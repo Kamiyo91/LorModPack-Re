@@ -31,11 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\mscorlib.dll</HintPath>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +53,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
@@ -62,6 +71,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\MechUtilBaseMechUtilBase.cs" />
+    <Compile Include="BaseClass\NpcMechUtilBaseMechUtilBase.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEnd_Re21341 - Copia.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalForTestPurpose_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
+    <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
+    <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />
+    <Compile Include="CustomMapUtility\Template.cs" />
     <Compile Include="EmotionalBurstUtil.cs" />
     <Compile Include="LocalizeUtil.cs" />
     <Compile Include="MapUtil.cs" />
@@ -74,5 +91,19 @@
       <Name>BLL-Re21341</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CustomMapUtility\README.md" />
+    <None Include="CustomMapUtility\Resource\StageBGM\README.md" />
+    <None Include="CustomMapUtility\Resource\Stage\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CustomMapUtility\Resource\Stage\Template\Background.png" />
+    <Content Include="CustomMapUtility\Resource\Stage\Template\Floor.png" />
+    <Content Include="CustomMapUtility\Resource\Stage\Template\FloorUnder.png" />
+    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch1.png" />
+    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch2.png" />
+    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch3.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

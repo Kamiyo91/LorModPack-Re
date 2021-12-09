@@ -9,6 +9,7 @@ using LOR_XML;
 using TMPro;
 using UI;
 using UnityEngine;
+using Util_Re21341.CommonBuffs;
 using Random = UnityEngine.Random;
 
 namespace Util_Re21341
@@ -150,27 +151,6 @@ namespace Util_Re21341
                 true);
             return allyUnit;
         }
-
-        public static void ReturnToTheOriginalPlayerUnit(BattleUnitModel unit, BookModel originalBook,
-            BattleDialogueModel originalDialog)
-        {
-            unit.UnitData.unitData.customizeData.SetCustomData(true);
-            unit.UnitData.unitData.ResetTempName();
-            unit.UnitData.unitData.EquipBook(unit.Book);
-            if (originalBook != null)
-                unit.UnitData.unitData.EquipCustomCoreBook(originalBook);
-            unit.UnitData.unitData.battleDialogModel = originalDialog;
-        }
-
-        public static void ReturnToTheOriginalBaseSkin(BattleUnitModel owner, string originalSkinName,
-            BattleDialogueModel dlg)
-        {
-            owner.UnitData.unitData.CustomBookItem.SetCharacterName(originalSkinName);
-            owner.UnitData.unitData.customizeData.SetCustomData(true);
-            owner.UnitData.unitData.ResetTempName();
-            owner.UnitData.unitData.battleDialogModel = dlg;
-        }
-
         public static void ChangeCustomSkin(BattleUnitModel owner, int skinId)
         {
             owner.UnitData.unitData.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, skinId));
@@ -195,17 +175,17 @@ namespace Util_Re21341
             owner.view.DisplayDlg(DialogType.START_BATTLE, "0");
         }
 
-        //public static void TestingUnitValues()
-        //{
-        //    var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
-        //    if (playerUnit == null) return;
-        //    foreach (var unit in playerUnit)
-        //    {
-        //        if (!unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_ModPack21341Init5))
-        //            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ModPack21341Init5());
-        //        unit.emotionDetail.SetEmotionLevel(5);
-        //    }
-        //}
+        public static void TestingUnitValues()
+        {
+            var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            if (playerUnit == null) return;
+            foreach (var unit in playerUnit)
+            {
+                if (!unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
+                    unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
+                unit.emotionDetail.SetEmotionLevel(5);
+            }
+        }
 
         public static void ReadyCounterCard(BattleUnitModel owner, int id)
         {
@@ -276,7 +256,7 @@ namespace Util_Re21341
             return unitBattleDataModel;
         }
 
-        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs)
+        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs, bool colorType)
         {
             var component = instance.GetComponent<CanvasGroup>();
             var dialog = dialogs[Random.Range(0, dialogs.Count)].dialog;
@@ -285,7 +265,7 @@ namespace Util_Re21341
             txtAbnormalityDlg.text = dialog;
             txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
                 SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
-            txtAbnormalityDlg.color = SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
+            txtAbnormalityDlg.color = colorType ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
             var canvas = (Canvas)typeof(BattleDialogUI).GetField("_canvas",
                 AccessTools.all)?.GetValue(instance);
             canvas.enabled = true;
@@ -295,7 +275,7 @@ namespace Util_Re21341
             var _ = (Coroutine)typeof(BattleDialogUI).GetField("_routine",
                 AccessTools.all)?.GetValue(instance);
             var method = typeof(BattleDialogUI).GetMethod("AbnormalityDlgRoutine", AccessTools.all);
-            instance.StartCoroutine(method.Invoke(instance, new object[0]) as IEnumerator);
+            instance.StartCoroutine(method.Invoke(instance, Array.Empty<object>()) as IEnumerator);
         }
 
         public static List<int> GetSamuraiGhostIndex(int originalUnitIndex)
@@ -429,9 +409,10 @@ namespace Util_Re21341
         public static void ChangeDialogItem(BattleDialogXmlList instance)
         {
             var dictionary = (Dictionary<string, BattleDialogRoot>)instance.GetType()
-                .GetField("_dictionary", AccessTools.all).GetValue(instance);
+                .GetField("_dictionary", AccessTools.all)
+                ?.GetValue(instance);
             foreach (var item in dictionary.SelectMany(x => x.Value.characterList)
-                .Where(y => y.id.packageId == ModParameters.PackageId))
+                         .Where(y => y.id.packageId == ModParameters.PackageId))
             {
                 if (item.id.id == 200)
                 {

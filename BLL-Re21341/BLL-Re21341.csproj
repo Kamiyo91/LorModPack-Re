@@ -49,9 +49,12 @@
   <ItemGroup>
     <Compile Include="Models\EmotionTypeEnum.cs" />
     <Compile Include="Models\MapModel.cs" />
+    <Compile Include="Models\MechUtilModels\MechUtilBaseModel.cs" />
+    <Compile Include="Models\MechUtilModels\NpcMechUtilBaseModel.cs" />
     <Compile Include="Models\ModParameters.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
+using Workshop;
 
 namespace LoRModPack_Re21341.Harmony
 {
@@ -18,7 +19,7 @@ namespace LoRModPack_Re21341.Harmony
     {
         public override void OnInitializeMod()
         {
-            var harmony = new HarmonyLib.Harmony("LOR.ModPack21341_MOD");
+            var harmony = new HarmonyLib.Harmony("LOR.LorModPackRe21341_MOD");
             var method = typeof(LoRModPack_Re).GetMethod("BookModel_SetXmlInfo");
             harmony.Patch(typeof(BookModel).GetMethod("SetXmlInfo", AccessTools.all), null, new HarmonyMethod(method));
             ModParameters.Path = Path.GetDirectoryName(
@@ -38,13 +39,13 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_GetStoryIcon");
             harmony.Patch(typeof(UISpriteDataManager).GetMethod("GetStoryIcon", AccessTools.all),
                 null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("BattleUnitInformationUI_PassiveList_SetData");
-            harmony.Patch(typeof(BattleUnitInformationUI_PassiveList).GetMethod("SetData", AccessTools.all),
+            method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
+            harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
-            UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
-            UnitUtil.ChangeDialogItem(BattleDialogXmlList.Instance);
+            //UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
+            //UnitUtil.ChangeDialogItem(BattleDialogXmlList.Instance);
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
@@ -94,8 +95,6 @@ namespace LoRModPack_Re21341.Harmony
             if (__instance.BookId.packageId == ModParameters.PackageId)
                 ____onlyCards.AddRange(____classInfo.EquipEffect.OnlyCard.Select(id =>
                     ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
-            if (__instance.BookId.id == 250024 && __instance.BookId.IsBasic())
-                ____onlyCards.Add(ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, 43)));
         }
 
         public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, StageModel stage,
@@ -158,6 +157,31 @@ namespace LoRModPack_Re21341.Harmony
                 icon = ModParameters.ArtWorks[story],
                 iconGlow = ModParameters.ArtWorks[story]
             };
+        }
+        public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
+        {
+            if (!ModParameters.SkinNames.Contains(charName)) return true;
+            Debug.LogError($"Entry {charName}");
+            var skinInfo =
+                typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
+                    BattleUnitView.SkinInfo;
+            skinInfo.state = BattleUnitView.SkinState.Default;
+            skinInfo.skinName = charName;
+            var currentMotionDetail = __instance.charAppearance.GetCurrentMotionDetail();
+            __instance.DestroySkin();
+            var gameObject =
+                UnityEngine.Object.Instantiate(Singleton<AssetBundleManagerRemake>.Instance.LoadCharacterPrefab(charName, "", out var resourceName), __instance.model.view.characterRotationCenter);
+            var workshopBookSkinData =
+                Singleton<CustomizingBookSkinLoader>.Instance.GetWorkshopBookSkinData(
+                    ModParameters.PackageId, charName);
+            gameObject.GetComponent<WorkshopSkinDataSetter>().SetData(workshopBookSkinData);
+            __instance.charAppearance = gameObject.GetComponent<CharacterAppearance>();
+            __instance.charAppearance.Initialize(resourceName);
+            __instance.charAppearance.ChangeMotion(currentMotionDetail);
+            __instance.charAppearance.ChangeLayer("Character");
+            __instance.charAppearance.SetLibrarianOnlySprites(__instance.model.faction);
+            __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
+            return false;
         }
     }
 }

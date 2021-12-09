@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using BLL_Re21341.Models;
+using CustomMapUtility;
 using HarmonyLib;
 using UnityEngine;
 
@@ -77,7 +78,7 @@ namespace Util_Re21341
         private static bool CanChangeMapCustom(int id)
         {
             return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                   new LorId(LoRModPack_Re.PackageId, id);
+                   new LorId(ModParameters.PackageId, id);
         }
 
         public static void CheckAndChangeBgm(ref Task changeBgm)
@@ -94,7 +95,7 @@ namespace Util_Re21341
         {
             if (caller.faction == Faction.Enemy && specialCase == false ||
                 Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                new LorId(LoRModPack_Re.PackageId, originalStageId)) return;
+                new LorId(ModParameters.PackageId, originalStageId)) return;
             RemoveValueInAddedMap(mapName);
             Singleton<StageController>.Instance.CheckMapChange();
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo)
@@ -124,7 +125,7 @@ namespace Util_Re21341
                 var value = Sprite.Create(texture2D, new Rect(0f, 0f, texture2D.width, texture2D.height),
                     new Vector2(0f, 0f));
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.FullName);
-                LoRModPack_Re.ArtWorks[fileNameWithoutExtension] = value;
+                ModParameters.ArtWorks[fileNameWithoutExtension] = value;
             }
         }
     }
