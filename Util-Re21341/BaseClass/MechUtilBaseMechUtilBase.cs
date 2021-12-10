@@ -15,7 +15,7 @@ namespace Util_Re21341.BaseClass
 
         public virtual void SurviveCheck(int dmg)
         {
-            if (!(model.Owner.hp - dmg <= model.Hp) || !model.Survive) return;
+            if (model.Owner.hp - dmg > model.Hp || !model.Survive) return;
             model.Survive = false;
             model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             model.Owner.SetHp(model.SetHp);

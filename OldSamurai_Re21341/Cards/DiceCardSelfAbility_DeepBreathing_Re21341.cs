@@ -5,6 +5,7 @@ namespace OldSamurai_Re21341.Cards
 {
     public class DiceCardSelfAbility_DeepBreathing_Re21341 : DiceCardSelfAbilityBase
     {
+        public static string Desc = "A";
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);

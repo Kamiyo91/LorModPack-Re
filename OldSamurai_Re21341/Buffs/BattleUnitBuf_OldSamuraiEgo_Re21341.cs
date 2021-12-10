@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
-using CustomMapUtility;
 using Util_Re21341;
+using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace OldSamurai_Re21341.Buffs
 {
@@ -18,7 +18,7 @@ namespace OldSamurai_Re21341.Buffs
                 ChangeToSamuraiEgoMap();
                 CustomMapHandler.SetEnemyTheme("Hornet.mp3");
             }
-            var id = owner.faction == Faction.Player ? 10000003 : 3;
+            var id = owner.faction == Faction.Player ? 10000002 : 2;
             var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
                          .Where(x => indexList.Contains(x.index))) BattleObjectManager.instance.UnregisterUnit(unit);
@@ -46,7 +46,7 @@ namespace OldSamurai_Re21341.Buffs
         {
             MapUtil.ChangeMap(new MapModel
             {
-                Stage = "OldSamurai",
+                Stage = "OldSamurai_Re21341",
                 StageId = 1,
                 IsPlayer = true,
                 Component = new OldSamurai_Re21341MapManager(),
@@ -55,8 +55,8 @@ namespace OldSamurai_Re21341.Buffs
         }
         private void RemoveSamuraiEgoMap()
         {
-            MapUtil.RemoveValueInEgoMap("OldSamurai");
-            MapUtil.ReturnFromEgoMap("OldSamurai", _owner, 1);
+            MapUtil.RemoveValueInEgoMap("OldSamurai_Re21341");
+            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", _owner, 1);
             SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
                 .Instance.currentMapObject.mapBgm);
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();

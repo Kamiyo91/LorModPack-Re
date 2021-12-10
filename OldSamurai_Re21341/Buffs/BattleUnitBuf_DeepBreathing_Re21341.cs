@@ -5,6 +5,8 @@ namespace OldSamurai_Re21341.Buffs
 {
     public class BattleUnitBuf_DeepBreathing_Re21341 : BattleUnitBuf
     {
+        public BattleUnitBuf_DeepBreathing_Re21341() => stack = 0;
+        public override int paramInBufDesc => 0;
         protected override string keywordId => "DeepBreathing_Re21341";
         public override void Init(BattleUnitModel owner)
         {

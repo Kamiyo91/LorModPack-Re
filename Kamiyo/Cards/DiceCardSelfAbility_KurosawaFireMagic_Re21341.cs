@@ -4,6 +4,7 @@ namespace Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_KurosawaFireMagic_Re21341 : DiceCardSelfAbilityBase
     {
+        public static string Desc = "A";
         private int _defClashWin;
         private const int Check = 2;
         public override void OnUseCard()
