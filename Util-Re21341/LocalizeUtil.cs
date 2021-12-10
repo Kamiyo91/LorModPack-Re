@@ -25,45 +25,67 @@ namespace Util_Re21341
                     foreach (var battleEffectText in battleEffectTextRoot.effectTextList)
                     {
                         dictionary?.Add(battleEffectText.ID, battleEffectText);
-                        ModParameters.EffectTexts.Add(battleEffectText.ID,battleEffectText.Desc);
+                        ModParameters.EffectTexts.Add(battleEffectText.ID, battleEffectText.Desc);
                     }
                 }
 
-            if (ModParameters.Language == "en") return;
-            {
-                files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards").GetFiles();
-                foreach (var t in files)
-                    using (var stringReader2 = new StringReader(File.ReadAllText(t.FullName)))
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards").GetFiles();
+            foreach (var t in files)
+                using (var stringReader2 = new StringReader(File.ReadAllText(t.FullName)))
+                {
+                    var battleCardDescRoot =
+                        (BattleCardDescRoot)new XmlSerializer(typeof(BattleCardDescRoot)).Deserialize(
+                            stringReader2);
+                    using (var enumerator =
+                        ItemXmlDataList.instance.GetAllWorkshopData()[ModParameters.PackageId].GetEnumerator())
                     {
-                        var battleCardDescRoot =
-                            (BattleCardDescRoot)new XmlSerializer(typeof(BattleCardDescRoot)).Deserialize(
-                                stringReader2);
-                        using (var enumerator =
-                            ItemXmlDataList.instance.GetAllWorkshopData()[ModParameters.PackageId].GetEnumerator())
+                        while (enumerator.MoveNext())
                         {
-                            while (enumerator.MoveNext())
-                            {
-                                var card = enumerator.Current;
-                                card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
-                                    .cardName;
-                            }
-                        }
-
-                        typeof(ItemXmlDataList).GetField("_cardInfoTable", AccessTools.all)
-                            .GetValue(ItemXmlDataList.instance);
-                        using (var enumerator2 = ItemXmlDataList.instance.GetCardList()
-                            .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
-                        {
-                            while (enumerator2.MoveNext())
-                            {
-                                var card = enumerator2.Current;
-                                card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
-                                    .cardName;
-                                ItemXmlDataList.instance.GetCardItem(card.id).workshopName = card.workshopName;
-                            }
+                            var card = enumerator.Current;
+                            card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
+                                .cardName;
                         }
                     }
 
+                    typeof(ItemXmlDataList).GetField("_cardInfoTable", AccessTools.all)
+                        .GetValue(ItemXmlDataList.instance);
+                    using (var enumerator2 = ItemXmlDataList.instance.GetCardList()
+                        .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
+                    {
+                        while (enumerator2.MoveNext())
+                        {
+                            var card = enumerator2.Current;
+                            card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
+                                .cardName;
+                            ItemXmlDataList.instance.GetCardItem(card.id).workshopName = card.workshopName;
+                        }
+                    }
+                }
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleCardAbilities").GetFiles();
+            foreach (var t in files)
+                using (var stringReader8 = new StringReader(File.ReadAllText(t.FullName)))
+                {
+                    foreach (var battleCardAbilityDesc in
+                             ((BattleCardAbilityDescRoot)new XmlSerializer(typeof(BattleCardAbilityDescRoot))
+                                 .Deserialize(stringReader8)).cardDescList)
+                        Singleton<BattleCardAbilityDescXmlList>.Instance.GetData(battleCardAbilityDesc.id).desc =
+                            battleCardAbilityDesc.desc;
+                }
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleDialog").GetFiles();
+            var dialogDictionary =
+                (Dictionary<string, BattleDialogRoot>)BattleDialogXmlList.Instance.GetType()
+                    .GetField("_dictionary", AccessTools.all)
+                    ?.GetValue(BattleDialogXmlList.Instance);
+            foreach (var t in files)
+                using (var stringReader = new StringReader(File.ReadAllText(t.FullName)))
+                {
+                    var battleDialogTextRoot =
+                        (BattleDialogRoot)new XmlSerializer(typeof(BattleDialogRoot))
+                            .Deserialize(stringReader);
+                    dialogDictionary.Add(ModParameters.PackageId, battleDialogTextRoot);
+                }
+            if (ModParameters.Language == "en") return;
+            {
                 files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName").GetFiles();
                 foreach (var t in files)
                     using (var stringReader3 = new StringReader(File.ReadAllText(t.FullName)))
@@ -183,17 +205,6 @@ namespace Util_Re21341
                                 passive.desc = passiveDescRoot.descList.Find(x => x.ID == passive.id.id).desc;
                             }
                         }
-                    }
-
-                files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleCardAbilities").GetFiles();
-                foreach (var t in files)
-                    using (var stringReader8 = new StringReader(File.ReadAllText(t.FullName)))
-                    {
-                        foreach (var battleCardAbilityDesc in
-                            ((BattleCardAbilityDescRoot)new XmlSerializer(typeof(BattleCardAbilityDescRoot))
-                                .Deserialize(stringReader8)).cardDescList)
-                            Singleton<BattleCardAbilityDescXmlList>.Instance.GetData(battleCardAbilityDesc.id).desc =
-                                battleCardAbilityDesc.desc;
                     }
             }
         }

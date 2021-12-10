@@ -15,11 +15,12 @@ namespace Util_Re21341.BaseClass
 
         public virtual void SurviveCheck(int dmg)
         {
-            if (!(model.Owner.hp - dmg <= model.Hp) || !model.Revive) return;
+            if (!(model.Owner.hp - dmg <= model.Hp) || !model.Survive) return;
             model.Survive = false;
             model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             model.Owner.SetHp(model.SetHp);
-            if(model.HasEgo) EgoActive();
+            if(model.NearDeathBuffExist) model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(model.NearDeathBuffType));
+            if (model.HasEgo) ForcedEgo();
         }
         public virtual void EgoActive()
         {
@@ -30,6 +31,7 @@ namespace Util_Re21341.BaseClass
             model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(model.EgoType));
             model.Owner.breakDetail.ResetGauge();
             model.Owner.breakDetail.RecoverBreakLife(1,true);
+            model.Owner.cardSlotDetail.RecoverPlayPoint(model.Owner.cardSlotDetail.GetMaxPlayPoint());
             if(model.RefreshUI) UnitUtil.RefreshCombatUI();
         }
         public virtual void OnUseExpireCard(LorId cardId)
@@ -45,5 +47,6 @@ namespace Util_Re21341.BaseClass
             }
         }
         public virtual bool EgoCheck() => model.EgoActivated;
+        public virtual bool ForcedEgo() => model.EgoActivated = true;
     }
 }

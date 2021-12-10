@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
 using HarmonyLib;
 using LOR_DiceSystem;
 using LOR_XML;
@@ -45,7 +46,12 @@ namespace Util_Re21341
                 unit.cardSlotDetail.RecoverPlayPoint(finalLightRecover);
             }
         }
-
+        public static void RemoveImmortalBuff(BattleUnitModel owner)
+        {
+            if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_ImmortalUntilRoundEnd_Re21341) is
+                BattleUnitBuf_ImmortalUntilRoundEnd_Re21341 buf)
+                owner.bufListDetail.RemoveBuf(buf);
+        }
         public static void RefreshCombatUI(bool forceReturn = false)
         {
             foreach (var (battleUnit, num) in BattleObjectManager.instance.GetList()
@@ -59,6 +65,14 @@ namespace Util_Re21341
             BattleObjectManager.instance.InitUI();
         }
 
+        public static void UnitReviveAndRecovery(BattleUnitModel owner,int hp)
+        {
+            owner.Revive(hp);
+            owner.breakDetail.ResetGauge();
+            owner.breakDetail.nextTurnBreak = false;
+            owner.breakDetail.RecoverBreakLife(1, true);
+            owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
+        }
         public static void AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
         {
             var allyUnit = Singleton<StageController>.Instance.CreateLibrarianUnit_fromBattleUnitData(index);
@@ -256,7 +270,7 @@ namespace Util_Re21341
             return unitBattleDataModel;
         }
 
-        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs, bool colorType)
+        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs, AbColorType colorType)
         {
             var component = instance.GetComponent<CanvasGroup>();
             var dialog = dialogs[Random.Range(0, dialogs.Count)].dialog;
@@ -265,7 +279,7 @@ namespace Util_Re21341
             txtAbnormalityDlg.text = dialog;
             txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
                 SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
-            txtAbnormalityDlg.color = colorType ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
+            txtAbnormalityDlg.color = colorType == AbColorType.Positive ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
             var canvas = (Canvas)typeof(BattleDialogUI).GetField("_canvas",
                 AccessTools.all)?.GetValue(instance);
             canvas.enabled = true;
@@ -403,113 +417,6 @@ namespace Util_Re21341
                 }
 
                 SetBaseKeywordCard(item.Key, ref dictionary, ref list);
-            }
-        }
-
-        public static void ChangeDialogItem(BattleDialogXmlList instance)
-        {
-            var dictionary = (Dictionary<string, BattleDialogRoot>)instance.GetType()
-                .GetField("_dictionary", AccessTools.all)
-                ?.GetValue(instance);
-            foreach (var item in dictionary.SelectMany(x => x.Value.characterList)
-                         .Where(y => y.id.packageId == ModParameters.PackageId))
-            {
-                if (item.id.id == 200)
-                {
-                    var dlg = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "It doesn't look good.I'll do my best!"
-                    };
-                    var dlgList = new List<BattleDialog> { dlg };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
-
-                if (item.id.id == 3)
-                {
-                    var dlg1 = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "Everyone who stand in my way must vanish!!!"
-                    };
-                    var dlg2 = new BattleDialog
-                    {
-                        dialogID = "1",
-                        dialogContent = "I..I...Ahhhhh!"
-                    };
-                    var dlgList = new List<BattleDialog> { dlg1, dlg2 };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
-
-                if (item.id.id == 201)
-                {
-                    var dlg1 = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "The situation seems really bad."
-                    };
-                    var dlg2 = new BattleDialog
-                    {
-                        dialogID = "1",
-                        dialogContent = "I must stop her now"
-                    };
-                    var dlgList = new List<BattleDialog> { dlg1, dlg2 };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
-
-                if (item.id.id == 202)
-                {
-                    var dlg1 = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "It's not over yet!"
-                    };
-                    var dlg2 = new BattleDialog
-                    {
-                        dialogID = "1",
-                        dialogContent = "Not bad.Let's see how you'll handle this now!"
-                    };
-                    var dlgList = new List<BattleDialog> { dlg1, dlg2 };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
-
-                if (item.id.id == 14)
-                {
-                    var dlg1 = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "I'll not fall!Not now!"
-                    };
-                    var dlg2 = new BattleDialog
-                    {
-                        dialogID = "1",
-                        dialogContent = "Think you can keep up with me?..."
-                    };
-                    var dlgList = new List<BattleDialog> { dlg1, dlg2 };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
-
-                if (item.id.id == 8 || item.id.id == 9)
-                {
-                    var dlg1 = new BattleDialog
-                    {
-                        dialogID = "0",
-                        dialogContent = "Playtime is over."
-                    };
-                    var dlg2 = new BattleDialog
-                    {
-                        dialogID = "1",
-                        dialogContent = "Time to end this."
-                    };
-                    var dlgList = new List<BattleDialog> { dlg1, dlg2 };
-                    item.dialogTypeList.Add(new BattleDialogType
-                    { dialogType = DialogType.SPECIAL_EVENT, dialogList = dlgList });
-                }
             }
         }
     }

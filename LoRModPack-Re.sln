@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util-Re21341", "Util-Re2134
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL-Re21341", "BLL-Re21341\BLL-Re21341.csproj", "{1DF30575-B636-45B5-B748-A37D420C63F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OldSamurai_Re21341", "OldSamurai_Re21341\OldSamurai_Re21341.csproj", "{7E6E131E-7DFB-46F2-AE55-5889932B9476}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1DF30575-B636-45B5-B748-A37D420C63F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF30575-B636-45B5-B748-A37D420C63F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF30575-B636-45B5-B748-A37D420C63F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6E131E-7DFB-46F2-AE55-5889932B9476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6E131E-7DFB-46F2-AE55-5889932B9476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6E131E-7DFB-46F2-AE55-5889932B9476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6E131E-7DFB-46F2-AE55-5889932B9476}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -45,7 +45,6 @@ namespace LoRModPack_Re21341.Harmony
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             //UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
-            //UnitUtil.ChangeDialogItem(BattleDialogXmlList.Instance);
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
@@ -161,7 +160,6 @@ namespace LoRModPack_Re21341.Harmony
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNames.Contains(charName)) return true;
-            Debug.LogError($"Entry {charName}");
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;

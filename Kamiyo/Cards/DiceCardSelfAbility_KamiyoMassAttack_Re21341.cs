@@ -2,7 +2,6 @@
 {
     public class DiceCardSelfAbility_KamiyoMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc = "Can only be used at [Emotion Level 5] and [Alter Ego's Aura] is required";
         private bool _motionChanged;
 
         public override bool OnChooseCard(BattleUnitModel owner)

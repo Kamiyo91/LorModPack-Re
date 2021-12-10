@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E8E54F99-6663-487B-910A-69BAC555D6D4}</ProjectGuid>
+    <ProjectGuid>{7E6E131E-7DFB-46F2-AE55-5889932B9476}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kamiyo_Re21341</RootNamespace>
-    <AssemblyName>Kamiyo-Re21341</AssemblyName>
+    <RootNamespace>OldSamurai_Re21341</RootNamespace>
+    <AssemblyName>OldSamurai_Re21341</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,8 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.5.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
@@ -54,22 +53,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_AlterEgoCard_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_FireBlade_Re21341 - Copia.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_OutragingFire_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_KurosawaFireMagic_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
-    <Compile Include="Passives\Npc\PassiveAbility_AlterEgoNpc_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_SixthSense_Re21341.cs" />
-    <Compile Include="Passives\Player\PassiveAbility_AlterEgoPlayer_Re21341.cs" />
-    <Compile Include="Passives\Player\PassiveAbility_MaskOfPerception_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_GhostSamurai_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgo_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
+    <Compile Include="Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="EnemyTeamStageManager_OldSamurai_Re21341.cs" />
+    <Compile Include="OldSamurai_Re21341MapManager.cs" />
+    <Compile Include="Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_GhostSamurai_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_OldSamuraiEnemyDesc_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_OldSamurai_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_ZeroBlade_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dice\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
       <Project>{1DF30575-B636-45B5-B748-A37D420C63F0}</Project>

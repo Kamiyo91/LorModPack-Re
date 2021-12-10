@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EmotionTypeEnum.cs" />
+    <Compile Include="Models\Enum\ColorTypeEnum.cs" />
     <Compile Include="Models\MapModel.cs" />
     <Compile Include="Models\MechUtilModels\MechUtilBaseModel.cs" />
     <Compile Include="Models\MechUtilModels\NpcMechUtilBaseModel.cs" />

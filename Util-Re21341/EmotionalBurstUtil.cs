@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using BLL_Re21341.Models;
-
-namespace Util_Re21341
+﻿namespace Util_Re21341
 {
     public class EmotionalBurstUtil
     {

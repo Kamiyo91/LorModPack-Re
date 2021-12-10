@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
 using LOR_XML;
@@ -20,9 +21,12 @@ namespace Kamiyo_Re21341.Passives.Player
                 Survive = true, 
                 HasEgo = true, 
                 RefreshUI = true,
+                NearDeathBuffExist = true,
                 SkinName = "KamiyoMask-Re21341", 
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341), 
+                NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 1) });
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId,1));
             UnitUtil.TestingUnitValues();
         }
 
@@ -31,7 +35,10 @@ namespace Kamiyo_Re21341.Passives.Player
             _util.SurviveCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
-
+        public override void OnStartBattle()
+        {
+            UnitUtil.RemoveImmortalBuff(owner);
+        }
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -41,7 +48,7 @@ namespace Kamiyo_Re21341.Passives.Player
                 new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive1_Re21341")).Value},
                 new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive2_Re21341")).Value},
                 new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value}
-            },false);
+            },AbColorType.Negative);
         }
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
