@@ -10,42 +10,19 @@ namespace Util_Re21341
 {
     public static class MapUtil
     {
-        private static bool ChangeMapCheck(MapModel model)
-        {
-            if (!Singleton<StageController>.Instance.CanChangeMap()) return true;
-            if (!model.OneTurnEgo && CanChangeMapCustom(1) || CanChangeMapCustom(2) || CanChangeMapCustom(5))
-                return true;
-            if (model.StageId != 0 && CanChangeMapCustom(model.StageId)) return true;
-            return false;
-        }
-
-        public static bool ChangeMusicCheck()
-        {
-            return CanChangeMapCustom(1) || CanChangeMapCustom(2) || CanChangeMapCustom(5);
-        }
-
         public static void ChangeMap(MapModel model, Faction faction = Faction.Player)
         {
             Singleton<StageController>.Instance.CheckMapChange();
-            if (ChangeMapCheck(model)) return;
             CustomMapHandler.InitCustomMap(model.Stage, model.Component, model.IsPlayer, model.InitBgm, model.Bgx,
                 model.Bgy, model.Fx, model.Fy);
             if (model.IsPlayer && !model.OneTurnEgo)
             {
                 CustomMapHandler.ChangeToCustomEgoMapByAssimilation(model.Stage, faction);
+                SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
                 return;
             }
-
             CustomMapHandler.ChangeToCustomEgoMap(model.Stage, faction);
         }
-
-        public static void RemoveValueInEgoMap(string name)
-        {
-            var mapList = (List<string>)typeof(StageController).GetField("_addedEgoMap",
-                AccessTools.all)?.GetValue(Singleton<StageController>.Instance);
-            mapList?.RemoveAll(x => x.Contains(name));
-        }
-
         public static void ActiveCreatureBattleCamFilterComponent()
         {
             var battleCamera = (Camera)typeof(BattleCamManager).GetField("_effectCam",
@@ -75,12 +52,6 @@ namespace Util_Re21341
             });
         }
 
-        private static bool CanChangeMapCustom(int id)
-        {
-            return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                   new LorId(ModParameters.PackageId, id);
-        }
-
         public static void CheckAndChangeBgm(ref Task changeBgm)
         {
             if (changeBgm == null) return;
@@ -90,21 +61,10 @@ namespace Util_Re21341
             changeBgm = null;
         }
 
-        public static void ReturnFromEgoMap(string mapName, BattleUnitModel caller, int originalStageId,
-            bool specialCase = false)
+        public static void ReturnFromEgoMap(string mapName)
         {
-            if (caller.faction == Faction.Enemy && specialCase == false ||
-                Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                new LorId(ModParameters.PackageId, originalStageId)) return;
-            RemoveValueInAddedMap(mapName);
+            CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
             Singleton<StageController>.Instance.CheckMapChange();
-            if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo)
-            {
-                SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSephirahMap(
-                    Singleton<StageController>.Instance.CurrentFloor, true);
-                Singleton<StageController>.Instance.CheckMapChange();
-            }
-
             SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
                 .Instance.currentMapObject.mapBgm);
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();

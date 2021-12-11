@@ -19,11 +19,11 @@ namespace LoRModPack_Re21341.Harmony
     {
         public override void OnInitializeMod()
         {
+            ModParameters.Path = Path.GetDirectoryName(
+                Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             var harmony = new HarmonyLib.Harmony("LOR.LorModPackRe21341_MOD");
             var method = typeof(LoRModPack_Re).GetMethod("BookModel_SetXmlInfo");
             harmony.Patch(typeof(BookModel).GetMethod("SetXmlInfo", AccessTools.all), null, new HarmonyMethod(method));
-            ModParameters.Path = Path.GetDirectoryName(
-                Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             method = typeof(LoRModPack_Re).GetMethod("BookModel_GetThumbSprite");
             harmony.Patch(typeof(BookModel).GetMethod("GetThumbSprite", AccessTools.all), null,
                 new HarmonyMethod(method));
@@ -44,7 +44,7 @@ namespace LoRModPack_Re21341.Harmony
                 new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
-            //UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
+            UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
@@ -55,47 +55,19 @@ namespace LoRModPack_Re21341.Harmony
             switch (__instance.BookId.id)
             {
                 case 10000001:
-                case 10000002:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
-                    return;
-                case 10000005:
-                case 10000012:
-                    __result = ModParameters.ArtWorks["ModPack21341Init8"];
-                    return;
-                case 10000013:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/102");
-                    return;
-                case 10000014:
-                    __result = ModParameters.ArtWorks["ModPack21341Init6"];
-                    return;
-                case 10000015:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/8");
-                    return;
-                case 10000016:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/250022");
-                    return;
-                case 10000006:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/250035");
-                    return;
-                case 10000009:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/250024");
-                    return;
-                case 10000010:
-                    __result = ModParameters.ArtWorks["ModPack21341Init7"];
                     return;
                 default:
                     return;
             }
         }
-
         public static void BookModel_SetXmlInfo(BookModel __instance, BookXmlInfo ____classInfo,
             ref List<DiceCardXmlInfo> ____onlyCards)
         {
-            if (__instance.BookId.packageId == ModParameters.PackageId)
-                ____onlyCards.AddRange(____classInfo.EquipEffect.OnlyCard.Select(id =>
-                    ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
+            if (__instance.BookId.packageId == ModParameters.PackageId && ModParameters.KeypageWithOnlyCardsList.Keys.Contains(__instance.BookId.id))
+                ____onlyCards.AddRange(ModParameters.KeypageWithOnlyCardsList
+                    .FirstOrDefault(x => x.Key.Equals(__instance.BookId.id)).Value.Select(id => ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
         }
-
         public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, StageModel stage,
             LibraryFloorModel floor)
         {
@@ -125,8 +97,8 @@ namespace LoRModPack_Re21341.Harmony
             if (books.Count < 0) return;
             image.enabled = true;
             image2.enabled = true;
-            image2.sprite = ModParameters.ArtWorks["ModPack21341Init4"];
-            image.sprite = ModParameters.ArtWorks["ModPack21341Init4"];
+            image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            image.sprite = ModParameters.ArtWorks["Light_Re21341"];
             textMeshProUGUI.text = "Kamiyo's Mod Pack";
         }
 
@@ -141,8 +113,8 @@ namespace LoRModPack_Re21341.Harmony
             if (books.Count < 0) return;
             image.enabled = true;
             image2.enabled = true;
-            image2.sprite = ModParameters.ArtWorks["ModPack21341Init4"];
-            image.sprite = ModParameters.ArtWorks["ModPack21341Init4"];
+            image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            image.sprite = ModParameters.ArtWorks["Light_Re21341"];
             textMeshProUGUI.text = "Kamiyo's Mod Pack";
         }
 

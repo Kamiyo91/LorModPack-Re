@@ -26,7 +26,7 @@ namespace Util_Re21341.BaseClass
         {
             if (model.Owner.bufListDetail.HasAssimilation()) return;
             model.EgoActivated = false;
-            model.Owner.personalEgoDetail.RemoveCard(model.EgoCardId);
+            if(model.EgoCardId != null) model.Owner.personalEgoDetail.RemoveCard(model.EgoCardId);
             if(!string.IsNullOrEmpty(model.SkinName)) model.Owner.view.SetAltSkin(model.SkinName);
             model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(model.EgoType));
             model.Owner.breakDetail.ResetGauge();
@@ -47,6 +47,6 @@ namespace Util_Re21341.BaseClass
             }
         }
         public virtual bool EgoCheck() => model.EgoActivated;
-        public virtual bool ForcedEgo() => model.EgoActivated = true;
+        public virtual void ForcedEgo() => model.EgoActivated = true;
     }
 }

@@ -13,7 +13,7 @@ namespace OldSamurai_Re21341.Passives
 
         private void AddDeepBreathingCard()
         {
-            _ = owner.personalEgoDetail.GetHand().Exists(x => x.GetID() == new LorId(ModParameters.PackageId, 900))
+            _ = owner.personalEgoDetail.GetHand().Exists(x => x.GetID() == new LorId(ModParameters.PackageId, 1))
                 ? _count = 0
                 : _count++;
             if (_count != 3) return;
@@ -59,13 +59,13 @@ namespace OldSamurai_Re21341.Passives
         {
             _lightUse = true;
             _enemyCount = 0;
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 900));
+            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 1));
             DiceCardSelfAbility_DeepBreathing_Re21341.Activate(owner);
         }
 
         public override void OnWaveStart()
         {
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 900));
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 1));
         }
 
 
@@ -96,7 +96,7 @@ namespace OldSamurai_Re21341.Passives
                 if (positiveNum > 0)
                     positiveNum /= 3;
             }
-            behavior.ApplyDiceStatBonus(new DiceStatBonus { max = positiveNum });
+            behavior.ApplyDiceStatBonus(new DiceStatBonus { min = positiveNum, max = positiveNum });
         }
 
         private void DefDiceRoll(BattleDiceBehavior behavior)
@@ -108,7 +108,7 @@ namespace OldSamurai_Re21341.Passives
                 if (positiveNum > 0)
                     positiveNum /= 3;
             }
-            behavior.ApplyDiceStatBonus(new DiceStatBonus { max = positiveNum });
+            behavior.ApplyDiceStatBonus(new DiceStatBonus { min=positiveNum,max = positiveNum });
         }
 
         private void PowerNullDiceRoll(BattleDiceBehavior behavior)

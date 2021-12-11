@@ -57,12 +57,14 @@
     <Compile Include="Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_GhostSamurai_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgoNpc_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgo_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
     <Compile Include="Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_OldSamurai_Re21341.cs" />
-    <Compile Include="OldSamurai_Re21341MapManager.cs" />
+    <Compile Include="MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
+    <Compile Include="MapManager\OldSamurai_Re21341MapManager.cs" />
     <Compile Include="Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_GhostSamurai_Re21341.cs" />

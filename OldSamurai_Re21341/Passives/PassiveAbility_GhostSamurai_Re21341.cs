@@ -1,4 +1,5 @@
-﻿using OldSamurai_Re21341.Buffs;
+﻿using System.Linq;
+using OldSamurai_Re21341.Buffs;
 using Util_Re21341;
 
 namespace OldSamurai_Re21341.Passives
@@ -27,12 +28,12 @@ namespace OldSamurai_Re21341.Passives
                 : typeof(BattleUnitBuf_GhostSamuraiEnemy_Re21341));
         }
 
-        public override void OnRoundEndTheLast()
+        public override void OnRoundEndTheLast_ignoreDead()
         {
-            if (owner.faction == Faction.Enemy) UnitUtil.UnitReviveAndRecovery(owner, 25);
+            if (owner.faction == Faction.Enemy && BattleObjectManager.instance.GetAliveList(Faction.Enemy).Exists(x => x.bufListDetail.GetActivatedBufList().Exists(y => y is BattleUnitBuf_OldSamuraiEgoNpc_Re21341))) UnitUtil.UnitReviveAndRecovery(owner, 25);
         }
 
-        public override void OnRoundStart()
+        public override void OnWaveStart()
         {
             AddGhostUnitBuffs();
         }

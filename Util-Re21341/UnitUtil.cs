@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using HarmonyLib;
@@ -17,24 +19,6 @@ namespace Util_Re21341
 {
     public static class UnitUtil
     {
-        private static readonly List<int> PersonalCardList = new List<int>
-        {
-            900, 901, 903, 904, 906, 907,
-            908, 909, 911, 912, 913, 914, 915, 916, 917, 928, 930, 931, 932
-        };
-
-        private static readonly List<int> EgoPersonalCardList = new List<int> { 902, 905, 910, 927, 929 };
-
-        private static readonly List<int> OnlyPageCardList = new List<int>
-        {
-            8, 9, 10, 11, 12, 23, 17, 22, 43, 32, 34, 36, 46,
-            47, 49, 50, 51, 53, 56
-        };
-        private static readonly List<int> SamuraiCardList = new List<int> { 8, 9, 10, 11, 12 };
-        private static readonly List<int> KamiyoCardList = new List<int> { 32, 34, 36, 46 };
-        private static readonly List<int> MioCardList = new List<int> { 23, 17, 22 };
-        private static readonly List<int> HayateCardList = new List<int> { 47, 49, 50, 51, 53, 56 };
-
         public static void PhaseChangeAllPlayerUnitRecoverBonus(int hp, int stagger, int light,
             bool fullLightRecover = false)
         {
@@ -46,16 +30,18 @@ namespace Util_Re21341
                 unit.cardSlotDetail.RecoverPlayPoint(finalLightRecover);
             }
         }
+
         public static void RemoveImmortalBuff(BattleUnitModel owner)
         {
             if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_ImmortalUntilRoundEnd_Re21341) is
                 BattleUnitBuf_ImmortalUntilRoundEnd_Re21341 buf)
                 owner.bufListDetail.RemoveBuf(buf);
         }
+
         public static void RefreshCombatUI(bool forceReturn = false)
         {
             foreach (var (battleUnit, num) in BattleObjectManager.instance.GetList()
-                .Select((value, i) => (value, i)))
+                         .Select((value, i) => (value, i)))
             {
                 SingletonBehavior<UICharacterRenderer>.Instance.SetCharacter(battleUnit.UnitData.unitData, num, true);
                 if (forceReturn)
@@ -65,7 +51,38 @@ namespace Util_Re21341
             BattleObjectManager.instance.InitUI();
         }
 
-        public static void UnitReviveAndRecovery(BattleUnitModel owner,int hp)
+        public static void SummonSamuraiGhostUnits(Faction ownerFaction, StageLibraryFloorModel floor, int unitId,
+            List<int> pos)
+        {
+            if (ownerFaction == Faction.Player)
+            {
+                for (var i = 0; i < 3; i++)
+
+                    AddNewUnitPlayerSide(floor, new UnitModel
+                    {
+                        Id = unitId,
+                        Name = "Samurai's Ghost",
+                        Pos = pos[i],
+                        LockedEmotion = true,
+                        Sephirah = floor.Sephirah
+                    });
+            }
+            else
+            {
+                for (var i = 0; i < 3; i++)
+
+                    AddNewUnitEnemySide(new UnitModel
+                    {
+                        Id = unitId,
+                        Name = "Samurai's Ghost",
+                        Pos = pos[i],
+                        LockedEmotion = true,
+                        Sephirah = floor.Sephirah
+                    });
+            }
+        }
+
+        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
         {
             owner.Revive(hp);
             owner.breakDetail.ResetGauge();
@@ -73,6 +90,7 @@ namespace Util_Re21341
             owner.breakDetail.RecoverBreakLife(1, true);
             owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
         }
+
         public static void AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
         {
             var allyUnit = Singleton<StageController>.Instance.CreateLibrarianUnit_fromBattleUnitData(index);
@@ -88,6 +106,7 @@ namespace Util_Re21341
         {
             var unitWithIndex = Singleton<StageController>.Instance.AddNewUnit(Faction.Enemy,
                 new LorId(ModParameters.PackageId, unit.Id), unit.Pos);
+            Debug.LogError($"{unitWithIndex.Book.BookId} - {unit.Id} - {unitWithIndex.MaxHp}");
             unitWithIndex.emotionDetail.SetEmotionLevel(unit.EmotionLevel);
             if (unit.LockedEmotion)
                 unitWithIndex.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
@@ -108,9 +127,9 @@ namespace Util_Re21341
             var playerUnitsAlive = BattleObjectManager.instance.GetAliveList(Faction.Player);
             if (!playerUnitsAlive.Any()) return;
             foreach (var emotionCard in playerUnitsAlive.FirstOrDefault()
-                .emotionDetail.PassiveList.Where(x =>
-                    x.XmlInfo.TargetType == EmotionTargetType.AllIncludingEnemy ||
-                    x.XmlInfo.TargetType == EmotionTargetType.All))
+                         .emotionDetail.PassiveList.Where(x =>
+                             x.XmlInfo.TargetType == EmotionTargetType.AllIncludingEnemy ||
+                             x.XmlInfo.TargetType == EmotionTargetType.All))
             {
                 if (unit.faction == Faction.Enemy &&
                     emotionCard.XmlInfo.TargetType == EmotionTargetType.All) continue;
@@ -132,7 +151,7 @@ namespace Util_Re21341
         {
             var playerUnitsAlive = BattleObjectManager.instance.GetList(Faction.Player);
             foreach (var emotionCard in playerUnitsAlive.SelectMany(x => x.emotionDetail.PassiveList)
-                .Where(emotionCard => !emotionCardList.Exists(x => x.XmlInfo.Equals(emotionCard.XmlInfo))))
+                         .Where(emotionCard => !emotionCardList.Exists(x => x.XmlInfo.Equals(emotionCard.XmlInfo))))
                 emotionCardList.Add(emotionCard);
             return emotionCardList;
         }
@@ -165,6 +184,7 @@ namespace Util_Re21341
                 true);
             return allyUnit;
         }
+
         public static void ChangeCustomSkin(BattleUnitModel owner, int skinId)
         {
             owner.UnitData.unitData.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, skinId));
@@ -195,7 +215,8 @@ namespace Util_Re21341
             if (playerUnit == null) return;
             foreach (var unit in playerUnit)
             {
-                if (!unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
+                if (!unit.bufListDetail.GetActivatedBufList()
+                        .Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
                 unit.emotionDetail.SetEmotionLevel(5);
             }
@@ -222,17 +243,11 @@ namespace Util_Re21341
                 // ignored
             }
         }
+
         public static void SetPassiveCombatLog(PassiveAbilityBase passive, BattleUnitModel owner)
         {
             var battleCardResultLog = owner.battleCardResultLog;
             battleCardResultLog?.SetPassiveAbility(passive);
-        }
-
-        public static void DrawUntilX(BattleUnitModel owner, int x)
-        {
-            var count = owner.allyCardDetail.GetHand().Count;
-            var num = x - count;
-            if (num > 0) owner.allyCardDetail.DrawCards(num);
         }
 
         public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage, UnitDataModel data)
@@ -270,7 +285,8 @@ namespace Util_Re21341
             return unitBattleDataModel;
         }
 
-        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs, AbColorType colorType)
+        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs,
+            AbColorType colorType)
         {
             var component = instance.GetComponent<CanvasGroup>();
             var dialog = dialogs[Random.Range(0, dialogs.Count)].dialog;
@@ -279,7 +295,9 @@ namespace Util_Re21341
             txtAbnormalityDlg.text = dialog;
             txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
                 SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
-            txtAbnormalityDlg.color = colorType == AbColorType.Positive ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
+            txtAbnormalityDlg.color = colorType == AbColorType.Positive
+                ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor
+                : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
             var canvas = (Canvas)typeof(BattleDialogUI).GetField("_canvas",
                 AccessTools.all)?.GetValue(instance);
             canvas.enabled = true;
@@ -321,44 +339,42 @@ namespace Util_Re21341
         {
             var keywordsList = new List<string>();
             if (keywordsRequired) keywordsList = GetKeywordsList(id.id).ToList();
-            var diceCardXmlInfo2 = CardOptionChange(cardDictionary[id], new List<CardOption> { option }, keywordsRequired,
+            var diceCardXmlInfo2 = CardOptionChange(cardDictionary[id], new List<CardOption> { option },
+                keywordsRequired,
                 keywordsList);
             cardDictionary[id] = diceCardXmlInfo2;
             cardXmlList.Add(diceCardXmlInfo2);
         }
 
-        private static void SetRangeSpecial(LorId id, ref Dictionary<LorId, DiceCardXmlInfo> cardDictionary,
-            ref List<DiceCardXmlInfo> cardXmlList)
+        private static List<int> GetAllOnlyCardsId()
         {
-            var diceCardXmlInfo2 =
-                CardOptionChange(cardDictionary[id], new List<CardOption>(), false, null, "", "", 0, true);
-            cardDictionary[id] = diceCardXmlInfo2;
-            cardXmlList.Add(diceCardXmlInfo2);
+            var onlyPageCardList = new List<int>(ModParameters.HayateCardList.Count +
+                                                 ModParameters.KamiyoCardList.Count + ModParameters.MioCardList.Count +
+                                                 ModParameters.SamuraiCardList.Count);
+            onlyPageCardList.AddRange(ModParameters.HayateCardList);
+            onlyPageCardList.AddRange(ModParameters.MioCardList);
+            onlyPageCardList.AddRange(ModParameters.KamiyoCardList);
+            onlyPageCardList.AddRange(ModParameters.SamuraiCardList);
+            return onlyPageCardList;
         }
 
         private static IEnumerable<string> GetKeywordsList(int id)
         {
-            if (KamiyoCardList.Contains(id))
-                return new List<string> { "ModPack21341Init6", "ModPack21341Init1" };
-            if (MioCardList.Contains(id))
-                return new List<string> { "ModPack21341Init6", "ModPack21341Init2" };
-            if (HayateCardList.Contains(id))
-                return new List<string> { "ModPack21341Init6", "ModPack21341Init3" };
-            return SamuraiCardList.Contains(id)
-                ? new List<string> { "ModPack21341Init6", "ModPack21341Init4" }
-                : new List<string> { "ModPack21341Init6" };
+            if (ModParameters.KamiyoCardList.Contains(id))
+                return new List<string> { "LoRModPage_Re21341", "KamiyoPage_Re21341" };
+            if (ModParameters.MioCardList.Contains(id))
+                return new List<string> { "LoRModPage_Re21341", "MioPage_Re21341" };
+            if (ModParameters.HayateCardList.Contains(id))
+                return new List<string> { "LoRModPage_Re21341", "HayatePage_Re21341" };
+            return ModParameters.SamuraiCardList.Contains(id)
+                ? new List<string> { "LoRModPage_Re21341", "SamuraiPage_Re21341" }
+                : new List<string> { "LoRModPage_Re21341" };
         }
+
         private static DiceCardXmlInfo CardOptionChange(DiceCardXmlInfo cardXml, List<CardOption> option,
             bool keywordRequired, List<string> keywords,
-            string skinName = "", string mapName = "", int skinHeight = 0, bool changeRange = false)
+            string skinName = "", string mapName = "", int skinHeight = 0)
         {
-            var spec = new DiceCardSpec
-            {
-                affection = cardXml.Spec.affection,
-                Cost = cardXml.Spec.Cost,
-                emotionLimit = cardXml.Spec.emotionLimit,
-                Ranged = CardRange.Special
-            };
             return new DiceCardXmlInfo(cardXml.id)
             {
                 workshopID = cardXml.workshopID,
@@ -373,7 +389,7 @@ namespace Util_Re21341
                 Rarity = cardXml.Rarity,
                 Script = cardXml.Script,
                 ScriptDesc = cardXml.ScriptDesc,
-                Spec = changeRange ? spec : cardXml.Spec,
+                Spec = cardXml.Spec,
                 SpecialEffect = cardXml.SpecialEffect,
                 SkinChange = string.IsNullOrEmpty(skinName) ? cardXml.SkinChange : skinName,
                 SkinChangeType = cardXml.SkinChangeType,
@@ -390,34 +406,34 @@ namespace Util_Re21341
                 .GetField("_cardInfoTable", AccessTools.all).GetValue(instance);
             var list = (List<DiceCardXmlInfo>)instance.GetType()
                 .GetField("_cardInfoList", AccessTools.all).GetValue(instance);
-            foreach (var item in dictionary.Where(x => x.Key.packageId == ModParameters.PackageId).ToList())
+            var onlyPageCardList = GetAllOnlyCardsId();
+            foreach (var (key, _) in dictionary.Where(x => x.Key.packageId == ModParameters.PackageId).ToList())
             {
-                if (PersonalCardList.Contains(item.Key.id))
+                if (ModParameters.PersonalCardList.Contains(key.id))
                 {
-                    SetCustomCardOption(CardOption.Personal, item.Key, false, ref dictionary, ref list);
+                    SetCustomCardOption(CardOption.Personal, key, false, ref dictionary, ref list);
                     continue;
                 }
 
-                if (EgoPersonalCardList.Contains(item.Key.id))
+                if (ModParameters.EgoPersonalCardList.Contains(key.id))
                 {
-                    SetCustomCardOption(CardOption.EgoPersonal, item.Key, false, ref dictionary, ref list);
+                    SetCustomCardOption(CardOption.EgoPersonal, key, false, ref dictionary, ref list);
                     continue;
                 }
 
-                if (OnlyPageCardList.Contains(item.Key.id))
+                if (onlyPageCardList.Contains(key.id))
                 {
-                    SetCustomCardOption(CardOption.OnlyPage, item.Key, true, ref dictionary, ref list);
+                    SetCustomCardOption(CardOption.OnlyPage, key, true, ref dictionary, ref list);
                     continue;
                 }
 
-                if (item.Key.id == 920)
-                {
-                    SetRangeSpecial(item.Key, ref dictionary, ref list);
-                    continue;
-                }
-
-                SetBaseKeywordCard(item.Key, ref dictionary, ref list);
+                SetBaseKeywordCard(key, ref dictionary, ref list);
             }
+        }
+
+        public static void ChangePassiveItem(ItemXmlDataList instance)
+        {
+
         }
     }
 }

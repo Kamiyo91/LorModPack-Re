@@ -17,7 +17,7 @@ namespace OldSamurai_Re21341.Passives
                 Owner = owner,
                 HasEgo = true,
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgo_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 1)
+                EgoCardId = new LorId(ModParameters.PackageId, 8)
             });
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 8));
             UnitUtil.TestingUnitValues();
