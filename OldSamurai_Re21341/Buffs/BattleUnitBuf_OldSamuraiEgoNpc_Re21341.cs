@@ -15,7 +15,8 @@ namespace OldSamurai_Re21341.Buffs
                 {
                     Id = 2,
                     Pos = i,
-                    LockedEmotion = true
+                    LockedEmotion = true,
+                    OnWaveStart = true
                 });
             UnitUtil.RefreshCombatUI();
         }
