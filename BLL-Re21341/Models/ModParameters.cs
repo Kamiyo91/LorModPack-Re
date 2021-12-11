@@ -17,6 +17,7 @@ namespace BLL_Re21341.Models
         public static readonly List<int> KamiyoCardList = new List<int>();
         public static readonly List<int> MioCardList = new List<int>();
         public static readonly List<int> HayateCardList = new List<int>();
+        public static readonly List<int> UntransferablePassives = new List<int> {6};
         public static readonly Dictionary<int,List<int>> KeypageWithOnlyCardsList = new Dictionary<int, List<int>> { {10000001,new List<int>{3,4,5,6,7}} };
     }
 }

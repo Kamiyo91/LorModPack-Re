@@ -13,7 +13,6 @@ namespace Util_Re21341
         public static void ChangeMap(MapModel model, Faction faction = Faction.Player)
         {
             if (CheckStageMap(model.StageId)) return;
-            Singleton<StageController>.Instance.CheckMapChange();
             CustomMapHandler.InitCustomMap(model.Stage, model.Component, model.IsPlayer, model.InitBgm, model.Bgx,
                 model.Bgy, model.Fx, model.Fy);
             if (model.IsPlayer && !model.OneTurnEgo)
@@ -69,12 +68,8 @@ namespace Util_Re21341
         {
             if (CheckStageMap(id)) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
-            Singleton<StageController>.Instance.CheckMapChange();
-            if (SingletonBehavior<BattleSceneRoot>
-                    .Instance.currentMapObject.sephirahType == sephirah)
-            {
+            if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.sephirahType == sephirah)
                 SingletonBehavior<BattleSoundManager>.Instance.OnStageStart();
-            }
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
         }
 

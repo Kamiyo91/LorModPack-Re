@@ -45,6 +45,7 @@ namespace LoRModPack_Re21341.Harmony
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
+            UnitUtil.ChangePassiveItem();
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }

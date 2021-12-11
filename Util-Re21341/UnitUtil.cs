@@ -396,9 +396,13 @@ namespace Util_Re21341
             }
         }
 
-        public static void ChangePassiveItem(ItemXmlDataList instance)
+        public static void ChangePassiveItem()
         {
-
+            foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive => passive.id.packageId == ModParameters.PackageId &&
+                         ModParameters.UntransferablePassives.Contains(passive.id.id)))
+            {
+                passive.CanGivePassive = false;
+            }
         }
     }
 }

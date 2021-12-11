@@ -189,6 +189,8 @@ namespace Util_Re21341
                         }
                     }
                 }
+            var cardAbilityDictionary = typeof(BattleCardAbilityDescXmlList).GetField("_dictionary", AccessTools.all)
+                ?.GetValue(Singleton<BattleCardAbilityDescXmlList>.Instance) as Dictionary<string, BattleCardAbilityDesc>;
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleCardAbilities").GetFiles();
             foreach (var t in files)
                 using (var stringReader8 = new StringReader(File.ReadAllText(t.FullName)))
@@ -196,8 +198,7 @@ namespace Util_Re21341
                     foreach (var battleCardAbilityDesc in
                              ((BattleCardAbilityDescRoot)new XmlSerializer(typeof(BattleCardAbilityDescRoot))
                                  .Deserialize(stringReader8)).cardDescList)
-                        Singleton<BattleCardAbilityDescXmlList>.Instance.GetData(battleCardAbilityDesc.id).desc =
-                            battleCardAbilityDesc.desc;
+                        cardAbilityDictionary.Add(battleCardAbilityDesc.id, battleCardAbilityDesc);
                 }
         }
 

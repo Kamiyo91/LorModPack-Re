@@ -4,7 +4,6 @@ namespace Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_OutragingFire_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc = "A";
         private int _atkClashWin;
         private const int Check = 2;
         public override void OnUseCard()
