@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BLL_Re21341.Models.MechUtilModels;
 using Util_Re21341.CommonBuffs;
 
@@ -6,47 +7,44 @@ namespace Util_Re21341.BaseClass
 {
     public class MechUtilBase
     {
-        private MechUtilBaseModel model;
+        private readonly MechUtilBaseModel _model;
 
         public MechUtilBase(MechUtilBaseModel model)
         {
-            this.model = model;
+            _model = model;
         }
 
         public virtual void SurviveCheck(int dmg)
         {
-            if (model.Owner.hp - dmg > model.Hp || !model.Survive) return;
-            model.Survive = false;
-            model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
-            model.Owner.SetHp(model.SetHp);
-            if(model.NearDeathBuffExist) model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(model.NearDeathBuffType));
-            if (model.HasEgo) ForcedEgo();
+            if (_model.Owner.hp - dmg > _model.Hp || !_model.Survive) return;
+            _model.Survive = false;
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
+            _model.Owner.SetHp(_model.SetHp);
+            if(_model.NearDeathBuffExist) _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.NearDeathBuffType));
         }
         public virtual void EgoActive()
         {
-            if (model.Owner.bufListDetail.HasAssimilation()) return;
-            model.EgoActivated = false;
-            if(model.EgoCardId != null) model.Owner.personalEgoDetail.RemoveCard(model.EgoCardId);
-            if(!string.IsNullOrEmpty(model.SkinName)) model.Owner.view.SetAltSkin(model.SkinName);
-            model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(model.EgoType));
-            model.Owner.breakDetail.ResetGauge();
-            model.Owner.breakDetail.RecoverBreakLife(1,true);
-            model.Owner.cardSlotDetail.RecoverPlayPoint(model.Owner.cardSlotDetail.GetMaxPlayPoint());
-            if(model.RefreshUI) UnitUtil.RefreshCombatUI();
+            if (_model.Owner.bufListDetail.HasAssimilation()) return;
+            _model.EgoActivated = false;
+            if(_model.EgoCardId != null) _model.Owner.personalEgoDetail.RemoveCard(_model.EgoCardId);
+            if(!string.IsNullOrEmpty(_model.SkinName)) _model.Owner.view.SetAltSkin(_model.SkinName);
+            _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
+            _model.Owner.breakDetail.ResetGauge();
+            _model.Owner.breakDetail.RecoverBreakLife(1,true);
+            _model.Owner.cardSlotDetail.RecoverPlayPoint(_model.Owner.cardSlotDetail.GetMaxPlayPoint());
+            if(_model.RefreshUI) UnitUtil.RefreshCombatUI();
         }
         public virtual void OnUseExpireCard(LorId cardId)
         {
-            if (model.LorIdArray != null && model.LorIdArray.Contains(cardId))
+            if (_model.LorIdArray != null && _model.LorIdArray.Contains(cardId))
             {
-                model.Owner.personalEgoDetail.RemoveCard(cardId);
+                _model.Owner.personalEgoDetail.RemoveCard(cardId);
             }
 
-            if (model.HasEgo && model.EgoCardId == cardId)
-            {
-                model.EgoActivated = true;
-            }
+            if (!_model.HasEgo || _model.EgoCardId != cardId) return;
+            _model.EgoActivated = true;
         }
-        public virtual bool EgoCheck() => model.EgoActivated;
-        public virtual void ForcedEgo() => model.EgoActivated = true;
+        public virtual bool EgoCheck() => _model.EgoActivated;
+        public virtual void ForcedEgo() => _model.EgoActivated = true;
     }
 }

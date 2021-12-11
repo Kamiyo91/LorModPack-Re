@@ -50,38 +50,6 @@ namespace Util_Re21341
 
             BattleObjectManager.instance.InitUI();
         }
-
-        public static void SummonSamuraiGhostUnits(Faction ownerFaction, StageLibraryFloorModel floor, int unitId,
-            List<int> pos)
-        {
-            if (ownerFaction == Faction.Player)
-            {
-                for (var i = 0; i < 3; i++)
-
-                    AddNewUnitPlayerSide(floor, new UnitModel
-                    {
-                        Id = unitId,
-                        Name = "Samurai's Ghost",
-                        Pos = pos[i],
-                        LockedEmotion = true,
-                        Sephirah = floor.Sephirah
-                    });
-            }
-            else
-            {
-                for (var i = 0; i < 3; i++)
-
-                    AddNewUnitEnemySide(new UnitModel
-                    {
-                        Id = unitId,
-                        Name = "Samurai's Ghost",
-                        Pos = pos[i],
-                        LockedEmotion = true,
-                        Sephirah = floor.Sephirah
-                    });
-            }
-        }
-
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
         {
             owner.Revive(hp);
@@ -106,7 +74,6 @@ namespace Util_Re21341
         {
             var unitWithIndex = Singleton<StageController>.Instance.AddNewUnit(Faction.Enemy,
                 new LorId(ModParameters.PackageId, unit.Id), unit.Pos);
-            Debug.LogError($"{unitWithIndex.Book.BookId} - {unit.Id} - {unitWithIndex.MaxHp}");
             unitWithIndex.emotionDetail.SetEmotionLevel(unit.EmotionLevel);
             if (unit.LockedEmotion)
                 unitWithIndex.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
@@ -180,8 +147,6 @@ namespace Util_Re21341
             if (unit.AddEmotionPassive)
                 AddEmotionPassives(allyUnit);
             allyUnit.OnWaveStart();
-            SingletonBehavior<UICharacterRenderer>.Instance.SetCharacter(allyUnit.UnitData.unitData, allyUnit.index,
-                true);
             return allyUnit;
         }
 

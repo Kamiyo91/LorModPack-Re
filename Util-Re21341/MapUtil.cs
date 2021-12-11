@@ -12,13 +12,13 @@ namespace Util_Re21341
     {
         public static void ChangeMap(MapModel model, Faction faction = Faction.Player)
         {
+            if (CheckStageMap(model.StageId)) return;
             Singleton<StageController>.Instance.CheckMapChange();
             CustomMapHandler.InitCustomMap(model.Stage, model.Component, model.IsPlayer, model.InitBgm, model.Bgx,
                 model.Bgy, model.Fx, model.Fy);
             if (model.IsPlayer && !model.OneTurnEgo)
             {
                 CustomMapHandler.ChangeToCustomEgoMapByAssimilation(model.Stage, faction);
-                SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
                 return;
             }
             CustomMapHandler.ChangeToCustomEgoMap(model.Stage, faction);
@@ -29,6 +29,10 @@ namespace Util_Re21341
                 AccessTools.all)?.GetValue(SingletonBehavior<BattleCamManager>.Instance);
             if (!(battleCamera is null)) battleCamera.GetComponent<CameraFilterPack_Drawing_Paper3>().enabled = true;
         }
+
+        private static bool CheckStageMap(int id) =>
+            Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+            new LorId(ModParameters.PackageId, id);
 
         private static void RemoveValueInAddedMap(string name, bool removeAll = false)
         {
@@ -61,12 +65,16 @@ namespace Util_Re21341
             changeBgm = null;
         }
 
-        public static void ReturnFromEgoMap(string mapName)
+        public static void ReturnFromEgoMap(string mapName, SephirahType sephirah,int id)
         {
+            if (CheckStageMap(id)) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
             Singleton<StageController>.Instance.CheckMapChange();
-            SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
-                .Instance.currentMapObject.mapBgm);
+            if (SingletonBehavior<BattleSceneRoot>
+                    .Instance.currentMapObject.sephirahType == sephirah)
+            {
+                SingletonBehavior<BattleSoundManager>.Instance.OnStageStart();
+            }
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
         }
 
