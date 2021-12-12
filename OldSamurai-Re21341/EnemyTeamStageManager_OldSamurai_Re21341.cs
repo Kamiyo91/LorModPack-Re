@@ -46,7 +46,7 @@ namespace OldSamurai_Re21341
             _phaseChanged = true;
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,_mainEnemyModel.MaxHp);
             _mechUtil.ForcedEgo();
-            MapUtil.PrepareChangeBgm("Hornet.mp3", ref _changeBgm);
+            MapUtil.PrepareChangeBgm("Hornet_Re21341.mp3", ref _changeBgm);
         }
     }
 }

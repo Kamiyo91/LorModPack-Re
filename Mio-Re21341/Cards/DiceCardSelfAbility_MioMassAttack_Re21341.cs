@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL_Re21341.Models;
-using OldSamurai_Re21341.MapManager;
 using Util_Re21341;
 
 namespace Mio_Re21341.Cards

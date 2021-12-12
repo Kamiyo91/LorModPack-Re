@@ -80,7 +80,7 @@ namespace Mio_Re21341.Passives
         public void ForcedEgo() => _util.ForcedEgo();
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
-            _util.OnSelectCardPutMassAttack(ref origin,new LorId(ModParameters.PackageId,900));
+            _util.OnSelectCardPutMassAttack(ref origin);
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
 

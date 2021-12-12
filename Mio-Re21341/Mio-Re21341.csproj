@@ -66,6 +66,7 @@
     <Compile Include="Passives\PassiveAbility_GodFragmentEnemy_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_GodFragment_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HiddenBlade_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_MioMemory_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

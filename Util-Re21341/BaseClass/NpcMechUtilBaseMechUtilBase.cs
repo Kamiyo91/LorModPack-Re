@@ -39,17 +39,17 @@ namespace Util_Re21341.BaseClass
         }
         public virtual void RaiseCounter()
         {
-            if (_model.MassAttackCount && _model.Counter < _model.MaxCounter) _model.Counter++;
+            if (_model.MassAttackStartCount && _model.Counter < _model.MaxCounter) _model.Counter++;
         }
-        public virtual void SetMassAttack(bool value) => _model.MassAttackCount = value;
+        public virtual void SetMassAttack(bool value) => _model.MassAttackStartCount = value;
         public virtual void SetOneTurnCard(bool value) => _oneTurnCard = value;
         public virtual void SetCounter(int value) => _model.Counter = value;
-        public virtual void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin,LorId cardId)
+        public virtual void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
-            if (_model.Owner.IsBreakLifeZero() || !_model.MassAttackCount || _model.Counter < _model.MaxCounter || _oneTurnCard)
+            if (_model.Owner.IsBreakLifeZero() || !_model.MassAttackStartCount || _model.Counter < _model.MaxCounter || _oneTurnCard)
                 return;
             origin = BattleDiceCardModel.CreatePlayingCard(
-                ItemXmlDataList.instance.GetCardItem(cardId));
+                ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
             SetOneTurnCard(true);
         }
     }

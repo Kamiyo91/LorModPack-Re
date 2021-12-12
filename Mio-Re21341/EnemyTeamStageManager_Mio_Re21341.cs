@@ -1,14 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
 using Mio_Re21341.Passives;
-using OldSamurai_Re21341.MapManager;
 using Util_Re21341;
-using Util_Re21341.BaseClass;
 using Util_Re21341.CustomMapUtility.Assemblies;
 
-namespace OldSamurai_Re21341
+namespace Mio_Re21341
 {
     public class EnemyTeamStageManager_Mio_Re21341 : EnemyTeamStageManager
     {
@@ -51,7 +48,7 @@ namespace OldSamurai_Re21341
             _mioEnemyPassive.ActiveMassAttackCount();
             _mioEnemyPassive.SetCountToMax();
             PrepareAllyUnit();
-            MapUtil.PrepareChangeBgm("MioPhase2.mp3", ref _changeBgm);
+            MapUtil.PrepareChangeBgm("MioPhase2_Re21341.mp3", ref _changeBgm);
         }
         private void PrepareAllyUnit()
         {

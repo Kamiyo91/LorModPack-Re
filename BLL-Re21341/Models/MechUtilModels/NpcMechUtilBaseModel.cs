@@ -8,6 +8,6 @@
         public int MaxCounter { get; set; }
         public bool ReloadMassAttackOnLethal { get; set; }
         public LorId LorIdEgoMassAttack { get; set; } = null;
-        public bool MassAttackCount { get; set; } = false;
+        public bool MassAttackStartCount { get; set; } = false;
     }
 }

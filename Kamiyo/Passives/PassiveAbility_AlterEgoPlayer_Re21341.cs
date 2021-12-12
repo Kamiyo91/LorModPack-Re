@@ -8,24 +8,32 @@ using LOR_XML;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
-namespace Kamiyo_Re21341.Passives.Player
+namespace Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_AlterEgoPlayer_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+        public override void Init(BattleUnitModel self)
+        {
+            UnitUtil.ReturnToTheOriginalSkin(self, "KamiyoNormal_Re21341");
+            base.Init(self);
+        }
+        public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel { Owner = owner, 
                 Hp = 25, 
                 SetHp = 25, 
                 Survive = true, 
-                HasEgo = true, 
+                HasEgo = true,
+                HasEgoAttack = true,
                 RefreshUI = true,
                 NearDeathBuffExist = true,
-                SkinName = "KamiyoMask-Re21341", 
+                SkinName = "KamiyoMask_Re21341", 
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341), 
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 1),
+                EgoCardId = new LorId(ModParameters.PackageId, 17),
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 16),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,

@@ -4,6 +4,6 @@ namespace OldSamurai_Re21341.MapManager
 {
     public class OldSamurai_Re21341MapManager : CustomMapManager
     {
-        protected override string[] CustomBGMs => new[] { "Reflection.mp3" };
+        protected override string[] CustomBGMs => new[] { "Reflection_Re21341.mp3" };
     }
 }
