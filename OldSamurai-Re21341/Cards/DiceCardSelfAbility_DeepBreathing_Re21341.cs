@@ -1,5 +1,6 @@
 ﻿using BLL_Re21341.Models;
 using OldSamurai_Re21341.Buffs;
+using Util_Re21341.CommonBuffs;
 
 namespace OldSamurai_Re21341.Cards
 {
@@ -16,7 +17,7 @@ namespace OldSamurai_Re21341.Cards
             unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 3));
             unit.bufListDetail.AddBuf(new BattleUnitBuf_DeepBreathing_Re21341());
             if (unit.faction == Faction.Player && !unit.bufListDetail.GetActivatedBufList()
-                    .Exists(x => x is BattleUnitBuf_GhostSamurai_Re21341))
+                    .Exists(x => x is BattleUnitBuf_Uncontrollable_Re21341))
             {
                 unit.passiveDetail.OnCreated();
             }

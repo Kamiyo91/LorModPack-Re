@@ -88,6 +88,7 @@ namespace Util_Re21341
                             var enemy = enumerator3.Current;
                             enemy.name = charactersNameRoot.nameList.Find(x => x.ID == enemy.id.id).name;
                             Singleton<EnemyUnitClassInfoList>.Instance.GetData(enemy.id).name = enemy.name;
+                            ModParameters.NameTexts.Add(enemy.id.id.ToString(),enemy.name);
                         }
                     }
                 }

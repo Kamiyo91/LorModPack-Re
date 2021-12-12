@@ -20,7 +20,6 @@ namespace OldSamurai_Re21341.Passives
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgo_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 8)
             });
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 8));
             UnitUtil.TestingUnitValues();
         }
         public override void OnRoundStart()
@@ -37,11 +36,7 @@ namespace OldSamurai_Re21341.Passives
         {
             if (!owner.bufListDetail.GetActivatedBufList()
                     .Exists(x => x is BattleUnitBuf_OldSamuraiEgo_Re21341)) return;
-            foreach (var ghostUnit in BattleObjectManager.instance.GetAliveList(owner.faction)
-                         .Where(x => x != owner))
-            {
-                ghostUnit.Die();
-            }
+            UnitUtil.VipDeath(owner);
         }
     }
 }

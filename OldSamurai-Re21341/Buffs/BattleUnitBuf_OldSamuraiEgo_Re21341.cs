@@ -9,24 +9,23 @@ namespace OldSamurai_Re21341.Buffs
 {
     public class BattleUnitBuf_OldSamuraiEgo_Re21341 : BattleUnitBuf
     {
-        private readonly SephirahType _sephirah = Singleton<StageController>.Instance.GetCurrentStageFloorModel().Sephirah;
+        private readonly StageLibraryFloorModel _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
         public override bool isAssimilation => true;
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            var floor = Singleton<StageController>.Instance.GetStageModel().GetFloor(_sephirah);
             ChangeToSamuraiEgoMap();
             var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
                          .Where(x => indexList.Contains(x.index))) BattleObjectManager.instance.UnregisterUnit(unit);
             for (var i = 0; i < 3; i++)
-                UnitUtil.AddNewUnitPlayerSide(floor, new UnitModel
+                UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
                 {
                     Id = 10000002,
-                    Name = "Samurai's Ghost",
+                    Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("2")).Value,
                     Pos = indexList[i],
                     LockedEmotion = true,
-                    Sephirah = floor.Sephirah
+                    Sephirah = _floor.Sephirah
                 });
             UnitUtil.RefreshCombatUI();
         }
@@ -54,7 +53,7 @@ namespace OldSamurai_Re21341.Buffs
         private void RemoveSamuraiEgoMap()
         {
             Destroy();
-            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", _sephirah,1);
+            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", _floor.Sephirah, 1);
         }
     }
 }

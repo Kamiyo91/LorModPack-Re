@@ -2,6 +2,7 @@
 using LOR_DiceSystem;
 using OldSamurai_Re21341.Buffs;
 using OldSamurai_Re21341.Cards;
+using Util_Re21341.CommonBuffs;
 
 namespace OldSamurai_Re21341.Passives
 {
@@ -45,7 +46,7 @@ namespace OldSamurai_Re21341.Passives
         public override void OnRoundEndTheLast()
         {
             if (owner.faction != Faction.Enemy && !owner.bufListDetail.GetActivatedBufList()
-                .Exists(x => x is BattleUnitBuf_GhostSamurai_Re21341))
+                .Exists(x => x is BattleUnitBuf_Uncontrollable_Re21341))
                 return;
 
             _enemyCount++;

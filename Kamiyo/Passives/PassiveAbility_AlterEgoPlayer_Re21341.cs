@@ -25,7 +25,23 @@ namespace Kamiyo_Re21341.Passives.Player
                 SkinName = "KamiyoMask-Re21341", 
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341), 
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 1) });
+                EgoCardId = new LorId(ModParameters.PackageId, 1),
+                HasEgoAbDialog = true,
+                HasSurviveAbDialog = true,
+                SurviveAbDialogColor = AbColorType.Negative,
+                EgoAbColorColor = AbColorType.Negative,
+                SurviveAbDialogList = new List<AbnormalityCardDialog>
+                {
+                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive2_Re21341")).Value}
+                },
+                EgoAbDialogList = new List<AbnormalityCardDialog>
+                {
+                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive2_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value}
+                }
+            });
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId,1));
             UnitUtil.TestingUnitValues();
         }

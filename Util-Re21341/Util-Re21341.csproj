@@ -74,8 +74,12 @@
   <ItemGroup>
     <Compile Include="BaseClass\MechUtilBaseMechUtilBase.cs" />
     <Compile Include="BaseClass\NpcMechUtilBaseMechUtilBase.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToBinding_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_Vip_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_Uncontrollable_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEnd_Re21341 - Copia.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalForTestPurpose_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
     <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />

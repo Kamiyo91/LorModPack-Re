@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7E6E131E-7DFB-46F2-AE55-5889932B9476}</ProjectGuid>
+    <ProjectGuid>{D8511094-97E9-4B2B-9D69-D59BD85D2260}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OldSamurai_Re21341</RootNamespace>
-    <AssemblyName>OldSamurai_Re21341</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <RootNamespace>Mio_Re21341</RootNamespace>
+    <AssemblyName>Mio-Re21341</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,35 +53,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_GhostSamurai_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgoNpc_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgo_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
-    <Compile Include="Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
-    <Compile Include="EnemyTeamStageManager_OldSamurai_Re21341.cs" />
-    <Compile Include="MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
-    <Compile Include="MapManager\OldSamurai_Re21341MapManager.cs" />
-    <Compile Include="Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_GhostSamurai_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_OldSamuraiEnemyDesc_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_OldSamurai_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_GodAuraRelease_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_CorruptedGodAuraRelease_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_EnergyRelease_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_GodAuraCard_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_MioMassAttack_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Rush_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_SakuraBloom_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_WaterBlade_Re21341.cs" />
+    <Compile Include="EnemyTeamStageManager_Mio_Re21341.cs" />
+    <Compile Include="Mio_Re21341MapManager.cs" />
+    <Compile Include="Passives\PassiveAbility_GodFragmentEnemy_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_GodFragment_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_HiddenBlade_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
-      <Project>{1DF30575-B636-45B5-B748-A37D420C63F0}</Project>
+      <Project>{1df30575-b636-45b5-b748-a37d420c63f0}</Project>
       <Name>BLL-Re21341</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
-      <Project>{DACDC2EA-D97B-47B0-BA6A-1E0D27800C68}</Project>
+      <Project>{dacdc2ea-d97b-47b0-ba6a-1e0d27800c68}</Project>
       <Name>Util-Re21341</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

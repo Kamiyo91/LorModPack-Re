@@ -31,6 +31,18 @@ namespace Util_Re21341
             }
         }
 
+        public static void VipDeath(BattleUnitModel owner)
+        {
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)
+                         .Where(x => x != owner))
+            {
+                unit.Die();
+            }
+        }
+        public static void ReturnToTheOriginalSkin(BattleUnitModel owner,string charName)
+        {
+            owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
+        }
         public static void RemoveImmortalBuff(BattleUnitModel owner)
         {
             if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_ImmortalUntilRoundEnd_Re21341) is
@@ -149,13 +161,6 @@ namespace Util_Re21341
             allyUnit.OnWaveStart();
             return allyUnit;
         }
-
-        public static void ChangeCustomSkin(BattleUnitModel owner, int skinId)
-        {
-            owner.UnitData.unitData.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, skinId));
-            owner.view.CreateSkin();
-        }
-
         public static void PrepareSephirahSkin(BattleUnitModel owner, int id, string charName, bool isNpc,
             ref string originalSkinName, ref BattleDialogueModel dlg, bool baseDlg = false, string charName2 = null,
             bool doubleName = false)
@@ -250,7 +255,7 @@ namespace Util_Re21341
             return unitBattleDataModel;
         }
 
-        public static void BattleAbDialog(MonoBehaviour instance, List<AbnormalityCardDialog> dialogs,
+        public static void BattleAbDialog(BattleDialogUI instance, List<AbnormalityCardDialog> dialogs,
             AbColorType colorType)
         {
             var component = instance.GetComponent<CanvasGroup>();
@@ -335,7 +340,6 @@ namespace Util_Re21341
                 ? new List<string> { "LoRModPage_Re21341", "SamuraiPage_Re21341" }
                 : new List<string> { "LoRModPage_Re21341" };
         }
-
         private static DiceCardXmlInfo CardOptionChange(DiceCardXmlInfo cardXml, List<CardOption> option,
             bool keywordRequired, List<string> keywords,
             string skinName = "", string mapName = "", int skinHeight = 0)

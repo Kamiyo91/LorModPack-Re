@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using OldSamurai_Re21341.Buffs;
 using Util_Re21341;
+using Util_Re21341.CommonBuffs;
 
 namespace OldSamurai_Re21341.Passives
 {
@@ -10,7 +11,7 @@ namespace OldSamurai_Re21341.Passives
         {
             owner.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_LibrarianAura());
             if (owner.faction == Faction.Player) 
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_GhostSamurai_Re21341());
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_Re21341());
             else
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_GhostSamuraiEnemy_Re21341());
         }
@@ -24,7 +25,7 @@ namespace OldSamurai_Re21341.Passives
 
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_KeterFinal_LibrarianAura));
             owner.bufListDetail.RemoveBufAll(owner.faction == Faction.Player
-                ? typeof(BattleUnitBuf_GhostSamurai_Re21341)
+                ? typeof(BattleUnitBuf_Uncontrollable_Re21341)
                 : typeof(BattleUnitBuf_GhostSamuraiEnemy_Re21341));
         }
 

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using BLL_Re21341.Models.Enum;
+using LOR_XML;
 
 namespace BLL_Re21341.Models.MechUtilModels
 {
@@ -9,13 +12,22 @@ namespace BLL_Re21341.Models.MechUtilModels
         public int SetHp { get; set; }
         public bool Survive { get; set; }
         public bool HasEgo { get; set; }
+        public bool HasEgoAttack { get; set; }
         public bool EgoActivated { get; set; }
         public bool RefreshUI { get; set; }
         public string SkinName { get; set; }
+        public List<AbnormalityCardDialog> SurviveAbDialogList { get; set; }
+        public List<AbnormalityCardDialog> EgoAbDialogList { get; set; }
+        public bool HasEgoAbDialog { get; set; }
+        public bool HasSurviveAbDialog { get; set; }
         public bool NearDeathBuffExist { get; set; }
+        public bool VipUnit { get; set; }
+        public AbColorType SurviveAbDialogColor { get; set; }
+        public AbColorType EgoAbColorColor { get; set; }
         public Type NearDeathBuffType { get; set; }
         public Type EgoType { get; set; }
         public LorId[] LorIdArray { get; set; } = null;
         public LorId EgoCardId { get; set; }
+        public LorId EgoAttackCardId { get; set; }
     }
 }
