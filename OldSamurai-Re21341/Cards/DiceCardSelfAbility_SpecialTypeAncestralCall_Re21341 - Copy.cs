@@ -8,7 +8,7 @@ namespace OldSamurai_Re21341.Cards
 {
     public class DiceCardSelfAbility_SpecialTypeAncestralCall_Re21341 : DiceCardSelfAbilityBase
     {
-        //public override bool OnChooseCard(BattleUnitModel owner) => owner.emotionDetail.EmotionLevel >= 5 && BattleObjectManager.instance.GetAliveList(Faction.Player).All(x => x == owner);
+        public override bool OnChooseCard(BattleUnitModel owner) => owner.emotionDetail.EmotionLevel >= 5 && BattleObjectManager.instance.GetAliveList(Faction.Player).All(x => x == owner);
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);
