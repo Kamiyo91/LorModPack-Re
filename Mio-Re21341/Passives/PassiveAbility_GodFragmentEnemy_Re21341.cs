@@ -50,7 +50,8 @@ namespace Mio_Re21341.Passives
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
                     new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value},
-                }
+                },
+                LorIdEgoMassAttack = new LorId(ModParameters.PackageId,900)
             });
         }
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

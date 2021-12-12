@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Schema;
+using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
@@ -32,6 +33,11 @@ namespace Util_Re21341.BaseClass
         {
             if (_model.Owner.bufListDetail.HasAssimilation()) return;
             _model.EgoActivated = false;
+            if (_model.IsSummonEgo && BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 1)
+            {
+                _model.Owner.personalEgoDetail.AddCard(_model.SecondaryEgoCardId);
+                return;
+            }
             if(!string.IsNullOrEmpty(_model.SkinName)) _model.Owner.view.SetAltSkin(_model.SkinName);
             _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
             _model.Owner.breakDetail.ResetGauge();
@@ -52,10 +58,8 @@ namespace Util_Re21341.BaseClass
             if (_model.EgoCardId != null) _model.Owner.personalEgoDetail.RemoveCard(_model.EgoCardId);
             _model.EgoActivated = true;
         }
-        public virtual bool VipUnitCheck() => _model.VipUnit;
         public virtual bool EgoCheck() => _model.EgoActivated;
         public virtual void ForcedEgo() => _model.EgoActivated = true;
-
         public virtual void SetVipUnit() => _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
         public virtual void ChangeEgoAbDialog(List<AbnormalityCardDialog> value) => _model.EgoAbDialogList = value;
     }

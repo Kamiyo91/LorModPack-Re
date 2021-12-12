@@ -132,9 +132,7 @@ namespace LoRModPack_Re21341.Harmony
         }
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
-            Debug.LogError($"Entry 1 {charName} - {ModParameters.SkinNames}");
             if (!ModParameters.SkinNames.Contains(charName)) return true;
-            Debug.LogError("Entry 2");
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;

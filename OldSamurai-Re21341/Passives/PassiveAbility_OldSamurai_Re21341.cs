@@ -17,8 +17,10 @@ namespace OldSamurai_Re21341.Passives
             {
                 Owner = owner,
                 HasEgo = true,
+                IsSummonEgo = true,
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgo_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 8)
+                EgoCardId = new LorId(ModParameters.PackageId, 8),
+                SecondaryEgoCardId = new LorId(ModParameters.PackageId,901)
             });
             UnitUtil.TestingUnitValues();
         }
@@ -38,5 +40,7 @@ namespace OldSamurai_Re21341.Passives
                     .Exists(x => x is BattleUnitBuf_OldSamuraiEgo_Re21341)) return;
             UnitUtil.VipDeath(owner);
         }
+
+        public void ForcedEgo() => _util.ForcedEgo();
     }
 }

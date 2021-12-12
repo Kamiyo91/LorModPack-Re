@@ -13,7 +13,7 @@ namespace BLL_Re21341.Models
         public static Dictionary<string, string> EffectTexts = new Dictionary<string, string>();
         public static Dictionary<string, string> NameTexts = new Dictionary<string, string>();
         public static readonly List<int> PersonalCardList = new List<int>{1};
-        public static readonly List<int> EgoPersonalCardList = new List<int> { 8,9,10 };
+        public static readonly List<int> EgoPersonalCardList = new List<int> { 8,9,10,901 };
         public static readonly List<int> SamuraiCardList = new List<int> { 3, 4, 5, 6, 7 };
         public static readonly List<int> KamiyoCardList = new List<int>();
         public static readonly List<int> MioCardList = new List<int>{12,13,14,15};

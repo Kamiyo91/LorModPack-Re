@@ -15,19 +15,20 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool HasEgoAttack { get; set; }
         public bool EgoActivated { get; set; }
         public bool RefreshUI { get; set; }
+        public bool IsSummonEgo { get; set; }
         public string SkinName { get; set; }
         public List<AbnormalityCardDialog> SurviveAbDialogList { get; set; }
         public List<AbnormalityCardDialog> EgoAbDialogList { get; set; }
         public bool HasEgoAbDialog { get; set; }
         public bool HasSurviveAbDialog { get; set; }
         public bool NearDeathBuffExist { get; set; }
-        public bool VipUnit { get; set; }
         public AbColorType SurviveAbDialogColor { get; set; }
         public AbColorType EgoAbColorColor { get; set; }
         public Type NearDeathBuffType { get; set; }
         public Type EgoType { get; set; }
         public LorId[] LorIdArray { get; set; } = null;
         public LorId EgoCardId { get; set; }
+        public LorId SecondaryEgoCardId { get; set; }
         public LorId EgoAttackCardId { get; set; }
     }
 }

@@ -7,7 +7,7 @@
         public int Counter { get; set; }
         public int MaxCounter { get; set; }
         public bool ReloadMassAttackOnLethal { get; set; }
-        public LorId LorIdArrayMass { get; set; } = null;
+        public LorId LorIdEgoMassAttack { get; set; } = null;
         public bool MassAttackCount { get; set; } = false;
     }
 }

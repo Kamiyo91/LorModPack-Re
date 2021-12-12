@@ -59,6 +59,7 @@
     <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgoNpc_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgo_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_SpecialTypeAncestralCall_Re21341 - Copy.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
     <Compile Include="Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_OldSamurai_Re21341.cs" />

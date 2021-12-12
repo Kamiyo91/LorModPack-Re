@@ -72,6 +72,7 @@ namespace Mio_Re21341.Passives
             _util.SetVipUnit();
             _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>{ new AbnormalityCardDialog { id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value } });
             _util.ForcedEgo();
+            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 9));
         }
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {

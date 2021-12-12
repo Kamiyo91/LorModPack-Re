@@ -68,10 +68,32 @@ namespace Util_Re21341
             foreach (var t in files)
                 using (var stringReader = new StringReader(File.ReadAllText(t.FullName)))
                 {
-                    var battleDialogTextRoot =
-                        (BattleDialogRoot)new XmlSerializer(typeof(BattleDialogRoot))
-                            .Deserialize(stringReader);
-                    dialogDictionary.Add(ModParameters.PackageId, battleDialogTextRoot);
+                    var battleDialogList =
+                        ((BattleDialogRoot)new XmlSerializer(typeof(BattleDialogRoot))
+                            .Deserialize(stringReader)).characterList;
+                    foreach (var dialog in battleDialogList)
+                    {
+                        dialog.workshopId = ModParameters.PackageId;
+                        dialog.bookId = int.Parse(dialog.characterID);
+                    }
+                    if (dialogDictionary.ContainsKey("Workshop"))
+                    {
+                        dialogDictionary["Workshop"].characterList
+                            .RemoveAll(x => x.workshopId.Equals(ModParameters.PackageId));
+                        if (dialogDictionary.ContainsKey("Workshop"))
+                        {
+                            dialogDictionary["Workshop"].characterList.AddRange(battleDialogList);
+                        }
+                        else
+                        {
+                            var battleDialogRoot = new BattleDialogRoot
+                            {
+                                groupName = "Workshop",
+                                characterList = battleDialogList
+                            };
+                            dialogDictionary.Add("Workshop", battleDialogRoot);
+                        }
+                    }
                 }
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName").GetFiles();
             foreach (var t in files)

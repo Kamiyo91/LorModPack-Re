@@ -14,7 +14,7 @@ namespace Util_Re21341.BaseClass
         }
         public virtual void OnUseCardResetCount(LorId cardId)
         {
-            if (_model.LorIdArrayMass != null && _model.LorIdArrayMass == cardId)
+            if (_model.LorIdEgoMassAttack != null && _model.LorIdEgoMassAttack == cardId)
             {
                 _model.Counter = 0;
             }
