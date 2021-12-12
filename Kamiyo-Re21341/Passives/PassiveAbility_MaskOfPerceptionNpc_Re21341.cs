@@ -5,9 +5,7 @@ namespace Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_MaskOfPerceptionNpc_Re21341 : PassiveAbilityBase
     {
-        public override int SpeedDiceNumAdder() => 1;
         public override bool IsTargetable_theLast() => false;
-
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             if (behavior.Detail != BehaviourDetail.Evasion) return;

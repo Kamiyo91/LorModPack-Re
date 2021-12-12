@@ -41,6 +41,7 @@ namespace Util_Re21341.BaseClass
         {
             if (_model.MassAttackStartCount && _model.Counter < _model.MaxCounter) _model.Counter++;
         }
+        public virtual void AddAdditionalPassive() => _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
         public virtual void SetMassAttack(bool value) => _model.MassAttackStartCount = value;
         public virtual void SetOneTurnCard(bool value) => _oneTurnCard = value;
         public virtual void SetCounter(int value) => _model.Counter = value;

@@ -11,6 +11,7 @@ namespace Mio_Re21341.Cards
         private const int Check = 2;
         public override void OnUseCard()
         {
+            owner.allyCardDetail.DrawCards(1);
             var speedDiceResultValue = card.speedDiceResultValue;
             var target = card.target;
             var targetSlotOrder = card.targetSlotOrder;
@@ -22,13 +23,6 @@ namespace Mio_Re21341.Cards
             {
                 power = 1
             });
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-            owner.allyCardDetail.DrawCards(1);
-            owner.cardSlotDetail.RecoverPlayPointByCard(1);
         }
     }
 }

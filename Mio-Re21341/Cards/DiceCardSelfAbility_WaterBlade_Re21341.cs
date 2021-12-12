@@ -11,6 +11,7 @@ namespace Mio_Re21341.Cards
         private const int Check = 1;
         public override void OnUseCard()
         {
+            owner.cardSlotDetail.RecoverPlayPointByCard(1);
             var speedDiceResultValue = card.speedDiceResultValue;
             var target = card.target;
             var targetSlotOrder = card.targetSlotOrder;
@@ -22,8 +23,8 @@ namespace Mio_Re21341.Cards
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-            owner.cardSlotDetail.RecoverPlayPointByCard(2);
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Quickness,1,owner);
+            owner.cardSlotDetail.RecoverPlayPoint(1);
         }
     }
 }

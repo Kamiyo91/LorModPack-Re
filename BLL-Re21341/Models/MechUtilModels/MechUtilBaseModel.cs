@@ -16,6 +16,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool EgoActivated { get; set; }
         public bool RefreshUI { get; set; }
         public bool IsSummonEgo { get; set; }
+        public bool HasAdditionalPassive { get; set; }
         public string SkinName { get; set; }
         public List<AbnormalityCardDialog> SurviveAbDialogList { get; set; }
         public List<AbnormalityCardDialog> EgoAbDialogList { get; set; }
@@ -30,5 +31,6 @@ namespace BLL_Re21341.Models.MechUtilModels
         public LorId EgoCardId { get; set; }
         public LorId SecondaryEgoCardId { get; set; }
         public LorId EgoAttackCardId { get; set; }
+        public LorId AdditionalPassiveId { get; set; }
     }
 }

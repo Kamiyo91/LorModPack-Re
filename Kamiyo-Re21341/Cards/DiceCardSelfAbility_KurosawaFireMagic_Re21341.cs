@@ -1,4 +1,5 @@
 ﻿using BLL_Re21341.Models;
+using UnityEngine;
 
 namespace Kamiyo_Re21341.Cards
 {
@@ -8,23 +9,20 @@ namespace Kamiyo_Re21341.Cards
         private const int Check = 2;
         public override void OnUseCard()
         {
+            owner.allyCardDetail.DrawCards(1);
             _defClashWin = 0;
         }
 
-        public override void OnWinParryingDef()
-        {
-            _defClashWin++;
-        }
+        public override void OnWinParryingDef() => _defClashWin++;
 
         public override void OnEndBattle()
         {
             if (_defClashWin < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x != card.card && x.GetID() == new LorId(ModParameters.PackageId,1)))
+            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x != card.card && x.GetID()  == card.card.GetID()))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-            owner.allyCardDetail.DrawCards(1);
         }
     }
 }

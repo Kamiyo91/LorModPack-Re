@@ -48,7 +48,7 @@ namespace Mio_Re21341.Passives
         public override void OnRoundEndTheLast_ignoreDead()
         {
             if (owner.IsDead() &&
-                BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 191)
+                BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 161)
                 UnitUtil.UnitReviveAndRecovery(owner, 67);
         }
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card.GetID());

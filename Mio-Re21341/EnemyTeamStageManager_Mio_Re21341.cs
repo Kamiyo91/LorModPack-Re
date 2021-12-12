@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using Mio_Re21341.Passives;
+using Sound;
 using Util_Re21341;
 using Util_Re21341.CustomMapUtility.Assemblies;
 
@@ -47,6 +48,9 @@ namespace Mio_Re21341
             _mioEnemyPassive.ForcedEgo();
             _mioEnemyPassive.ActiveMassAttackCount();
             _mioEnemyPassive.SetCountToMax();
+            MapUtil.ActiveCreatureBattleCamFilterComponent();
+            UnitUtil.ChangeCardCostByValue(_mainEnemyModel,-2,4);
+            SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             PrepareAllyUnit();
             MapUtil.PrepareChangeBgm("MioPhase2_Re21341.mp3", ref _changeBgm);
         }

@@ -7,6 +7,7 @@ namespace Mio_Re21341.Cards
         private const int Check = 3;
         public override void OnUseCard()
         {
+            owner.allyCardDetail.DrawCards(1);
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Quickness, 1, owner);
             var speedDiceResultValue = card.speedDiceResultValue;
             var target = card.target;
@@ -19,7 +20,6 @@ namespace Mio_Re21341.Cards
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-            owner.allyCardDetail.DrawCards(1);
         }
     }
 }

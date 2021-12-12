@@ -32,7 +32,6 @@ namespace Mio_Re21341.Buffs
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
-            SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             UnitUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
         }
 

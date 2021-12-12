@@ -62,9 +62,20 @@ namespace Util_Re21341
 
             BattleObjectManager.instance.InitUI();
         }
+
+        public static void ChangeCardCostByValue(BattleUnitModel owner,int changeValue, int baseValue)
+        {
+            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().Where(x => x.GetOriginCost() < baseValue))
+            {
+                battleDiceCardModel.GetBufList();
+                battleDiceCardModel.AddCost(changeValue);
+            }
+        }
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
         {
             owner.Revive(hp);
+            owner.bufListDetail.RemoveBufAll(BufPositiveType.Negative);
+            owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_sealTemp));
             owner.breakDetail.ResetGauge();
             owner.breakDetail.nextTurnBreak = false;
             owner.breakDetail.RecoverBreakLife(1, true);

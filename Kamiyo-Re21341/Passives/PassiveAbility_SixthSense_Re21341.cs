@@ -6,7 +6,7 @@ namespace Kamiyo_Re21341.Passives
     {
         public override void OnStartBattle()
         {
-            UnitUtil.ReadyCounterCard(owner, 30);
+            UnitUtil.ReadyCounterCard(owner, 18);
         }
     }
 }

@@ -25,18 +25,20 @@ namespace Kamiyo_Re21341.Passives
             {
                 Owner = owner,
                 Hp = 0,
-                SetHp = 210,
+                SetHp = 161,
                 MechHp = 100,
                 Counter = 0,
                 MaxCounter = 4,
                 Survive = true,
                 HasEgo = true,
                 HasMechOnHp = true,
+                HasAdditionalPassive = true,
                 NearDeathBuffExist = true,
                 RefreshUI = true,
                 ReloadMassAttackOnLethal = true,
                 SkinName = "KamiyoMask_Re21341",
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
+                AdditionalPassiveId = new LorId(ModParameters.PackageId, 11),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeathNpc_Re21341),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
@@ -44,11 +46,11 @@ namespace Kamiyo_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341")).Value}
+                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemySurvive1_Re21341")).Value}
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value},
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902)
             });
@@ -75,6 +77,7 @@ namespace Kamiyo_Re21341.Passives
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
+        public void AddAdditionalPassive() => _util.AddAdditionalPassive();
         public void SetCountToMax() => _util.SetCounter(4);
         public void ActiveMassAttackCount() => _util.SetMassAttack(true);
         public void ForcedEgo() => _util.ForcedEgo();

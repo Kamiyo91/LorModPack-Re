@@ -27,10 +27,12 @@ namespace Kamiyo_Re21341.Passives
                 Survive = true, 
                 HasEgo = true,
                 HasEgoAttack = true,
+                HasAdditionalPassive = true,
                 RefreshUI = true,
                 NearDeathBuffExist = true,
                 SkinName = "KamiyoMask_Re21341", 
-                EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341), 
+                EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
+                AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 17),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 16),
@@ -50,7 +52,6 @@ namespace Kamiyo_Re21341.Passives
                     new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value}
                 }
             });
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId,1));
             UnitUtil.TestingUnitValues();
         }
 

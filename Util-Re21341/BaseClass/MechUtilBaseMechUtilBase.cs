@@ -56,6 +56,7 @@ namespace Util_Re21341.BaseClass
 
             if (!_model.HasEgo || _model.EgoCardId != cardId) return;
             if (_model.EgoCardId != null) _model.Owner.personalEgoDetail.RemoveCard(_model.EgoCardId);
+            if (_model.HasAdditionalPassive) _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
             _model.EgoActivated = true;
         }
         public virtual bool EgoCheck() => _model.EgoActivated;
