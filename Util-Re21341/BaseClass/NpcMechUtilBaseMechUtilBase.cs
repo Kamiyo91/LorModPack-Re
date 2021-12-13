@@ -7,14 +7,13 @@ namespace Util_Re21341.BaseClass
     public class NpcMechUtilBase : MechUtilBase
     {
         private readonly NpcMechUtilBaseModel _model;
-        private bool _oneTurnCard;
         public NpcMechUtilBase(NpcMechUtilBaseModel model) : base(model)
         {
             _model = model;
         }
         public virtual void OnUseCardResetCount(LorId cardId)
         {
-            if (_model.LorIdEgoMassAttack != null && _model.LorIdEgoMassAttack == cardId)
+            if (_model.LorIdEgoMassAttack == cardId)
             {
                 _model.Counter = 0;
             }
@@ -43,11 +42,11 @@ namespace Util_Re21341.BaseClass
         }
         public virtual void AddAdditionalPassive() => _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
         public virtual void SetMassAttack(bool value) => _model.MassAttackStartCount = value;
-        public virtual void SetOneTurnCard(bool value) => _oneTurnCard = value;
+        public virtual void SetOneTurnCard(bool value) => _model.OneTurnCard = value;
         public virtual void SetCounter(int value) => _model.Counter = value;
         public virtual void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
-            if (_model.Owner.IsBreakLifeZero() || !_model.MassAttackStartCount || _model.Counter < _model.MaxCounter || _oneTurnCard)
+            if (!_model.MassAttackStartCount || _model.Counter < _model.MaxCounter || _model.OneTurnCard)
                 return;
             origin = BattleDiceCardModel.CreatePlayingCard(
                 ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));

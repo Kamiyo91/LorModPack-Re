@@ -42,28 +42,6 @@ namespace Util_Re21341
             else
                 mapList?.RemoveAll(x => x.name.Contains(name));
         }
-
-        public static void PrepareChangeBgm(string bgmName, ref Task changeBgm)
-        {
-            changeBgm = Task.Run(() =>
-            {
-                SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.mapBgm =
-                    CustomMapHandler.CustomBgmParse(new[]
-                    {
-                        bgmName
-                    });
-            });
-        }
-
-        public static void CheckAndChangeBgm(ref Task changeBgm)
-        {
-            if (changeBgm == null) return;
-            changeBgm.Wait();
-            SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>.Instance
-                .currentMapObject.mapBgm);
-            changeBgm = null;
-        }
-
         public static void ReturnFromEgoMap(string mapName, SephirahType sephirah,int id)
         {
             if (CheckStageMap(id)) return;

@@ -41,9 +41,6 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -70,10 +67,17 @@
     <Reference Include="UnityEngine.UIModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.UIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClass\MechUtilBaseMechUtilBase.cs" />
     <Compile Include="BaseClass\NpcMechUtilBaseMechUtilBase.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToBinding_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Vip_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Uncontrollable_Re21341.cs" />
@@ -82,8 +86,6 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
-    <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />
-    <Compile Include="CustomMapUtility\Template.cs" />
     <Compile Include="EmotionalBurstUtil.cs" />
     <Compile Include="LocalizeUtil.cs" />
     <Compile Include="MapUtil.cs" />
@@ -95,19 +97,6 @@
       <Project>{1df30575-b636-45b5-b748-a37d420c63f0}</Project>
       <Name>BLL-Re21341</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CustomMapUtility\README.md" />
-    <None Include="CustomMapUtility\Resource\StageBGM\README.md" />
-    <None Include="CustomMapUtility\Resource\Stage\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CustomMapUtility\Resource\Stage\Template\Background.png" />
-    <Content Include="CustomMapUtility\Resource\Stage\Template\Floor.png" />
-    <Content Include="CustomMapUtility\Resource\Stage\Template\FloorUnder.png" />
-    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch1.png" />
-    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch2.png" />
-    <Content Include="CustomMapUtility\Resource\Stage\Template\Scratch3.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

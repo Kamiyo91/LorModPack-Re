@@ -39,7 +39,7 @@ namespace Util_Re21341
                 unit.Die();
             }
         }
-        public static void ReturnToTheOriginalSkin(BattleUnitModel owner,string charName)
+        public static void ReturnToTheOriginalSkin(BattleUnitModel owner, string charName)
         {
             owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
         }
@@ -63,7 +63,7 @@ namespace Util_Re21341
             BattleObjectManager.instance.InitUI();
         }
 
-        public static void ChangeCardCostByValue(BattleUnitModel owner,int changeValue, int baseValue)
+        public static void ChangeCardCostByValue(BattleUnitModel owner, int changeValue, int baseValue)
         {
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().Where(x => x.GetOriginCost() < baseValue))
             {
@@ -73,7 +73,7 @@ namespace Util_Re21341
         }
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
         {
-            owner.Revive(hp);
+            if (owner.IsDead()) owner.Revive(hp);
             owner.bufListDetail.RemoveBufAll(BufPositiveType.Negative);
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_sealTemp));
             owner.breakDetail.ResetGauge();

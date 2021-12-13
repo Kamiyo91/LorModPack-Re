@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BLL_Re21341.Extensions.MechUtilModelExtensions;
+using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
+using BLL_Re21341.Models.MechUtilModels;
+using Hayate_Re21341.MechUtil;
+using LOR_XML;
+using Mio_Re21341.Buffs;
+using Util_Re21341;
+using Util_Re21341.BaseClass;
+
+namespace Hayate_Re21341.Passives
+{
+    public class PassiveAbility_Hayate_Re21341 : PassiveAbilityBase
+    {
+        private MechUtil_Hayate _util;
+        public override void OnWaveStart()
+        {
+            _util = new MechUtil_Hayate(new MechUtilBaseModel
+            {
+                Owner = owner,
+                HasEgo = true,
+                EgoType = typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341),
+                EgoCardId = new LorId(ModParameters.PackageId,1),
+                HasEgoAttack = true,
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 1),
+                HasEgoAbDialog = true,
+                EgoAbColorColor = AbColorType.Positive,
+                EgoAbDialogList = new List<AbnormalityCardDialog>
+                {
+                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive2_Re21341")).Value},
+                }
+            });
+        }
+        public override void OnRoundStart()
+        {
+            if (!_util.EgoCheck()) return;
+            _util.EgoActive();
+        }
+
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseExpireCard(curCard.card.GetID());
+    }
+}

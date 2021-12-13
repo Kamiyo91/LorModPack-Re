@@ -240,7 +240,6 @@ namespace Util_Re21341
             var list = new List<string>();
             var list2 = new List<string>();
             list.Add("0Harmony");
-            list.Add("NAudio");
             using (var enumerator = Singleton<ModContentManager>.Instance.GetErrorLogs().GetEnumerator())
             {
                 while (enumerator.MoveNext())

@@ -12,7 +12,6 @@ namespace OldSamurai_Re21341
 {
     public class EnemyTeamStageManager_OldSamurai_Re21341 : EnemyTeamStageManager
     {
-        private Task _changeBgm;
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
         private MechUtilBase _mechUtil;
@@ -38,7 +37,6 @@ namespace OldSamurai_Re21341
         {
             if(_mechUtil.EgoCheck()) _mechUtil.EgoActive();
             CustomMapHandler.EnforceMap();
-            MapUtil.CheckAndChangeBgm(ref _changeBgm);
         }
         private void CheckPhase()
         {
@@ -46,7 +44,7 @@ namespace OldSamurai_Re21341
             _phaseChanged = true;
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,_mainEnemyModel.MaxHp);
             _mechUtil.ForcedEgo();
-            MapUtil.PrepareChangeBgm("Hornet_Re21341.mp3", ref _changeBgm);
+            CustomMapHandler.SetMapBgm("Hornet_Re21341.wav");
         }
     }
 }

@@ -68,14 +68,13 @@ namespace Kamiyo_Re21341.Passives
         {
             if (!_util.EgoCheck()) return;
             _util.EgoActive();
-            UnitUtil.BattleAbDialog(owner.view.dialogUI, new List<AbnormalityCardDialog>
-            {
-                new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive1_Re21341")).Value},
-                new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive2_Re21341")).Value},
-                new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value}
-            },AbColorType.Negative);
         }
 
+        public void ForcedEgo()
+        {
+            _util.ForcedEgo();
+            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog> { new AbnormalityCardDialog { id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive4_Re21341")).Value } });
+        }
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());

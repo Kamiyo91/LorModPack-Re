@@ -45,8 +45,7 @@ namespace OldSamurai_Re21341.Passives
 
         public override void OnRoundEndTheLast()
         {
-            if (owner.faction != Faction.Enemy && !owner.bufListDetail.GetActivatedBufList()
-                .Exists(x => x is BattleUnitBuf_Uncontrollable_Re21341))
+            if (owner.faction != Faction.Enemy && !owner.bufListDetail.HasBuf<BattleUnitBuf_Uncontrollable_Re21341>())
                 return;
 
             _enemyCount++;

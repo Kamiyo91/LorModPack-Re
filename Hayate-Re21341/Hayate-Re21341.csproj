@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DF30575-B636-45B5-B748-A37D420C63F0}</ProjectGuid>
+    <ProjectGuid>{8F00951C-2936-4691-812A-89ACCC8D649A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL_Re21341</RootNamespace>
-    <AssemblyName>BLL-Re21341</AssemblyName>
+    <RootNamespace>Hayate_Re21341</RootNamespace>
+    <AssemblyName>Hayate-Re21341</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -43,21 +45,39 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\MechUtilModelExtensions\NpcMechUtil_HayateModel.cs" />
-    <Compile Include="Models\EmotionTypeEnum.cs" />
-    <Compile Include="Models\Enum\ColorTypeEnum.cs" />
-    <Compile Include="Models\MapModel.cs" />
-    <Compile Include="Models\MechUtilModels\MechUtilBaseModel.cs" />
-    <Compile Include="Models\MechUtilModels\NpcMechUtilBaseModel.cs" />
-    <Compile Include="Models\ModParameters.cs" />
-    <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="EnemyTeamStageManager_Hayate_Re21341.cs" />
+    <Compile Include="Hayate_Re21341MapManager.cs" />
+    <Compile Include="MechUtil\MechUtil_Hayate.cs" />
+    <Compile Include="MechUtil\NpcMechUtil_Hayate.cs" />
+    <Compile Include="Passives\PassiveAbility_Hayate_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_HayateNpc_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_HighDivinity_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
+      <Project>{1DF30575-B636-45B5-B748-A37D420C63F0}</Project>
+      <Name>BLL-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kamiyo-Re21341\Kamiyo-Re21341.csproj">
+      <Project>{E8E54F99-6663-487B-910A-69BAC555D6D4}</Project>
+      <Name>Kamiyo-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
+      <Project>{DACDC2EA-D97B-47B0-BA6A-1E0D27800C68}</Project>
+      <Name>Util-Re21341</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

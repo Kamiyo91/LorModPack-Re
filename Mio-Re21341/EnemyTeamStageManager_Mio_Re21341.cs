@@ -10,7 +10,6 @@ namespace Mio_Re21341
 {
     public class EnemyTeamStageManager_Mio_Re21341 : EnemyTeamStageManager
     {
-        private Task _changeBgm;
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
         private PassiveAbility_GodFragmentEnemy_Re21341 _mioEnemyPassive;
@@ -34,7 +33,6 @@ namespace Mio_Re21341
         public override void OnRoundStart()
         {
             CustomMapHandler.EnforceMap();
-            MapUtil.CheckAndChangeBgm(ref _changeBgm);
         }
 
         public override void OnRoundStart_After()
@@ -52,7 +50,7 @@ namespace Mio_Re21341
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel,-2,4);
             SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             PrepareAllyUnit();
-            MapUtil.PrepareChangeBgm("MioPhase2_Re21341.mp3", ref _changeBgm);
+            CustomMapHandler.SetMapBgm("MioPhase2_Re21341.wav");
         }
         private void PrepareAllyUnit()
         {

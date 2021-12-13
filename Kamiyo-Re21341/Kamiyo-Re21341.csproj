@@ -58,6 +58,7 @@
     <Compile Include="Buffs\BattleUnitBuf_NearDeathNpc_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_PossessorOfMioLight.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_AlterEgoCard_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireAbsorb_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireBlade_Re21341.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="MapManager\Kamiyo1_Re21341MapManager.cs" />
     <Compile Include="Passives\PassiveAbility_AlterEgoNpc_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MaskOfPerceptionNpc_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_PossesorOfMioLight.cs" />
     <Compile Include="Passives\PassiveAbility_SixthSense_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_AlterEgoPlayer_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MaskOfPerception_Re21341.cs" />

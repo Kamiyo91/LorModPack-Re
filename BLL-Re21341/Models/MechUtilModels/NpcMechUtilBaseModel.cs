@@ -7,7 +7,8 @@
         public int Counter { get; set; }
         public int MaxCounter { get; set; }
         public bool ReloadMassAttackOnLethal { get; set; }
-        public LorId LorIdEgoMassAttack { get; set; } = null;
-        public bool MassAttackStartCount { get; set; } = false;
+        public bool OneTurnCard { get; set; }
+        public LorId LorIdEgoMassAttack { get; set; }
+        public bool MassAttackStartCount { get; set; }
     }
 }

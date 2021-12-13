@@ -31,7 +31,7 @@ namespace OldSamurai_Re21341.Passives
 
         public override void OnRoundEndTheLast_ignoreDead()
         {
-            if (owner.faction == Faction.Enemy && BattleObjectManager.instance.GetAliveList(Faction.Enemy).Exists(x => x.bufListDetail.GetActivatedBufList().Exists(y => y is BattleUnitBuf_OldSamuraiEgoNpc_Re21341))) UnitUtil.UnitReviveAndRecovery(owner, 25);
+            if (owner.IsDead() && owner.faction == Faction.Enemy && BattleObjectManager.instance.GetAliveList(Faction.Enemy).Exists(x => x.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgoNpc_Re21341>())) UnitUtil.UnitReviveAndRecovery(owner, 25);
         }
 
         public override void OnWaveStart()
