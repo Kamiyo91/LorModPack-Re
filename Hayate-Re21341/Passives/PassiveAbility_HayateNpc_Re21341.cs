@@ -72,7 +72,11 @@ namespace Hayate_Re21341.Passives
                 manager.AddValueToEmotionCardList(UnitUtil.GetEmotionCardByUnit(unit));
             }
         }
-
+        public override BattleUnitModel ChangeAttackTarget(BattleDiceCardModel card, int idx)
+        {
+            var unit = _util.ChooseEgoAttackTarget(card.GetID());
+            return unit ?? base.ChangeAttackTarget(card, idx);
+        }
         public override void OnRoundEnd()
         {
             _util.SetOneTurnCard(false);

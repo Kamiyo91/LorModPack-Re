@@ -51,10 +51,7 @@ namespace Hayate_Re21341
             CheckLastPhase();
         }
 
-        public override void OnRoundStart()
-        {
-            CustomMapHandler.EnforceMap();
-        }
+        public override void OnRoundStart() => CustomMapHandler.EnforceMap();
 
         public override void OnRoundStart_After()
         {
@@ -62,7 +59,7 @@ namespace Hayate_Re21341
         }
         private void CheckPhase()
         {
-            if (_mainEnemyModel.hp > 621 || _phaseChanged) return;
+            if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
             _phaseChanged = true;
             _hayateEnemyPassive.ForcedEgo();
             MapUtil.ActiveCreatureBattleCamFilterComponent();
@@ -102,7 +99,6 @@ namespace Hayate_Re21341
                 BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 0) return;
             _lastPhaseStarted = true;
             CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.wav");
-            _emotionCards = UnitUtil.SaveEmotionCards(_emotionCards).ToList();
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player))
                 BattleObjectManager.instance.UnregisterUnit(unit);
             var allyUnit = PrepareAllyUnit();

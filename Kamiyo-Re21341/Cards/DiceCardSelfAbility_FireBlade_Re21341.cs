@@ -6,7 +6,7 @@ namespace Kamiyo_Re21341.Cards
     public class DiceCardSelfAbility_FireBlade_Re21341 : DiceCardSelfAbilityBase
     {
         private int _atkClashWin;
-        private const int Check = 2;
+        private const int Check = 1;
 
         public override void OnUseCard()
         {

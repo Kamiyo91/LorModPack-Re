@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
 using Util_Re21341.CommonBuffs;
 
@@ -51,6 +53,16 @@ namespace Util_Re21341.BaseClass
             origin = BattleDiceCardModel.CreatePlayingCard(
                 ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
             SetOneTurnCard(true);
+        }
+
+        public virtual BattleUnitModel ChooseEgoAttackTarget(LorId cardId)
+        {
+            if (cardId != _model.LorIdEgoMassAttack) return null;
+            if (BattleObjectManager.instance
+                .GetAliveList(Faction.Player).Any(x => !x.UnitData.unitData.isSephirah))
+                return RandomUtil.SelectOne(BattleObjectManager.instance.GetAliveList(Faction.Player)
+                    .Where(x => !x.UnitData.unitData.isSephirah).ToList());
+            return null;
         }
     }
 }

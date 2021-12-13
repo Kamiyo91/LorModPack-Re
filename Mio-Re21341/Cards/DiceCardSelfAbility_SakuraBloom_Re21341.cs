@@ -8,10 +8,9 @@ namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_SakuraBloom_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 2;
+        private const int Check = 3;
         public override void OnUseCard()
         {
-            owner.allyCardDetail.DrawCards(1);
             var speedDiceResultValue = card.speedDiceResultValue;
             var target = card.target;
             var targetSlotOrder = card.targetSlotOrder;

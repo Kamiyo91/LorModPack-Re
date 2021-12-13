@@ -8,7 +8,7 @@ namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_WaterBlade_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 1;
+        private const int Check = 2;
         public override void OnUseCard()
         {
             owner.cardSlotDetail.RecoverPlayPointByCard(1);

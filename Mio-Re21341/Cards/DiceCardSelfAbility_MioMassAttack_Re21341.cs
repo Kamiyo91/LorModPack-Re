@@ -12,11 +12,9 @@ namespace Mio_Re21341.Cards
     {
         private bool _motionChanged;
 
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.emotionDetail.EmotionLevel >= 5 &&
-                   owner.bufListDetail.HasAssimilation();
-        }
+        public override bool OnChooseCard(BattleUnitModel owner) =>
+            owner.emotionDetail.EmotionLevel >= 5 &&
+            owner.bufListDetail.HasAssimilation();
 
         public override void OnEndAreaAttack()
         {
@@ -32,8 +30,7 @@ namespace Mio_Re21341.Cards
             ChangeToMioEgoMap();
         }
 
-        private static void ChangeToMioEgoMap()
-        {
+        private static void ChangeToMioEgoMap() =>
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Mio_Re21341",
@@ -43,7 +40,6 @@ namespace Mio_Re21341.Cards
                 Component = new Mio_Re21341MapManager(),
                 Bgy = 0.2f
             });
-        }
 
         public override void OnApplyCard()
         {

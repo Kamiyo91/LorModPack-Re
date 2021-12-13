@@ -55,6 +55,15 @@
   <ItemGroup>
     <Compile Include="Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FerventCut_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FingersnapNpc_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Fingersnap_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_LightingBlade_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_PowerSlash_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Rage_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Ultima_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Hayate_Re21341.cs" />
     <Compile Include="Hayate_Re21341MapManager.cs" />
     <Compile Include="MechUtil\MechUtil_Hayate.cs" />

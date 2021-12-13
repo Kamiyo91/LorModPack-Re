@@ -8,10 +8,7 @@ namespace Kamiyo_Re21341.Cards
     {
         private bool _motionChanged;
 
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.emotionDetail.EmotionLevel >= 5 && owner.bufListDetail.HasAssimilation();
-        }
+        public override bool OnChooseCard(BattleUnitModel owner) => owner.emotionDetail.EmotionLevel >= 5 && owner.bufListDetail.HasAssimilation();
 
         public override void OnEndAreaAttack()
         {
@@ -38,8 +35,7 @@ namespace Kamiyo_Re21341.Cards
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             ChangeToKamiyoEgoMap();
         }
-        private static void ChangeToKamiyoEgoMap()
-        {
+        private static void ChangeToKamiyoEgoMap() =>
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Kamiyo2_Re21341",
@@ -50,6 +46,5 @@ namespace Kamiyo_Re21341.Cards
                 Bgy = 0.475f,
                 Fy = 0.225f
             });
-        }
     }
 }

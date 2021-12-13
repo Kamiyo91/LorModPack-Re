@@ -4,7 +4,7 @@ namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_Rush_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 3;
+        private const int Check = 2;
         public override void OnUseCard()
         {
             owner.allyCardDetail.DrawCards(1);

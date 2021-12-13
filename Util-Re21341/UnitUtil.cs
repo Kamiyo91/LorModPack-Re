@@ -136,16 +136,6 @@ namespace Util_Re21341
         {
             return unit.emotionDetail.PassiveList.ToList();
         }
-
-        public static IEnumerable<BattleEmotionCardModel> SaveEmotionCards(List<BattleEmotionCardModel> emotionCardList)
-        {
-            var playerUnitsAlive = BattleObjectManager.instance.GetList(Faction.Player);
-            foreach (var emotionCard in playerUnitsAlive.SelectMany(x => x.emotionDetail.PassiveList)
-                         .Where(emotionCard => !emotionCardList.Exists(x => x.XmlInfo.Equals(emotionCard.XmlInfo))))
-                emotionCardList.Add(emotionCard);
-            return emotionCardList;
-        }
-
         public static BattleUnitModel AddNewUnitPlayerSide(StageLibraryFloorModel floor, UnitModel unit)
         {
             var unitData = new UnitDataModel(new LorId(ModParameters.PackageId, unit.Id), floor.Sephirah);

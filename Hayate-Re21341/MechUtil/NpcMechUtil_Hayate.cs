@@ -22,6 +22,12 @@ namespace Hayate_Re21341.MechUtil
             _model.FinalMechStart = true;
         }
 
+        public override void ForcedEgo()
+        {
+            base.ForcedEgo();
+            _buf.stack = 40;
+        }
+
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
