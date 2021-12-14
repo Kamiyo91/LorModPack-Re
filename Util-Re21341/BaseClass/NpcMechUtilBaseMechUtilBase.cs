@@ -14,11 +14,11 @@ namespace Util_Re21341.BaseClass
         {
             _model = model;
         }
-        public virtual void OnUseCardResetCount(BattleDiceCardModel card)
+        public virtual void OnUseCardResetCount(BattlePlayingCardDataInUnitModel curCard)
         {
-            if (_model.LorIdEgoMassAttack != card.GetID()) return;
+            if (_model.LorIdEgoMassAttack != curCard.card.GetID()) return;
             _model.Counter = 0;
-            _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
+            _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
         }
 
         public virtual void MechHpCheck(int dmg)

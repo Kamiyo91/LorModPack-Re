@@ -41,17 +41,28 @@ namespace Hayate_Re21341.MechUtil
                 ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
             SetOneTurnCard(true);
         }
-        public override void OnUseCardResetCount(BattleDiceCardModel card)
+        public override void OnUseCardResetCount(BattlePlayingCardDataInUnitModel curCard)
         {
-            if (_model.SecondaryMechCard != card.GetID() && _model.LorIdEgoMassAttack != card.GetID()) return;
-            if (_model.SecondaryMechCard == card.GetID())
+            if (_model.SecondaryMechCard != curCard.card.GetID() && _model.LorIdEgoMassAttack != curCard.card.GetID()) return;
+            if (_model.SecondaryMechCard == curCard.card.GetID())
             {
                 _model.FinalMechStart = false;
                 _model.Owner.allyCardDetail.DrawCards(_model.DrawBack);
                 _model.DrawBack = 0;
             }
-            _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
+            else
+            {
+                _model.FingersnapTarget = curCard.target;
+            }
+            _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
             _buf.stack = 0;
+        }
+
+        public void DeleteTarget()
+        {
+            if (_model.FingersnapTarget == null) return;
+            BattleObjectManager.instance.UnregisterUnit(_model.FingersnapTarget);
+            _model.FingersnapTarget = null;
         }
         public void SecondMechHpCheck(int dmg)
         {

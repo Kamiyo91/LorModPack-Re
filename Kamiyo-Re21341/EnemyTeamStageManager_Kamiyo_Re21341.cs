@@ -77,11 +77,14 @@ namespace Kamiyo_Re21341
             if(addPassive)_kamiyoEnemyPassive.AddAdditionalPassive();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             if(restart)_kamiyoEnemyPassive.ForcedEgoRestart();
-            else _kamiyoEnemyPassive.ForcedEgo();
+            else
+            {
+                _kamiyoEnemyPassive.ForcedEgo();
+                _mainEnemyModel.Book.SetHp(514);
+                _mainEnemyModel.Book.SetBp(273);
+            }
             _kamiyoEnemyPassive.ActiveMassAttackCount();
             _kamiyoEnemyPassive.SetCountToMax();
-            _mainEnemyModel.Book.SetHp(514);
-            _mainEnemyModel.Book.SetBp(273);
             if(recoverHp)_mainEnemyModel.RecoverHP(514);
             _mainEnemyModel.breakDetail.ResetGauge();
             _mainEnemyModel.breakDetail.nextTurnBreak = false;

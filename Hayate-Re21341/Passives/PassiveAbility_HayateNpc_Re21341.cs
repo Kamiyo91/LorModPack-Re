@@ -78,11 +78,13 @@ namespace Hayate_Re21341.Passives
             _util.SetOneTurnCard(false);
         }
         public void ForcedEgo() => _util.ForcedEgo();
+        public override void OnRoundEndTheLast() => _util.DeleteTarget();
+
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
             _util.OnSelectCardPutMassAttack(ref origin);
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
     }
 }

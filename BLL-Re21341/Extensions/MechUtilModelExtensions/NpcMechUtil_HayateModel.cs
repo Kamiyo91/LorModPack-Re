@@ -14,5 +14,6 @@ namespace BLL_Re21341.Extensions.MechUtilModelExtensions
         public bool SecondMechHpExist { get; set; }
         public int SecondMechHp { get; set; }
         public int DrawBack { get; set; }
+        public BattleUnitModel FingersnapTarget { get; set; }
     }
 }

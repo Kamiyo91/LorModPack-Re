@@ -97,6 +97,6 @@ namespace Kamiyo_Re21341.Passives
         }
         public override void OnDie() => UnitUtil.VipDeath(owner);
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
     }
 }

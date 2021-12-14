@@ -86,6 +86,6 @@ namespace Mio_Re21341.Passives
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
     }
 }

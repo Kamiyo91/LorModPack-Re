@@ -51,6 +51,6 @@ namespace Mio_Re21341.Passives
                 BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 161)
                 UnitUtil.UnitReviveAndRecovery(owner, 67,false);
         }
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
     }
 }

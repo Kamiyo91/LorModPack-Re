@@ -81,6 +81,7 @@
     <Compile Include="BaseClass\MechUtilBaseMechUtilBase.cs" />
     <Compile Include="BaseClass\NpcMechUtilBaseMechUtilBase.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToStatusAliment_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToBinding_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Vip_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Uncontrollable_Re21341.cs" />
