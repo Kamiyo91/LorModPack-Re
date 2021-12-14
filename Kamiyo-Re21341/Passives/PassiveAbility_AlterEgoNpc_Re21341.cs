@@ -48,11 +48,11 @@ namespace Kamiyo_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemySurvive1_Re21341")).Value}
+                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemySurvive1_Re21341")).Value.Desc}
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value.Desc},
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902)
             });

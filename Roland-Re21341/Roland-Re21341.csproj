@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DF30575-B636-45B5-B748-A37D420C63F0}</ProjectGuid>
+    <ProjectGuid>{4B7A5F90-ADEB-4437-90DB-B5C809AD0B2F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL_Re21341</RootNamespace>
-    <AssemblyName>BLL-Re21341</AssemblyName>
+    <RootNamespace>Roland_Re21341</RootNamespace>
+    <AssemblyName>Roland-Re21341</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,22 +42,39 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\MechUtilModelExtensions\NpcMechUtil_HayateModel.cs" />
-    <Compile Include="Models\EffectTextModel.cs" />
-    <Compile Include="Models\Enum\ColorTypeEnum.cs" />
-    <Compile Include="Models\Enum\EmotionBufEnum.cs" />
-    <Compile Include="Models\MapModel.cs" />
-    <Compile Include="Models\MechUtilModels\MechUtilBaseModel.cs" />
-    <Compile Include="Models\MechUtilModels\NpcMechUtilBaseModel.cs" />
-    <Compile Include="Models\ModParameters.cs" />
-    <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="BlackSilence_Re21341MapManager.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_BlackSilenceEgoMask_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_BlackSilenceEgoMaskScream_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_BlackSilenceEgoMask_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_BlackSilenceCustomEgoAreaStrongFinal_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_BlackSilenceCustomEgoAreaStrong_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_BlackSilenceCustomEgoGauntlet1_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_BlackSilenceCustomEgoGauntlet2_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_BlackSilenceCustomEgoShortSword_Re21341.cs" />
+    <Compile Include="DiceEffects\FarAreaEffect_BlackSilenceCustomEgoAreaStrongFinal_Re21341.cs" />
+    <Compile Include="DiceEffects\FarAreaEffect_BlackSilenceCustomEgoAreaStrong_Re21341.cs" />
+    <Compile Include="MechUtil_Roland.cs" />
+    <Compile Include="Passives\PassiveAbility_BlackSilenceEgoMask_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
+      <Project>{1df30575-b636-45b5-b748-a37d420c63f0}</Project>
+      <Name>BLL-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
+      <Project>{dacdc2ea-d97b-47b0-ba6a-1e0d27800c68}</Project>
+      <Name>Util-Re21341</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

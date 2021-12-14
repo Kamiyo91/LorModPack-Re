@@ -33,8 +33,8 @@ namespace Hayate_Re21341.Passives
                 EgoAbColorColor = AbColorType.Positive,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive1_Re21341")).Value},
-                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive2_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive1_Re21341")).Value.Desc},
+                    new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive2_Re21341")).Value.Desc},
                 }
             });
             UnitUtil.CheckSkinProjection(owner);

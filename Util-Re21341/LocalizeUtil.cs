@@ -27,7 +27,7 @@ namespace Util_Re21341
                     foreach (var battleEffectText in battleEffectTextRoot.effectTextList)
                     {
                         dictionary?.Add(battleEffectText.ID, battleEffectText);
-                        ModParameters.EffectTexts.Add(battleEffectText.ID, battleEffectText.Desc);
+                        ModParameters.EffectTexts.Add(battleEffectText.ID, new EffectTextModel{Name = battleEffectText.Name , Desc = battleEffectText.Desc });
                     }
                 }
             Debug.LogError("Entry2");

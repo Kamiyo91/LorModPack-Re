@@ -92,7 +92,7 @@ namespace Hayate_Re21341
             for (var i = 1; i < 4; i++)
             {
                 var unit = UnitUtil.AddOriginalPlayerUnitPlayerSide(i, _sephiraModel.emotionDetail.EmotionLevel);
-                UnitUtil.BattleAbDialog(unit.view.dialogUI, new List<AbnormalityCardDialog>{new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value }} ,AbColorType.Negative);
+                UnitUtil.BattleAbDialog(unit.view.dialogUI, new List<AbnormalityCardDialog>{new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value.Desc } } ,AbColorType.Negative);
             }
             UnitUtil.RefreshCombatUI();
         }
@@ -118,7 +118,7 @@ namespace Hayate_Re21341
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,210,true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>
-                    {new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value}},AbColorType.Negative);
+                    {new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value.Desc}},AbColorType.Negative);
         }
         public void AddValueToEmotionCardList(IEnumerable<BattleEmotionCardModel> card)
         {

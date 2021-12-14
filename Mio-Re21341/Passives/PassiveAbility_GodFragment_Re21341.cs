@@ -48,13 +48,13 @@ namespace Mio_Re21341.Passives
                 EgoAbColorColor = AbColorType.Positive,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive1_Re21341")).Value},
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive2_Re21341")).Value}
+                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive1_Re21341")).Value.Desc},
+                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive2_Re21341")).Value.Desc}
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive1_Re21341")).Value},
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive2_Re21341")).Value}
+                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive1_Re21341")).Value.Desc},
+                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive2_Re21341")).Value.Desc}
                 }
             });
             if (UnitUtil.CheckSkinProjection(owner))
@@ -79,7 +79,7 @@ namespace Mio_Re21341.Passives
         public void ForcedEgo()
         {
             _util.SetVipUnit();
-            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>{ new AbnormalityCardDialog { id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value } });
+            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>{ new AbnormalityCardDialog { id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value.Desc } });
             _util.ForcedEgo();
             owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 9));
         }

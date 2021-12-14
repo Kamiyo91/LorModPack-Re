@@ -36,7 +36,7 @@ namespace Hayate_Re21341.Passives
                 EgoAbColorColor = AbColorType.Positive,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyEgoActive1_Re21341")).Value.Desc},
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 903),
                 SecondaryMechCard = new LorId(ModParameters.PackageId, 904)

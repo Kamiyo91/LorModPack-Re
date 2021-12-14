@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="BaseClass\MechUtilBase.cs" />
     <Compile Include="BaseClass\NpcMechUtilBase.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToStatusAliment_Re21341.cs" />
@@ -89,10 +90,12 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEnd_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalForTestPurpose_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
+    <Compile Include="CommonCards\DiceCardSelfAbility_CustomInstantIndexRelease_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
     <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />
-    <Compile Include="EmotionalBurstUtil.cs" />
     <Compile Include="LocalizeUtil.cs" />
     <Compile Include="MapUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

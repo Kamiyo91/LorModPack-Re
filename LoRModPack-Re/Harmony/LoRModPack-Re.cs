@@ -6,6 +6,7 @@ using System.Reflection;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
+using Roland_Re21341.Passives;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -57,6 +58,9 @@ namespace LoRModPack_Re21341.Harmony
             {
                 case 10000001:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
+                    return;
+                case 10000006:
+                    __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
                     return;
                 default:
                     return;
@@ -133,6 +137,14 @@ namespace LoRModPack_Re21341.Harmony
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNames.Contains(charName)) return true;
+            switch (charName)
+            {
+                case "BlackSilence3" when __instance.model.passiveDetail.HasPassive<PassiveAbility_BlackSilenceEgoMask_Re21341>():
+                    __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
+                    return true;
+                case "BlackSilence3":
+                    return true;
+            }
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;

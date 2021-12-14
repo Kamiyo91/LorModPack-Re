@@ -9,8 +9,8 @@ namespace BLL_Re21341.Models
         public static string Path;
         public static readonly Dictionary<string, Sprite> ArtWorks = new Dictionary<string, Sprite>();
         public static string Language;
-        public static string[] SkinNames = { "KamiyoMask_Re21341", "MioRedEye_Re21341" };
-        public static Dictionary<string, string> EffectTexts = new Dictionary<string, string>();
+        public static string[] SkinNames = { "KamiyoMask_Re21341", "MioRedEye_Re21341", "BlackSilence3" };
+        public static Dictionary<string, EffectTextModel> EffectTexts = new Dictionary<string, EffectTextModel>();
         public static Dictionary<string, string> NameTexts = new Dictionary<string, string>();
         public static readonly List<int> PersonalCardList = new List<int>{1,9,17,28,29};
         public static readonly List<int> EgoPersonalCardList = new List<int> { 8,10,16,901 };

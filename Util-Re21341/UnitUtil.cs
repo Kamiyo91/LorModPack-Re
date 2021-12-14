@@ -171,22 +171,20 @@ namespace Util_Re21341
             allyUnit.OnWaveStart();
             return allyUnit;
         }
-        public static void PrepareSephirahSkin(BattleUnitModel owner, int id, string charName, bool isNpc,
-            ref string originalSkinName, ref BattleDialogueModel dlg, bool baseDlg = false, string charName2 = null,
-            bool doubleName = false)
+        public static void PrepareSephirahSkin(BattleUnitModel owner, int id, string charName,ref BattleDialogueModel dlg)
         {
-            originalSkinName = owner.UnitData.unitData.CustomBookItem.GetCharacterName();
             dlg = owner.UnitData.unitData.battleDialogModel;
             owner.UnitData.unitData.SetTempName(charName);
-            if (!isNpc)
-                owner.UnitData.unitData.customizeData.SetCustomData(false);
-            owner.view.SetAltSkin(doubleName ? charName2 : charName);
-            owner.UnitData.unitData.CustomBookItem.SetCharacterName(doubleName ? charName2 : charName);
+            owner.UnitData.unitData.customizeData.SetCustomData(false);
             RefreshCombatUI();
-            owner.UnitData.unitData.InitBattleDialogByDefaultBook(baseDlg
-                ? new LorId(id)
-                : new LorId(ModParameters.PackageId, id));
+            owner.UnitData.unitData.InitBattleDialogByDefaultBook(new LorId(ModParameters.PackageId, id));
             owner.view.DisplayDlg(DialogType.START_BATTLE, "0");
+        }
+        public static void ReturnToTheOriginalBaseSkin(BattleUnitModel owner, BattleDialogueModel dlg)
+        {
+            owner.UnitData.unitData.customizeData.SetCustomData(true);
+            owner.UnitData.unitData.ResetTempName();
+            owner.UnitData.unitData.battleDialogModel = dlg;
         }
 
         public static void TestingUnitValues()

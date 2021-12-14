@@ -46,11 +46,11 @@ namespace Mio_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341")).Value}
+                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341")).Value.Desc}
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value},
+                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value.Desc},
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId,900)
             });
