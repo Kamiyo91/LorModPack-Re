@@ -105,10 +105,13 @@ namespace Hayate_Re21341
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player))
                 BattleObjectManager.instance.UnregisterUnit(unit);
             var allyUnit = PrepareAllyUnit();
-            allyUnit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_PossessorOfMioLight());
+            var specialPassive = allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 17));
             var passive = allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_AlterEgoPlayer_Re21341) as
                 PassiveAbility_AlterEgoPlayer_Re21341;
+            specialPassive.OnWaveStart();
             passive?.ForcedEgo();
+            passive?.SetDieAtEnd();
+            UnitUtil.ChangeCardCostByValue(allyUnit, -2, 4);
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
             _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,210,true);

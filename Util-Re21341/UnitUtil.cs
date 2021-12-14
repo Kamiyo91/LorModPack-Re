@@ -31,6 +31,13 @@ namespace Util_Re21341
             }
         }
 
+        public static bool CheckSkinProjection(BattleUnitModel owner)
+        {
+            if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
+                owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem) return false;
+            owner.view.ChangeSkin(owner.UnitData.unitData.CustomBookItem.GetCharacterName());
+            return true;
+        }
         public static void VipDeath(BattleUnitModel owner)
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)

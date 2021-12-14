@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_EntertainMeFinalPhase_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_TrueGodAuraRelease_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FerventCut_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341.cs" />

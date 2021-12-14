@@ -37,6 +37,7 @@ namespace Hayate_Re21341.Passives
                     new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEgoActive2_Re21341")).Value},
                 }
             });
+            UnitUtil.CheckSkinProjection(owner);
         }
         public override void OnRoundStart()
         {

@@ -25,7 +25,7 @@ namespace Util_Re21341.BaseClass
         {
             if (_model.Owner.hp - dmg > _model.MechHp || !_model.HasMechOnHp) return;
             _model.HasMechOnHp = false;
-            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341());
             _model.Owner.SetHp(_model.MechHp);
         }
         public override void SurviveCheck(int dmg)

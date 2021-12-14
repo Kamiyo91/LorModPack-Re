@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
+using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
+using HarmonyLib;
 using Hayate_Re21341.Buffs;
 using UnityEngine;
 using Util_Re21341;
@@ -47,13 +49,15 @@ namespace Hayate_Re21341.MechUtil
             if (_model.SecondaryMechCard == curCard.card.GetID())
             {
                 _model.FinalMechStart = false;
+                _model.MassAttackStartCount = false;
                 _model.Owner.allyCardDetail.DrawCards(_model.DrawBack);
                 _model.DrawBack = 0;
+                _model.Owner.bufListDetail.RemoveBuf(_buf);
+                _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_EntertainMeFinalPhase_Re21341());
+                _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
+                return;
             }
-            else
-            {
-                _model.FingersnapTarget = curCard.target;
-            }
+            _model.FingersnapTarget = curCard.target;
             _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
             _buf.stack = 0;
         }
@@ -71,7 +75,7 @@ namespace Hayate_Re21341.MechUtil
             _model.SecondMechHpExist = false;
             _model.FinalMechStart = true;
             UnitUtil.UnitReviveAndRecovery(_model.Owner,0,false);
-            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341());
             _model.Owner.SetHp(_model.SecondMechHp);
         }
         public override void ExhaustEgoAttackCards()

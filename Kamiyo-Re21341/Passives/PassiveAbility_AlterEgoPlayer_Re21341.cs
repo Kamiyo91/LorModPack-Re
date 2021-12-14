@@ -15,10 +15,14 @@ namespace Kamiyo_Re21341.Passives
         private MechUtilBase _util;
         public override void Init(BattleUnitModel self)
         {
-            UnitUtil.ReturnToTheOriginalSkin(self, "KamiyoNormal_Re21341");
+            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(self, "KamiyoNormal_Re21341");
             base.Init(self);
         }
-        public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+
+        public override void OnBattleEnd()
+        {
+            if(_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+        }
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel { Owner = owner, 
@@ -53,6 +57,10 @@ namespace Kamiyo_Re21341.Passives
                     new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value}
                 }
             });
+            if (UnitUtil.CheckSkinProjection(owner))
+            {
+                _util.DoNotChangeSkinOnEgo();
+            }
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -70,6 +78,15 @@ namespace Kamiyo_Re21341.Passives
             _util.EgoActive();
         }
 
+        public override void OnRoundEnd_before()
+        {
+            if(BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 && _util.CheckOnDieAtFightEnd()) owner.Die(); 
+        }
+        public override void OnRoundStartAfter()
+        {
+            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 && _util.CheckOnDieAtFightEnd()) owner.Die();
+        }
+        public void SetDieAtEnd() => _util.TurnOnDieAtFightEnd();
         public void ForcedEgo()
         {
             _util.ForcedEgo();

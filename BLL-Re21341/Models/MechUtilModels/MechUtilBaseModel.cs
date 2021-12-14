@@ -20,6 +20,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool EgoAttackCardExpire { get; set; }
         public bool HasAdditionalPassive { get; set; }
         public string SkinName { get; set; }
+        public bool DieOnFightEnd { get; set; }
         public List<AbnormalityCardDialog> SurviveAbDialogList { get; set; }
         public List<AbnormalityCardDialog> EgoAbDialogList { get; set; }
         public bool HasEgoAbDialog { get; set; }

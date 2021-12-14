@@ -18,10 +18,14 @@ namespace Mio_Re21341.Passives
         private MechUtilBase _util;
         public override void Init(BattleUnitModel self)
         {
-            UnitUtil.ReturnToTheOriginalSkin(self,"MioNormalEye_Re21341");
+            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(self, "MioNormalEye_Re21341");
             base.Init(self);
         }
-        public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+
+        public override void OnBattleEnd()
+        {
+            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+        }
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel
@@ -53,6 +57,10 @@ namespace Mio_Re21341.Passives
                     new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive2_Re21341")).Value}
                 }
             });
+            if (UnitUtil.CheckSkinProjection(owner))
+            {
+                _util.DoNotChangeSkinOnEgo();
+            }
         }
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {

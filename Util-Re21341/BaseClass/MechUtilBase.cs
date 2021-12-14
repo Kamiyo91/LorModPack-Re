@@ -61,6 +61,10 @@ namespace Util_Re21341.BaseClass
             _model.EgoActivated = true;
         }
 
+        public virtual void DoNotChangeSkinOnEgo() => _model.SkinName = "";
+        public virtual bool CheckSkinChangeIsActive() => !string.IsNullOrEmpty(_model.SkinName);
+        public virtual bool CheckOnDieAtFightEnd() => _model.DieOnFightEnd;
+        public virtual void TurnOnDieAtFightEnd() => _model.DieOnFightEnd = true;
         public virtual void TurnEgoAbDialogOff() => _model.HasEgoAbDialog = false;
         public virtual bool EgoCheck() => _model.EgoActivated;
         public virtual void ForcedEgo() => _model.EgoActivated = true;
