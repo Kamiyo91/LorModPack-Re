@@ -104,6 +104,7 @@ namespace Hayate_Re21341
             CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.wav",true, "Hayate_Re21341");
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player))
                 BattleObjectManager.instance.UnregisterUnit(unit);
+            UnitUtil.RefreshCombatUI();
             var allyUnit = PrepareAllyUnit();
             var specialPassive = allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 17));
             var passive = allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_AlterEgoPlayer_Re21341) as
