@@ -22,7 +22,6 @@ namespace OldSamurai_Re21341.Passives
                 EgoCardId = new LorId(ModParameters.PackageId, 8),
                 SecondaryEgoCardId = new LorId(ModParameters.PackageId,901)
             });
-            UnitUtil.TestingUnitValues();
         }
         public override void OnRoundStart()
         {

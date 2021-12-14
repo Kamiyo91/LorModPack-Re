@@ -41,7 +41,7 @@ namespace Util_Re21341.BaseClass
         public virtual void RaiseCounter()
         {
             if (_model.MassAttackStartCount && _model.Counter < _model.MaxCounter) _model.Counter++;
-            Debug.LogError($"Ego Attack Count - {_model.Counter}");
+            Debug.LogError($"Ego Attack Count - {_model.Counter} / Owner Name - {_model.Owner.UnitData.unitData.name}");
         }
         public virtual void AddAdditionalPassive() => _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
         public virtual void SetMassAttack(bool value) => _model.MassAttackStartCount = value;

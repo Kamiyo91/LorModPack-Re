@@ -2,6 +2,8 @@
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models.MechUtilModels;
 using Hayate_Re21341.Buffs;
+using UnityEngine;
+using Util_Re21341;
 using Util_Re21341.BaseClass;
 using Util_Re21341.CommonBuffs;
 
@@ -17,19 +19,11 @@ namespace Hayate_Re21341.MechUtil
             _buf = new BattleUnitBuf_EntertainMe_Re21341();
             model.Owner.bufListDetail.AddBufWithoutDuplication(_buf);
         }
-
-        public override void SurviveCheck(int dmg)
-        {
-            base.SurviveCheck(dmg);
-            _model.FinalMechStart = true;
-        }
-
         public override void ForcedEgo()
         {
             base.ForcedEgo();
             _buf.stack = 40;
         }
-
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
@@ -63,6 +57,8 @@ namespace Hayate_Re21341.MechUtil
         {
             if (_model.Owner.hp - dmg > _model.SecondMechHp || !_model.SecondMechHpExist) return;
             _model.SecondMechHpExist = false;
+            _model.FinalMechStart = true;
+            UnitUtil.UnitReviveAndRecovery(_model.Owner,0);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SecondMechHp);
         }

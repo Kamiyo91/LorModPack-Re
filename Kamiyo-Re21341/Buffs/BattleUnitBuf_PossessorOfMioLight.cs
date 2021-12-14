@@ -17,7 +17,7 @@ namespace Kamiyo_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x.GetID() == new LorId(ModParameters.PackageId,22)))
+            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x.GetID() == new LorId(ModParameters.PackageId,22) || x.GetID() == new LorId(ModParameters.PackageId,19)))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);

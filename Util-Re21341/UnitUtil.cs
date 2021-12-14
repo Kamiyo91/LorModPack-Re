@@ -74,6 +74,7 @@ namespace Util_Re21341
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
         {
             if (owner.IsDead()) owner.Revive(hp);
+            else owner.RecoverHP(hp);
             owner.bufListDetail.RemoveBufAll(BufPositiveType.Negative);
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_sealTemp));
             owner.breakDetail.ResetGauge();
@@ -265,11 +266,18 @@ namespace Util_Re21341
             var txtAbnormalityDlg = (TextMeshProUGUI)typeof(BattleDialogUI).GetField("_txtAbnormalityDlg",
                 AccessTools.all)?.GetValue(instance);
             txtAbnormalityDlg.text = dialog;
-            txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
-                SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
-            txtAbnormalityDlg.color = colorType == AbColorType.Positive
-                ? SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor
-                : SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
+            if (colorType == AbColorType.Positive)
+            {
+                txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
+                    SingletonBehavior<BattleManagerUI>.Instance.positiveCoinColor);
+                txtAbnormalityDlg.color = SingletonBehavior<BattleManagerUI>.Instance.positiveTextColor;
+            }
+            else
+            {
+                txtAbnormalityDlg.fontMaterial.SetColor("_GlowColor",
+                    SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
+                txtAbnormalityDlg.color = SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
+            }
             var canvas = (Canvas)typeof(BattleDialogUI).GetField("_canvas",
                 AccessTools.all)?.GetValue(instance);
             canvas.enabled = true;

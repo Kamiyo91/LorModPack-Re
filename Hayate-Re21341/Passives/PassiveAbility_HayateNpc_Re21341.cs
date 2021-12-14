@@ -45,8 +45,8 @@ namespace Hayate_Re21341.Passives
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
-            _util.MechHpCheck(dmg);
             _util.SecondMechHpCheck(dmg);
+            _util.MechHpCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
         public override void OnStartBattle()

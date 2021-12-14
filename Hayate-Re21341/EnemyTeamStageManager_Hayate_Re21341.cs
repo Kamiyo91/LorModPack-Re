@@ -92,7 +92,7 @@ namespace Hayate_Re21341
             for (var i = 1; i < 4; i++)
             {
                 var unit = UnitUtil.AddOriginalPlayerUnitPlayerSide(i, _sephiraModel.emotionDetail.EmotionLevel);
-                UnitUtil.BattleAbDialog(unit.view.dialogUI, new List<AbnormalityCardDialog>{new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value }, new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateBattleAllyEntry2_Re21341")).Value },new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateBattleAllyEntry3_Re21341")).Value } },AbColorType.Negative);
+                UnitUtil.BattleAbDialog(unit.view.dialogUI, new List<AbnormalityCardDialog>{new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value }} ,AbColorType.Negative);
             }
             UnitUtil.RefreshCombatUI();
         }
