@@ -2,6 +2,7 @@
 using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
+using UnityEngine;
 using Util_Re21341.CommonBuffs;
 
 namespace Util_Re21341.BaseClass
@@ -13,12 +14,11 @@ namespace Util_Re21341.BaseClass
         {
             _model = model;
         }
-        public virtual void OnUseCardResetCount(LorId cardId)
+        public virtual void OnUseCardResetCount(BattleDiceCardModel card)
         {
-            if (_model.LorIdEgoMassAttack == cardId)
-            {
-                _model.Counter = 0;
-            }
+            if (_model.LorIdEgoMassAttack != card.GetID()) return;
+            _model.Counter = 0;
+            _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
         }
 
         public virtual void MechHpCheck(int dmg)
@@ -41,6 +41,7 @@ namespace Util_Re21341.BaseClass
         public virtual void RaiseCounter()
         {
             if (_model.MassAttackStartCount && _model.Counter < _model.MaxCounter) _model.Counter++;
+            Debug.LogError($"Ego Attack Count - {_model.Counter}");
         }
         public virtual void AddAdditionalPassive() => _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
         public virtual void SetMassAttack(bool value) => _model.MassAttackStartCount = value;
@@ -55,6 +56,14 @@ namespace Util_Re21341.BaseClass
             SetOneTurnCard(true);
         }
 
+        public virtual void ExhaustEgoAttackCards()
+        {
+            var cards = _model.Owner.allyCardDetail.GetAllDeck().Where(x => x.GetID() == _model.LorIdEgoMassAttack);
+            foreach (var card in cards)
+            {
+                _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
+            }
+        }
         public virtual BattleUnitModel ChooseEgoAttackTarget(LorId cardId)
         {
             if (cardId != _model.LorIdEgoMassAttack) return null;

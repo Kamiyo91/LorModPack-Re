@@ -72,6 +72,7 @@ namespace Mio_Re21341.Passives
 
         public override void OnRoundEnd()
         {
+            _util.ExhaustEgoAttackCards();
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
@@ -84,6 +85,6 @@ namespace Mio_Re21341.Passives
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card.GetID());
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
     }
 }

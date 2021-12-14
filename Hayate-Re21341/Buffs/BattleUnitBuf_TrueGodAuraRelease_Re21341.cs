@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 using HarmonyLib;
-using Hayate_Re21341.Buffs;
 using Sound;
 using Util_Re21341;
 
-namespace Mio_Re21341.Buffs
+namespace Hayate_Re21341.Buffs
 {
     public class BattleUnitBuf_TrueGodAuraRelease_Re21341 : BattleUnitBuf
     {
         public BattleUnitBuf_TrueGodAuraRelease_Re21341() => stack = 0;
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
-        protected override string keywordId => "TrueGodAura_Re21341";
+        protected override string keywordId => "TrueGodAuraRelease_Re21341";
         public override void BeforeRollDice(BattleDiceBehavior behavior) =>
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus

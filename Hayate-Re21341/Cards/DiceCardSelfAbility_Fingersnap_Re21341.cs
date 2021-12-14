@@ -9,9 +9,6 @@ namespace Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_Fingersnap_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc =
-            "[Single Use]\nCan only be used at Emotion Level 5 and require 40 stacks of [Entertain Me!] buff.[On Use] [Kill] all enemies where [Max Hp] are lower then 250.If the [Max Hp] of the enemy are higher than 250, do 250 [Fixed Damage] instead.";
-
         private bool _motionChange;
 
         public override bool OnChooseCard(BattleUnitModel owner)

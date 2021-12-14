@@ -1,7 +1,9 @@
-﻿using BLL_Re21341.Extensions.MechUtilModelExtensions;
+﻿using System.Linq;
+using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models.MechUtilModels;
 using Hayate_Re21341.Buffs;
 using Util_Re21341.BaseClass;
+using Util_Re21341.CommonBuffs;
 
 namespace Hayate_Re21341.MechUtil
 {
@@ -32,6 +34,8 @@ namespace Hayate_Re21341.MechUtil
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
             {
+                _model.DrawBack = _model.Owner.allyCardDetail.GetHand().Count;
+                _model.Owner.allyCardDetail.DiscardACardByAbility(_model.Owner.allyCardDetail.GetHand());
                 origin = BattleDiceCardModel.CreatePlayingCard(
                     ItemXmlDataList.instance.GetCardItem(_model.SecondaryMechCard));
                 SetOneTurnCard(true);
@@ -43,11 +47,32 @@ namespace Hayate_Re21341.MechUtil
                 ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
             SetOneTurnCard(true);
         }
-        public override void OnUseCardResetCount(LorId cardId)
+        public override void OnUseCardResetCount(BattleDiceCardModel card)
         {
-            if (_model.SecondaryMechCard != cardId && _model.LorIdEgoMassAttack != cardId) return;
-            if (_model.SecondaryMechCard == cardId) _model.FinalMechStart = false;
+            if (_model.SecondaryMechCard != card.GetID() && _model.LorIdEgoMassAttack != card.GetID()) return;
+            if (_model.SecondaryMechCard == card.GetID())
+            {
+                _model.FinalMechStart = false;
+                _model.Owner.allyCardDetail.DrawCards(_model.DrawBack);
+                _model.DrawBack = 0;
+            }
+            _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
             _buf.stack = 0;
+        }
+        public void SecondMechHpCheck(int dmg)
+        {
+            if (_model.Owner.hp - dmg > _model.SecondMechHp || !_model.SecondMechHpExist) return;
+            _model.SecondMechHpExist = false;
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
+            _model.Owner.SetHp(_model.SecondMechHp);
+        }
+        public override void ExhaustEgoAttackCards()
+        {
+            var cards = _model.Owner.allyCardDetail.GetAllDeck().Where(x => x.GetID() == _model.LorIdEgoMassAttack || x.GetID() == _model.SecondaryMechCard);
+            foreach (var card in cards)
+            {
+                _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
+            }
         }
     }
 }

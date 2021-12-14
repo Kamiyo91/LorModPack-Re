@@ -80,7 +80,7 @@ namespace LoRModPack_Re21341.Harmony
                         UnitUtil.ClearCharList(__instance);
                         UnitUtil.AddUnitSephiraOnly(__instance, stage, unitDataModel);
                         return;
-                    case 6:
+                    case 4:
                         UnitUtil.ClearCharList(__instance);
                         UnitUtil.AddUnitSephiraOnly(__instance, stage, unitDataModel);
                         return;

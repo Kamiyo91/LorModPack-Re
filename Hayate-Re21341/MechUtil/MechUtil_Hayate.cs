@@ -16,7 +16,7 @@ namespace Hayate_Re21341.MechUtil
         }
         public override void OnUseExpireCard(LorId cardId)
         {
-            if (cardId == new LorId(ModParameters.PackageId, 1))
+            if (cardId == new LorId(ModParameters.PackageId, 29))
                 _buf.stack = 0;
             base.OnUseExpireCard(cardId);
         }

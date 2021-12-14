@@ -35,25 +35,39 @@ namespace Hayate_Re21341.Buffs
                     });
         }
 
+        public override void OnRoundEndTheLast()
+        {
+            AddStack(_owner.faction == Faction.Enemy ? 5 : 3);
+        }
+
+        private void AddStack(int value = 1)
+        {
+            if (stack + _addValue > 50)
+                stack = 50;
+            else
+                stack += _addValue * value;
+        }
+
+        private void SubStack()
+        {
+            if (stack - _addValue < 0)
+                stack = 0;
+            else
+                stack -= _addValue;
+        }
         public void SetValue(int value)
         {
             _addValue = value;
         }
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
-            if (stack + _addValue > 50)
-                stack = 50;
-            else
-                stack += _addValue;
+            AddStack();
         }
 
         public override void BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             if (attacker == null) return;
-            if (stack - _addValue < 0)
-                stack = 0;
-            else
-                stack -= _addValue;
+            SubStack();
         }
     }
 }

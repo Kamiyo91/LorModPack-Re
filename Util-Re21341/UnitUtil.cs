@@ -82,7 +82,7 @@ namespace Util_Re21341
             owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
         }
 
-        public static void AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
+        public static BattleUnitModel AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
         {
             var allyUnit = Singleton<StageController>.Instance.CreateLibrarianUnit_fromBattleUnitData(index);
             allyUnit.OnWaveStart();
@@ -91,6 +91,7 @@ namespace Util_Re21341
             allyUnit.emotionDetail.Reset();
             allyUnit.cardSlotDetail.RecoverPlayPoint(allyUnit.cardSlotDetail.GetMaxPlayPoint());
             AddEmotionPassives(allyUnit);
+            return allyUnit;
         }
 
         public static BattleUnitModel AddNewUnitEnemySide(UnitModel unit)

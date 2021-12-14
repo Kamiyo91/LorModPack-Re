@@ -7,9 +7,9 @@ using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
+using Hayate_Re21341.Buffs;
 using Hayate_Re21341.MechUtil;
 using LOR_XML;
-using Mio_Re21341.Buffs;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -17,28 +17,23 @@ namespace Hayate_Re21341.Passives
 {
     public class PassiveAbility_HayateNpc_Re21341 : PassiveAbilityBase
     {
-        private NpcMechUtilBase _util;
+        private NpcMechUtil_Hayate _util;
         public override void OnWaveStart()
         {
             _util = new NpcMechUtil_Hayate(new NpcMechUtil_HayateModel
             {
                 Owner = owner,
-                Hp = 0,
-                SetHp = 161,
-                MechHp = 100,
-                Survive = true,
+                MechHp = 527,
+                SecondMechHp = 100,
                 HasEgo = true,
                 HasMechOnHp = true,
+                SecondMechHpExist = true,
                 RefreshUI = true,
+                MassAttackStartCount = true,
                 EgoType = typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
-                SurviveAbDialogColor = AbColorType.Negative,
                 EgoAbColorColor = AbColorType.Positive,
-                SurviveAbDialogList = new List<AbnormalityCardDialog>
-                {
-                    new AbnormalityCardDialog {id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemySurvive1_Re21341")).Value}
-                },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
                     new AbnormalityCardDialog {id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyEgoActive1_Re21341")).Value},
@@ -51,7 +46,7 @@ namespace Hayate_Re21341.Passives
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.MechHpCheck(dmg);
-            _util.SurviveCheck(dmg);
+            _util.SecondMechHpCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
         public override void OnStartBattle()
@@ -79,8 +74,8 @@ namespace Hayate_Re21341.Passives
         }
         public override void OnRoundEnd()
         {
+            _util.ExhaustEgoAttackCards();
             _util.SetOneTurnCard(false);
-            _util.RaiseCounter();
         }
         public void ForcedEgo() => _util.ForcedEgo();
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
@@ -88,6 +83,6 @@ namespace Hayate_Re21341.Passives
             _util.OnSelectCardPutMassAttack(ref origin);
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card.GetID());
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
     }
 }

@@ -74,6 +74,7 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnRoundEnd()
         {
+            _util.ExhaustEgoAttackCards();
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
@@ -88,6 +89,6 @@ namespace Kamiyo_Re21341.Passives
         }
         public override void OnDie() => UnitUtil.VipDeath(owner);
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card.GetID());
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
     }
 }

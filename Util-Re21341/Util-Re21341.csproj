@@ -41,6 +41,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +89,7 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
+    <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />
     <Compile Include="EmotionalBurstUtil.cs" />
     <Compile Include="LocalizeUtil.cs" />
     <Compile Include="MapUtil.cs" />

@@ -7,9 +7,9 @@ using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
+using Hayate_Re21341.Buffs;
 using Hayate_Re21341.MechUtil;
 using LOR_XML;
-using Mio_Re21341.Buffs;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -25,10 +25,11 @@ namespace Hayate_Re21341.Passives
                 Owner = owner,
                 HasEgo = true,
                 EgoType = typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId,1),
+                EgoCardId = new LorId(ModParameters.PackageId,28),
                 HasEgoAttack = true,
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 1),
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 29),
                 HasEgoAbDialog = true,
+                EgoAttackCardExpire = true,
                 EgoAbColorColor = AbColorType.Positive,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {

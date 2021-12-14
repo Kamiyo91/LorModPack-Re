@@ -17,6 +17,11 @@ namespace Kamiyo_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
+            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x => x.GetID() == new LorId(ModParameters.PackageId,22)))
+            {
+                battleDiceCardModel.GetBufList();
+                battleDiceCardModel.AddCost(-1);
+            }
             typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
                 ?.SetValue(this, ModParameters.ArtWorks["Light_Re21341"]);
             typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);

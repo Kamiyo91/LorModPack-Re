@@ -11,5 +11,8 @@ namespace BLL_Re21341.Extensions.MechUtilModelExtensions
     {
         public LorId SecondaryMechCard { get; set; }
         public bool FinalMechStart { get; set; }
+        public bool SecondMechHpExist { get; set; }
+        public int SecondMechHp { get; set; }
+        public int DrawBack { get; set; }
     }
 }
