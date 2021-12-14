@@ -59,7 +59,7 @@ namespace LoRModPack_Re21341.Harmony
                 case 10000001:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
                     return;
-                case 10000006:
+                case 10000007:
                     __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
                     return;
                 default:

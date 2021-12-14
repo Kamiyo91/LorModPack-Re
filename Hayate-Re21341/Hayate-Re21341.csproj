@@ -72,6 +72,7 @@
     <Compile Include="Passives\PassiveAbility_Hayate_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HayateNpc_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HighDivinity_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_HighGuard_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

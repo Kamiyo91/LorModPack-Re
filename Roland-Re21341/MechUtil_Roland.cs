@@ -36,6 +36,6 @@ namespace Roland_Re21341
             _model.Owner.allyCardDetail.Shuffle();
             _model.Owner.allyCardDetail.DrawCards(handCount);
         }
-        private static List<LorId> GetBlackSilenceMaskCardsId() => new List<LorId> {new LorId(705206), new LorId(705207), new LorId(705208), new LorId(ModParameters.PackageId,39), new LorId(ModParameters.PackageId,40), new LorId(ModParameters.PackageId,41), new LorId(ModParameters.PackageId,42), new LorId(702001), new LorId(702004) };
+        private static List<LorId> GetBlackSilenceMaskCardsId() => new List<LorId> {new LorId(705206), new LorId(705207), new LorId(705208), new LorId(ModParameters.PackageId,36), new LorId(ModParameters.PackageId,37), new LorId(ModParameters.PackageId,38), new LorId(ModParameters.PackageId,39), new LorId(702001), new LorId(702004) };
     }
 }

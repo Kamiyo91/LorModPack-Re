@@ -9,18 +9,18 @@ namespace EmotionalBurstPassive_Re21341
     {
         public static void RemoveEmotionalBurstCards(BattleUnitModel unit)
         {
-            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 906));
-            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 907));
-            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 908));
-            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 909));
+            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 32));
+            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 33));
+            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 34));
+            unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 35));
         }
 
         public static void AddEmotionalBurstCards(BattleUnitModel unit)
         {
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 906));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 907));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 908));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 909));
+            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 32));
+            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 33));
+            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 34));
+            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 35));
         }
 
         public static void RemoveAllEmotionalPassives(BattleUnitModel unit,

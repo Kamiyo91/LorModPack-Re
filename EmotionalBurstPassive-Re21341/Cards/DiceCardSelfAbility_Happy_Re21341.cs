@@ -35,7 +35,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
                 return;
             }
             var passive =
-                unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 19)) as
+                unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 29)) as
                     PassiveAbility_Happy_Re21341;
             passive?.ChangeNameAndSetStacks(1);
             passive?.AfterInit();

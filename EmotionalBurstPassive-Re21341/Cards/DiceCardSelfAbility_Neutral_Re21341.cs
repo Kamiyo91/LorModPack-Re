@@ -30,7 +30,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
         private static void AddNeutralPassive(BattleUnitModel unit)
         {
             if (unit.passiveDetail.HasPassive<PassiveAbility_Neutral_Re21341>()) return;
-            unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 20));
+            unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 32));
             unit.passiveDetail.OnCreated();
         }
     }

@@ -13,7 +13,7 @@ namespace Roland_Re21341
             sephirahColor = Color.black;
             var map = Util.LoadPrefab("InvitationMaps/InvitationMap_BlackSilence4",
                 SingletonBehavior<BattleSceneRoot>.Instance.transform);
-            _mapGameObject = map.GetComponent<global::MapManager>() as BlackSilence4thMapManager;
+            _mapGameObject = map.GetComponent<MapManager>() as BlackSilence4thMapManager;
             Destroy(map);
         }
 

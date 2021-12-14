@@ -92,6 +92,7 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
     <Compile Include="CommonCards\DiceCardSelfAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_CustomInstantIndexRelease_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_FragmentOfPowerDrop_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />

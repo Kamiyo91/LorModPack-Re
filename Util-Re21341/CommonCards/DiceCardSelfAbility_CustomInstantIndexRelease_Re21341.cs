@@ -9,13 +9,7 @@ namespace Util_Re21341.CommonCards
 {
     public class DiceCardSelfAbility_CustomInstantIndexRelease_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc = "Can only be used at Emotion Level 3 or higher\n[On Play]Release Locked Potential";
-
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.emotionDetail.EmotionLevel >= 3;
-        }
-
+        public static string Desc = "[On Play]Release Locked Potential";
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);
