@@ -78,8 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseClass\MechUtilBaseMechUtilBase.cs" />
-    <Compile Include="BaseClass\NpcMechUtilBaseMechUtilBase.cs" />
+    <Compile Include="BaseClass\MechUtilBase.cs" />
+    <Compile Include="BaseClass\NpcMechUtilBase.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToStatusAliment_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToBinding_Re21341.cs" />

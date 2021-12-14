@@ -63,6 +63,7 @@ namespace Hayate_Re21341.MechUtil
             if (_model.FingersnapTarget == null) return;
             BattleObjectManager.instance.UnregisterUnit(_model.FingersnapTarget);
             _model.FingersnapTarget = null;
+            UnitUtil.RefreshCombatUI();
         }
         public void SecondMechHpCheck(int dmg)
         {
