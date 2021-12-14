@@ -34,6 +34,8 @@ namespace Mio_Re21341.Passives
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900)
             });
             _util.EgoActive();
+            if (BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 161) return;
+            owner.Die();
         }
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
@@ -47,7 +49,7 @@ namespace Mio_Re21341.Passives
             _util.RaiseCounter();
             if (owner.IsDead() &&
                 BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 161)
-                UnitUtil.UnitReviveAndRecovery(owner, 67);
+                UnitUtil.UnitReviveAndRecovery(owner, 67,false);
         }
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard.card);
     }

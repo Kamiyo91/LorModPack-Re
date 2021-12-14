@@ -16,6 +16,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool EgoActivated { get; set; }
         public bool RefreshUI { get; set; }
         public bool IsSummonEgo { get; set; }
+        public bool RecoverLightOnSurvive { get; set; }
         public bool EgoAttackCardExpire { get; set; }
         public bool HasAdditionalPassive { get; set; }
         public string SkinName { get; set; }

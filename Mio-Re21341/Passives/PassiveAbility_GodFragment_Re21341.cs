@@ -33,6 +33,7 @@ namespace Mio_Re21341.Passives
                 HasEgo = true,
                 HasEgoAttack = true,
                 RefreshUI = true,
+                RecoverLightOnSurvive = false,
                 SkinName = "MioRedEye_Re21341",
                 EgoType = typeof(BattleUnitBuf_GodAuraRelease_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 9),

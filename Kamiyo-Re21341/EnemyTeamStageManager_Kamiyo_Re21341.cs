@@ -14,30 +14,27 @@ namespace Kamiyo_Re21341
     {
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
+        private bool _restart;
         private PassiveAbility_AlterEgoNpc_Re21341 _kamiyoEnemyPassive;
 
         public override void OnWaveStart()
         {
+            _phaseChanged = Singleton<StageController>.Instance.GetStageModel()
+                .GetStageStorageData<bool>("Phase", out var curPhase) && curPhase;
+            _restart = _phaseChanged;
             CustomMapHandler.InitCustomMap("Kamiyo1_Re21341", new Kamiyo1_Re21341MapManager(), false, true, 0.5f, 0.2f,
                 0.5f, 0.45f);
             CustomMapHandler.InitCustomMap("Kamiyo2_Re21341", new Kamiyo2_Re21341MapManager(), false, true, 0.5f,
                 0.475f, 0.5f, 0.225f);
-            CustomMapHandler.EnforceMap();
+            CustomMapHandler.EnforceMap(_phaseChanged ? 1 : 0);
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
             if (_mainEnemyModel != null)
                 _kamiyoEnemyPassive =
                     _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_AlterEgoNpc_Re21341) as
                         PassiveAbility_AlterEgoNpc_Re21341;
-            if (Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<bool>("Phase", out var curPhase))
-                _phaseChanged = curPhase;
             if (!_phaseChanged) return;
-            PrepareKamiyoUnit();
-            PrepareMioEnemyUnit();
-            CustomMapHandler.EnforceMap(1);
-            Singleton<StageController>.Instance.CheckMapChange();
-            UnitUtil.RefreshCombatUI();
+            _mainEnemyModel?.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 11));
 
         }
         public override void OnEndBattle()
@@ -51,7 +48,11 @@ namespace Kamiyo_Re21341
         }
         public override void OnRoundEndTheLast() => CheckPhase();
 
-        public override void OnRoundStart() => CustomMapHandler.EnforceMap(_phaseChanged ? 1 : 0);
+        public override void OnRoundStart()
+        {
+            CheckRestart();
+            CustomMapHandler.EnforceMap(_phaseChanged ? 1 : 0);
+        }
 
         private void CheckPhase()
         {
@@ -59,15 +60,24 @@ namespace Kamiyo_Re21341
             _phaseChanged = true;
             CustomMapHandler.EnforceMap(1);
             Singleton<StageController>.Instance.CheckMapChange();
-            PrepareKamiyoUnit(true,true,true);
+            PrepareKamiyoUnit(false,true,true,true);
             PrepareMioEnemyUnit();
         }
 
-        private void PrepareKamiyoUnit(bool recoverHp = false,bool changeEmotionLevel = false,bool addPassive = false)
+        private void CheckRestart()
+        {
+            if (!_restart) return;
+            _restart = false;
+            PrepareKamiyoUnit(true);
+            PrepareMioEnemyUnit();
+            UnitUtil.RefreshCombatUI();
+        }
+        private void PrepareKamiyoUnit(bool restart,bool recoverHp = false,bool changeEmotionLevel = false,bool addPassive = false)
         {
             if(addPassive)_kamiyoEnemyPassive.AddAdditionalPassive();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
-            _kamiyoEnemyPassive.ForcedEgo();
+            if(restart)_kamiyoEnemyPassive.ForcedEgoRestart();
+            else _kamiyoEnemyPassive.ForcedEgo();
             _kamiyoEnemyPassive.ActiveMassAttackCount();
             _kamiyoEnemyPassive.SetCountToMax();
             _mainEnemyModel.Book.SetHp(514);

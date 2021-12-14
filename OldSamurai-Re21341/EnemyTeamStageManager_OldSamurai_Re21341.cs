@@ -42,7 +42,7 @@ namespace OldSamurai_Re21341
         {
             if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count > 0 || _phaseChanged) return;
             _phaseChanged = true;
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,_mainEnemyModel.MaxHp);
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,_mainEnemyModel.MaxHp,true);
             _mechUtil.ForcedEgo();
             CustomMapHandler.SetMapBgm("Hornet_Re21341.wav",true, "OldSamurai_Re21341");
         }

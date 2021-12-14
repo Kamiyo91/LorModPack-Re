@@ -35,6 +35,7 @@ namespace Mio_Re21341.Passives
                 Survive = true,
                 HasEgo = true,
                 HasMechOnHp = true,
+                RecoverLightOnSurvive = true,
                 RefreshUI = true,
                 ReloadMassAttackOnLethal = true,
                 SkinName = "MioRedEye_Re21341",

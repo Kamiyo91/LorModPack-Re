@@ -5,6 +5,7 @@ using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
 using LOR_XML;
+using UnityEngine;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -36,6 +37,7 @@ namespace Kamiyo_Re21341.Passives
                 NearDeathBuffExist = true,
                 RefreshUI = true,
                 ReloadMassAttackOnLethal = true,
+                RecoverLightOnSurvive = true,
                 SkinName = "KamiyoMask_Re21341",
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 11),
@@ -82,6 +84,12 @@ namespace Kamiyo_Re21341.Passives
         public void SetCountToMax() => _util.SetCounter(4);
         public void ActiveMassAttackCount() => _util.SetMassAttack(true);
         public void ForcedEgo() => _util.ForcedEgo();
+
+        public void ForcedEgoRestart()
+        {
+            _util.TurnEgoAbDialogOff();
+            _util.ForcedEgo();
+        }
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
             _util.OnSelectCardPutMassAttack(ref origin);

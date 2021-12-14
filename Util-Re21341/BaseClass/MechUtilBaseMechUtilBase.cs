@@ -26,6 +26,7 @@ namespace Util_Re21341.BaseClass
             _model.Survive = false;
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SetHp);
+            UnitUtil.UnitReviveAndRecovery(_model.Owner,0,_model.RecoverLightOnSurvive);
             if (_model.HasSurviveAbDialog) UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.SurviveAbDialogList, _model.SurviveAbDialogColor);
             if (_model.NearDeathBuffExist) _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.NearDeathBuffType));
         }
@@ -58,6 +59,8 @@ namespace Util_Re21341.BaseClass
             if (_model.HasAdditionalPassive) _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
             _model.EgoActivated = true;
         }
+
+        public virtual void TurnEgoAbDialogOff() => _model.HasEgoAbDialog = false;
         public virtual bool EgoCheck() => _model.EgoActivated;
         public virtual void ForcedEgo() => _model.EgoActivated = true;
         public virtual void SetVipUnit() => _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());

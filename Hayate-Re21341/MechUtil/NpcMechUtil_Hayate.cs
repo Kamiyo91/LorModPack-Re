@@ -58,7 +58,7 @@ namespace Hayate_Re21341.MechUtil
             if (_model.Owner.hp - dmg > _model.SecondMechHp || !_model.SecondMechHpExist) return;
             _model.SecondMechHpExist = false;
             _model.FinalMechStart = true;
-            UnitUtil.UnitReviveAndRecovery(_model.Owner,0);
+            UnitUtil.UnitReviveAndRecovery(_model.Owner,0,false);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SecondMechHp);
         }

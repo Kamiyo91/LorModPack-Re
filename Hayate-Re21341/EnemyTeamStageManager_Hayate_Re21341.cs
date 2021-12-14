@@ -82,7 +82,7 @@ namespace Hayate_Re21341
         {
             if (_lastPhaseStarted) return;
             if (!_mainEnemyModel.IsDead()) return;
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5);
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5,false);
         }
         private void CheckUnitSummon()
         {
@@ -111,7 +111,7 @@ namespace Hayate_Re21341
             passive?.ForcedEgo();
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
             _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,210);
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,210,true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>
                     {new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value}},AbColorType.Negative);

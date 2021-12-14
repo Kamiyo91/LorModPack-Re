@@ -30,6 +30,7 @@ namespace Kamiyo_Re21341.Passives
                 HasAdditionalPassive = true,
                 RefreshUI = true,
                 NearDeathBuffExist = true,
+                RecoverLightOnSurvive = false,
                 SkinName = "KamiyoMask_Re21341", 
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),

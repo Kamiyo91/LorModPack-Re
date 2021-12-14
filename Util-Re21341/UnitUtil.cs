@@ -71,7 +71,7 @@ namespace Util_Re21341
                 battleDiceCardModel.AddCost(changeValue);
             }
         }
-        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp)
+        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp,bool recoverLight)
         {
             if (owner.IsDead()) owner.Revive(hp);
             else owner.RecoverHP(hp);
@@ -80,7 +80,7 @@ namespace Util_Re21341
             owner.breakDetail.ResetGauge();
             owner.breakDetail.nextTurnBreak = false;
             owner.breakDetail.RecoverBreakLife(1, true);
-            owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
+            if(recoverLight)owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
         }
 
         public static BattleUnitModel AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
