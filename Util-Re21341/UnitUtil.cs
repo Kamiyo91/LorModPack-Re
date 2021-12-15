@@ -175,14 +175,11 @@ namespace Util_Re21341
         {
             dlg = owner.UnitData.unitData.battleDialogModel;
             owner.UnitData.unitData.SetTempName(charName);
-            owner.UnitData.unitData.customizeData.SetCustomData(false);
             RefreshCombatUI();
             owner.UnitData.unitData.InitBattleDialogByDefaultBook(new LorId(ModParameters.PackageId, id));
-            owner.view.DisplayDlg(DialogType.START_BATTLE, "0");
         }
         public static void ReturnToTheOriginalBaseSkin(BattleUnitModel owner, BattleDialogueModel dlg)
         {
-            owner.UnitData.unitData.customizeData.SetCustomData(true);
             owner.UnitData.unitData.ResetTempName();
             owner.UnitData.unitData.battleDialogModel = dlg;
         }

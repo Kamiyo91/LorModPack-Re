@@ -12,9 +12,6 @@ namespace EmotionalBurstPassive_Re21341.Cards
 {
     public class DiceCardSelfAbility_Happy_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc =
-            "[On Play]Add Emotion [Happy] in Passives([Using it more times will increase its effects]) and remove other Emotion Passives this Scene\n[Happy]:\nGain 1/2/3 [Haste] each Scene.[On Dice Roll]Boost the *maximum* Dice Roll by 1/2/3 or Lower the *maximum* Dice Roll by 1/2/3 at 10%/20%/30% chance.At the end of each Scene change all Emotions Coin Type in [Positive Coin]";
-
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);

@@ -28,6 +28,9 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("BookModel_GetThumbSprite");
             harmony.Patch(typeof(BookModel).GetMethod("GetThumbSprite", AccessTools.all), null,
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("BookXmlInfo_GetThumbSprite");
+            harmony.Patch(typeof(BookXmlInfo).GetMethod("GetThumbSprite", AccessTools.all), null,
+                new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("StageLibraryFloorModel_InitUnitList");
             harmony.Patch(typeof(StageLibraryFloorModel).GetMethod("InitUnitList", AccessTools.all),
                 null, new HarmonyMethod(method));
@@ -43,6 +46,12 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBook");
+            harmony.Patch(typeof(UnitDataModel).GetMethod("EquipBook", AccessTools.all),
+                new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UILibrarianAppearanceInfoPanel_OnClickCustomizeButton");
+            harmony.Patch(typeof(UILibrarianAppearanceInfoPanel).GetMethod("OnClickCustomizeButton", AccessTools.all),
+                new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -50,7 +59,21 @@ namespace LoRModPack_Re21341.Harmony
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
-
+        public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
+        {
+            if (__instance.id.packageId != ModParameters.PackageId) return;
+            switch (__instance.id.id)
+            {
+                case 10000001:
+                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
+                    return;
+                case 10000006:
+                    __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
+                    return;
+                default:
+                    return;
+            }
+        }
         public static void BookModel_GetThumbSprite(BookModel __instance, ref Sprite __result)
         {
             if (__instance.BookId.packageId != ModParameters.PackageId) return;
@@ -59,15 +82,14 @@ namespace LoRModPack_Re21341.Harmony
                 case 10000001:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
                     return;
-                case 10000007:
+                case 10000006:
                     __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
                     return;
                 default:
                     return;
             }
         }
-        public static void BookModel_SetXmlInfo(BookModel __instance, BookXmlInfo ____classInfo,
-            ref List<DiceCardXmlInfo> ____onlyCards)
+        public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
             if (__instance.BookId.packageId == ModParameters.PackageId && ModParameters.KeypageWithOnlyCardsList.Keys.Contains(__instance.BookId.id))
                 ____onlyCards.AddRange(ModParameters.KeypageWithOnlyCardsList
@@ -89,6 +111,29 @@ namespace LoRModPack_Re21341.Harmony
                         UnitUtil.AddUnitSephiraOnly(__instance, stage, unitDataModel);
                         return;
                 }
+        }
+        public static bool UnitDataModel_EquipBook(UnitDataModel __instance, BookModel newBook, bool isEnemySetting, bool force)
+        {
+            if (!force && newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId && ModParameters.EquipPageWithOriginalFace.Contains(newBook.ClassInfo.id.id) && newBook.owner == null)
+            {
+                __instance.customizeData.SetCustomData(false);
+                __instance.EquipCustomCoreBook(null);
+                ModParameters.DynamicNames.TryGetValue(newBook.ClassInfo.id.id,out var name);
+                __instance.SetTempName(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals(name)).Value.Name);
+            }
+            else
+            {
+                __instance.customizeData.SetCustomData(true);
+                __instance.ResetTempName();
+            }
+            return force || newBook == null || newBook.ClassInfo.id.packageId != ModParameters.PackageId || !ModParameters.NotEquipPages.Contains(newBook.ClassInfo.id.id) || newBook.owner != null;
+        }
+        public static bool UILibrarianAppearanceInfoPanel_OnClickCustomizeButton(UILibrarianAppearanceInfoPanel __instance)
+        {
+            if (__instance.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
+                !ModParameters.WithoutCustomSkins.Contains(__instance.unitData.bookItem.BookId.id)) return true;
+            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Desc);
+            return false;
         }
 
         public static void UIInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
@@ -148,7 +193,7 @@ namespace LoRModPack_Re21341.Harmony
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;
-            skinInfo.state = BattleUnitView.SkinState.Default;
+            skinInfo.state = BattleUnitView.SkinState.Changed;
             skinInfo.skinName = charName;
             var currentMotionDetail = __instance.charAppearance.GetCurrentMotionDetail();
             __instance.DestroySkin();

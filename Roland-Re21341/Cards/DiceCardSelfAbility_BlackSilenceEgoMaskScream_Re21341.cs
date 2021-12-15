@@ -36,10 +36,7 @@ namespace Roland_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            if (string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin))
-                owner.view.SetAltSkin("BlackSilence3");
-            else
-                owner.view.CreateSkin();
+            owner.view.SetAltSkin("BlackSilence3");
         }
     }
 }

@@ -8,12 +8,6 @@ namespace Roland_Re21341.Passives
     public class PassiveAbility_BlackSilenceEgoMask_Re21341 : PassiveAbilityBase
     {
         private MechUtil_Roland _util;
-        public override void Init(BattleUnitModel self)
-        {
-            UnitUtil.ReturnToTheOriginalSkin(self, "BlackSilence");
-            base.Init(self);
-        }
-
         public override void OnBattleEnd()
         {
             UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
@@ -25,6 +19,7 @@ namespace Roland_Re21341.Passives
                 owner.passiveDetail.DestroyPassive(this);
                 return;
             }
+            UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
             _util = new MechUtil_Roland(new MechUtilBaseModel
             {
                 Owner = owner,

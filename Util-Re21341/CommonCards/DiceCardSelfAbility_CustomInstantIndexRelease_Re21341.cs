@@ -9,7 +9,6 @@ namespace Util_Re21341.CommonCards
 {
     public class DiceCardSelfAbility_CustomInstantIndexRelease_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc = "[On Play]Release Locked Potential";
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);

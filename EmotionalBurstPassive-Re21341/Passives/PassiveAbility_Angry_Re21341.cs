@@ -37,9 +37,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
-
-            desc =
-                $"Gain {_stack} [Strength],inflict on self {_stack} [Disarm] and {_stack * 3} [Fragile] each Scene.Each time this Character takes damage Gain 1 [Negative Emotion Coin]";
         }
 
         public override void OnRoundStartAfter()

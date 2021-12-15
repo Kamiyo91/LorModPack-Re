@@ -16,7 +16,7 @@ namespace Angela_Re21341.Passives
         {
             if (string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) &&
                 owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem)
-                UnitUtil.PrepareSephirahSkin(owner, 7, ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Desc, ref _dlg);
+                UnitUtil.PrepareSephirahSkin(owner, 10000006, ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Name, ref _dlg);
             AddCardsWaveStart();
         }
 

@@ -14,14 +14,10 @@ namespace Kamiyo_Re21341.Passives
     public class PassiveAbility_AlterEgoNpc_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
-        public override void Init(BattleUnitModel self)
-        {
-            UnitUtil.ReturnToTheOriginalSkin(self, "KamiyoNormal_Re21341");
-            base.Init(self);
-        }
         public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
         public override void OnWaveStart()
         {
+            UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,

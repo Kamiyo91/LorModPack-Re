@@ -32,9 +32,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
-
-            desc =
-                $"Gain {_stack} [Endurance] and {_stack * 2} [Protection], inflict on self {_stack} [Bind] each Scene.At the end of each Scene change all Emotions Coin Type in [Negative Coin]";
         }
 
         public override void OnRoundStartAfter()

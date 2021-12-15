@@ -16,12 +16,6 @@ namespace Mio_Re21341.Passives
     public class PassiveAbility_GodFragment_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
-        public override void Init(BattleUnitModel self)
-        {
-            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(self, "MioNormalEye_Re21341");
-            base.Init(self);
-        }
-
         public override void OnBattleEnd()
         {
             if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
@@ -60,6 +54,10 @@ namespace Mio_Re21341.Passives
             if (UnitUtil.CheckSkinProjection(owner))
             {
                 _util.DoNotChangeSkinOnEgo();
+            }
+            else
+            {
+                UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
             }
         }
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

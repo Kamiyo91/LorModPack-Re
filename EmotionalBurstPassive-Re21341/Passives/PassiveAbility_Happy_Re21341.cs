@@ -35,9 +35,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
-
-            desc =
-                $"Gain {_stack} [Haste] each Scene.[On Dice Roll]Boost the *maximum* Dice Roll by {_stack} or Lower the *maximum* Dice Roll by {_stack} at {_stack * 10}% chance.At the end of each Scene change all Emotions Coin Type in [Positive Coin]";
         }
 
         public override void OnRoundStartAfter()

@@ -12,9 +12,6 @@ namespace EmotionalBurstPassive_Re21341.Cards
 {
     public class DiceCardSelfAbility_Sad_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc =
-            "[On Play]Add Emotion [Sad] in Passives([Using it more times will increase its effects]) and remove other Emotion Passives this Scene\n[Sad]:\nGain 1/2/3 [Endurance] and 2/4/6 [Protection], inflict on self 1/2/3 [Bind] each Scene.At the end of each Scene change all Emotions Coin Type in [Negative Coin]";
-
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);

@@ -16,14 +16,10 @@ namespace Mio_Re21341.Passives
     public class PassiveAbility_GodFragmentEnemy_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
-        public override void Init(BattleUnitModel self)
-        {
-            UnitUtil.ReturnToTheOriginalSkin(self, "MioNormalEye_Re21341");
-            base.Init(self);
-        }
         public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
         public override void OnWaveStart()
         {
+            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,

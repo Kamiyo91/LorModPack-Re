@@ -12,9 +12,6 @@ namespace EmotionalBurstPassive_Re21341.Cards
 {
     public class DiceCardSelfAbility_Angry_Re21341 : DiceCardSelfAbilityBase
     {
-        public static string Desc =
-            "[On Play]Add Emotion [Angry] in Passives([Using it more times will increase its effects]) and remove other Emotion Passives this Scene\n[Angry]:\nGain 1/2/3 [Strength],inflict on self 1/2/3 [Disarm] and 3/6/9 [Fragile] each Scene.Each time this Character takes damage Gain 1 [Negative Emotion Coin]";
-
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             Activate(unit);
