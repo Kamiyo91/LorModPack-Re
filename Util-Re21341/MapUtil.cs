@@ -42,15 +42,16 @@ namespace Util_Re21341
             else
                 mapList?.RemoveAll(x => x.name.Contains(name));
         }
-        public static void ReturnFromEgoMap(string mapName, SephirahType sephirah,int id)
+        public static void ReturnFromEgoMap(string mapName,int id)
         {
             if (CheckStageMap(id)) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
-            if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.sephirahType == sephirah)
-                SingletonBehavior<BattleSoundManager>.Instance.OnStageStart();
+            RemoveValueInAddedMap(mapName);
+            Singleton<StageController>.Instance.CheckMapChange();
+            SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
+                    .Instance.currentMapObject.mapBgm);
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
         }
-
         public static void GetArtWorks(DirectoryInfo dir)
         {
             if (dir.GetDirectories().Length != 0)

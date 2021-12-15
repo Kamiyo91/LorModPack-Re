@@ -14,9 +14,8 @@ namespace Angela_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            if (string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) &&
-                owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem)
-                UnitUtil.PrepareSephirahSkin(owner, 10000006, ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Name, ref _dlg);
+            _dlg = owner.UnitData.unitData.battleDialogModel;
+            owner.UnitData.unitData.InitBattleDialogByDefaultBook(new LorId(ModParameters.PackageId, 10000006));
             AddCardsWaveStart();
         }
 
@@ -75,11 +74,6 @@ namespace Angela_Re21341.Passives
 
         public override void OnLevelUpEmotion() => AddCardOnLvUpEmotion();
 
-        public override void OnBattleEnd()
-        {
-            if (string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) &&
-                owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem)
-                UnitUtil.ReturnToTheOriginalBaseSkin(owner, _dlg);
-        }
+        public override void OnBattleEnd() => owner.UnitData.unitData.battleDialogModel = _dlg;
     }
 }

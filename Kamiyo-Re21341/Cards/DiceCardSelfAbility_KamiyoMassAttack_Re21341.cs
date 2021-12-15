@@ -7,7 +7,7 @@ namespace Kamiyo_Re21341.Cards
     public class DiceCardSelfAbility_KamiyoMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChanged;
-
+        private bool _used;
         public override bool OnChooseCard(BattleUnitModel owner) => owner.emotionDetail.EmotionLevel >= 5 && owner.bufListDetail.HasAssimilation();
 
         public override void OnEndAreaAttack()
@@ -31,9 +31,16 @@ namespace Kamiyo_Re21341.Cards
         }
         public override void OnStartBattle()
         {
+            _used = true;
             if (owner.faction != Faction.Player ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             ChangeToKamiyoEgoMap();
+        }
+        public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            if (!_used) return;
+            _used = false;
+            MapUtil.ReturnFromEgoMap("Kamiyo2_Re21341", 3);
         }
         private static void ChangeToKamiyoEgoMap() =>
             MapUtil.ChangeMap(new MapModel

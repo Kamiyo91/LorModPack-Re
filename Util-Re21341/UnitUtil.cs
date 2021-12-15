@@ -171,19 +171,6 @@ namespace Util_Re21341
             allyUnit.OnWaveStart();
             return allyUnit;
         }
-        public static void PrepareSephirahSkin(BattleUnitModel owner, int id, string charName,ref BattleDialogueModel dlg)
-        {
-            dlg = owner.UnitData.unitData.battleDialogModel;
-            owner.UnitData.unitData.SetTempName(charName);
-            RefreshCombatUI();
-            owner.UnitData.unitData.InitBattleDialogByDefaultBook(new LorId(ModParameters.PackageId, id));
-        }
-        public static void ReturnToTheOriginalBaseSkin(BattleUnitModel owner, BattleDialogueModel dlg)
-        {
-            owner.UnitData.unitData.ResetTempName();
-            owner.UnitData.unitData.battleDialogModel = dlg;
-        }
-
         public static void TestingUnitValues()
         {
             var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
@@ -411,7 +398,6 @@ namespace Util_Re21341
                 SetBaseKeywordCard(key, ref dictionary, ref list);
             }
         }
-
         public static void ChangePassiveItem()
         {
             foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive => passive.id.packageId == ModParameters.PackageId &&

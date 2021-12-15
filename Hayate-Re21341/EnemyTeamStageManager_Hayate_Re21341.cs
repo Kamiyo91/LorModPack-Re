@@ -64,7 +64,7 @@ namespace Hayate_Re21341
             _hayateEnemyPassive.ForcedEgo();
             MapUtil.ActiveCreatureBattleCamFilterComponent();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel,-2,4);
-            CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.wav",true, "Hayate_Re21341");
+            CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.mp3",true, "Hayate_Re21341");
         }
         private BattleUnitModel PrepareAllyUnit()
         {
@@ -101,7 +101,7 @@ namespace Hayate_Re21341
             if (_lastPhaseStarted || !_phaseChanged || _mainEnemyModel.hp > 100 ||
                 BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 0) return;
             _lastPhaseStarted = true;
-            CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.wav",true, "Hayate_Re21341");
+            CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.mp3",true, "Hayate_Re21341");
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player))
                 BattleObjectManager.instance.UnregisterUnit(unit);
             UnitUtil.RefreshCombatUI();

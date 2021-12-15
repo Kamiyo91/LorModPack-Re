@@ -53,7 +53,7 @@ namespace OldSamurai_Re21341.Buffs
         private void RemoveSamuraiEgoMap()
         {
             Destroy();
-            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", _floor.Sephirah, 1);
+            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", 1);
         }
     }
 }

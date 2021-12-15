@@ -13,7 +13,6 @@ namespace Util_Re21341
     {
         public static void AddLocalize()
         {
-            Debug.LogError("Entry1");
             var dictionary =
                 typeof(BattleEffectTextsXmlList).GetField("_dictionary", AccessTools.all)
                     ?.GetValue(Singleton<BattleEffectTextsXmlList>.Instance) as Dictionary<string, BattleEffectText>;
@@ -30,7 +29,6 @@ namespace Util_Re21341
                         ModParameters.EffectTexts.Add(battleEffectText.ID, new EffectTextModel{Name = battleEffectText.Name , Desc = battleEffectText.Desc });
                     }
                 }
-            Debug.LogError("Entry2");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards").GetFiles();
             foreach (var t in files)
                 using (var stringReader2 = new StringReader(File.ReadAllText(t.FullName)))
@@ -63,7 +61,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry3");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleDialog").GetFiles();
             var dialogDictionary =
                 (Dictionary<string, BattleDialogRoot>)BattleDialogXmlList.Instance.GetType()
@@ -99,7 +96,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry4");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName").GetFiles();
             foreach (var t in files)
                 using (var stringReader3 = new StringReader(File.ReadAllText(t.FullName)))
@@ -119,7 +115,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry5");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/Books").GetFiles();
             foreach (var t in files)
                 using (var stringReader4 = new StringReader(File.ReadAllText(t.FullName)))
@@ -153,7 +148,6 @@ namespace Util_Re21341
                             .GetValue(Singleton<BookDescXmlList>.Instance) as Dictionary<string, List<BookDesc>>)
                         [ModParameters.PackageId] = bookDescRoot.bookDescList;
                 }
-            Debug.LogError("Entry6");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/DropBooks").GetFiles();
             foreach (var t in files)
                 using (var stringReader5 = new StringReader(File.ReadAllText(t.FullName)))
@@ -185,7 +179,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry7");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/StageName").GetFiles();
             foreach (var t in files)
                 using (var stringReader6 = new StringReader(File.ReadAllText(t.FullName)))
@@ -203,7 +196,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry8");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/PassiveDesc").GetFiles();
             foreach (var t in files)
                 using (var stringReader7 = new StringReader(File.ReadAllText(t.FullName)))
@@ -221,7 +213,6 @@ namespace Util_Re21341
                         }
                     }
                 }
-            Debug.LogError("Entry9");
             var cardAbilityDictionary = typeof(BattleCardAbilityDescXmlList).GetField("_dictionary", AccessTools.all)
                 ?.GetValue(Singleton<BattleCardAbilityDescXmlList>.Instance) as Dictionary<string, BattleCardAbilityDesc>;
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleCardAbilities").GetFiles();
@@ -240,6 +231,7 @@ namespace Util_Re21341
             var list = new List<string>();
             var list2 = new List<string>();
             list.Add("0Harmony");
+            list.Add("NAudio");
             using (var enumerator = Singleton<ModContentManager>.Instance.GetErrorLogs().GetEnumerator())
             {
                 while (enumerator.MoveNext())

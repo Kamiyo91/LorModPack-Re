@@ -5,18 +5,14 @@ namespace Roland_Re21341.Cards
 {
     public class DiceCardSelfAbility_BlackSilenceEgoMaskScream_Re21341 : DiceCardSelfAbilityBase
     {
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.bufListDetail.HasAssimilation();
-        }
+        private bool _used;
+        public override bool OnChooseCard(BattleUnitModel owner) => owner.bufListDetail.HasAssimilation();
 
-        public override void OnUseCard()
-        {
-            owner.view.SetAltSkin("BlackSilence4");
-        }
+        public override void OnUseCard() => owner.view.SetAltSkin("BlackSilence4");
 
         public override void OnStartBattle()
         {
+            _used = true;
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             ChangeToBlackSilenceEgoMap(owner);
         }
@@ -34,9 +30,12 @@ namespace Roland_Re21341.Cards
             }, owner.faction);
         }
 
-        public override void OnEndBattle()
+        public override void OnEndBattle() => owner.view.SetAltSkin("BlackSilence3");
+        public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
         {
-            owner.view.SetAltSkin("BlackSilence3");
+            if (!_used) return;
+            _used = false;
+            MapUtil.ReturnFromEgoMap("BlackSilenceMassEgo_Re21341",0);
         }
     }
 }

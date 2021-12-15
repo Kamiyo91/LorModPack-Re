@@ -42,8 +42,6 @@ namespace Util_Re21341.BaseClass
             }
             if (!string.IsNullOrEmpty(_model.SkinName)) _model.Owner.view.SetAltSkin(_model.SkinName);
             _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
-            _model.Owner.breakDetail.ResetGauge();
-            _model.Owner.breakDetail.RecoverBreakLife(1, true);
             _model.Owner.cardSlotDetail.RecoverPlayPoint(_model.Owner.cardSlotDetail.GetMaxPlayPoint());
             if (_model.HasEgoAttack) _model.Owner.personalEgoDetail.AddCard(_model.EgoAttackCardId);
             if (_model.RefreshUI) UnitUtil.RefreshCombatUI();
@@ -58,9 +56,10 @@ namespace Util_Re21341.BaseClass
             if (!_model.HasEgo || _model.EgoCardId != cardId) return;
             if (_model.EgoCardId != null) _model.Owner.personalEgoDetail.RemoveCard(_model.EgoCardId);
             if (_model.HasAdditionalPassive) _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
+            _model.Owner.breakDetail.ResetGauge();
+            _model.Owner.breakDetail.RecoverBreakLife(1, true);
             _model.EgoActivated = true;
         }
-
         public virtual void DoNotChangeSkinOnEgo() => _model.SkinName = "";
         public virtual bool CheckSkinChangeIsActive() => !string.IsNullOrEmpty(_model.SkinName);
         public virtual bool CheckOnDieAtFightEnd() => _model.DieOnFightEnd;

@@ -11,6 +11,7 @@ namespace Mio_Re21341.Cards
     public class DiceCardSelfAbility_MioMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChanged;
+        private bool _used;
 
         public override bool OnChooseCard(BattleUnitModel owner) =>
             owner.emotionDetail.EmotionLevel >= 5 &&
@@ -25,6 +26,7 @@ namespace Mio_Re21341.Cards
 
         public override void OnStartBattle()
         {
+            _used = true;
             if (owner.faction != Faction.Player ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             ChangeToMioEgoMap();
@@ -40,7 +42,12 @@ namespace Mio_Re21341.Cards
                 Component = new Mio_Re21341MapManager(),
                 Bgy = 0.2f
             });
-
+        public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            if (!_used) return;
+            _used = false;
+            MapUtil.ReturnFromEgoMap("Mio_Re21341", 2);
+        }
         public override void OnApplyCard()
         {
             if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||

@@ -65,10 +65,27 @@ namespace LoRModPack_Re21341.Harmony
             switch (__instance.id.id)
             {
                 case 10000001:
+                case 10000002:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
+                    return;
+                case 10000003:
+                    __result = ModParameters.ArtWorks["MioDefault_Re21341"];
+                    return;
+                case 10000004:
+                    __result = ModParameters.ArtWorks["KamiyoDefault_Re21341"];
+                    return;
+                case 10000005:
+                    __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
                     return;
                 case 10000006:
                     __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
+                    return;
+                case 10000007:
+                case 10000008:
+                case 10000009:
+                case 10000010:
+                case 10000011:
+                    __result = ModParameters.ArtWorks["FragmentDefault_Re21341"];
                     return;
                 default:
                     return;
@@ -80,10 +97,27 @@ namespace LoRModPack_Re21341.Harmony
             switch (__instance.BookId.id)
             {
                 case 10000001:
+                case 10000002:
                     __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
+                    return;
+                case 10000003:
+                    __result = ModParameters.ArtWorks["MioDefault_Re21341"];
+                    return;
+                case 10000004:
+                    __result = ModParameters.ArtWorks["KamiyoDefault_Re21341"];
+                    return;
+                case 10000005:
+                    __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
                     return;
                 case 10000006:
                     __result = ModParameters.ArtWorks["AngelaDefault_Re21341"];
+                    return;
+                case 10000007:
+                case 10000008:
+                case 10000009:
+                case 10000010:
+                case 10000011:
+                    __result = ModParameters.ArtWorks["FragmentDefault_Re21341"];
                     return;
                 default:
                     return;
@@ -118,10 +152,11 @@ namespace LoRModPack_Re21341.Harmony
             {
                 __instance.customizeData.SetCustomData(false);
                 __instance.EquipCustomCoreBook(null);
-                ModParameters.DynamicNames.TryGetValue(newBook.ClassInfo.id.id,out var name);
+                ModParameters.DynamicNames.TryGetValue(newBook.ClassInfo.id.id, out var name);
                 __instance.SetTempName(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals(name)).Value.Name);
             }
-            else
+            else if(__instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.EquipPageWithOriginalFace.Contains(__instance.bookItem.ClassInfo.id.id))
             {
                 __instance.customizeData.SetCustomData(true);
                 __instance.ResetTempName();
@@ -149,7 +184,7 @@ namespace LoRModPack_Re21341.Harmony
             image2.enabled = true;
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = "Kamiyo's Mod Pack";
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value.Name;
         }
 
         public static void UISettingInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
@@ -165,7 +200,7 @@ namespace LoRModPack_Re21341.Harmony
             image2.enabled = true;
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = "Kamiyo's Mod Pack";
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value.Name;
         }
 
         public static void UISpriteDataManager_GetStoryIcon(UISpriteDataManager __instance,
@@ -182,14 +217,6 @@ namespace LoRModPack_Re21341.Harmony
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNames.Contains(charName)) return true;
-            switch (charName)
-            {
-                case "BlackSilence3" when __instance.model.passiveDetail.HasPassive<PassiveAbility_BlackSilenceEgoMask_Re21341>():
-                    __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
-                    return true;
-                case "BlackSilence3":
-                    return true;
-            }
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;

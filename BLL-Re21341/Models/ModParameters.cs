@@ -18,7 +18,7 @@ namespace BLL_Re21341.Models
         public static readonly List<int> KamiyoCardList = new List<int>{19,20,21,22};
         public static readonly List<int> MioCardList = new List<int>{12,13,14,15};
         public static readonly List<int> HayateCardList = new List<int>{23,24,25,26,27};
-        public static readonly List<int> UntransferablePassives = new List<int> {6,8,12,20,23,24,25};
+        public static readonly List<int> UntransferablePassives = new List<int> {6,8,12,20,23,24,25,35};
         public static readonly List<int> EquipPageWithOriginalFace = new List<int> { 10000006 };
         public static readonly List<int> WithoutCustomSkins = new List<int> { 10000006 };
         public static readonly List<int> NotEquipPages = new List<int> { 10000007,10000008, 10000009, 10000010, 10000011 };
