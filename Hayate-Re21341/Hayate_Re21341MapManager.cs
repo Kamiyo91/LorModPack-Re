@@ -7,10 +7,10 @@ namespace Hayate_Re21341
     {
         protected override string[] CustomBGMs => new[] { "HayatePhase1_Re21341.mp3" };
 
-        public override void InitializeMap()
+        public override void EnableMap(bool b)
         {
-            base.InitializeMap();
-            sephirahColor = Color.yellow;
+            sephirahColor = Color.black;
+            base.EnableMap(b);
         }
     }
 }

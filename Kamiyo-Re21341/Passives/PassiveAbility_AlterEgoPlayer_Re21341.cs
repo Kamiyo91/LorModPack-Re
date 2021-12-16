@@ -84,6 +84,7 @@ namespace Kamiyo_Re21341.Passives
                 _util.DoNotChangeSkinOnEgo();
             else
                 UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+            UnitUtil.TestingUnitValues();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -103,18 +104,10 @@ namespace Kamiyo_Re21341.Passives
             _util.EgoActive();
         }
 
-        public override void OnRoundEnd_before()
+        public override void OnKill(BattleUnitModel target)
         {
-            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 &&
-                _util.CheckOnDieAtFightEnd()) owner.Die();
+            if(_util.CheckOnDieAtFightEnd() && target.passiveDetail.PassiveList.Exists(x => x.id == new LorId(ModParameters.PackageId,18))) owner.Die();
         }
-
-        public override void OnRoundStartAfter()
-        {
-            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 &&
-                _util.CheckOnDieAtFightEnd()) owner.Die();
-        }
-
         public void SetDieAtEnd()
         {
             _util.TurnOnDieAtFightEnd();

@@ -7,10 +7,10 @@ namespace Mio_Re21341
     {
         protected override string[] CustomBGMs => new[] { "MioPhase1_Re21341.mp3" };
 
-        public override void InitializeMap()
+        public override void EnableMap(bool b)
         {
-            base.InitializeMap();
-            sephirahColor = Color.blue;
+            sephirahColor = Color.black;
+            base.EnableMap(b);
         }
     }
 }

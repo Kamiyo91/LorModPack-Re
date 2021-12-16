@@ -7,10 +7,10 @@ namespace Kamiyo_Re21341.MapManager
     {
         protected override string[] CustomBGMs => new[] { "KamiyoPhase1_Re21341.mp3" };
 
-        public override void InitializeMap()
+        public override void EnableMap(bool b)
         {
-            base.InitializeMap();
             sephirahColor = Color.black;
+            base.EnableMap(b);
         }
     }
 }

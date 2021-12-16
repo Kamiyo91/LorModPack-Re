@@ -81,6 +81,8 @@ namespace Hayate_Re21341.MechUtil
             UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, false);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341());
             _model.Owner.SetHp(_model.SecondMechHp);
+            _model.Owner.breakDetail.ResetGauge();
+            _model.Owner.breakDetail.RecoverBreakLife(1, true);
         }
 
         public override void ExhaustEgoAttackCards()
