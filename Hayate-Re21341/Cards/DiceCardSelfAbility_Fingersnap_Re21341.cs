@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hayate_Re21341.Buffs;
+﻿using Hayate_Re21341.Buffs;
 
 namespace Hayate_Re21341.Cards
 {
@@ -13,8 +8,8 @@ namespace Hayate_Re21341.Cards
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return owner.emotionDetail.EmotionLevel >= 5 && owner.bufListDetail.GetActivatedBufList()
-                .Find(x => x is BattleUnitBuf_EntertainMe_Re21341).stack >= 40;
+            return owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341).stack >=
+                   40;
         }
 
         public override void OnStartBattle()
@@ -24,6 +19,7 @@ namespace Hayate_Re21341.Cards
                 _motionChange = false;
                 owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
             }
+
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Enemy))
                 if (unit.MaxHp < 250)
                 {

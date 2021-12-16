@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
+using Mio_Re21341.Buffs;
 using Util_Re21341;
 
 namespace Mio_Re21341.Cards
@@ -13,9 +9,11 @@ namespace Mio_Re21341.Cards
         private bool _motionChanged;
         private bool _used;
 
-        public override bool OnChooseCard(BattleUnitModel owner) =>
-            owner.emotionDetail.EmotionLevel >= 5 &&
-            owner.bufListDetail.HasAssimilation();
+        public override bool OnChooseCard(BattleUnitModel owner)
+        {
+            return owner.bufListDetail.HasBuf<BattleUnitBuf_GodAuraRelease_Re21341>() ||
+                   owner.bufListDetail.HasBuf<BattleUnitBuf_CorruptedGodAuraRelease_Re21341>();
+        }
 
         public override void OnEndAreaAttack()
         {
@@ -32,7 +30,8 @@ namespace Mio_Re21341.Cards
             ChangeToMioEgoMap();
         }
 
-        private static void ChangeToMioEgoMap() =>
+        private static void ChangeToMioEgoMap()
+        {
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Mio_Re21341",
@@ -42,12 +41,15 @@ namespace Mio_Re21341.Cards
                 Component = new Mio_Re21341MapManager(),
                 Bgy = 0.2f
             });
+        }
+
         public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
         {
             if (!_used) return;
             _used = false;
             MapUtil.ReturnFromEgoMap("Mio_Re21341", 2);
         }
+
         public override void OnApplyCard()
         {
             if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||

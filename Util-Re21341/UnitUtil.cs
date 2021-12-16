@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using HarmonyLib;
@@ -38,18 +36,19 @@ namespace Util_Re21341
             owner.view.ChangeSkin(owner.UnitData.unitData.CustomBookItem.GetCharacterName());
             return true;
         }
+
         public static void VipDeath(BattleUnitModel owner)
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)
                          .Where(x => x != owner))
-            {
                 unit.Die();
-            }
         }
+
         public static void ReturnToTheOriginalSkin(BattleUnitModel owner, string charName)
         {
             owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
         }
+
         public static void RemoveImmortalBuff(BattleUnitModel owner)
         {
             if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_ImmortalUntilRoundEnd_Re21341) is
@@ -72,13 +71,17 @@ namespace Util_Re21341
 
         public static void ChangeCardCostByValue(BattleUnitModel owner, int changeValue, int baseValue)
         {
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().Where(x => x.GetOriginCost() < baseValue))
+            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
+                         .Where(x => x.GetOriginCost() < baseValue))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(changeValue);
             }
+
+            if (owner.faction == Faction.Enemy) owner.allyCardDetail.DrawCards(owner.UnitData.unitData.GetStartDraw());
         }
-        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp,bool recoverLight)
+
+        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight)
         {
             if (owner.IsDead()) owner.Revive(hp);
             else owner.RecoverHP(hp);
@@ -87,7 +90,7 @@ namespace Util_Re21341
             owner.breakDetail.ResetGauge();
             owner.breakDetail.nextTurnBreak = false;
             owner.breakDetail.RecoverBreakLife(1, true);
-            if(recoverLight)owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
+            if (recoverLight) owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
         }
 
         public static BattleUnitModel AddOriginalPlayerUnitPlayerSide(int index, int emotionLevel)
@@ -145,6 +148,7 @@ namespace Util_Re21341
         {
             return unit.emotionDetail.PassiveList.ToList();
         }
+
         public static BattleUnitModel AddNewUnitPlayerSide(StageLibraryFloorModel floor, UnitModel unit)
         {
             var unitData = new UnitDataModel(new LorId(ModParameters.PackageId, unit.Id), floor.Sephirah);
@@ -171,6 +175,7 @@ namespace Util_Re21341
             allyUnit.OnWaveStart();
             return allyUnit;
         }
+
         public static void TestingUnitValues()
         {
             var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
@@ -267,6 +272,7 @@ namespace Util_Re21341
                     SingletonBehavior<BattleManagerUI>.Instance.negativeCoinColor);
                 txtAbnormalityDlg.color = SingletonBehavior<BattleManagerUI>.Instance.negativeTextColor;
             }
+
             var canvas = (Canvas)typeof(BattleDialogUI).GetField("_canvas",
                 AccessTools.all)?.GetValue(instance);
             canvas.enabled = true;
@@ -339,6 +345,7 @@ namespace Util_Re21341
                 ? new List<string> { "LoRModPage_Re21341", "SamuraiPage_Re21341" }
                 : new List<string> { "LoRModPage_Re21341" };
         }
+
         private static DiceCardXmlInfo CardOptionChange(DiceCardXmlInfo cardXml, List<CardOption> option,
             bool keywordRequired, List<string> keywords,
             string skinName = "", string mapName = "", int skinHeight = 0)
@@ -398,13 +405,13 @@ namespace Util_Re21341
                 SetBaseKeywordCard(key, ref dictionary, ref list);
             }
         }
+
         public static void ChangePassiveItem()
         {
-            foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive => passive.id.packageId == ModParameters.PackageId &&
+            foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive =>
+                         passive.id.packageId == ModParameters.PackageId &&
                          ModParameters.UntransferablePassives.Contains(passive.id.id)))
-            {
                 passive.CanGivePassive = false;
-            }
         }
     }
 }

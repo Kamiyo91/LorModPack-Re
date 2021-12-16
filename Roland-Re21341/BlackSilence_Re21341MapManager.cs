@@ -6,6 +6,7 @@ namespace Roland_Re21341
     {
         private GameObject _aura;
         private BlackSilence4thMapManager _mapGameObject;
+
         public override void InitializeMap()
         {
             base.InitializeMap();

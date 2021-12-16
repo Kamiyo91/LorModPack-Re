@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
-using Util_Re21341;
+﻿using BLL_Re21341.Models;
 
 namespace Angela_Re21341.Passives
 {
@@ -72,8 +66,14 @@ namespace Angela_Re21341.Passives
             owner.personalEgoDetail.AddCard(9910019);
         }
 
-        public override void OnLevelUpEmotion() => AddCardOnLvUpEmotion();
+        public override void OnLevelUpEmotion()
+        {
+            AddCardOnLvUpEmotion();
+        }
 
-        public override void OnBattleEnd() => owner.UnitData.unitData.battleDialogModel = _dlg;
+        public override void OnBattleEnd()
+        {
+            owner.UnitData.unitData.battleDialogModel = _dlg;
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using OldSamurai_Re21341.MapManager;
 using Util_Re21341;
@@ -9,8 +8,11 @@ namespace OldSamurai_Re21341.Buffs
 {
     public class BattleUnitBuf_OldSamuraiEgo_Re21341 : BattleUnitBuf
     {
-        private readonly StageLibraryFloorModel _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+        private readonly StageLibraryFloorModel
+            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+
         public override bool isAssimilation => true;
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
@@ -33,10 +35,7 @@ namespace OldSamurai_Re21341.Buffs
         public override void OnRoundStart()
         {
             CustomMapHandler.EnforceTheme();
-            if (BattleObjectManager.instance.GetAliveList(Faction.Player).Count <= 1)
-            {
-                RemoveSamuraiEgoMap();
-            }
+            if (BattleObjectManager.instance.GetAliveList(Faction.Player).Count <= 1) RemoveSamuraiEgoMap();
         }
 
         private static void ChangeToSamuraiEgoMap()
@@ -50,6 +49,7 @@ namespace OldSamurai_Re21341.Buffs
                 Bgy = 0.2f
             });
         }
+
         private void RemoveSamuraiEgoMap()
         {
             Destroy();

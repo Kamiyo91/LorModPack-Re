@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hayate_Re21341.Cards
+﻿namespace Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341 : DiceCardSelfAbilityBase
     {
@@ -14,8 +8,14 @@ namespace Hayate_Re21341.Cards
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.Die();
         }
 
-        public override void OnApplyCard() => owner.view.charAppearance.ChangeMotion(ActionDetail.Aim);
+        public override void OnApplyCard()
+        {
+            owner.view.charAppearance.ChangeMotion(ActionDetail.Aim);
+        }
 
-        public override void OnReleaseCard() => owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
+        public override void OnReleaseCard()
+        {
+            owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
+        }
     }
 }

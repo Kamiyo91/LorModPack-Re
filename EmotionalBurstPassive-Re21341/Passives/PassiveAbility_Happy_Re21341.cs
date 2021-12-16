@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using Util_Re21341;
 
@@ -13,7 +10,10 @@ namespace EmotionalBurstPassive_Re21341.Passives
         private static readonly Random RndChance = new Random();
         private int _stack;
 
-        public int GetStack() => _stack;
+        public int GetStack()
+        {
+            return _stack;
+        }
 
         public void ChangeNameAndSetStacks(int stack)
         {
@@ -47,7 +47,10 @@ namespace EmotionalBurstPassive_Re21341.Passives
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Quickness, _stack);
         }
 
-        public void AfterInit() => OnRoundStartAfter();
+        public void AfterInit()
+        {
+            OnRoundStartAfter();
+        }
 
         public void InstantIncrease()
         {
@@ -68,7 +71,10 @@ namespace EmotionalBurstPassive_Re21341.Passives
                 : new DiceStatBonus { max = value });
         }
 
-        public override void OnRoundEnd() => ChangeAllCoinsToPositiveType();
+        public override void OnRoundEnd()
+        {
+            ChangeAllCoinsToPositiveType();
+        }
 
         private void ChangeAllCoinsToPositiveType()
         {

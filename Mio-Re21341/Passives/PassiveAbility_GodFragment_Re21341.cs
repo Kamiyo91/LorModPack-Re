@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
@@ -16,10 +13,12 @@ namespace Mio_Re21341.Passives
     public class PassiveAbility_GodFragment_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+
         public override void OnBattleEnd()
         {
             if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
         }
+
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel
@@ -42,45 +41,74 @@ namespace Mio_Re21341.Passives
                 EgoAbColorColor = AbColorType.Positive,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive1_Re21341")).Value.Desc},
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive2_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "Mio",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive1_Re21341"))
+                            .Value.Desc
+                    },
+                    new AbnormalityCardDialog
+                    {
+                        id = "Mio",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioSurvive2_Re21341"))
+                            .Value.Desc
+                    }
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive1_Re21341")).Value.Desc},
-                    new AbnormalityCardDialog {id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive2_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "Mio",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive1_Re21341"))
+                            .Value.Desc
+                    },
+                    new AbnormalityCardDialog
+                    {
+                        id = "Mio",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive2_Re21341"))
+                            .Value.Desc
+                    }
                 }
             });
             if (UnitUtil.CheckSkinProjection(owner))
-            {
                 _util.DoNotChangeSkinOnEgo();
-            }
             else
-            {
                 UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
-            }
         }
+
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.SurviveCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
+
         public override void OnStartBattle()
         {
             UnitUtil.RemoveImmortalBuff(owner);
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
             _util.EgoActive();
         }
+
         public void ForcedEgo()
         {
             _util.SetVipUnit();
-            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>{ new AbnormalityCardDialog { id = "Mio", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value.Desc } });
+            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>
+            {
+                new AbnormalityCardDialog
+                {
+                    id = "Mio",
+                    dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value
+                        .Desc
+                }
+            });
             _util.ForcedEgo();
             owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 9));
         }
+
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());

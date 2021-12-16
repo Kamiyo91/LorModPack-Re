@@ -28,8 +28,8 @@ namespace EmotionalBurstPassive_Re21341
         {
             if (type != EmotionBufEnum.Neutral)
                 if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Neutral_Re21341) is
-                PassiveAbility_Neutral_Re21341 passiveAbilityNeutral)
-                unit.passiveDetail.DestroyPassive(passiveAbilityNeutral);
+                    PassiveAbility_Neutral_Re21341 passiveAbilityNeutral)
+                    unit.passiveDetail.DestroyPassive(passiveAbilityNeutral);
 
             if (type != EmotionBufEnum.Happy)
                 if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Happy_Re21341) is

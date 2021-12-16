@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using OldSamurai_Re21341.Buffs;
+﻿using OldSamurai_Re21341.Buffs;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
 
@@ -10,7 +9,7 @@ namespace OldSamurai_Re21341.Passives
         private void AddGhostUnitBuffs()
         {
             owner.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_LibrarianAura());
-            if (owner.faction == Faction.Player) 
+            if (owner.faction == Faction.Player)
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_Re21341());
             else
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_GhostSamuraiEnemy_Re21341());
@@ -31,7 +30,10 @@ namespace OldSamurai_Re21341.Passives
 
         public override void OnRoundEndTheLast_ignoreDead()
         {
-            if (owner.IsDead() && owner.faction == Faction.Enemy && BattleObjectManager.instance.GetAliveList(Faction.Enemy).Exists(x => x.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgoNpc_Re21341>())) UnitUtil.UnitReviveAndRecovery(owner, 25,false);
+            if (owner.IsDead() && owner.faction == Faction.Enemy && BattleObjectManager.instance
+                    .GetAliveList(Faction.Enemy)
+                    .Exists(x => x.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgoNpc_Re21341>()))
+                UnitUtil.UnitReviveAndRecovery(owner, 25, false);
         }
 
         public override void OnWaveStart()

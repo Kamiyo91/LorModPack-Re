@@ -11,7 +11,6 @@ namespace Kamiyo_Re21341.MapManager
         {
             base.InitializeMap();
             sephirahColor = Color.black;
-
         }
     }
 }

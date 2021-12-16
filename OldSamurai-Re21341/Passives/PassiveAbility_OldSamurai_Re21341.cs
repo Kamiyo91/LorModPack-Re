@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
 using OldSamurai_Re21341.Buffs;
 using Util_Re21341;
@@ -11,6 +9,7 @@ namespace OldSamurai_Re21341.Passives
     public class PassiveAbility_OldSamurai_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel
@@ -20,9 +19,10 @@ namespace OldSamurai_Re21341.Passives
                 IsSummonEgo = true,
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgo_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 8),
-                SecondaryEgoCardId = new LorId(ModParameters.PackageId,901)
+                SecondaryEgoCardId = new LorId(ModParameters.PackageId, 901)
             });
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -33,12 +33,16 @@ namespace OldSamurai_Re21341.Passives
         {
             _util.OnUseExpireCard(curCard.card.GetID());
         }
+
         public override void OnDie()
         {
             if (!owner.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgo_Re21341>()) return;
             UnitUtil.VipDeath(owner);
         }
 
-        public void ForcedEgo() => _util.ForcedEgo();
+        public void ForcedEgo()
+        {
+            _util.ForcedEgo();
+        }
     }
 }

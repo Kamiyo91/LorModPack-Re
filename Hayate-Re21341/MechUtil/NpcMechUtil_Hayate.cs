@@ -1,10 +1,6 @@
 ﻿using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
-using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
-using HarmonyLib;
 using Hayate_Re21341.Buffs;
-using UnityEngine;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 using Util_Re21341.CommonBuffs;
@@ -15,17 +11,20 @@ namespace Hayate_Re21341.MechUtil
     {
         private readonly BattleUnitBuf_EntertainMe_Re21341 _buf;
         private readonly NpcMechUtil_HayateModel _model;
+
         public NpcMechUtil_Hayate(NpcMechUtil_HayateModel model) : base(model)
         {
             _model = model;
             _buf = new BattleUnitBuf_EntertainMe_Re21341();
             model.Owner.bufListDetail.AddBufWithoutDuplication(_buf);
         }
+
         public override void ForcedEgo()
         {
             base.ForcedEgo();
             _buf.stack = 40;
         }
+
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
@@ -37,15 +36,18 @@ namespace Hayate_Re21341.MechUtil
                 SetOneTurnCard(true);
                 return;
             }
+
             if (!_model.MassAttackStartCount || _buf.stack < 40 || _model.OneTurnCard)
                 return;
             origin = BattleDiceCardModel.CreatePlayingCard(
                 ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
             SetOneTurnCard(true);
         }
+
         public override void OnUseCardResetCount(BattlePlayingCardDataInUnitModel curCard)
         {
-            if (_model.SecondaryMechCard != curCard.card.GetID() && _model.LorIdEgoMassAttack != curCard.card.GetID()) return;
+            if (_model.SecondaryMechCard != curCard.card.GetID() &&
+                _model.LorIdEgoMassAttack != curCard.card.GetID()) return;
             if (_model.SecondaryMechCard == curCard.card.GetID())
             {
                 _model.FinalMechStart = false;
@@ -57,6 +59,7 @@ namespace Hayate_Re21341.MechUtil
                 _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
                 return;
             }
+
             _model.FingersnapTarget = curCard.target;
             _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);
             _buf.stack = 0;
@@ -69,22 +72,22 @@ namespace Hayate_Re21341.MechUtil
             _model.FingersnapTarget = null;
             UnitUtil.RefreshCombatUI();
         }
+
         public void SecondMechHpCheck(int dmg)
         {
             if (_model.Owner.hp - dmg > _model.SecondMechHp || !_model.SecondMechHpExist) return;
             _model.SecondMechHpExist = false;
             _model.FinalMechStart = true;
-            UnitUtil.UnitReviveAndRecovery(_model.Owner,0,false);
+            UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, false);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341());
             _model.Owner.SetHp(_model.SecondMechHp);
         }
+
         public override void ExhaustEgoAttackCards()
         {
-            var cards = _model.Owner.allyCardDetail.GetAllDeck().Where(x => x.GetID() == _model.LorIdEgoMassAttack || x.GetID() == _model.SecondaryMechCard);
-            foreach (var card in cards)
-            {
-                _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
-            }
+            var cards = _model.Owner.allyCardDetail.GetAllDeck().Where(x =>
+                x.GetID() == _model.LorIdEgoMassAttack || x.GetID() == _model.SecondaryMechCard);
+            foreach (var card in cards) _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
         }
     }
 }

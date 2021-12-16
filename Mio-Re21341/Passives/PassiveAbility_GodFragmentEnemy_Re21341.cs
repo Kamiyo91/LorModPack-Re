@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
@@ -16,7 +13,12 @@ namespace Mio_Re21341.Passives
     public class PassiveAbility_GodFragmentEnemy_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
-        public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+
+        public override void OnBattleEnd()
+        {
+            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+        }
+
         public override void OnWaveStart()
         {
             UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
@@ -42,25 +44,43 @@ namespace Mio_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "MioEnemy",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341"))
+                            .Value.Desc
+                    }
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "MioEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value.Desc},
+                    new AbnormalityCardDialog
+                    {
+                        id = "MioEnemy",
+                        dialog = ModParameters.EffectTexts
+                            .FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value.Desc
+                    }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId,900)
+                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900)
             });
         }
+
+        public override int SpeedDiceNumAdder()
+        {
+            return 2;
+        }
+
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.MechHpCheck(dmg);
             _util.SurviveCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
+
         public override void OnStartBattle()
         {
             UnitUtil.RemoveImmortalBuff(owner);
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -73,15 +93,31 @@ namespace Mio_Re21341.Passives
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
-        public void SetCountToMax() => _util.SetCounter(4);
-        public void ActiveMassAttackCount() => _util.SetMassAttack(true);
-        public void ForcedEgo() => _util.ForcedEgo();
+
+        public void SetCountToMax()
+        {
+            _util.SetCounter(4);
+        }
+
+        public void ActiveMassAttackCount()
+        {
+            _util.SetMassAttack(true);
+        }
+
+        public void ForcedEgo()
+        {
+            _util.ForcedEgo();
+        }
+
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
             _util.OnSelectCardPutMassAttack(ref origin);
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            _util.OnUseCardResetCount(curCard);
+        }
     }
 }

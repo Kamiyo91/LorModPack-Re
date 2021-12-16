@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hayate_Re21341.Passives
+﻿namespace Hayate_Re21341.Passives
 {
     public class PassiveAbility_HighDivinity_Re21341 : PassiveAbilityBase
     {

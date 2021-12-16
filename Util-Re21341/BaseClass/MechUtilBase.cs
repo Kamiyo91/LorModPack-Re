@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
 using Util_Re21341.CommonBuffs;
@@ -26,11 +22,16 @@ namespace Util_Re21341.BaseClass
             _model.Survive = false;
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SetHp);
-            UnitUtil.UnitReviveAndRecovery(_model.Owner,0,_model.RecoverLightOnSurvive);
+            UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, _model.RecoverLightOnSurvive);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmunityToStatusAliment_Re21341());
-            if (_model.HasSurviveAbDialog) UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.SurviveAbDialogList, _model.SurviveAbDialogColor);
-            if (_model.NearDeathBuffExist) _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.NearDeathBuffType));
+            if (_model.HasSurviveAbDialog)
+                UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.SurviveAbDialogList,
+                    _model.SurviveAbDialogColor);
+            if (_model.NearDeathBuffExist)
+                _model.Owner.bufListDetail.AddBufWithoutDuplication(
+                    (BattleUnitBuf)Activator.CreateInstance(_model.NearDeathBuffType));
         }
+
         public virtual void EgoActive()
         {
             if (_model.Owner.bufListDetail.HasAssimilation()) return;
@@ -40,13 +41,17 @@ namespace Util_Re21341.BaseClass
                 _model.Owner.personalEgoDetail.AddCard(_model.SecondaryEgoCardId);
                 return;
             }
+
             if (!string.IsNullOrEmpty(_model.SkinName)) _model.Owner.view.SetAltSkin(_model.SkinName);
-            _model.Owner.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(
+                (BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
             _model.Owner.cardSlotDetail.RecoverPlayPoint(_model.Owner.cardSlotDetail.GetMaxPlayPoint());
             if (_model.HasEgoAttack) _model.Owner.personalEgoDetail.AddCard(_model.EgoAttackCardId);
             if (_model.RefreshUI) UnitUtil.RefreshCombatUI();
-            if (_model.HasEgoAbDialog) UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.EgoAbDialogList, _model.EgoAbColorColor);
+            if (_model.HasEgoAbDialog)
+                UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.EgoAbDialogList, _model.EgoAbColorColor);
         }
+
         public virtual void OnUseExpireCard(LorId cardId)
         {
             if (_model.LorIdArray != null && _model.LorIdArray.Contains(cardId))
@@ -60,14 +65,50 @@ namespace Util_Re21341.BaseClass
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
             _model.EgoActivated = true;
         }
-        public virtual void DoNotChangeSkinOnEgo() => _model.SkinName = "";
-        public virtual bool CheckSkinChangeIsActive() => !string.IsNullOrEmpty(_model.SkinName);
-        public virtual bool CheckOnDieAtFightEnd() => _model.DieOnFightEnd;
-        public virtual void TurnOnDieAtFightEnd() => _model.DieOnFightEnd = true;
-        public virtual void TurnEgoAbDialogOff() => _model.HasEgoAbDialog = false;
-        public virtual bool EgoCheck() => _model.EgoActivated;
-        public virtual void ForcedEgo() => _model.EgoActivated = true;
-        public virtual void SetVipUnit() => _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
-        public virtual void ChangeEgoAbDialog(List<AbnormalityCardDialog> value) => _model.EgoAbDialogList = value;
+
+        public virtual void DoNotChangeSkinOnEgo()
+        {
+            _model.SkinName = "";
+        }
+
+        public virtual bool CheckSkinChangeIsActive()
+        {
+            return !string.IsNullOrEmpty(_model.SkinName);
+        }
+
+        public virtual bool CheckOnDieAtFightEnd()
+        {
+            return _model.DieOnFightEnd;
+        }
+
+        public virtual void TurnOnDieAtFightEnd()
+        {
+            _model.DieOnFightEnd = true;
+        }
+
+        public virtual void TurnEgoAbDialogOff()
+        {
+            _model.HasEgoAbDialog = false;
+        }
+
+        public virtual bool EgoCheck()
+        {
+            return _model.EgoActivated;
+        }
+
+        public virtual void ForcedEgo()
+        {
+            _model.EgoActivated = true;
+        }
+
+        public virtual void SetVipUnit()
+        {
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
+        }
+
+        public virtual void ChangeEgoAbDialog(List<AbnormalityCardDialog> value)
+        {
+            _model.EgoAbDialogList = value;
+        }
     }
 }

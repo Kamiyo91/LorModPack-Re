@@ -1,24 +1,28 @@
-﻿using Battle.CreatureEffect;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 using HarmonyLib;
 using Sound;
-using UnityEngine;
 
 namespace Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_GodAuraRelease_Re21341 : BattleUnitBuf
     {
-        public BattleUnitBuf_GodAuraRelease_Re21341() => stack = 0;
+        public BattleUnitBuf_GodAuraRelease_Re21341()
+        {
+            stack = 0;
+        }
+
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "GodAura_Re21341";
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior) =>
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
                     power = 1
                 });
+        }
 
         public override void Init(BattleUnitModel owner)
         {
@@ -36,7 +40,10 @@ namespace Mio_Re21341.Buffs
             SoundEffectPlayer.PlaySound("Creature/Greed_MakeDiamond");
         }
 
-        public override void OnRoundEnd() => RecoverHpAndStagger();
+        public override void OnRoundEnd()
+        {
+            RecoverHpAndStagger();
+        }
 
         private void RecoverHpAndStagger()
         {

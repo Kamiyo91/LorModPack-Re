@@ -2,13 +2,25 @@
 {
     public class BattleUnitBuf_ImmortalForTestPurpose_Re21341 : BattleUnitBuf
     {
-        public override bool IsImmortal() => true;
+        public override bool IsImmortal()
+        {
+            return true;
+        }
 
-        public override bool IsInvincibleHp(BattleUnitModel attacker) => true;
+        public override bool IsInvincibleHp(BattleUnitModel attacker)
+        {
+            return true;
+        }
 
-        public override bool IsInvincibleBp(BattleUnitModel attacker) => true;
+        public override bool IsInvincibleBp(BattleUnitModel attacker)
+        {
+            return true;
+        }
 
-        public override void OnRoundStart() => _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
+        public override void OnRoundStart()
+        {
+            _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
+        }
         //public override void BeforeRollDice(BattleDiceBehavior behavior) =>
         //    behavior.ApplyDiceStatBonus(
         //        new DiceStatBonus

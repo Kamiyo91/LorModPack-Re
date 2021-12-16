@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 
 namespace Util_Re21341.CommonPassives
 {

@@ -6,13 +6,13 @@ using System.Reflection;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
-using Roland_Re21341.Passives;
 using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
 using Workshop;
+using Object = UnityEngine.Object;
 
 namespace LoRModPack_Re21341.Harmony
 {
@@ -59,6 +59,7 @@ namespace LoRModPack_Re21341.Harmony
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
+
         public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
         {
             if (__instance.id.packageId != ModParameters.PackageId) return;
@@ -91,6 +92,7 @@ namespace LoRModPack_Re21341.Harmony
                     return;
             }
         }
+
         public static void BookModel_GetThumbSprite(BookModel __instance, ref Sprite __result)
         {
             if (__instance.BookId.packageId != ModParameters.PackageId) return;
@@ -123,12 +125,16 @@ namespace LoRModPack_Re21341.Harmony
                     return;
             }
         }
+
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
-            if (__instance.BookId.packageId == ModParameters.PackageId && ModParameters.KeypageWithOnlyCardsList.Keys.Contains(__instance.BookId.id))
+            if (__instance.BookId.packageId == ModParameters.PackageId &&
+                ModParameters.KeypageWithOnlyCardsList.Keys.Contains(__instance.BookId.id))
                 ____onlyCards.AddRange(ModParameters.KeypageWithOnlyCardsList
-                    .FirstOrDefault(x => x.Key.Equals(__instance.BookId.id)).Value.Select(id => ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
+                    .FirstOrDefault(x => x.Key.Equals(__instance.BookId.id)).Value.Select(id =>
+                        ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
         }
+
         public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, StageModel stage,
             LibraryFloorModel floor)
         {
@@ -146,28 +152,36 @@ namespace LoRModPack_Re21341.Harmony
                         return;
                 }
         }
-        public static bool UnitDataModel_EquipBook(UnitDataModel __instance, BookModel newBook, bool isEnemySetting, bool force)
+
+        public static bool UnitDataModel_EquipBook(UnitDataModel __instance, BookModel newBook, bool isEnemySetting,
+            bool force)
         {
-            if (!force && newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId && ModParameters.EquipPageWithOriginalFace.Contains(newBook.ClassInfo.id.id) && newBook.owner == null)
+            if (!force && newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.EquipPageWithOriginalFace.Contains(newBook.ClassInfo.id.id) && newBook.owner == null)
             {
                 __instance.customizeData.SetCustomData(false);
                 __instance.EquipCustomCoreBook(null);
                 ModParameters.DynamicNames.TryGetValue(newBook.ClassInfo.id.id, out var name);
                 __instance.SetTempName(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals(name)).Value.Name);
             }
-            else if(__instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
-                ModParameters.EquipPageWithOriginalFace.Contains(__instance.bookItem.ClassInfo.id.id))
+            else if (__instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
+                     ModParameters.EquipPageWithOriginalFace.Contains(__instance.bookItem.ClassInfo.id.id))
             {
                 __instance.customizeData.SetCustomData(true);
                 __instance.ResetTempName();
             }
-            return force || newBook == null || newBook.ClassInfo.id.packageId != ModParameters.PackageId || !ModParameters.NotEquipPages.Contains(newBook.ClassInfo.id.id) || newBook.owner != null;
+
+            return force || newBook == null || newBook.ClassInfo.id.packageId != ModParameters.PackageId ||
+                   !ModParameters.NotEquipPages.Contains(newBook.ClassInfo.id.id) || newBook.owner != null;
         }
-        public static bool UILibrarianAppearanceInfoPanel_OnClickCustomizeButton(UILibrarianAppearanceInfoPanel __instance)
+
+        public static bool UILibrarianAppearanceInfoPanel_OnClickCustomizeButton(
+            UILibrarianAppearanceInfoPanel __instance)
         {
             if (__instance.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
                 !ModParameters.WithoutCustomSkins.Contains(__instance.unitData.bookItem.BookId.id)) return true;
-            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Desc);
+            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts
+                .FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Desc);
             return false;
         }
 
@@ -184,7 +198,8 @@ namespace LoRModPack_Re21341.Harmony
             image2.enabled = true;
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value.Name;
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
+                .Name;
         }
 
         public static void UISettingInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
@@ -200,7 +215,8 @@ namespace LoRModPack_Re21341.Harmony
             image2.enabled = true;
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value.Name;
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
+                .Name;
         }
 
         public static void UISpriteDataManager_GetStoryIcon(UISpriteDataManager __instance,
@@ -214,6 +230,7 @@ namespace LoRModPack_Re21341.Harmony
                 iconGlow = ModParameters.ArtWorks[story]
             };
         }
+
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNames.Contains(charName)) return true;
@@ -225,7 +242,9 @@ namespace LoRModPack_Re21341.Harmony
             var currentMotionDetail = __instance.charAppearance.GetCurrentMotionDetail();
             __instance.DestroySkin();
             var gameObject =
-                UnityEngine.Object.Instantiate(Singleton<AssetBundleManagerRemake>.Instance.LoadCharacterPrefab(charName, "", out var resourceName), __instance.model.view.characterRotationCenter);
+                Object.Instantiate(
+                    Singleton<AssetBundleManagerRemake>.Instance.LoadCharacterPrefab(charName, "",
+                        out var resourceName), __instance.model.view.characterRotationCenter);
             var workshopBookSkinData =
                 Singleton<CustomizingBookSkinLoader>.Instance.GetWorkshopBookSkinData(
                     ModParameters.PackageId, charName);

@@ -1,4 +1,5 @@
 ﻿using BLL_Re21341.Models;
+using Kamiyo_Re21341.Buffs;
 using Kamiyo_Re21341.MapManager;
 using Util_Re21341;
 
@@ -8,7 +9,12 @@ namespace Kamiyo_Re21341.Cards
     {
         private bool _motionChanged;
         private bool _used;
-        public override bool OnChooseCard(BattleUnitModel owner) => owner.emotionDetail.EmotionLevel >= 5 && owner.bufListDetail.HasAssimilation();
+
+        public override bool OnChooseCard(BattleUnitModel owner)
+        {
+            return owner.emotionDetail.EmotionLevel >= 5 &&
+                   owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
+        }
 
         public override void OnEndAreaAttack()
         {
@@ -24,11 +30,13 @@ namespace Kamiyo_Re21341.Cards
             _motionChanged = true;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Penetrate);
         }
+
         public override void OnReleaseCard()
         {
             _motionChanged = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
         }
+
         public override void OnStartBattle()
         {
             _used = true;
@@ -36,13 +44,16 @@ namespace Kamiyo_Re21341.Cards
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             ChangeToKamiyoEgoMap();
         }
+
         public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
         {
             if (!_used) return;
             _used = false;
             MapUtil.ReturnFromEgoMap("Kamiyo2_Re21341", 3);
         }
-        private static void ChangeToKamiyoEgoMap() =>
+
+        private static void ChangeToKamiyoEgoMap()
+        {
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Kamiyo2_Re21341",
@@ -53,5 +64,6 @@ namespace Kamiyo_Re21341.Cards
                 Bgy = 0.475f,
                 Fy = 0.225f
             });
+        }
     }
 }

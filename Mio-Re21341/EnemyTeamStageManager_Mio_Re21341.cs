@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using Mio_Re21341.Passives;
 using Sound;
@@ -10,10 +9,12 @@ namespace Mio_Re21341
 {
     public class EnemyTeamStageManager_Mio_Re21341 : EnemyTeamStageManager
     {
+        private readonly StageLibraryFloorModel
+            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+
         private BattleUnitModel _mainEnemyModel;
-        private bool _phaseChanged;
         private PassiveAbility_GodFragmentEnemy_Re21341 _mioEnemyPassive;
-        private readonly StageLibraryFloorModel _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+        private bool _phaseChanged;
 
         public override void OnWaveStart()
         {
@@ -28,7 +29,10 @@ namespace Mio_Re21341
             _phaseChanged = false;
         }
 
-        public override void OnRoundEndTheLast() => CheckPhase();
+        public override void OnRoundEndTheLast()
+        {
+            CheckPhase();
+        }
 
         public override void OnRoundStart()
         {
@@ -37,8 +41,9 @@ namespace Mio_Re21341
 
         public override void OnRoundStart_After()
         {
-            if(_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
         }
+
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 271 || _phaseChanged) return;
@@ -47,11 +52,12 @@ namespace Mio_Re21341
             _mioEnemyPassive.ActiveMassAttackCount();
             _mioEnemyPassive.SetCountToMax();
             MapUtil.ActiveCreatureBattleCamFilterComponent();
-            UnitUtil.ChangeCardCostByValue(_mainEnemyModel,-2,4);
+            UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             PrepareAllyUnit();
-            CustomMapHandler.SetMapBgm("MioPhase2_Re21341.mp3",true, "Mio_Re21341");
+            CustomMapHandler.SetMapBgm("MioPhase2_Re21341.mp3", true, "Mio_Re21341");
         }
+
         private void PrepareAllyUnit()
         {
             var playerUnitList = BattleObjectManager.instance.GetList(Faction.Player);

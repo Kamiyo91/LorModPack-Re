@@ -14,14 +14,14 @@ namespace OldSamurai_Re21341.Passives
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            if (behavior.abilityList.Exists(x => x is DiceCardAbility_ZeroBlade_Re21341) && owner.passiveDetail.PassiveList.Exists(x => x is PassiveAbility_OldSamurai_Re21341 || x is PassiveAbility_OldSamuraiEnemyDesc_Re21341))
-            {
+            if (behavior.abilityList.Exists(x => x is DiceCardAbility_ZeroBlade_Re21341) &&
+                owner.passiveDetail.PassiveList.Exists(x =>
+                    x is PassiveAbility_OldSamurai_Re21341 || x is PassiveAbility_OldSamuraiEnemyDesc_Re21341))
                 behavior.ApplyDiceStatBonus(
                     new DiceStatBonus
                     {
-                        min = 2,max = 2
+                        min = 2, max = 2
                     });
-            }
         }
 
         public override void OnLoseParrying(BattleDiceBehavior behavior)

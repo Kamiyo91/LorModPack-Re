@@ -6,6 +6,7 @@ namespace OldSamurai_Re21341.Buffs
     public class BattleUnitBuf_OldSamuraiEgoNpc_Re21341 : BattleUnitBuf
     {
         public override bool isAssimilation => true;
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);

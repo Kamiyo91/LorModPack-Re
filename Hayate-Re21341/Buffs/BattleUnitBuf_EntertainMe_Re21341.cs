@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 using HarmonyLib;
 
 namespace Hayate_Re21341.Buffs
@@ -55,10 +50,12 @@ namespace Hayate_Re21341.Buffs
             else
                 stack -= _addValue;
         }
+
         public void SetValue(int value)
         {
             _addValue = value;
         }
+
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
             AddStack();

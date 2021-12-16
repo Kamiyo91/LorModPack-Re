@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sound;
+﻿using Sound;
 using UnityEngine;
 
 namespace Util_Re21341.CommonBuffs
@@ -14,11 +10,13 @@ namespace Util_Re21341.CommonBuffs
         protected override string keywordId => "IndexRelease";
         protected override string keywordIconId => "IndexRelease";
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior) =>
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 power = 1
             });
+        }
 
         public override void Init(BattleUnitModel owner)
         {
@@ -44,6 +42,7 @@ namespace Util_Re21341.CommonBuffs
                     _aura = gameObject;
                 }
             }
+
             var object2 = Resources.Load("Prefabs/Battle/SpecialEffect/IndexRelease_ActivateParticle");
             if (object2 != null)
             {
@@ -56,6 +55,7 @@ namespace Util_Re21341.CommonBuffs
                     gameObject2.transform.localScale = Vector3.one;
                 }
             }
+
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Buf/Effect_Index_Unlock");
         }
     }

@@ -2,6 +2,9 @@
 {
     public class BattleUnitBuf_Immortal_Re21341 : BattleUnitBuf
     {
-        public override bool IsImmortal() => true;
+        public override bool IsImmortal()
+        {
+            return true;
+        }
     }
 }

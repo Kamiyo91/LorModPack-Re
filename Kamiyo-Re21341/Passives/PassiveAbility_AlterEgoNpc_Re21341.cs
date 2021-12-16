@@ -5,7 +5,6 @@ using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
 using LOR_XML;
-using UnityEngine;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -14,7 +13,12 @@ namespace Kamiyo_Re21341.Passives
     public class PassiveAbility_AlterEgoNpc_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
-        public override void OnBattleEnd() => UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+
+        public override void OnBattleEnd()
+        {
+            UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+        }
+
         public override void OnWaveStart()
         {
             UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
@@ -44,14 +48,29 @@ namespace Kamiyo_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemySurvive1_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "KamiyoEnemy",
+                        dialog = ModParameters.EffectTexts
+                            .FirstOrDefault(x => x.Key.Equals("KamiyoEnemySurvive1_Re21341")).Value.Desc
+                    }
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "KamiyoEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value.Desc},
+                    new AbnormalityCardDialog
+                    {
+                        id = "KamiyoEnemy",
+                        dialog = ModParameters.EffectTexts
+                            .FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value.Desc
+                    }
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902)
             });
+        }
+
+        public override int SpeedDiceNumAdder()
+        {
+            return 2;
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -60,10 +79,12 @@ namespace Kamiyo_Re21341.Passives
             _util.SurviveCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
+
         public override void OnStartBattle()
         {
             UnitUtil.RemoveImmortalBuff(owner);
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -76,23 +97,47 @@ namespace Kamiyo_Re21341.Passives
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
-        public void AddAdditionalPassive() => _util.AddAdditionalPassive();
-        public void SetCountToMax() => _util.SetCounter(4);
-        public void ActiveMassAttackCount() => _util.SetMassAttack(true);
-        public void ForcedEgo() => _util.ForcedEgo();
+
+        public void AddAdditionalPassive()
+        {
+            _util.AddAdditionalPassive();
+        }
+
+        public void SetCountToMax()
+        {
+            _util.SetCounter(4);
+        }
+
+        public void ActiveMassAttackCount()
+        {
+            _util.SetMassAttack(true);
+        }
+
+        public void ForcedEgo()
+        {
+            _util.ForcedEgo();
+        }
 
         public void ForcedEgoRestart()
         {
             _util.TurnEgoAbDialogOff();
             _util.ForcedEgo();
         }
+
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
         {
             _util.OnSelectCardPutMassAttack(ref origin);
             return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
         }
-        public override void OnDie() => UnitUtil.VipDeath(owner);
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseCardResetCount(curCard);
+        public override void OnDie()
+        {
+            UnitUtil.VipDeath(owner);
+        }
+
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            _util.OnUseCardResetCount(curCard);
+        }
     }
 }

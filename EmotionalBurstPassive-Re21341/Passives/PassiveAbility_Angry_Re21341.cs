@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using BLL_Re21341.Models;
 using Util_Re21341;
 
@@ -67,7 +63,10 @@ namespace EmotionalBurstPassive_Re21341.Passives
             if (buf != null && buf.stack < 1) owner.bufListDetail.RemoveBuf(buf);
         }
 
-        public void AfterInit() => OnRoundStartAfter();
+        public void AfterInit()
+        {
+            OnRoundStartAfter();
+        }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {

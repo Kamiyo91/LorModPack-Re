@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mio_Re21341.Cards
+﻿namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_SakuraBloom_Re21341 : DiceCardSelfAbilityBase
     {
         private const int Check = 3;
+
         public override void OnUseCard()
         {
             var speedDiceResultValue = card.speedDiceResultValue;

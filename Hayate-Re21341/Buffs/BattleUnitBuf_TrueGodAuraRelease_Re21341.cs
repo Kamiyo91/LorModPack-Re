@@ -7,16 +7,23 @@ namespace Hayate_Re21341.Buffs
 {
     public class BattleUnitBuf_TrueGodAuraRelease_Re21341 : BattleUnitBuf
     {
-        public BattleUnitBuf_TrueGodAuraRelease_Re21341() => stack = 0;
+        public BattleUnitBuf_TrueGodAuraRelease_Re21341()
+        {
+            stack = 0;
+        }
+
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "TrueGodAuraRelease_Re21341";
-        public override void BeforeRollDice(BattleDiceBehavior behavior) =>
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
                     power = 2
                 });
+        }
 
         public override void Init(BattleUnitModel owner)
         {

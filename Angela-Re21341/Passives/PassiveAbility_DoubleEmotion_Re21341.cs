@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Angela_Re21341.Passives
 {
     public class PassiveAbility_DoubleEmotion_Re21341 : PassiveAbilityBase
     {
-        public override void OnDie() => RemoveBuffAndAuraToAll();
+        public override void OnDie()
+        {
+            RemoveBuffAndAuraToAll();
+        }
 
         private void RemoveBuffAndAuraToAll()
         {
@@ -25,13 +24,17 @@ namespace Angela_Re21341.Passives
             }
         }
 
-        public override void OnRoundStart() => GiveBuf();
+        public override void OnRoundStart()
+        {
+            GiveBuf();
+        }
 
         private void GiveBuf()
         {
             foreach (var battleUnitModel in BattleObjectManager.instance.GetAliveList(owner.faction)
                          .Where(battleUnitModel =>
-                             battleUnitModel.bufListDetail.GetActivatedBuf(KeywordBuf.KeterFinal_DoubleEmotion) == null))
+                             battleUnitModel.bufListDetail.GetActivatedBuf(KeywordBuf.KeterFinal_DoubleEmotion) ==
+                             null))
             {
                 battleUnitModel.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_DoubleEmotion());
                 battleUnitModel.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_LibrarianAura());

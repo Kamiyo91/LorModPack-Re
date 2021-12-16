@@ -2,10 +2,19 @@
 {
     public class BattleUnitBuf_ImmortalUntilRoundEnd_Re21341 : BattleUnitBuf
     {
-        public override bool IsImmortal() => true;
+        public override bool IsImmortal()
+        {
+            return true;
+        }
 
-        public override bool IsInvincibleHp(BattleUnitModel attacker) => true;
+        public override bool IsInvincibleHp(BattleUnitModel attacker)
+        {
+            return true;
+        }
 
-        public override void OnRoundEnd() => Destroy();
+        public override void OnRoundEnd()
+        {
+            Destroy();
+        }
     }
 }

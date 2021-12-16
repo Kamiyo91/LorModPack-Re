@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
+﻿using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using EmotionalBurstPassive_Re21341.Passives;
-using Util_Re21341;
 
 namespace EmotionalBurstPassive_Re21341.Cards
 {
@@ -31,6 +25,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
                 passiveHappy.InstantIncrease();
                 return;
             }
+
             var passive =
                 unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 29)) as
                     PassiveAbility_Happy_Re21341;

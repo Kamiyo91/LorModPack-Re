@@ -8,10 +8,12 @@ namespace Roland_Re21341.Passives
     public class PassiveAbility_BlackSilenceEgoMask_Re21341 : PassiveAbilityBase
     {
         private MechUtil_Roland _util;
+
         public override void OnBattleEnd()
         {
             UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
         }
+
         public override void OnWaveStart()
         {
             if (!owner.passiveDetail.HasPassive<PassiveAbility_10012>())
@@ -19,6 +21,7 @@ namespace Roland_Re21341.Passives
                 owner.passiveDetail.DestroyPassive(this);
                 return;
             }
+
             UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
             _util = new MechUtil_Roland(new MechUtilBaseModel
             {
@@ -33,7 +36,11 @@ namespace Roland_Re21341.Passives
             });
         }
 
-        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard) => _util.OnUseExpireCard(curCard.card.GetID());
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            _util.OnUseExpireCard(curCard.card.GetID());
+        }
+
         public override void OnRoundEndTheLast()
         {
             if (_util.EgoCheck()) _util.EgoActive();

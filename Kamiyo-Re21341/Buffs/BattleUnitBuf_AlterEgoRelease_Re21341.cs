@@ -8,18 +8,26 @@ namespace Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_AlterEgoRelease_Re21341 : BattleUnitBuf
     {
-        public BattleUnitBuf_AlterEgoRelease_Re21341() => stack = 0;
         private const string Path = "6/RedHood_Emotion_Aura";
         private CreatureEffect _aura;
+
+        public BattleUnitBuf_AlterEgoRelease_Re21341()
+        {
+            stack = 0;
+        }
+
         public override int paramInBufDesc => 0;
         public override bool isAssimilation => true;
         protected override string keywordId => "AlterEgoMask_Re21341";
-        public override void BeforeRollDice(BattleDiceBehavior behavior) =>
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
                     power = 1
                 });
+        }
 
         public override void Init(BattleUnitModel owner)
         {
@@ -30,7 +38,10 @@ namespace Kamiyo_Re21341.Buffs
             PlayChangingEffect(owner);
         }
 
-        public override void OnRoundStart() => _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 3, _owner);
+        public override void OnRoundStart()
+        {
+            _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 3, _owner);
+        }
 
         private void PlayChangingEffect(BattleUnitModel owner)
         {
@@ -47,6 +58,7 @@ namespace Kamiyo_Re21341.Buffs
                 gameObject.transform.localRotation = Quaternion.identity;
                 gameObject.transform.localScale = Vector3.one;
             }
+
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
         }
     }

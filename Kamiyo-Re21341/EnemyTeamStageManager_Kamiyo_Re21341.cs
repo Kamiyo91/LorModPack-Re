@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using Kamiyo_Re21341.MapManager;
 using Kamiyo_Re21341.Passives;
-using UnityEngine;
 using Util_Re21341;
 using Util_Re21341.CustomMapUtility.Assemblies;
 
@@ -12,10 +10,10 @@ namespace Kamiyo_Re21341
 {
     public class EnemyTeamStageManager_Kamiyo_Re21341 : EnemyTeamStageManager
     {
+        private PassiveAbility_AlterEgoNpc_Re21341 _kamiyoEnemyPassive;
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
         private bool _restart;
-        private PassiveAbility_AlterEgoNpc_Re21341 _kamiyoEnemyPassive;
 
         public override void OnWaveStart()
         {
@@ -35,18 +33,23 @@ namespace Kamiyo_Re21341
                         PassiveAbility_AlterEgoNpc_Re21341;
             if (!_phaseChanged) return;
             _mainEnemyModel?.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 11));
-
         }
+
         public override void OnEndBattle()
         {
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
             stageModel.SetStageStorgeData("Phase", _phaseChanged);
-            var list = new List<UnitBattleDataModel> { BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault()?.UnitData };
+            var list = new List<UnitBattleDataModel>
+                { BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault()?.UnitData };
             currentWaveModel.ResetUnitBattleDataList(list);
         }
-        public override void OnRoundEndTheLast() => CheckPhase();
+
+        public override void OnRoundEndTheLast()
+        {
+            CheckPhase();
+        }
 
         public override void OnRoundStart()
         {
@@ -60,7 +63,7 @@ namespace Kamiyo_Re21341
             _phaseChanged = true;
             CustomMapHandler.EnforceMap(1);
             Singleton<StageController>.Instance.CheckMapChange();
-            PrepareKamiyoUnit(false,true,true,true);
+            PrepareKamiyoUnit(false, true, true, true);
             PrepareMioEnemyUnit();
         }
 
@@ -72,20 +75,30 @@ namespace Kamiyo_Re21341
             PrepareMioEnemyUnit();
             UnitUtil.RefreshCombatUI();
         }
-        private void PrepareKamiyoUnit(bool restart,bool recoverHp = false,bool changeEmotionLevel = false,bool addPassive = false)
+
+        private void PrepareKamiyoUnit(bool restart, bool recoverHp = false, bool changeEmotionLevel = false,
+            bool addPassive = false)
         {
-            if(addPassive)_kamiyoEnemyPassive.AddAdditionalPassive();
+            if (addPassive) _kamiyoEnemyPassive.AddAdditionalPassive();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
-            if(restart)_kamiyoEnemyPassive.ForcedEgoRestart();
+            if (restart)
+            {
+                _kamiyoEnemyPassive.ForcedEgoRestart();
+            }
             else
             {
                 _kamiyoEnemyPassive.ForcedEgo();
                 _mainEnemyModel.Book.SetHp(514);
                 _mainEnemyModel.Book.SetBp(273);
             }
+
+            var card = _mainEnemyModel.allyCardDetail.GetAllDeck()
+                .FirstOrDefault(x => x.GetID() == new LorId(ModParameters.PackageId, 21));
+            _mainEnemyModel.allyCardDetail.ExhaustACardAnywhere(card);
+            _mainEnemyModel.allyCardDetail.AddNewCardToDeck(new LorId(ModParameters.PackageId, 22));
             _kamiyoEnemyPassive.ActiveMassAttackCount();
             _kamiyoEnemyPassive.SetCountToMax();
-            if(recoverHp)_mainEnemyModel.RecoverHP(514);
+            if (recoverHp) _mainEnemyModel.RecoverHP(514);
             _mainEnemyModel.breakDetail.ResetGauge();
             _mainEnemyModel.breakDetail.nextTurnBreak = false;
             _mainEnemyModel.breakDetail.RecoverBreakLife(1, true);
@@ -93,6 +106,7 @@ namespace Kamiyo_Re21341
             _mainEnemyModel.emotionDetail.SetEmotionLevel(4);
             _mainEnemyModel.emotionDetail.Reset();
         }
+
         private static void PrepareMioEnemyUnit()
         {
             var mioUnit = UnitUtil.AddNewUnitEnemySide(new UnitModel

@@ -5,7 +5,6 @@ using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_XML;
 using Mod;
-using UnityEngine;
 
 namespace Util_Re21341
 {
@@ -16,7 +15,8 @@ namespace Util_Re21341
             var dictionary =
                 typeof(BattleEffectTextsXmlList).GetField("_dictionary", AccessTools.all)
                     ?.GetValue(Singleton<BattleEffectTextsXmlList>.Instance) as Dictionary<string, BattleEffectText>;
-            var files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/EffectTexts").GetFiles();
+            var files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/EffectTexts")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader = new StringReader(File.ReadAllText(t.FullName)))
                 {
@@ -26,10 +26,13 @@ namespace Util_Re21341
                     foreach (var battleEffectText in battleEffectTextRoot.effectTextList)
                     {
                         dictionary?.Add(battleEffectText.ID, battleEffectText);
-                        ModParameters.EffectTexts.Add(battleEffectText.ID, new EffectTextModel{Name = battleEffectText.Name , Desc = battleEffectText.Desc });
+                        ModParameters.EffectTexts.Add(battleEffectText.ID,
+                            new EffectTextModel { Name = battleEffectText.Name, Desc = battleEffectText.Desc });
                     }
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader2 = new StringReader(File.ReadAllText(t.FullName)))
                 {
@@ -37,7 +40,7 @@ namespace Util_Re21341
                         (BattleCardDescRoot)new XmlSerializer(typeof(BattleCardDescRoot)).Deserialize(
                             stringReader2);
                     using (var enumerator =
-                        ItemXmlDataList.instance.GetAllWorkshopData()[ModParameters.PackageId].GetEnumerator())
+                           ItemXmlDataList.instance.GetAllWorkshopData()[ModParameters.PackageId].GetEnumerator())
                     {
                         while (enumerator.MoveNext())
                         {
@@ -50,7 +53,7 @@ namespace Util_Re21341
                     typeof(ItemXmlDataList).GetField("_cardInfoTable", AccessTools.all)
                         .GetValue(ItemXmlDataList.instance);
                     using (var enumerator2 = ItemXmlDataList.instance.GetCardList()
-                        .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
+                               .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
                     {
                         while (enumerator2.MoveNext())
                         {
@@ -61,7 +64,9 @@ namespace Util_Re21341
                         }
                     }
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleDialog").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleDialog")
+                .GetFiles();
             var dialogDictionary =
                 (Dictionary<string, BattleDialogRoot>)BattleDialogXmlList.Instance.GetType()
                     .GetField("_dictionary", AccessTools.all)
@@ -77,6 +82,7 @@ namespace Util_Re21341
                         dialog.workshopId = ModParameters.PackageId;
                         dialog.bookId = int.Parse(dialog.characterID);
                     }
+
                     if (dialogDictionary.ContainsKey("Workshop"))
                     {
                         dialogDictionary["Workshop"].characterList
@@ -96,7 +102,9 @@ namespace Util_Re21341
                         }
                     }
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader3 = new StringReader(File.ReadAllText(t.FullName)))
                 {
@@ -104,25 +112,28 @@ namespace Util_Re21341
                         (CharactersNameRoot)new XmlSerializer(typeof(CharactersNameRoot)).Deserialize(
                             stringReader3);
                     using (var enumerator3 =
-                        Singleton<EnemyUnitClassInfoList>.Instance.GetAllWorkshopData()[ModParameters.PackageId].GetEnumerator())
+                           Singleton<EnemyUnitClassInfoList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
+                               .GetEnumerator())
                     {
                         while (enumerator3.MoveNext())
                         {
                             var enemy = enumerator3.Current;
                             enemy.name = charactersNameRoot.nameList.Find(x => x.ID == enemy.id.id).name;
                             Singleton<EnemyUnitClassInfoList>.Instance.GetData(enemy.id).name = enemy.name;
-                            ModParameters.NameTexts.Add(enemy.id.id.ToString(),enemy.name);
+                            ModParameters.NameTexts.Add(enemy.id.id.ToString(), enemy.name);
                         }
                     }
                 }
+
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/Books").GetFiles();
             foreach (var t in files)
                 using (var stringReader4 = new StringReader(File.ReadAllText(t.FullName)))
                 {
                     var bookDescRoot =
                         (BookDescRoot)new XmlSerializer(typeof(BookDescRoot)).Deserialize(stringReader4);
-                    using (var enumerator4 = Singleton<BookXmlList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
-                        .GetEnumerator())
+                    using (var enumerator4 =
+                           Singleton<BookXmlList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
+                               .GetEnumerator())
                     {
                         while (enumerator4.MoveNext())
                         {
@@ -133,7 +144,7 @@ namespace Util_Re21341
                     }
 
                     using (var enumerator5 = Singleton<BookXmlList>.Instance.GetList()
-                        .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
+                               .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
                     {
                         while (enumerator5.MoveNext())
                         {
@@ -148,15 +159,18 @@ namespace Util_Re21341
                             .GetValue(Singleton<BookDescXmlList>.Instance) as Dictionary<string, List<BookDesc>>)
                         [ModParameters.PackageId] = bookDescRoot.bookDescList;
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/DropBooks").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/DropBooks")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader5 = new StringReader(File.ReadAllText(t.FullName)))
                 {
                     var charactersNameRoot2 =
                         (CharactersNameRoot)new XmlSerializer(typeof(CharactersNameRoot)).Deserialize(
                             stringReader5);
-                    using (var enumerator6 = Singleton<DropBookXmlList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
-                        .GetEnumerator())
+                    using (var enumerator6 =
+                           Singleton<DropBookXmlList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
+                               .GetEnumerator())
                     {
                         while (enumerator6.MoveNext())
                         {
@@ -167,7 +181,7 @@ namespace Util_Re21341
                     }
 
                     using (var enumerator7 = Singleton<DropBookXmlList>.Instance.GetList()
-                        .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
+                               .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
                     {
                         while (enumerator7.MoveNext())
                         {
@@ -179,15 +193,18 @@ namespace Util_Re21341
                         }
                     }
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/StageName").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/StageName")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader6 = new StringReader(File.ReadAllText(t.FullName)))
                 {
                     var charactersNameRoot3 =
                         (CharactersNameRoot)new XmlSerializer(typeof(CharactersNameRoot)).Deserialize(
                             stringReader6);
-                    using (var enumerator8 = Singleton<StageClassInfoList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
-                        .GetEnumerator())
+                    using (var enumerator8 =
+                           Singleton<StageClassInfoList>.Instance.GetAllWorkshopData()[ModParameters.PackageId]
+                               .GetEnumerator())
                     {
                         while (enumerator8.MoveNext())
                         {
@@ -196,14 +213,16 @@ namespace Util_Re21341
                         }
                     }
                 }
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/PassiveDesc").GetFiles();
+
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/PassiveDesc")
+                .GetFiles();
             foreach (var t in files)
                 using (var stringReader7 = new StringReader(File.ReadAllText(t.FullName)))
                 {
                     var passiveDescRoot =
                         (PassiveDescRoot)new XmlSerializer(typeof(PassiveDescRoot)).Deserialize(stringReader7);
                     using (var enumerator9 = Singleton<PassiveXmlList>.Instance.GetDataAll()
-                        .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
+                               .FindAll(x => x.id.packageId == ModParameters.PackageId).GetEnumerator())
                     {
                         while (enumerator9.MoveNext())
                         {
@@ -213,9 +232,12 @@ namespace Util_Re21341
                         }
                     }
                 }
+
             var cardAbilityDictionary = typeof(BattleCardAbilityDescXmlList).GetField("_dictionary", AccessTools.all)
-                ?.GetValue(Singleton<BattleCardAbilityDescXmlList>.Instance) as Dictionary<string, BattleCardAbilityDesc>;
-            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleCardAbilities").GetFiles();
+                    ?.GetValue(Singleton<BattleCardAbilityDescXmlList>.Instance) as
+                Dictionary<string, BattleCardAbilityDesc>;
+            files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language +
+                                      "/BattleCardAbilities").GetFiles();
             foreach (var t in files)
                 using (var stringReader8 = new StringReader(File.ReadAllText(t.FullName)))
                 {

@@ -3,10 +3,8 @@ using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using Hayate_Re21341.Passives;
-using Kamiyo_Re21341.Buffs;
 using Kamiyo_Re21341.Passives;
 using LOR_XML;
-using Sound;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
 using Util_Re21341.CustomMapUtility.Assemblies;
@@ -15,14 +13,16 @@ namespace Hayate_Re21341
 {
     public class EnemyTeamStageManager_Hayate_Re21341 : EnemyTeamStageManager
     {
+        private readonly StageLibraryFloorModel
+            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+
+        private bool _allySummon;
+        private readonly List<BattleEmotionCardModel> _emotionCards = new List<BattleEmotionCardModel>();
+        private PassiveAbility_HayateNpc_Re21341 _hayateEnemyPassive;
+        private bool _lastPhaseStarted;
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
-        private bool _lastPhaseStarted;
-        private bool _allySummon;
-        private PassiveAbility_HayateNpc_Re21341 _hayateEnemyPassive;
-        private readonly StageLibraryFloorModel _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
         private BattleUnitModel _sephiraModel;
-        private List<BattleEmotionCardModel> _emotionCards = new List<BattleEmotionCardModel>();
 
         public override void OnWaveStart()
         {
@@ -51,21 +51,26 @@ namespace Hayate_Re21341
             CheckLastPhase();
         }
 
-        public override void OnRoundStart() => CustomMapHandler.EnforceMap();
+        public override void OnRoundStart()
+        {
+            CustomMapHandler.EnforceMap();
+        }
 
         public override void OnRoundStart_After()
         {
-            if(_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
         }
+
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
             _phaseChanged = true;
             _hayateEnemyPassive.ForcedEgo();
             MapUtil.ActiveCreatureBattleCamFilterComponent();
-            UnitUtil.ChangeCardCostByValue(_mainEnemyModel,-2,4);
-            CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.mp3",true, "Hayate_Re21341");
+            UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
+            CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.mp3", true, "Hayate_Re21341");
         }
+
         private BattleUnitModel PrepareAllyUnit()
         {
             var allyUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
@@ -78,12 +83,14 @@ namespace Hayate_Re21341
             });
             return allyUnit;
         }
+
         private void HayateIsDeadBeforePhase3()
         {
             if (_lastPhaseStarted) return;
             if (!_mainEnemyModel.IsDead()) return;
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5,false);
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5, false);
         }
+
         private void CheckUnitSummon()
         {
             if (_allySummon || BattleObjectManager.instance.GetAliveList(Faction.Player).Count < 1 ||
@@ -92,16 +99,27 @@ namespace Hayate_Re21341
             for (var i = 1; i < 4; i++)
             {
                 var unit = UnitUtil.AddOriginalPlayerUnitPlayerSide(i, _sephiraModel.emotionDetail.EmotionLevel);
-                UnitUtil.BattleAbDialog(unit.view.dialogUI, new List<AbnormalityCardDialog>{new AbnormalityCardDialog { id = "HayateEnemy", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value.Desc } } ,AbColorType.Negative);
+                UnitUtil.BattleAbDialog(unit.view.dialogUI,
+                    new List<AbnormalityCardDialog>
+                    {
+                        new AbnormalityCardDialog
+                        {
+                            id = "HayateEnemy",
+                            dialog = ModParameters.EffectTexts
+                                .FirstOrDefault(x => x.Key.Equals($"HayateBattleAllyEntry{i}_Re21341")).Value.Desc
+                        }
+                    }, AbColorType.Negative);
             }
+
             UnitUtil.RefreshCombatUI();
         }
+
         private void CheckLastPhase()
         {
             if (_lastPhaseStarted || !_phaseChanged || _mainEnemyModel.hp > 100 ||
                 BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 0) return;
             _lastPhaseStarted = true;
-            CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.mp3",true, "Hayate_Re21341");
+            CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.mp3", true, "Hayate_Re21341");
             foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player))
                 BattleObjectManager.instance.UnregisterUnit(unit);
             UnitUtil.RefreshCombatUI();
@@ -115,11 +133,19 @@ namespace Hayate_Re21341
             UnitUtil.ChangeCardCostByValue(allyUnit, -2, 4);
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
             _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel,210,true);
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 25, true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>
-                    {new AbnormalityCardDialog {id = "Hayate", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value.Desc}},AbColorType.Negative);
+                {
+                    new AbnormalityCardDialog
+                    {
+                        id = "Hayate",
+                        dialog = ModParameters.EffectTexts
+                            .FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value.Desc
+                    }
+                }, AbColorType.Negative);
         }
+
         public void AddValueToEmotionCardList(IEnumerable<BattleEmotionCardModel> card)
         {
             _emotionCards.AddRange(card.Where(emotionCard =>

@@ -1,6 +1,4 @@
-﻿using Util_Re21341;
-
-namespace EmotionalBurstPassive_Re21341.Passives
+﻿namespace EmotionalBurstPassive_Re21341.Passives
 {
     public class PassiveAbility_EmotionalBurst_Re21341 : PassiveAbilityBase
     {

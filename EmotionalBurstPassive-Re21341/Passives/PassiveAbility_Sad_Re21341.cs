@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using BLL_Re21341.Models;
-using Util_Re21341;
 
 namespace EmotionalBurstPassive_Re21341.Passives
 {
     public class PassiveAbility_Sad_Re21341 : PassiveAbilityBase
     {
         private int _stack;
-        public int GetStack() => _stack;
+
+        public int GetStack()
+        {
+            return _stack;
+        }
+
         public void ChangeNameAndSetStacks(int stack)
         {
             switch (stack)
@@ -55,9 +55,15 @@ namespace EmotionalBurstPassive_Re21341.Passives
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 2);
         }
 
-        public void AfterInit() => OnRoundStartAfter();
+        public void AfterInit()
+        {
+            OnRoundStartAfter();
+        }
 
-        public override void OnRoundEnd() => ChangeAllCoinsToNegativeType();
+        public override void OnRoundEnd()
+        {
+            ChangeAllCoinsToNegativeType();
+        }
 
         private void ChangeAllCoinsToNegativeType()
         {

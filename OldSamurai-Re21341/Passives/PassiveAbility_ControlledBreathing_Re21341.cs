@@ -1,6 +1,5 @@
 ﻿using BLL_Re21341.Models;
 using LOR_DiceSystem;
-using OldSamurai_Re21341.Buffs;
 using OldSamurai_Re21341.Cards;
 using Util_Re21341.CommonBuffs;
 
@@ -96,6 +95,7 @@ namespace OldSamurai_Re21341.Passives
                 if (positiveNum > 0)
                     positiveNum /= 3;
             }
+
             behavior.ApplyDiceStatBonus(new DiceStatBonus { min = positiveNum, max = positiveNum });
         }
 
@@ -108,7 +108,8 @@ namespace OldSamurai_Re21341.Passives
                 if (positiveNum > 0)
                     positiveNum /= 3;
             }
-            behavior.ApplyDiceStatBonus(new DiceStatBonus { min=positiveNum,max = positiveNum });
+
+            behavior.ApplyDiceStatBonus(new DiceStatBonus { min = positiveNum, max = positiveNum });
         }
 
         private void PowerNullDiceRoll(BattleDiceBehavior behavior)

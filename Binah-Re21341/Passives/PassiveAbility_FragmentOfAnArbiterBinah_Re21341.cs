@@ -56,9 +56,9 @@ namespace Binah_Re21341.Passives
                 }
 
             foreach (var cardId2 in from battleDiceCardModel2 in deck
-                                    let id2 = battleDiceCardModel2.GetID().id
-                                    let name2 = battleDiceCardModel2.GetName()
-                                    select id2)
+                     let id2 = battleDiceCardModel2.GetID().id
+                     let name2 = battleDiceCardModel2.GetName()
+                     select id2)
                 switch (cardId2)
                 {
                     case 607201:

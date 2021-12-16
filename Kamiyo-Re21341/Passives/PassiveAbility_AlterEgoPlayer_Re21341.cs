@@ -13,23 +13,27 @@ namespace Kamiyo_Re21341.Passives
     public class PassiveAbility_AlterEgoPlayer_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+
         public override void OnBattleEnd()
         {
-            if(_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
         }
+
         public override void OnWaveStart()
         {
-            _util = new MechUtilBase(new MechUtilBaseModel { Owner = owner, 
-                Hp = 25, 
-                SetHp = 25, 
-                Survive = true, 
+            _util = new MechUtilBase(new MechUtilBaseModel
+            {
+                Owner = owner,
+                Hp = 25,
+                SetHp = 25,
+                Survive = true,
                 HasEgo = true,
                 HasEgoAttack = true,
                 HasAdditionalPassive = true,
                 RefreshUI = true,
                 NearDeathBuffExist = true,
                 RecoverLightOnSurvive = false,
-                SkinName = "KamiyoMask_Re21341", 
+                SkinName = "KamiyoMask_Re21341",
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
@@ -41,24 +45,46 @@ namespace Kamiyo_Re21341.Passives
                 EgoAbColorColor = AbColorType.Negative,
                 SurviveAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive1_Re21341")).Value.Desc},
-                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive2_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "Kamiyo",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive1_Re21341"))
+                            .Value.Desc
+                    },
+                    new AbnormalityCardDialog
+                    {
+                        id = "Kamiyo",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoSurvive2_Re21341"))
+                            .Value.Desc
+                    }
                 },
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
-                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive1_Re21341")).Value.Desc},
-                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive2_Re21341")).Value.Desc},
-                    new AbnormalityCardDialog {id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341")).Value.Desc}
+                    new AbnormalityCardDialog
+                    {
+                        id = "Kamiyo",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive1_Re21341"))
+                            .Value.Desc
+                    },
+                    new AbnormalityCardDialog
+                    {
+                        id = "Kamiyo",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive2_Re21341"))
+                            .Value.Desc
+                    },
+                    new AbnormalityCardDialog
+                    {
+                        id = "Kamiyo",
+                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive3_Re21341"))
+                            .Value.Desc
+                    }
                 }
             });
             if (UnitUtil.CheckSkinProjection(owner))
-            {
                 _util.DoNotChangeSkinOnEgo();
-            }
             else
-            {
                 UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
-            }
+            UnitUtil.TestingUnitValues();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -66,10 +92,12 @@ namespace Kamiyo_Re21341.Passives
             _util.SurviveCheck(dmg);
             return base.BeforeTakeDamage(attacker, dmg);
         }
+
         public override void OnStartBattle()
         {
             UnitUtil.RemoveImmortalBuff(owner);
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -78,19 +106,36 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnRoundEnd_before()
         {
-            if(BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 && _util.CheckOnDieAtFightEnd()) owner.Die(); 
+            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 &&
+                _util.CheckOnDieAtFightEnd()) owner.Die();
         }
+
         public override void OnRoundStartAfter()
         {
-            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 && _util.CheckOnDieAtFightEnd()) owner.Die();
+            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count < 1 &&
+                _util.CheckOnDieAtFightEnd()) owner.Die();
         }
-        public void SetDieAtEnd() => _util.TurnOnDieAtFightEnd();
+
+        public void SetDieAtEnd()
+        {
+            _util.TurnOnDieAtFightEnd();
+        }
+
         public void ForcedEgo()
         {
             owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 17));
             _util.ForcedEgo();
-            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog> { new AbnormalityCardDialog { id = "Kamiyo", dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive4_Re21341")).Value.Desc } });
+            _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>
+            {
+                new AbnormalityCardDialog
+                {
+                    id = "Kamiyo",
+                    dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("KamiyoEgoActive4_Re21341"))
+                        .Value.Desc
+                }
+            });
         }
+
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
