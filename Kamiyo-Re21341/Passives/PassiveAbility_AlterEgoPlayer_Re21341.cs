@@ -84,7 +84,6 @@ namespace Kamiyo_Re21341.Passives
                 _util.DoNotChangeSkinOnEgo();
             else
                 UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
-            UnitUtil.TestingUnitValues();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
