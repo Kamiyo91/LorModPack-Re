@@ -39,9 +39,9 @@ namespace Kamiyo_Re21341.Cards
 
         public override void OnStartBattle()
         {
-            _used = true;
             if (owner.faction != Faction.Player ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
+            _used = true;
             ChangeToKamiyoEgoMap();
         }
 

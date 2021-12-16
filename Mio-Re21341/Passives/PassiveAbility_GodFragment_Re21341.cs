@@ -73,7 +73,7 @@ namespace Mio_Re21341.Passives
             if (UnitUtil.CheckSkinProjection(owner))
                 _util.DoNotChangeSkinOnEgo();
             else
-                UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+                UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341",true);
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

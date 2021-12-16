@@ -21,7 +21,7 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
+            UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341",true);
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,

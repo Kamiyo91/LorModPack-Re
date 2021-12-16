@@ -20,8 +20,8 @@ namespace Roland_Re21341.Cards
 
         public override void OnStartBattle()
         {
-            _used = true;
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
+            _used = true;
             ChangeToBlackSilenceEgoMap(owner);
         }
 

@@ -21,7 +21,7 @@ namespace Mio_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
+            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341",true);
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,
