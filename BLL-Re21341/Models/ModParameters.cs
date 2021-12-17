@@ -33,9 +33,5 @@ namespace BLL_Re21341.Models
             { 10000001, new List<int> { 3, 4, 5, 6, 7 } }, { 10000003, new List<int> { 12, 13, 14, 15 } },
             { 10000004, new List<int> { 19, 20, 21, 22 } }, { 10000005, new List<int> { 23, 24, 25, 26, 27 } }
         };
-        public static readonly Dictionary<SephirahType, string> SephirahError = new Dictionary<SephirahType, string>
-            { { SephirahType.Binah, "BinahError_Re21341" },{ SephirahType.Keter, "KeterError_Re21341" } };
-        public static readonly Dictionary<int, string> DynamicNames = new Dictionary<int, string>
-            { { 10000006, "AngelaName_Re21341" } };
     }
 }
