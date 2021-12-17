@@ -47,11 +47,21 @@ namespace LoRModPack_Re21341.Harmony
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBook");
+            var methodSuffix = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBook_Postfix");
             harmony.Patch(typeof(UnitDataModel).GetMethod("EquipBook", AccessTools.all),
-                new HarmonyMethod(method));
+                new HarmonyMethod(method), new HarmonyMethod(methodSuffix));
+            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_IsBinahChangeItemLock");
+            harmony.Patch(typeof(UnitDataModel).GetMethod("IsBinahChangeItemLock", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_IsBlackSilenceChangeItemLock");
+            harmony.Patch(typeof(UnitDataModel).GetMethod("IsBlackSilenceChangeItemLock", AccessTools.all),
+                null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UILibrarianAppearanceInfoPanel_OnClickCustomizeButton");
             harmony.Patch(typeof(UILibrarianAppearanceInfoPanel).GetMethod("OnClickCustomizeButton", AccessTools.all),
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
+            harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
+                null,new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -152,36 +162,78 @@ namespace LoRModPack_Re21341.Harmony
                         return;
                 }
         }
-
-        public static bool UnitDataModel_EquipBook(UnitDataModel __instance, BookModel newBook, bool isEnemySetting,
+        [HarmonyPriority(0)]
+        public static void UnitDataModel_EquipBook(UnitDataModel __instance, ref bool __state, BookModel ____bookItem, ref BookModel newBook, bool isEnemySetting,
             bool force)
         {
-            if (!force && newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
-                ModParameters.EquipPageWithOriginalFace.Contains(newBook.ClassInfo.id.id) && newBook.owner == null)
+            if (force) return;
+            var book = newBook;
+            if (newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.SkinNameIds.Any(x =>
+                    x.Item2.Contains(book.ClassInfo.id.id) && book.ClassInfo.CharacterSkin.Contains(x.Item1)))
+                newBook.ClassInfo.CharacterSkin = new List<string> { ModParameters.SkinNameIds.FirstOrDefault(x => book.ClassInfo.CharacterSkin.Contains(x.Item1))?.Item3 };
+            if (newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.DynamicNames.ContainsKey(newBook.ClassInfo.id.id))
             {
                 __instance.customizeData.SetCustomData(false);
                 __instance.EquipCustomCoreBook(null);
                 ModParameters.DynamicNames.TryGetValue(newBook.ClassInfo.id.id, out var name);
                 __instance.SetTempName(ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals(name)).Value.Name);
+                return;
             }
-            else if (__instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
-                     ModParameters.EquipPageWithOriginalFace.Contains(__instance.bookItem.ClassInfo.id.id))
+            if (__instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.DynamicNames.ContainsKey(__instance.bookItem.ClassInfo.id.id))
             {
-                __instance.customizeData.SetCustomData(true);
                 __instance.ResetTempName();
+                __instance.customizeData.SetCustomData(true);
+                if (!__instance.isSephirah || __instance.OwnerSephirah != SephirahType.Keter || LibraryModel.Instance.IsBlackSilenceLockedInLibrary()) return;
+                newBook = Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook();
+                return;
             }
-
-            return force || newBook == null || newBook.ClassInfo.id.packageId != ModParameters.PackageId ||
-                   !ModParameters.NotEquipPages.Contains(newBook.ClassInfo.id.id) || newBook.owner != null;
+            if (newBook != null && (newBook.ClassInfo.id.packageId == ModParameters.PackageId || !newBook.IsWorkshop) && __instance.isSephirah && (__instance.OwnerSephirah == SephirahType.Binah || __instance.OwnerSephirah == SephirahType.Keter))
+            {
+                newBook = ____bookItem;
+                __state = false;
+                return;
+            }
+            __instance.customizeData.SetCustomData(true);
+            __state = true;
         }
+        public static void UnitDataModel_EquipBook_Postfix(UnitDataModel __instance,ref bool __state,ref bool __result)
+        {
+            if (__state) return;
+            __result = false;
 
+        }
+        public static void TextDataModel_InitTextData(string currentLanguage)
+        {
+            ModParameters.Language = currentLanguage;
+            LocalizeUtil.AddLocalize();
+        }
+        public static void UnitDataModel_IsBinahChangeItemLock(ref bool __result)
+        {
+            __result = false;
+        }
+        public static void UnitDataModel_IsBlackSilenceChangeItemLock(ref bool __result)
+        {
+            __result = false;
+        }
         public static bool UILibrarianAppearanceInfoPanel_OnClickCustomizeButton(
             UILibrarianAppearanceInfoPanel __instance)
         {
+            if (__instance.unitData.isSephirah && 
+                (__instance.unitData.OwnerSephirah == SephirahType.Binah ||
+                 __instance.unitData.OwnerSephirah == SephirahType.Keter &&
+                 !LibraryModel.Instance.IsBlackSilenceLockedInLibrary()))
+            {
+                UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts
+                    .FirstOrDefault(x => x.Key.Equals(ModParameters.SephirahError.FirstOrDefault(y => __instance.unitData.OwnerSephirah == y.Key).Value)).Value.Desc);
+                return false;
+            }
             if (__instance.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
-                !ModParameters.WithoutCustomSkins.Contains(__instance.unitData.bookItem.BookId.id)) return true;
+                !ModParameters.DynamicNames.ContainsKey(__instance.unitData.bookItem.BookId.id)) return true;
             UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts
-                .FirstOrDefault(x => x.Key.Equals("AngelaName_Re21341")).Value.Desc);
+                    .FirstOrDefault(x => x.Key.Equals(ModParameters.DynamicNames.FirstOrDefault(y => __instance.unitData.bookItem.BookId.id == y.Key).Value)).Value.Desc);
             return false;
         }
 
@@ -233,7 +285,7 @@ namespace LoRModPack_Re21341.Harmony
 
         public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
-            if (!ModParameters.SkinNames.Contains(charName)) return true;
+            if (!ModParameters.SkinNameIds.Exists(x => x.Item1.Contains(charName))) return true;
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;

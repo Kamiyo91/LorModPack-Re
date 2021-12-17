@@ -17,6 +17,7 @@ namespace Util_Re21341
                     ?.GetValue(Singleton<BattleEffectTextsXmlList>.Instance) as Dictionary<string, BattleEffectText>;
             var files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/EffectTexts")
                 .GetFiles();
+            ModParameters.EffectTexts.Clear();
             foreach (var t in files)
                 using (var stringReader = new StringReader(File.ReadAllText(t.FullName)))
                 {
@@ -25,6 +26,7 @@ namespace Util_Re21341
                             .Deserialize(stringReader);
                     foreach (var battleEffectText in battleEffectTextRoot.effectTextList)
                     {
+                        dictionary.Remove(battleEffectText.ID);
                         dictionary?.Add(battleEffectText.ID, battleEffectText);
                         ModParameters.EffectTexts.Add(battleEffectText.ID,
                             new EffectTextModel { Name = battleEffectText.Name, Desc = battleEffectText.Desc });
@@ -83,28 +85,27 @@ namespace Util_Re21341
                         dialog.bookId = int.Parse(dialog.characterID);
                     }
 
+                    if (!dialogDictionary.ContainsKey("Workshop")) continue;
+                    dialogDictionary["Workshop"].characterList
+                        .RemoveAll(x => x.workshopId.Equals(ModParameters.PackageId));
                     if (dialogDictionary.ContainsKey("Workshop"))
                     {
-                        dialogDictionary["Workshop"].characterList
-                            .RemoveAll(x => x.workshopId.Equals(ModParameters.PackageId));
-                        if (dialogDictionary.ContainsKey("Workshop"))
+                        dialogDictionary["Workshop"].characterList.AddRange(battleDialogList);
+                    }
+                    else
+                    {
+                        var battleDialogRoot = new BattleDialogRoot
                         {
-                            dialogDictionary["Workshop"].characterList.AddRange(battleDialogList);
-                        }
-                        else
-                        {
-                            var battleDialogRoot = new BattleDialogRoot
-                            {
-                                groupName = "Workshop",
-                                characterList = battleDialogList
-                            };
-                            dialogDictionary.Add("Workshop", battleDialogRoot);
-                        }
+                            groupName = "Workshop",
+                            characterList = battleDialogList
+                        };
+                        dialogDictionary.Add("Workshop", battleDialogRoot);
                     }
                 }
 
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName")
                 .GetFiles();
+            ModParameters.NameTexts.Clear();
             foreach (var t in files)
                 using (var stringReader3 = new StringReader(File.ReadAllText(t.FullName)))
                 {
@@ -244,7 +245,10 @@ namespace Util_Re21341
                     foreach (var battleCardAbilityDesc in
                              ((BattleCardAbilityDescRoot)new XmlSerializer(typeof(BattleCardAbilityDescRoot))
                                  .Deserialize(stringReader8)).cardDescList)
+                    {
+                        cardAbilityDictionary.Remove(battleCardAbilityDesc.id);
                         cardAbilityDictionary.Add(battleCardAbilityDesc.id, battleCardAbilityDesc);
+                    }
                 }
         }
 

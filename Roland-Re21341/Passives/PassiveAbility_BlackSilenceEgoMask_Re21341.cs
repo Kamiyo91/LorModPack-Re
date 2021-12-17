@@ -1,18 +1,12 @@
 ﻿using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
 using Roland_Re21341.Buffs;
-using Util_Re21341;
 
 namespace Roland_Re21341.Passives
 {
     public class PassiveAbility_BlackSilenceEgoMask_Re21341 : PassiveAbilityBase
     {
         private MechUtil_Roland _util;
-
-        public override void OnBattleEnd()
-        {
-            UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
-        }
 
         public override void OnWaveStart()
         {
@@ -22,7 +16,6 @@ namespace Roland_Re21341.Passives
                 return;
             }
 
-            UnitUtil.ReturnToTheOriginalSkin(owner, "BlackSilence");
             _util = new MechUtil_Roland(new MechUtilBaseModel
             {
                 Owner = owner,

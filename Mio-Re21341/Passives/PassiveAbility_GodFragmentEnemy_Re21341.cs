@@ -14,14 +14,8 @@ namespace Mio_Re21341.Passives
     {
         private NpcMechUtilBase _util;
 
-        public override void OnBattleEnd()
-        {
-            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
-        }
-
         public override void OnWaveStart()
         {
-            UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341",true);
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,

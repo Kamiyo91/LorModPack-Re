@@ -14,11 +14,6 @@ namespace Kamiyo_Re21341.Passives
     {
         private MechUtilBase _util;
 
-        public override void OnBattleEnd()
-        {
-            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341");
-        }
-
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel
@@ -82,8 +77,6 @@ namespace Kamiyo_Re21341.Passives
             });
             if (UnitUtil.CheckSkinProjection(owner))
                 _util.DoNotChangeSkinOnEgo();
-            else
-                UnitUtil.ReturnToTheOriginalSkin(owner, "KamiyoNormal_Re21341",true);
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -105,8 +98,11 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnKill(BattleUnitModel target)
         {
-            if(_util.CheckOnDieAtFightEnd() && target.passiveDetail.PassiveList.Exists(x => x.id == new LorId(ModParameters.PackageId,18))) owner.Die();
+            if (_util.CheckOnDieAtFightEnd() &&
+                target.passiveDetail.PassiveList.Exists(x => x.id == new LorId(ModParameters.PackageId, 18)))
+                owner.Die();
         }
+
         public void SetDieAtEnd()
         {
             _util.TurnOnDieAtFightEnd();

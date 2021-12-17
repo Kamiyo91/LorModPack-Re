@@ -13,11 +13,12 @@ namespace Hayate_Re21341
 {
     public class EnemyTeamStageManager_Hayate_Re21341 : EnemyTeamStageManager
     {
+        private readonly List<BattleEmotionCardModel> _emotionCards = new List<BattleEmotionCardModel>();
+
         private readonly StageLibraryFloorModel
             _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
 
         private bool _allySummon;
-        private readonly List<BattleEmotionCardModel> _emotionCards = new List<BattleEmotionCardModel>();
         private PassiveAbility_HayateNpc_Re21341 _hayateEnemyPassive;
         private bool _lastPhaseStarted;
         private BattleUnitModel _mainEnemyModel;

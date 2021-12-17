@@ -14,11 +14,6 @@ namespace Mio_Re21341.Passives
     {
         private MechUtilBase _util;
 
-        public override void OnBattleEnd()
-        {
-            if (_util.CheckSkinChangeIsActive()) UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341");
-        }
-
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel
@@ -72,8 +67,6 @@ namespace Mio_Re21341.Passives
             });
             if (UnitUtil.CheckSkinProjection(owner))
                 _util.DoNotChangeSkinOnEgo();
-            else
-                UnitUtil.ReturnToTheOriginalSkin(owner, "MioNormalEye_Re21341",true);
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

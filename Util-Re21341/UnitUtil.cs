@@ -31,8 +31,7 @@ namespace Util_Re21341
 
         public static bool CheckSkinProjection(BattleUnitModel owner)
         {
-            if (owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin.Any(x => ModParameters.SkinNames.Contains(x)) ||
-                !string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
+            if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
                 owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem) return false;
             owner.view.ChangeSkin(owner.UnitData.unitData.CustomBookItem.GetCharacterName());
             return true;
@@ -43,14 +42,6 @@ namespace Util_Re21341
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)
                          .Where(x => x != owner))
                 unit.Die();
-        }
-
-        public static void ReturnToTheOriginalSkin(BattleUnitModel owner, string charName,bool forceChangeSkin = false)
-        {
-            owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
-            if (!forceChangeSkin) return;
-            owner.view.CreateSkin();
-            RefreshCombatUI();
         }
 
         public static void RemoveImmortalBuff(BattleUnitModel owner)
