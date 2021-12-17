@@ -61,7 +61,7 @@ namespace LoRModPack_Re21341.Harmony
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
             harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
-                null,new HarmonyMethod(method));
+                null, new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -167,6 +167,14 @@ namespace LoRModPack_Re21341.Harmony
             bool force)
         {
             if (force) return;
+            if (newBook == null && __instance.isSephirah && __instance.OwnerSephirah == SephirahType.Keter &&
+                !LibraryModel.Instance.IsBlackSilenceLockedInLibrary())
+            {
+                __instance.ResetTempName();
+                __instance.customizeData.SetCustomData(true);
+                newBook = Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook();
+                return;
+            }
             var book = newBook;
             if (newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
                 ModParameters.SkinNameIds.Any(x =>
@@ -186,8 +194,6 @@ namespace LoRModPack_Re21341.Harmony
             {
                 __instance.ResetTempName();
                 __instance.customizeData.SetCustomData(true);
-                if (!__instance.isSephirah || __instance.OwnerSephirah != SephirahType.Keter || LibraryModel.Instance.IsBlackSilenceLockedInLibrary()) return;
-                newBook = Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook();
                 return;
             }
             if (newBook != null && (newBook.ClassInfo.id.packageId == ModParameters.PackageId || !newBook.IsWorkshop) && __instance.isSephirah && (__instance.OwnerSephirah == SephirahType.Binah || __instance.OwnerSephirah == SephirahType.Keter))
@@ -196,10 +202,11 @@ namespace LoRModPack_Re21341.Harmony
                 __state = false;
                 return;
             }
-            __instance.customizeData.SetCustomData(true);
+            if (__instance.isSephirah && __instance.OwnerSephirah == SephirahType.Binah)
+                __instance.customizeData.SetCustomData(true);
             __state = true;
         }
-        public static void UnitDataModel_EquipBook_Postfix(UnitDataModel __instance,ref bool __state,ref bool __result)
+        public static void UnitDataModel_EquipBook_Postfix(UnitDataModel __instance, ref bool __state, ref bool __result)
         {
             if (__state) return;
             __result = false;
@@ -221,7 +228,7 @@ namespace LoRModPack_Re21341.Harmony
         public static bool UILibrarianAppearanceInfoPanel_OnClickCustomizeButton(
             UILibrarianAppearanceInfoPanel __instance)
         {
-            if (__instance.unitData.isSephirah && 
+            if (__instance.unitData.isSephirah &&
                 (__instance.unitData.OwnerSephirah == SephirahType.Binah ||
                  __instance.unitData.OwnerSephirah == SephirahType.Keter &&
                  !LibraryModel.Instance.IsBlackSilenceLockedInLibrary()))
