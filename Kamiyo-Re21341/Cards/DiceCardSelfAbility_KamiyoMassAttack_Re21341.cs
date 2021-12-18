@@ -12,8 +12,7 @@ namespace Kamiyo_Re21341.Cards
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return owner.emotionDetail.EmotionLevel >= 5 &&
-                   owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
+            return owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
         }
 
         public override void OnEndAreaAttack()
