@@ -46,6 +46,20 @@ namespace Util_Re21341.BaseClass
                     (BattleUnitBuf)Activator.CreateInstance(_model.NearDeathBuffType));
         }
 
+        public virtual int AlwaysAimToTheSlowestDice(BattleUnitModel target)
+        {
+            var speedValue = 999;
+            var finalTarget = 0;
+            foreach (var dice in target.speedDiceResult.Select((x, i) => new { i, x }))
+            {
+                if (speedValue <= dice.x.value) continue;
+                speedValue = dice.x.value;
+                finalTarget = dice.i;
+            }
+
+            return finalTarget;
+        }
+
         public virtual void RaiseCounter()
         {
             if (_model.MassAttackStartCount && _model.Counter < _model.MaxCounter) _model.Counter++;

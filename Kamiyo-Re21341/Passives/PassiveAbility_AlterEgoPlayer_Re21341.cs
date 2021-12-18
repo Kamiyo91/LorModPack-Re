@@ -13,6 +13,7 @@ namespace Kamiyo_Re21341.Passives
     public class PassiveAbility_AlterEgoPlayer_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+
         public override void OnBattleEnd()
         {
             if (_util.CheckSkinChangeIsActive())
