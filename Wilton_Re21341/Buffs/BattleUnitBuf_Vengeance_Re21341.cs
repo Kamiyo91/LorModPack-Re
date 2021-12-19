@@ -13,7 +13,8 @@ namespace Wilton_Re21341.Buffs
     {
         public override void Init(BattleUnitModel owner)
         {
-            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising", 1f, _owner.view, _owner.view, -1f);
+            base.Init(owner);
+            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising", 1f, owner.view, owner.view);
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
         }
 

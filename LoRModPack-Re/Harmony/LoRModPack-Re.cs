@@ -100,6 +100,9 @@ namespace LoRModPack_Re21341.Harmony
                 case 10000005:
                     __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
                     return;
+                case 10000006:
+                    __result = ModParameters.ArtWorks["WiltonDefault_Re21341"];
+                    return;
                 case 10000007:
                 case 10000008:
                 case 10000009:
@@ -129,6 +132,9 @@ namespace LoRModPack_Re21341.Harmony
                     return;
                 case 10000005:
                     __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
+                    return;
+                case 10000006:
+                    __result = ModParameters.ArtWorks["WiltonDefault_Re21341"];
                     return;
                 case 10000007:
                 case 10000008:

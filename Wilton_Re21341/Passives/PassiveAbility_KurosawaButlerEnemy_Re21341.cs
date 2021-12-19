@@ -13,7 +13,7 @@ using Wilton_Re21341.Buffs;
 
 namespace Wilton_Re21341.Passives
 {
-    public class PassiveAbility_KurosawaButler_Re21341 : PassiveAbilityBase
+    public class PassiveAbility_KurosawaButlerEnemy_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
         public override void OnWaveStart()

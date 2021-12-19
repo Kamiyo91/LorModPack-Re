@@ -8,7 +8,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_HorizonSlash_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 5;
+        private const int Check = 6;
         private BattleUnitModel _target;
         public override void OnUseCard()
         {

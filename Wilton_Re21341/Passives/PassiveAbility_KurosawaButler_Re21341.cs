@@ -13,7 +13,7 @@ using Wilton_Re21341.Buffs;
 
 namespace Wilton_Re21341.Passives
 {
-    public class PassiveAbility_KurosawaButlerEnemy_Re21341 : PassiveAbilityBase
+    public class PassiveAbility_KurosawaButler_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
         public override void OnWaveStart()
@@ -22,6 +22,7 @@ namespace Wilton_Re21341.Passives
             {
                 Owner = owner,
                 HasEgo = true,
+                HasEgoAttack = true,
                 EgoType = typeof(BattleUnitBuf_Vengeance_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 47),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 48),
@@ -37,17 +38,13 @@ namespace Wilton_Re21341.Passives
                     }
                 }
             });
+            UnitUtil.CheckSkinProjection(owner);
         }
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf buf, int stack, BattleUnitModel target)
         {
             if (owner.bufListDetail.HasBuf<BattleUnitBuf_Vengeance_Re21341>()) return stack + 1;
             return stack;
-        }
-        public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
-        {
-            _util.SurviveCheck(dmg);
-            return base.BeforeTakeDamage(attacker, dmg);
         }
 
         public override void OnStartBattle()

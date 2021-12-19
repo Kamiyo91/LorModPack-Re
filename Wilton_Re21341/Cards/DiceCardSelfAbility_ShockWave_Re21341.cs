@@ -8,7 +8,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_ShockWave_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 3;
+        private const int Check = 4;
         private BattleUnitModel _target;
         public override void OnUseCard()
         {
