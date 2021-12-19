@@ -52,6 +52,12 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
             harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
                 null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
+            harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("StageController_RoundEndPhase_ChoiceEmotionCard");
+            harmony.Patch(typeof(StageController).GetMethod("RoundEndPhase_ChoiceEmotionCard", AccessTools.all),
+                new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -60,6 +66,22 @@ namespace LoRModPack_Re21341.Harmony
             LocalizeUtil.RemoveError();
         }
 
+        public static bool StageController_RoundEndPhase_ChoiceEmotionCard(StageController __instance,
+            ref bool __result)
+        {
+            var stageModel = (StageModel)__instance.GetType().GetField("_stageModel", AccessTools.all)?.GetValue(__instance);
+            if (stageModel?.ClassInfo.id != null && !ModParameters.BannedEmotionStages.ContainsKey(stageModel?.ClassInfo.id)) return true;
+            if (ModParameters.BannedEmotionStages.FirstOrDefault(x => x.Key.Equals(stageModel?.ClassInfo.id)).Value)
+            {
+                var currentWaveModel = __instance.GetCurrentWaveModel();
+                if (currentWaveModel != null && currentWaveModel.HasSkillPoint())
+                    currentWaveModel.PickRandomEmotionCard();
+            }
+            SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
+            __result = true;
+            return false;
+
+        }
         public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
         {
             if (__instance.id.packageId != ModParameters.PackageId) return;
@@ -122,29 +144,31 @@ namespace LoRModPack_Re21341.Harmony
 
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
-            if (__instance.BookId.packageId == ModParameters.PackageId &&
-                ModParameters.KeypageWithOnlyCardsList.Keys.Contains(__instance.BookId.id))
-                ____onlyCards.AddRange(ModParameters.KeypageWithOnlyCardsList
-                    .FirstOrDefault(x => x.Key.Equals(__instance.BookId.id)).Value.Select(id =>
-                        ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
+            if (__instance.BookId.packageId != ModParameters.PackageId) return;
+            var onlyCards = ModParameters.OnlyCardKeywords.FirstOrDefault(x => x.Item3 == __instance.BookId.id)?.Item2;
+            if (onlyCards != null)
+                ____onlyCards.AddRange(onlyCards.Select(id => ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
         }
 
-        public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, StageModel stage,
-            LibraryFloorModel floor)
+        public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, List<UnitBattleDataModel> ____unitList, StageModel stage)
         {
             if (stage.ClassInfo.id.packageId != ModParameters.PackageId) return;
-            foreach (var unitDataModel in floor.GetUnitDataList())
-                switch (stage.ClassInfo.id.id)
-                {
-                    case 1:
-                        UnitUtil.ClearCharList(__instance);
-                        UnitUtil.AddUnitSephiraOnly(__instance, stage, unitDataModel);
-                        return;
-                    case 4:
-                        UnitUtil.ClearCharList(__instance);
-                        UnitUtil.AddUnitSephiraOnly(__instance, stage, unitDataModel);
-                        return;
-                }
+            switch (stage.ClassInfo.id.id)
+            {
+                case 1:
+                    ____unitList.Clear();
+                    UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
+                    return;
+                case 4:
+                    ____unitList.Clear();
+                    UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
+                    return;
+                case 6:
+                    if (__instance.Sephirah == SephirahType.Keter) ____unitList.Clear();
+                    UnitUtil.AddCustomUnits(__instance, stage, ____unitList, 6);
+                    return;
+
+            }
         }
 
         [HarmonyPriority(0)]
@@ -159,6 +183,12 @@ namespace LoRModPack_Re21341.Harmony
                     ModParameters.SkinNameIds.FirstOrDefault(x => newBook.ClassInfo.CharacterSkin.Contains(x.Item1))
                         ?.Item3
                 };
+        }
+
+        public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
+        {
+            if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
+                ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }
 
         public static void TextDataModel_InitTextData(string currentLanguage)

@@ -212,21 +212,32 @@ namespace Util_Re21341
             battleCardResultLog?.SetPassiveAbility(passive);
         }
 
-        public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage, UnitDataModel data)
+        public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage, List<UnitBattleDataModel> unitList)
         {
-            var list = (List<UnitBattleDataModel>)instance.GetType().GetField("_unitList", AccessTools.all)
-                ?.GetValue(instance);
-            var unitBattleDataModel = new UnitBattleDataModel(stage, data);
-            if (!unitBattleDataModel.unitData.isSephirah) return;
-            unitBattleDataModel.Init();
-            list?.Add(unitBattleDataModel);
+            var sephirahs = new List<UnitBattleDataModel>();
+            sephirahs.AddRange(instance._floorModel.GetUnitDataList()
+            .Where(x => x.isSephirah)
+            .Select(unit => InitUnitDefault(stage, unit)));
+            unitList?.AddRange(sephirahs);
         }
-
-        public static void ClearCharList(StageLibraryFloorModel instance)
+        public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage, List<UnitBattleDataModel> unitList, int dictionaryId)
         {
-            var list = (List<UnitBattleDataModel>)instance.GetType().GetField("_unitList", AccessTools.all)
-                ?.GetValue(instance);
-            list?.Clear();
+            var stageParameters =
+                ModParameters.PreBattleUnits.FirstOrDefault(x =>
+                    x.Item3.Contains(instance.Sephirah) && x.Item1 == dictionaryId);
+            if (stageParameters == null) return;
+            foreach (var unitParameters in stageParameters.Item2.Zip(stageParameters.Item4, (id, name) => new { UnitId = id, UnitName = name }))
+            {
+                var unitDataModel = new UnitDataModel(new LorId(ModParameters.PackageId, unitParameters.UnitId), instance.Sephirah, true);
+                unitDataModel.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, unitParameters.UnitId));
+                unitDataModel.isSephirah = false;
+                unitDataModel.SetCustomName(ModParameters.NameTexts.FirstOrDefault(x => x.Key == unitParameters.UnitName).Value);
+                unitDataModel.CreateDeckByDeckInfo();
+                unitDataModel.forceItemChangeLock = true;
+                var unitBattleDataModel = new UnitBattleDataModel(stage, unitDataModel);
+                unitBattleDataModel.Init();
+                unitList.Add(unitBattleDataModel);
+            }
         }
 
         public static void FillBaseUnit(StageLibraryFloorModel floor)
@@ -318,27 +329,20 @@ namespace Util_Re21341
 
         private static List<int> GetAllOnlyCardsId()
         {
-            var onlyPageCardList = new List<int>(ModParameters.HayateCardList.Count +
-                                                 ModParameters.KamiyoCardList.Count + ModParameters.MioCardList.Count +
-                                                 ModParameters.SamuraiCardList.Count);
-            onlyPageCardList.AddRange(ModParameters.HayateCardList);
-            onlyPageCardList.AddRange(ModParameters.MioCardList);
-            onlyPageCardList.AddRange(ModParameters.KamiyoCardList);
-            onlyPageCardList.AddRange(ModParameters.SamuraiCardList);
+            var onlyPageCardList = new List<int>();
+            foreach (var cardIds in ModParameters.OnlyCardKeywords.Select(x => x.Item2))
+            {
+                onlyPageCardList.AddRange(cardIds);
+            }
             return onlyPageCardList;
         }
 
         private static IEnumerable<string> GetKeywordsList(int id)
         {
-            if (ModParameters.KamiyoCardList.Contains(id))
-                return new List<string> { "LoRModPage_Re21341", "KamiyoPage_Re21341" };
-            if (ModParameters.MioCardList.Contains(id))
-                return new List<string> { "LoRModPage_Re21341", "MioPage_Re21341" };
-            if (ModParameters.HayateCardList.Contains(id))
-                return new List<string> { "LoRModPage_Re21341", "HayatePage_Re21341" };
-            return ModParameters.SamuraiCardList.Contains(id)
-                ? new List<string> { "LoRModPage_Re21341", "SamuraiPage_Re21341" }
-                : new List<string> { "LoRModPage_Re21341" };
+            var keyword = ModParameters.OnlyCardKeywords.FirstOrDefault(x => x.Item2.Contains(id))?.Item1;
+            return string.IsNullOrEmpty(keyword)
+                ? new List<string> { "LoRModPage_Re21341" }
+                : new List<string> { "LoRModPage_Re21341", keyword };
         }
 
         private static DiceCardXmlInfo CardOptionChange(DiceCardXmlInfo cardXml, List<CardOption> option,

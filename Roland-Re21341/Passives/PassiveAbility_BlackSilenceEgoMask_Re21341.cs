@@ -24,7 +24,6 @@ namespace Roland_Re21341.Passives
                 EgoType = typeof(BattleUnitBuf_BlackSilenceEgoMask_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 31),
                 HasEgoAttack = true,
-                RefreshUI = true,
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 30)
             });
         }

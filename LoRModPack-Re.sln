@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roland-Re21341", "Roland-Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionalBurstPassive-Re21341", "EmotionalBurstPassive-Re21341\EmotionalBurstPassive-Re21341.csproj", "{AFDCA036-F151-46A9-919F-AA3ABC08DEC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wilton_Re21341", "Wilton_Re21341\Wilton_Re21341.csproj", "{DE205ABD-5B43-41BE-BEE4-5B2FD3E4224C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{AFDCA036-F151-46A9-919F-AA3ABC08DEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFDCA036-F151-46A9-919F-AA3ABC08DEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFDCA036-F151-46A9-919F-AA3ABC08DEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE205ABD-5B43-41BE-BEE4-5B2FD3E4224C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE205ABD-5B43-41BE-BEE4-5B2FD3E4224C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE205ABD-5B43-41BE-BEE4-5B2FD3E4224C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE205ABD-5B43-41BE-BEE4-5B2FD3E4224C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
