@@ -52,5 +52,10 @@ namespace Wilton_Re21341.Buffs
 
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
         }
+
+        public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
+        {
+            return 1;
+        }
     }
 }

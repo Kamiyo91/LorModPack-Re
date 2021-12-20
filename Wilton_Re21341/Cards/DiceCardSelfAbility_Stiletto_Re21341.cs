@@ -4,7 +4,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_Stiletto_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 3;
+        private const int Check = 2;
         private BattleUnitModel _target;
 
         public override void OnUseCard()

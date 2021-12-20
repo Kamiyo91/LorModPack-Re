@@ -30,19 +30,13 @@ namespace Wilton_Re21341.Passives
                 {
                     new AbnormalityCardDialog
                     {
-                        id = "WiltonEnemy",
+                        id = "Wilton",
                         dialog = ModParameters.EffectTexts
-                            .FirstOrDefault(x => x.Key.Equals("WiltonEnemyEgoActive1_Re21341")).Value.Desc
+                            .FirstOrDefault(x => x.Key.Equals("WiltonEgoActive1_Re21341")).Value.Desc
                     }
                 }
             });
             UnitUtil.CheckSkinProjection(owner);
-        }
-
-        public override int OnGiveKeywordBufByCard(BattleUnitBuf buf, int stack, BattleUnitModel target)
-        {
-            if (owner.bufListDetail.HasBuf<BattleUnitBuf_Vengeance_Re21341>()) return stack + 1;
-            return stack;
         }
 
         public override void OnStartBattle()

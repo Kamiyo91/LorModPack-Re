@@ -4,7 +4,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_MysticEyeVision_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 6;
+        private const int Check = 5;
         private BattleUnitModel _target;
 
 

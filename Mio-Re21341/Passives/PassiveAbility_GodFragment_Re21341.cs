@@ -26,7 +26,7 @@ namespace Mio_Re21341.Passives
             {
                 Owner = owner,
                 Hp = 0,
-                SetHp = 10,
+                SetHp = 65,
                 Survive = true,
                 HasEgo = true,
                 HasEgoAttack = true,

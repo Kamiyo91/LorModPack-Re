@@ -38,6 +38,8 @@ namespace Util_Re21341.BaseClass
             if (_model.ReloadMassAttackOnLethal) SetCounter(_model.MaxCounter);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SetHp);
+            _model.Owner.breakDetail.ResetGauge();
+            _model.Owner.breakDetail.RecoverBreakLife(1, true);
             if (_model.HasSurviveAbDialog)
                 UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.SurviveAbDialogList,
                     _model.SurviveAbDialogColor);

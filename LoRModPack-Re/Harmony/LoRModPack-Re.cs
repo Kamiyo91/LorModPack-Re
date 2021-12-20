@@ -58,13 +58,16 @@ namespace LoRModPack_Re21341.Harmony
                 {
                     typeof(string),
                     typeof(string)
-                }, null), new HarmonyMethod(method));
+                }, null), null,new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("WorkshopSkinDataSetter_SetMotionData");
             harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("StageController_RoundEndPhase_ChoiceEmotionCard");
             harmony.Patch(typeof(StageController).GetMethod("RoundEndPhase_ChoiceEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
+            harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
+                null,new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -217,8 +220,7 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
-        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion,
-            ClothCustomizeData data)
+        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion)
         {
             if (__instance.Appearance.GetCharacterMotion(motion) != null) return;
             var item = UnitUtil.CopyCharacterMotion(__instance.Appearance, motion);
@@ -246,11 +248,11 @@ namespace LoRModPack_Re21341.Harmony
                 };
         }
 
-        //public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
-        //{
-        //    if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
-        //        ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
-        //}
+        public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
+        {
+            if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
+                ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
+        }
 
         public static void TextDataModel_InitTextData(string currentLanguage)
         {

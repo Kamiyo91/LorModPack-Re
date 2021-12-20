@@ -57,12 +57,6 @@ namespace Wilton_Re21341.Passives
             });
         }
 
-        public override int OnGiveKeywordBufByCard(BattleUnitBuf buf, int stack, BattleUnitModel target)
-        {
-            if (owner.bufListDetail.HasBuf<BattleUnitBuf_Vengeance_Re21341>()) return stack + 1;
-            return stack;
-        }
-
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.MechHpCheck(dmg);

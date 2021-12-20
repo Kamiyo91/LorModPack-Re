@@ -236,6 +236,7 @@ namespace Util_Re21341
                 var unitDataModel = new UnitDataModel(new LorId(ModParameters.PackageId, unitParameters.UnitId),
                     instance.Sephirah, true);
                 unitDataModel.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, unitParameters.UnitId));
+                unitDataModel.bookItem.ClassInfo.categoryList.Add(BookCategory.DeckFixed);
                 unitDataModel.isSephirah = false;
                 unitDataModel.SetCustomName(ModParameters.NameTexts
                     .FirstOrDefault(x => x.Key == unitParameters.UnitName).Value);

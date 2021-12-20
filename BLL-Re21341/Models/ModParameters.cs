@@ -50,18 +50,6 @@ namespace BLL_Re21341.Models
         {
             new SkinNames
             {
-                Name = "KamiyoMask_Re21341",
-                SkinParameters = new List<SkinParameters>
-                {
-                    new SkinParameters
-                    {
-                        PivotPosX = float.Parse("0"), PivotPosY = float.Parse("-400"), Motion = ActionDetail.Special,
-                        FileName = "Special.png"
-                    }
-                }
-            },
-            new SkinNames
-            {
                 Name = "Wilton_Re21341",
                 SkinParameters = new List<SkinParameters>
                 {
