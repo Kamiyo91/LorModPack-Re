@@ -11,6 +11,7 @@ using TMPro;
 using UI;
 using UnityEngine;
 using Util_Re21341.CommonBuffs;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Util_Re21341
@@ -411,6 +412,18 @@ namespace Util_Re21341
                          passive.id.packageId == ModParameters.PackageId &&
                          ModParameters.UntransferablePassives.Contains(passive.id.id)))
                 passive.CanGivePassive = false;
+        }
+        public static CharacterMotion CopyCharacterMotion(CharacterAppearance apprearance, ActionDetail detail)
+        {
+            var characterMotion = Object.Instantiate(apprearance._motionList[0]);
+            characterMotion.transform.parent = apprearance._motionList[0].transform.parent;
+            characterMotion.transform.name = apprearance._motionList[0].transform.name;
+            characterMotion.actionDetail = detail;
+            characterMotion.motionSpriteSet.Clear();
+            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Body));
+            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Head));
+            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Body));
+            return characterMotion;
         }
     }
 }

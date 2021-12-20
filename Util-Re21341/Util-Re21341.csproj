@@ -90,12 +90,14 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEnd_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalForTestPurpose_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToNull_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_WillOWispAura_Re21341.cs" />
     <Compile Include="CommonCards\DiceCardSelfAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_FragmentOfPowerDrop_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_NotEquip_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_WillOTheWisp_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
     <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />
     <Compile Include="LocalizeUtil.cs" />

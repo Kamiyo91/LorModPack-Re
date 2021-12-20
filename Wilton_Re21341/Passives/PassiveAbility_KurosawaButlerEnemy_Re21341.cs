@@ -22,8 +22,8 @@ namespace Wilton_Re21341.Passives
             {
                 Owner = owner,
                 Hp = 0,
-                SetHp = 70,
-                MechHp = 151,
+                SetHp = 61,
+                MechHp = 271,
                 Counter = 0,
                 MaxCounter = 5,
                 Survive = true,

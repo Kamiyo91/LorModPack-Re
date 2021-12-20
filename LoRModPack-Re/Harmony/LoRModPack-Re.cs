@@ -52,9 +52,14 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
             harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
                 null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
-            harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
-                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("CustomizingBookSkinLoader_GetWorkshopBookSkinData");
+            harmony.Patch(typeof(CustomizingBookSkinLoader).GetMethod("GetWorkshopBookSkinData", AccessTools.all, null, new[]
+            {
+                typeof(string),
+                typeof(string)
+            }, null),new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("WorkshopSkinDataSetter_SetMotionData");
+            harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("StageController_RoundEndPhase_ChoiceEmotionCard");
             harmony.Patch(typeof(StageController).GetMethod("RoundEndPhase_ChoiceEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
@@ -177,6 +182,45 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
+        public static void CustomizingBookSkinLoader_GetWorkshopBookSkinData(CustomizingBookSkinLoader __instance,
+            string id, string name)
+        {
+            if (id != ModParameters.PackageId || !ModParameters.SkinParameters.Exists(x => x.Name.Contains(name))) return;
+            var customSpecialSkinData = ModParameters.SkinParameters.FirstOrDefault(x => x.Name.Contains(name));
+            var workshopSkinData = ((Dictionary<string, List<WorkshopSkinData>>)__instance.GetType()
+                    .GetField("_bookSkinData", AccessTools.all).GetValue(__instance))[id].Find(x => x.dataName == name);
+            var clothCustomizeData = workshopSkinData.dic[ActionDetail.Default];
+            foreach (var skinData in customSpecialSkinData.SkinParameters.Where(x => !workshopSkinData.dic.ContainsKey(x.Motion)))
+            {
+                var value = new ClothCustomizeData
+                {
+                    spritePath = clothCustomizeData.spritePath.Replace("Default.png", skinData.FileName),
+                    frontSpritePath = clothCustomizeData.spritePath.Replace("Default.png", skinData.FileName),
+                    hasFrontSprite = clothCustomizeData.hasFrontSprite,
+                    pivotPos = new Vector2((skinData.PivotPosX + 512f) / 1024f, (skinData.PivotPosY + 512f) / 1024f),
+                    headPos = new Vector2(skinData.PivotHeadX / 100f, skinData.PivotHeadY / 100f),
+                    headRotation = skinData.HeadRotation,
+                    direction = CharacterMotion.MotionDirection.FrontView,
+                    headEnabled = clothCustomizeData.headEnabled,
+                    hasFrontSpriteFile = clothCustomizeData.hasFrontSpriteFile,
+                    hasSpriteFile = clothCustomizeData.hasSpriteFile
+                };
+                workshopSkinData.dic.Add(skinData.Motion, value);
+            }
+        }
+        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion, ClothCustomizeData data)
+        {
+            if (__instance.Appearance.GetCharacterMotion(motion) != null) return;
+            var item = UnitUtil.CopyCharacterMotion(__instance.Appearance, motion);
+            __instance.Appearance._motionList.Add(item);
+            if (__instance.Appearance._motionList.Count <= 0) return;
+            foreach (var characterMotion in __instance.Appearance._motionList.Where(characterMotion => !__instance.Appearance.CharacterMotions.ContainsKey(characterMotion.actionDetail)))
+            {
+                __instance.Appearance.CharacterMotions.Add(characterMotion.actionDetail, characterMotion);
+                characterMotion.gameObject.SetActive(false);
+            }
+        }
+
         [HarmonyPriority(0)]
         public static void UnitDataModel_EquipBook(BookModel newBook, bool force)
         {
@@ -191,11 +235,11 @@ namespace LoRModPack_Re21341.Harmony
                 };
         }
 
-        public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
-        {
-            if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
-                ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
-        }
+        //public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
+        //{
+        //    if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
+        //        ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
+        //}
 
         public static void TextDataModel_InitTextData(string currentLanguage)
         {
