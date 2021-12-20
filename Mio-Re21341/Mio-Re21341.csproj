@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Buffs\BattleUnitBuf_GodAuraRelease_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_CorruptedGodAuraRelease_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_KurosawaEmblem_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_EnergyRelease_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_GodAuraCard_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_MioMassAttack_Re21341.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Passives\PassiveAbility_GodFragment_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HiddenBlade_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MioMemory_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_KurosawaEmblem_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

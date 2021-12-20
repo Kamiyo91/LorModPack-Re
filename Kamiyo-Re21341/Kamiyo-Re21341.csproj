@@ -58,7 +58,7 @@
     <Compile Include="Buffs\BattleUnitBuf_NearDeathNpc_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_PossessorOfMioLight.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_PossessorOfMioLight_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_AlterEgoCard_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireAbsorb_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireBlade_Re21341.cs" />

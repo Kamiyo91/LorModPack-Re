@@ -4,9 +4,9 @@ using Sound;
 
 namespace Kamiyo_Re21341.Buffs
 {
-    public class BattleUnitBuf_PossessorOfMioLight : BattleUnitBuf
+    public class BattleUnitBuf_PossessorOfMioLight_Re21341 : BattleUnitBuf
     {
-        public BattleUnitBuf_PossessorOfMioLight()
+        public BattleUnitBuf_PossessorOfMioLight_Re21341()
         {
             stack = 0;
         }
