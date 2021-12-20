@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Util_Re21341.CommonPassives
 {
@@ -12,7 +8,7 @@ namespace Util_Re21341.CommonPassives
         {
             if (BattleObjectManager.instance.GetAliveList(owner.faction)
                     .Count(x => x.passiveDetail.HasPassive<PassiveAbility_WillOTheWisp_Re21341>()) <= 2) return;
-            owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Strength,1,owner);
+            owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Strength, 1, owner);
             owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Endurance, 1, owner);
         }
     }

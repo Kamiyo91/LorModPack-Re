@@ -53,13 +53,15 @@ namespace LoRModPack_Re21341.Harmony
             harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("CustomizingBookSkinLoader_GetWorkshopBookSkinData");
-            harmony.Patch(typeof(CustomizingBookSkinLoader).GetMethod("GetWorkshopBookSkinData", AccessTools.all, null, new[]
-            {
-                typeof(string),
-                typeof(string)
-            }, null),new HarmonyMethod(method));
+            harmony.Patch(typeof(CustomizingBookSkinLoader).GetMethod("GetWorkshopBookSkinData", AccessTools.all, null,
+                new[]
+                {
+                    typeof(string),
+                    typeof(string)
+                }, null), new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("WorkshopSkinDataSetter_SetMotionData");
-            harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),new HarmonyMethod(method));
+            harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),
+                new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("StageController_RoundEndPhase_ChoiceEmotionCard");
             harmony.Patch(typeof(StageController).GetMethod("RoundEndPhase_ChoiceEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
@@ -74,19 +76,22 @@ namespace LoRModPack_Re21341.Harmony
         public static bool StageController_RoundEndPhase_ChoiceEmotionCard(StageController __instance,
             ref bool __result)
         {
-            var stageModel = (StageModel)__instance.GetType().GetField("_stageModel", AccessTools.all)?.GetValue(__instance);
-            if (stageModel?.ClassInfo.id != null && !ModParameters.BannedEmotionStages.ContainsKey(stageModel?.ClassInfo.id)) return true;
+            var stageModel =
+                (StageModel)__instance.GetType().GetField("_stageModel", AccessTools.all)?.GetValue(__instance);
+            if (stageModel?.ClassInfo.id != null &&
+                !ModParameters.BannedEmotionStages.ContainsKey(stageModel?.ClassInfo.id)) return true;
             if (ModParameters.BannedEmotionStages.FirstOrDefault(x => x.Key.Equals(stageModel?.ClassInfo.id)).Value)
             {
                 var currentWaveModel = __instance.GetCurrentWaveModel();
                 if (currentWaveModel != null && currentWaveModel.HasSkillPoint())
                     currentWaveModel.PickRandomEmotionCard();
             }
+
             SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
             __result = true;
             return false;
-
         }
+
         public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
         {
             if (__instance.id.packageId != ModParameters.PackageId) return;
@@ -158,10 +163,12 @@ namespace LoRModPack_Re21341.Harmony
             if (__instance.BookId.packageId != ModParameters.PackageId) return;
             var onlyCards = ModParameters.OnlyCardKeywords.FirstOrDefault(x => x.Item3 == __instance.BookId.id)?.Item2;
             if (onlyCards != null)
-                ____onlyCards.AddRange(onlyCards.Select(id => ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
+                ____onlyCards.AddRange(onlyCards.Select(id =>
+                    ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
         }
 
-        public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance, List<UnitBattleDataModel> ____unitList, StageModel stage)
+        public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance,
+            List<UnitBattleDataModel> ____unitList, StageModel stage)
         {
             if (stage.ClassInfo.id.packageId != ModParameters.PackageId) return;
             switch (stage.ClassInfo.id.id)
@@ -178,19 +185,20 @@ namespace LoRModPack_Re21341.Harmony
                     if (__instance.Sephirah == SephirahType.Keter) ____unitList.Clear();
                     UnitUtil.AddCustomUnits(__instance, stage, ____unitList, 6);
                     return;
-
             }
         }
 
         public static void CustomizingBookSkinLoader_GetWorkshopBookSkinData(CustomizingBookSkinLoader __instance,
             string id, string name)
         {
-            if (id != ModParameters.PackageId || !ModParameters.SkinParameters.Exists(x => x.Name.Contains(name))) return;
+            if (id != ModParameters.PackageId ||
+                !ModParameters.SkinParameters.Exists(x => x.Name.Contains(name))) return;
             var customSpecialSkinData = ModParameters.SkinParameters.FirstOrDefault(x => x.Name.Contains(name));
             var workshopSkinData = ((Dictionary<string, List<WorkshopSkinData>>)__instance.GetType()
-                    .GetField("_bookSkinData", AccessTools.all).GetValue(__instance))[id].Find(x => x.dataName == name);
+                .GetField("_bookSkinData", AccessTools.all).GetValue(__instance))[id].Find(x => x.dataName == name);
             var clothCustomizeData = workshopSkinData.dic[ActionDetail.Default];
-            foreach (var skinData in customSpecialSkinData.SkinParameters.Where(x => !workshopSkinData.dic.ContainsKey(x.Motion)))
+            foreach (var skinData in customSpecialSkinData.SkinParameters.Where(x =>
+                         !workshopSkinData.dic.ContainsKey(x.Motion)))
             {
                 var value = new ClothCustomizeData
                 {
@@ -208,13 +216,16 @@ namespace LoRModPack_Re21341.Harmony
                 workshopSkinData.dic.Add(skinData.Motion, value);
             }
         }
-        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion, ClothCustomizeData data)
+
+        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion,
+            ClothCustomizeData data)
         {
             if (__instance.Appearance.GetCharacterMotion(motion) != null) return;
             var item = UnitUtil.CopyCharacterMotion(__instance.Appearance, motion);
             __instance.Appearance._motionList.Add(item);
             if (__instance.Appearance._motionList.Count <= 0) return;
-            foreach (var characterMotion in __instance.Appearance._motionList.Where(characterMotion => !__instance.Appearance.CharacterMotions.ContainsKey(characterMotion.actionDetail)))
+            foreach (var characterMotion in __instance.Appearance._motionList.Where(characterMotion =>
+                         !__instance.Appearance.CharacterMotions.ContainsKey(characterMotion.actionDetail)))
             {
                 __instance.Appearance.CharacterMotions.Add(characterMotion.actionDetail, characterMotion);
                 characterMotion.gameObject.SetActive(false);

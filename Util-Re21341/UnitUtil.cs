@@ -213,26 +213,32 @@ namespace Util_Re21341
             battleCardResultLog?.SetPassiveAbility(passive);
         }
 
-        public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage, List<UnitBattleDataModel> unitList)
+        public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage,
+            List<UnitBattleDataModel> unitList)
         {
             var sephirahs = new List<UnitBattleDataModel>();
             sephirahs.AddRange(instance._floorModel.GetUnitDataList()
-            .Where(x => x.isSephirah)
-            .Select(unit => InitUnitDefault(stage, unit)));
+                .Where(x => x.isSephirah)
+                .Select(unit => InitUnitDefault(stage, unit)));
             unitList?.AddRange(sephirahs);
         }
-        public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage, List<UnitBattleDataModel> unitList, int dictionaryId)
+
+        public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage,
+            List<UnitBattleDataModel> unitList, int dictionaryId)
         {
             var stageParameters =
                 ModParameters.PreBattleUnits.FirstOrDefault(x =>
                     x.Item3.Contains(instance.Sephirah) && x.Item1 == dictionaryId);
             if (stageParameters == null) return;
-            foreach (var unitParameters in stageParameters.Item2.Zip(stageParameters.Item4, (id, name) => new { UnitId = id, UnitName = name }))
+            foreach (var unitParameters in stageParameters.Item2.Zip(stageParameters.Item4,
+                         (id, name) => new { UnitId = id, UnitName = name }))
             {
-                var unitDataModel = new UnitDataModel(new LorId(ModParameters.PackageId, unitParameters.UnitId), instance.Sephirah, true);
+                var unitDataModel = new UnitDataModel(new LorId(ModParameters.PackageId, unitParameters.UnitId),
+                    instance.Sephirah, true);
                 unitDataModel.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, unitParameters.UnitId));
                 unitDataModel.isSephirah = false;
-                unitDataModel.SetCustomName(ModParameters.NameTexts.FirstOrDefault(x => x.Key == unitParameters.UnitName).Value);
+                unitDataModel.SetCustomName(ModParameters.NameTexts
+                    .FirstOrDefault(x => x.Key == unitParameters.UnitName).Value);
                 unitDataModel.CreateDeckByDeckInfo();
                 unitDataModel.forceItemChangeLock = true;
                 var unitBattleDataModel = new UnitBattleDataModel(stage, unitDataModel);
@@ -332,9 +338,7 @@ namespace Util_Re21341
         {
             var onlyPageCardList = new List<int>();
             foreach (var cardIds in ModParameters.OnlyCardKeywords.Select(x => x.Item2))
-            {
                 onlyPageCardList.AddRange(cardIds);
-            }
             return onlyPageCardList;
         }
 
@@ -413,6 +417,7 @@ namespace Util_Re21341
                          ModParameters.UntransferablePassives.Contains(passive.id.id)))
                 passive.CanGivePassive = false;
         }
+
         public static CharacterMotion CopyCharacterMotion(CharacterAppearance apprearance, ActionDetail detail)
         {
             var characterMotion = Object.Instantiate(apprearance._motionList[0]);
@@ -420,9 +425,15 @@ namespace Util_Re21341
             characterMotion.transform.name = apprearance._motionList[0].transform.name;
             characterMotion.actionDetail = detail;
             characterMotion.motionSpriteSet.Clear();
-            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Body));
-            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Head));
-            characterMotion.motionSpriteSet.Add(new SpriteSet(characterMotion.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>(), CharacterAppearanceType.Body));
+            characterMotion.motionSpriteSet.Add(new SpriteSet(
+                characterMotion.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(),
+                CharacterAppearanceType.Body));
+            characterMotion.motionSpriteSet.Add(new SpriteSet(
+                characterMotion.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>(),
+                CharacterAppearanceType.Head));
+            characterMotion.motionSpriteSet.Add(new SpriteSet(
+                characterMotion.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>(),
+                CharacterAppearanceType.Body));
             return characterMotion;
         }
     }

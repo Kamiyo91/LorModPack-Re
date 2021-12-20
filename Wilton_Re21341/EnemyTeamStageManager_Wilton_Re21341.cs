@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using BLL_Re21341.Models;
-using LOR_XML;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
 using Util_Re21341.CustomMapUtility.Assemblies;
@@ -12,11 +7,12 @@ using Wilton_Re21341.Passives;
 
 namespace Wilton_Re21341
 {
-    public class EnemyTeamStageManager_Wilton_Re21341 :EnemyTeamStageManager
+    public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
         private BattleUnitModel _mainEnemyModel;
-        private PassiveAbility_KurosawaButlerEnemy_Re21341 _wiltonEnemyPassive;
         private bool _phaseChanged;
+        private PassiveAbility_KurosawaButlerEnemy_Re21341 _wiltonEnemyPassive;
+
         public override void OnWaveStart()
         {
             CustomMapHandler.InitCustomMap("Wilton_Re21341", new Wilton_Re21341MapManager(), false, true, 0.5f, 0.2f);
@@ -25,10 +21,12 @@ namespace Wilton_Re21341
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
             if (_mainEnemyModel != null)
                 _wiltonEnemyPassive =
-                    _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_KurosawaButlerEnemy_Re21341) as
+                    _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_KurosawaButlerEnemy_Re21341)
+                        as
                         PassiveAbility_KurosawaButlerEnemy_Re21341;
             _phaseChanged = false;
         }
+
         public override void OnRoundEndTheLast()
         {
             CheckPhase();

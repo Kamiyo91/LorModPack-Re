@@ -1,12 +1,9 @@
-﻿using BLL_Re21341.Models.Enum;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 using Wilton_Re21341.Buffs;
@@ -16,6 +13,7 @@ namespace Wilton_Re21341.Passives
     public class PassiveAbility_KurosawaButler_Re21341 : PassiveAbilityBase
     {
         private MechUtilBase _util;
+
         public override void OnWaveStart()
         {
             _util = new MechUtilBase(new MechUtilBaseModel

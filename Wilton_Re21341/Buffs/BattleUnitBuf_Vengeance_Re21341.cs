@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Battle.CreatureEffect;
-using BLL_Re21341.Models;
-using HarmonyLib;
+﻿using Battle.CreatureEffect;
 using Sound;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Wilton_Re21341.Buffs
 {
@@ -17,6 +8,7 @@ namespace Wilton_Re21341.Buffs
     {
         private const string Path = "6/RedHood_Emotion_Aura";
         private CreatureEffect _aura;
+
         public BattleUnitBuf_Vengeance_Re21341()
         {
             stack = 0;
@@ -26,11 +18,13 @@ namespace Wilton_Re21341.Buffs
         public override bool isAssimilation => true;
         protected override string keywordId => "Vengeance_Re21341";
         protected override string keywordIconId => "RedHood_Rage";
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
             PlayChangingEffect(owner);
         }
+
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(
@@ -39,6 +33,7 @@ namespace Wilton_Re21341.Buffs
                     power = 1
                 });
         }
+
         private void PlayChangingEffect(BattleUnitModel owner)
         {
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
@@ -54,8 +49,8 @@ namespace Wilton_Re21341.Buffs
                 gameObject.transform.localRotation = Quaternion.identity;
                 gameObject.transform.localScale = Vector3.one;
             }
+
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
         }
-
     }
 }

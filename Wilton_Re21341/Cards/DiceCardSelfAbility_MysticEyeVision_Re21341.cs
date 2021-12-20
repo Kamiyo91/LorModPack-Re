@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Wilton_Re21341.Cards
 {
@@ -11,7 +7,7 @@ namespace Wilton_Re21341.Cards
         private const int Check = 6;
         private BattleUnitModel _target;
 
-        
+
         public override void AfterGiveDamage(int damage, BattleUnitModel target)
         {
             _target = target;
@@ -20,8 +16,8 @@ namespace Wilton_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_target == null || _target.bufListDetail.GetActivatedBufList()
-                .Count(x => x.bufType == KeywordBuf.Vulnerable) < Check) return;
-            _target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable,10,owner);
+                    .Count(x => x.bufType == KeywordBuf.Vulnerable) < Check) return;
+            _target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 10, owner);
         }
     }
 }

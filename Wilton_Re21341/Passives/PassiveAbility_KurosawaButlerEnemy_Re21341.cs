@@ -1,12 +1,9 @@
-﻿using BLL_Re21341.Models.Enum;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL_Re21341.Models;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 using Wilton_Re21341.Buffs;
@@ -16,6 +13,7 @@ namespace Wilton_Re21341.Passives
     public class PassiveAbility_KurosawaButlerEnemy_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
+
         public override void OnWaveStart()
         {
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
@@ -41,7 +39,8 @@ namespace Wilton_Re21341.Passives
                     new AbnormalityCardDialog
                     {
                         id = "WiltonEnemy",
-                        dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("WiltonEnemySurvive1_Re21341"))
+                        dialog = ModParameters.EffectTexts
+                            .FirstOrDefault(x => x.Key.Equals("WiltonEnemySurvive1_Re21341"))
                             .Value.Desc
                     }
                 },
@@ -63,6 +62,7 @@ namespace Wilton_Re21341.Passives
             if (owner.bufListDetail.HasBuf<BattleUnitBuf_Vengeance_Re21341>()) return stack + 1;
             return stack;
         }
+
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.MechHpCheck(dmg);
@@ -87,6 +87,7 @@ namespace Wilton_Re21341.Passives
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
+
         public void SetCountToMax()
         {
             _util.SetCounter(5);

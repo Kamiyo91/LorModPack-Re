@@ -9,6 +9,7 @@ namespace Util_Re21341.CommonBuffs
             base.Init(owner);
             InitAuraAndPlaySound();
         }
+
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");

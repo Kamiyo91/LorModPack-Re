@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Wilton_Re21341.Cards
 {
@@ -10,6 +6,7 @@ namespace Wilton_Re21341.Cards
     {
         private const int Check = 4;
         private BattleUnitModel _target;
+
         public override void OnUseCard()
         {
             owner.allyCardDetail.DrawCards(1);
@@ -30,6 +27,7 @@ namespace Wilton_Re21341.Cards
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
+
             owner.allyCardDetail.DrawCards(1);
         }
     }

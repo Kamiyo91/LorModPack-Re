@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LOR_DiceSystem;
+﻿using LOR_DiceSystem;
 
 namespace Wilton_Re21341.Passives
 {
