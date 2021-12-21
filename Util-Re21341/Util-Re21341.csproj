@@ -103,6 +103,7 @@
     <Compile Include="LocalizeUtil.cs" />
     <Compile Include="MapUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkinUtil.cs" />
     <Compile Include="UnitUtil.cs" />
   </ItemGroup>
   <ItemGroup>
