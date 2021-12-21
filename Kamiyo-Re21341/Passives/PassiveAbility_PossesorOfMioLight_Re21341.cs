@@ -2,7 +2,7 @@
 
 namespace Kamiyo_Re21341.Passives
 {
-    public class PassiveAbility_PossesorOfMioLight : PassiveAbilityBase
+    public class PassiveAbility_PossesorOfMioLight_Re21341 : PassiveAbilityBase
     {
         public override void OnWaveStart()
         {

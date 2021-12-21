@@ -5,29 +5,26 @@ namespace Wilton_Re21341.Cards
     public class DiceCardSelfAbility_ShockWave_Re21341 : DiceCardSelfAbilityBase
     {
         private const int Check = 3;
-        private BattleUnitModel _target;
+        private bool _atkSuccess;
 
         public override void OnUseCard()
         {
+            _atkSuccess = false;
             owner.allyCardDetail.DrawCards(1);
         }
-
-        public override void AfterGiveDamage(int damage, BattleUnitModel target)
+        public override void OnSucceedAttack()
         {
-            _target = target;
+            _atkSuccess = true;
         }
-
         public override void OnEndBattle()
         {
-            if (_target == null || _target.bufListDetail.GetActivatedBufList()
-                    .Count(x => x.bufType == KeywordBuf.Vulnerable) < Check) return;
+            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList().Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
                          .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-
             owner.allyCardDetail.DrawCards(1);
         }
     }

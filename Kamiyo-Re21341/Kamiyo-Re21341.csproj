@@ -70,7 +70,7 @@
     <Compile Include="MapManager\Kamiyo1_Re21341MapManager.cs" />
     <Compile Include="Passives\PassiveAbility_AlterEgoNpc_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MaskOfPerceptionNpc_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_PossesorOfMioLight.cs" />
+    <Compile Include="Passives\PassiveAbility_PossesorOfMioLight_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_SixthSense_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_AlterEgoPlayer_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MaskOfPerception_Re21341.cs" />

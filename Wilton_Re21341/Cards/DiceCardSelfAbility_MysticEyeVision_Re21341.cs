@@ -5,19 +5,21 @@ namespace Wilton_Re21341.Cards
     public class DiceCardSelfAbility_MysticEyeVision_Re21341 : DiceCardSelfAbilityBase
     {
         private const int Check = 5;
-        private BattleUnitModel _target;
+        private bool _atkSuccess;
 
-
-        public override void AfterGiveDamage(int damage, BattleUnitModel target)
+        public override void OnUseCard()
         {
-            _target = target;
+            _atkSuccess = false;
+        }
+        public override void OnSucceedAttack()
+        {
+            _atkSuccess = true;
         }
 
         public override void OnEndBattle()
         {
-            if (_target == null || _target.bufListDetail.GetActivatedBufList()
-                    .Count(x => x.bufType == KeywordBuf.Vulnerable) < Check) return;
-            _target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 10, owner);
+            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList().Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
+            card.target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 10, owner);
         }
     }
 }
