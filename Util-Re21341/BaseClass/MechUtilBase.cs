@@ -63,6 +63,7 @@ namespace Util_Re21341.BaseClass
             if (_model.HasAdditionalPassive) _model.Owner.passiveDetail.AddPassive(_model.AdditionalPassiveId);
             _model.Owner.breakDetail.ResetGauge();
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
+            _model.Owner.breakDetail.nextTurnBreak = false;
             _model.EgoActivated = true;
         }
 

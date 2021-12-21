@@ -29,6 +29,7 @@ namespace Util_Re21341.BaseClass
             _model.Owner.SetHp(_model.MechHp);
             _model.Owner.breakDetail.ResetGauge();
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
+            _model.Owner.breakDetail.nextTurnBreak = false;
         }
 
         public override void SurviveCheck(int dmg)
@@ -40,6 +41,7 @@ namespace Util_Re21341.BaseClass
             _model.Owner.SetHp(_model.SetHp);
             _model.Owner.breakDetail.ResetGauge();
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
+            _model.Owner.breakDetail.nextTurnBreak = false;
             if (_model.HasSurviveAbDialog)
                 UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.SurviveAbDialogList,
                     _model.SurviveAbDialogColor);

@@ -19,7 +19,7 @@ namespace BLL_Re21341.Models
             new Tuple<string, List<int>, int>("MioPage_Re21341", new List<int> { 12, 13, 14, 15 }, 10000003),
             new Tuple<string, List<int>, int>("HayatePage_Re21341", new List<int> { 23, 24, 25, 26, 27 }, 10000005),
             new Tuple<string, List<int>, int>("SamuraiPage_Re21341", new List<int> { 3, 4, 5, 6, 7 }, 10000001),
-            new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 43, 44, 45, 46 }, 10000006)
+            new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 44, 45, 46 }, 10000006)
         };
 
         public static readonly List<int> PersonalCardList = new List<int>

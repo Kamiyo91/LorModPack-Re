@@ -258,6 +258,9 @@ namespace Util_Re21341
             var list2 = new List<string>();
             list.Add("0Harmony");
             list.Add("NAudio");
+            list.Add("Mono.Cecil");
+            list.Add("MonoMod.Utils");
+            list.Add("MonoMod.RuntimeDetour");
             using (var enumerator = Singleton<ModContentManager>.Instance.GetErrorLogs().GetEnumerator())
             {
                 while (enumerator.MoveNext())
