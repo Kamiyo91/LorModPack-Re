@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using BLL_Re21341.Models;
+using CustomInvitation;
 using HarmonyLib;
 using Mod;
 using UnityEngine;
@@ -68,7 +69,6 @@ namespace Util_Re21341
                         workshopSkinData.dic.Add(skinData.Motion, value);
                     }
                 }
-                Debug.LogError("Exit Skin Load");
             }
             catch (Exception ex)
             {

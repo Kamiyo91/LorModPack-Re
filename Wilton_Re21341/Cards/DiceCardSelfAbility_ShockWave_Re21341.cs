@@ -4,7 +4,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_ShockWave_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 3;
+        private const int Check = 2;
         private bool _atkSuccess;
 
         public override void OnUseCard()

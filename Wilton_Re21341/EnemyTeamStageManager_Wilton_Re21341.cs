@@ -63,9 +63,9 @@ namespace Wilton_Re21341
                 {
                     Id = 9,
                     Pos = i,
-                    EmotionLevel = _mainEnemyModel.emotionDetail.EmotionLevel
+                    EmotionLevel = _mainEnemyModel.emotionDetail.EmotionLevel,
+                    OnWaveStart = true
                 });
-                unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
             }
 
             UnitUtil.RefreshCombatUI();

@@ -4,7 +4,7 @@ namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_HorizonSlash_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 3;
+        private const int Check = 4;
         private bool _atkSuccess;
 
         public override void OnUseCard()
