@@ -35,7 +35,7 @@ namespace Hayate_Re21341.Buffs
             AddStack(_owner.faction == Faction.Enemy ? 5 : 3);
         }
 
-        private void AddStack(int value = 1)
+        public void AddStack(int value = 1)
         {
             if (stack + _addValue > 50)
                 stack = 50;

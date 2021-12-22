@@ -70,9 +70,9 @@ namespace Util_Re21341
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Singleton<ModContentManager>.Instance.AddErrorLog(ex.Message);
+                // ignored
             }
         }
     }
