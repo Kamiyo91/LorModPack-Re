@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using BLL_Re21341.Models;
-using CustomInvitation;
 using HarmonyLib;
-using Mod;
+using TMPro;
+using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Workshop;
 using Object = UnityEngine.Object;
 
@@ -50,7 +47,7 @@ namespace Util_Re21341
                         dictionary?[ModParameters.PackageId].Find(x => x.dataName.Contains(item.Name));
                     var clothCustomizeData = workshopSkinData.dic[ActionDetail.Default];
                     foreach (var skinData in item.SkinParameters.Where(x =>
-                                     !workshopSkinData.dic.ContainsKey(x.Motion)))
+                                 !workshopSkinData.dic.ContainsKey(x.Motion)))
                     {
                         var value = new ClothCustomizeData
                         {
@@ -74,6 +71,39 @@ namespace Util_Re21341
             {
                 // ignored
             }
+        }
+
+        public static void UISettingInvenEquipPageListSlot_SetBooksData(UIOriginEquipPageList instance,
+            List<BookModel> books, UIStoryKeyData storyKey)
+        {
+            if (storyKey.workshopId != ModParameters.PackageId) return;
+            var image = (Image)instance.GetType().GetField("img_IconGlow", AccessTools.all).GetValue(instance);
+            var image2 = (Image)instance.GetType().GetField("img_Icon", AccessTools.all).GetValue(instance);
+            var textMeshProUGUI = (TextMeshProUGUI)instance.GetType().GetField("txt_StoryName", AccessTools.all)
+                .GetValue(instance);
+            if (books.Count < 0) return;
+            image.enabled = true;
+            image2.enabled = true;
+            image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            image.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
+                .Name;
+        }
+
+        public static void GetThumbSprite(LorId bookId, ref Sprite result)
+        {
+            if (bookId.packageId != ModParameters.PackageId) return;
+            var sprite = ModParameters.SpritePreviewChange.FirstOrDefault(x => x.Value.Contains(bookId.id));
+            if (!string.IsNullOrEmpty(sprite.Key) && sprite.Value.Any())
+            {
+                result = ModParameters.ArtWorks[sprite.Key];
+                return;
+            }
+
+            var defaultSprite =
+                ModParameters.DefaultSpritePreviewChange.FirstOrDefault(x => x.Value.Contains(bookId.id));
+            if (!string.IsNullOrEmpty(defaultSprite.Key) && defaultSprite.Value.Any())
+                result = Resources.Load<Sprite>(defaultSprite.Key);
         }
     }
 }

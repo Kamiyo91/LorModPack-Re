@@ -1,7 +1,7 @@
 ﻿using BLL_Re21341.Models;
 using HarmonyLib;
 
-namespace Kamiyo_Re21341.Buffs
+namespace Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_KurosawaEmblem_Re21341 : BattleUnitBuf
     {

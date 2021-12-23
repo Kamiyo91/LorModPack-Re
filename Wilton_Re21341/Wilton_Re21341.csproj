@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffs\BattleUnitBuf_VengeanceNpc_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Vengeance_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_WiltonMassAttack_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_HorizonSlash_Re21341.cs" />

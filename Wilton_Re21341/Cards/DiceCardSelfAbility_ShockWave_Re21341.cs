@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Wilton_Re21341.Cards
+﻿namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_ShockWave_Re21341 : DiceCardSelfAbilityBase
     {
@@ -12,19 +10,23 @@ namespace Wilton_Re21341.Cards
             _atkSuccess = false;
             owner.allyCardDetail.DrawCards(1);
         }
+
         public override void OnSucceedAttack()
         {
             _atkSuccess = true;
         }
+
         public override void OnEndBattle()
         {
-            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList().Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
+            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList()
+                    .Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
                          .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
+
             owner.allyCardDetail.DrawCards(1);
         }
     }

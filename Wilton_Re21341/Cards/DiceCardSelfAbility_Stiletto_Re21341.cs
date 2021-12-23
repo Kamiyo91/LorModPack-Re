@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Wilton_Re21341.Cards
+﻿namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_Stiletto_Re21341 : DiceCardSelfAbilityBase
     {
@@ -12,10 +10,12 @@ namespace Wilton_Re21341.Cards
             _atkSuccess = false;
             owner.cardSlotDetail.RecoverPlayPointByCard(1);
         }
+
         public override void OnSucceedAttack()
         {
             _atkSuccess = true;
         }
+
         public override void OnEndBattle()
         {
             if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList()

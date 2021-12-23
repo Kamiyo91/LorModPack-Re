@@ -11,7 +11,6 @@ using TMPro;
 using UI;
 using UnityEngine;
 using Util_Re21341.CommonBuffs;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Util_Re21341

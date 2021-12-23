@@ -36,6 +36,22 @@ namespace BLL_Re21341.Models
                 "MioNormalEye_Re21341")
         };
 
+        public static readonly Dictionary<string, List<int>> SpritePreviewChange = new Dictionary<string, List<int>>
+        {
+            { "MioDefault_Re21341", new List<int> { 10000003 } },
+            { "KamiyoDefault_Re21341", new List<int> { 10000004 } },
+            { "HayateDefault_Re21341", new List<int> { 10000005 } },
+            { "WiltonDefault_Re21341", new List<int> { 10000006 } },
+            { "FragmentDefault_Re21341", new List<int> { 10000008, 10000009, 10000010, 10000011, 10000012 } },
+            { "FragmentBlueDefault_Re21341", new List<int> { 10000013, 10000014 } }
+        };
+
+        public static readonly Dictionary<string, List<int>> DefaultSpritePreviewChange =
+            new Dictionary<string, List<int>>
+            {
+                { "Sprites/Books/Thumb/243003", new List<int> { 10000001, 10000002 } }
+            };
+
         public static readonly List<Tuple<int, List<int>, List<SephirahType>, List<string>>> PreBattleUnits =
             new List<Tuple<int, List<int>, List<SephirahType>, List<string>>>
             {

@@ -29,7 +29,7 @@ namespace Wilton_Re21341.Passives
                 HasMechOnHp = true,
                 RecoverLightOnSurvive = true,
                 ReloadMassAttackOnLethal = true,
-                EgoType = typeof(BattleUnitBuf_Vengeance_Re21341),
+                EgoType = typeof(BattleUnitBuf_VengeanceNpc_Re21341),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,

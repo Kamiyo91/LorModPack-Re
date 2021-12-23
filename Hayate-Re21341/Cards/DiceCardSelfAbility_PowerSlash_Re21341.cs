@@ -22,7 +22,9 @@ namespace Hayate_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            var buf = owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as BattleUnitBuf_EntertainMe_Re21341;
+            var buf =
+                owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
+                    BattleUnitBuf_EntertainMe_Re21341;
             buf?.AddStack(3);
         }
     }

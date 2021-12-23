@@ -1,15 +1,17 @@
 ﻿using Battle.CreatureEffect;
+using BLL_Re21341.Models;
 using Sound;
 using UnityEngine;
+using Util_Re21341;
 
 namespace Wilton_Re21341.Buffs
 {
-    public class BattleUnitBuf_Vengeance_Re21341 : BattleUnitBuf
+    public class BattleUnitBuf_VengeanceNpc_Re21341 : BattleUnitBuf
     {
         private const string Path = "6/RedHood_Emotion_Aura";
         private CreatureEffect _aura;
 
-        public BattleUnitBuf_Vengeance_Re21341()
+        public BattleUnitBuf_VengeanceNpc_Re21341()
         {
             stack = 0;
         }
@@ -23,6 +25,16 @@ namespace Wilton_Re21341.Buffs
         {
             base.Init(owner);
             PlayChangingEffect(owner);
+            for (var i = 1; i < 4; i++)
+
+                UnitUtil.AddNewUnitEnemySide(new UnitModel
+                {
+                    Id = 9,
+                    Pos = i,
+                    EmotionLevel = owner.emotionDetail.EmotionLevel,
+                    OnWaveStart = true
+                });
+            UnitUtil.RefreshCombatUI();
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)

@@ -1,4 +1,4 @@
-﻿using Kamiyo_Re21341.Passives;
+﻿using Mio_Re21341.Passives;
 
 namespace Mio_Re21341.Cards
 {

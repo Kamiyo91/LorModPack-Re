@@ -6,10 +6,8 @@ using System.Reflection;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
-using TMPro;
 using UI;
 using UnityEngine;
-using UnityEngine.UI;
 using Util_Re21341;
 using Workshop;
 using Object = UnityEngine.Object;
@@ -60,7 +58,7 @@ namespace LoRModPack_Re21341.Harmony
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
             harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
-                null,new HarmonyMethod(method));
+                null, new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
@@ -91,68 +89,12 @@ namespace LoRModPack_Re21341.Harmony
 
         public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
         {
-            if (__instance.id.packageId != ModParameters.PackageId) return;
-            switch (__instance.id.id)
-            {
-                case 10000001:
-                case 10000002:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
-                    return;
-                case 10000003:
-                    __result = ModParameters.ArtWorks["MioDefault_Re21341"];
-                    return;
-                case 10000004:
-                    __result = ModParameters.ArtWorks["KamiyoDefault_Re21341"];
-                    return;
-                case 10000005:
-                    __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
-                    return;
-                case 10000006:
-                    __result = ModParameters.ArtWorks["WiltonDefault_Re21341"];
-                    return;
-                case 10000007:
-                case 10000008:
-                case 10000009:
-                case 10000010:
-                case 10000011:
-                    __result = ModParameters.ArtWorks["FragmentDefault_Re21341"];
-                    return;
-                default:
-                    return;
-            }
+            SkinUtil.GetThumbSprite(__instance.id, ref __result);
         }
 
         public static void BookModel_GetThumbSprite(BookModel __instance, ref Sprite __result)
         {
-            if (__instance.BookId.packageId != ModParameters.PackageId) return;
-            switch (__instance.BookId.id)
-            {
-                case 10000001:
-                case 10000002:
-                    __result = Resources.Load<Sprite>("Sprites/Books/Thumb/243003");
-                    return;
-                case 10000003:
-                    __result = ModParameters.ArtWorks["MioDefault_Re21341"];
-                    return;
-                case 10000004:
-                    __result = ModParameters.ArtWorks["KamiyoDefault_Re21341"];
-                    return;
-                case 10000005:
-                    __result = ModParameters.ArtWorks["HayateDefault_Re21341"];
-                    return;
-                case 10000006:
-                    __result = ModParameters.ArtWorks["WiltonDefault_Re21341"];
-                    return;
-                case 10000007:
-                case 10000008:
-                case 10000009:
-                case 10000010:
-                case 10000011:
-                    __result = ModParameters.ArtWorks["FragmentDefault_Re21341"];
-                    return;
-                default:
-                    return;
-            }
+            SkinUtil.GetThumbSprite(__instance.BookId, ref __result);
         }
 
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
@@ -184,6 +126,7 @@ namespace LoRModPack_Re21341.Harmony
                     return;
             }
         }
+
         public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion)
         {
             if (__instance.Appearance.GetCharacterMotion(motion) != null) return;
@@ -227,35 +170,13 @@ namespace LoRModPack_Re21341.Harmony
         public static void UIInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
             List<BookModel> books, UIStoryKeyData storyKey)
         {
-            if (storyKey.workshopId != ModParameters.PackageId) return;
-            var image = (Image)__instance.GetType().GetField("img_IconGlow", AccessTools.all).GetValue(__instance);
-            var image2 = (Image)__instance.GetType().GetField("img_Icon", AccessTools.all).GetValue(__instance);
-            var textMeshProUGUI = (TextMeshProUGUI)__instance.GetType().GetField("txt_StoryName", AccessTools.all)
-                .GetValue(__instance);
-            if (books.Count < 0) return;
-            image.enabled = true;
-            image2.enabled = true;
-            image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
-                .Name;
+            SkinUtil.UISettingInvenEquipPageListSlot_SetBooksData(__instance, books, storyKey);
         }
 
         public static void UISettingInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
             List<BookModel> books, UIStoryKeyData storyKey)
         {
-            if (storyKey.workshopId != ModParameters.PackageId) return;
-            var image = (Image)__instance.GetType().GetField("img_IconGlow", AccessTools.all).GetValue(__instance);
-            var image2 = (Image)__instance.GetType().GetField("img_Icon", AccessTools.all).GetValue(__instance);
-            var textMeshProUGUI = (TextMeshProUGUI)__instance.GetType().GetField("txt_StoryName", AccessTools.all)
-                .GetValue(__instance);
-            if (books.Count < 0) return;
-            image.enabled = true;
-            image2.enabled = true;
-            image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
-                .Name;
+            SkinUtil.UISettingInvenEquipPageListSlot_SetBooksData(__instance, books, storyKey);
         }
 
         public static void UISpriteDataManager_GetStoryIcon(UISpriteDataManager __instance,

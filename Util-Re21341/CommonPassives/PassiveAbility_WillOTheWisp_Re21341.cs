@@ -15,7 +15,8 @@ namespace Util_Re21341.CommonPassives
 
         public override void OnWaveStart()
         {
-            if(owner.faction == Faction.Enemy) owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
+            if (owner.faction == Faction.Enemy)
+                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
         }
     }
 }

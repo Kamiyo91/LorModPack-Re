@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Wilton_Re21341.Cards
+﻿namespace Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_MysticEyeVision_Re21341 : DiceCardSelfAbilityBase
     {
@@ -11,6 +9,7 @@ namespace Wilton_Re21341.Cards
         {
             _atkSuccess = false;
         }
+
         public override void OnSucceedAttack()
         {
             _atkSuccess = true;
@@ -18,7 +17,8 @@ namespace Wilton_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList().Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
+            if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList()
+                    .Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
             card.target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 10, owner);
         }
     }
