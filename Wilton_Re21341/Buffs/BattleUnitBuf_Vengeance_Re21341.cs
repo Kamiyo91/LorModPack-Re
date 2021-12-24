@@ -1,6 +1,7 @@
 ﻿using Battle.CreatureEffect;
 using Sound;
 using UnityEngine;
+using Wilton_Re21341.Passives;
 
 namespace Wilton_Re21341.Buffs
 {
@@ -23,6 +24,9 @@ namespace Wilton_Re21341.Buffs
         {
             base.Init(owner);
             PlayChangingEffect(owner);
+            var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
+                PassiveAbility_MysticEyes_Re21341;
+            passive?.ChangeStacks(2);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
@@ -55,7 +59,7 @@ namespace Wilton_Re21341.Buffs
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
         {
-            return cardBuf.positiveType == BufPositiveType.Negative ? 1 : 0;
+            return target != _owner ? 1 : 0;
         }
     }
 }

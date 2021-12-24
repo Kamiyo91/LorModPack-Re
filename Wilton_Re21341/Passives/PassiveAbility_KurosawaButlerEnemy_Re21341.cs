@@ -19,7 +19,7 @@ namespace Wilton_Re21341.Passives
             _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
             {
                 Owner = owner,
-                Hp = 0,
+                Hp = 1,
                 SetHp = 61,
                 MechHp = 271,
                 Counter = 0,
@@ -55,6 +55,7 @@ namespace Wilton_Re21341.Passives
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905)
             });
+            UnitUtil.TestingUnitValues();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -106,6 +107,11 @@ namespace Wilton_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseCardResetCount(curCard);
+        }
+
+        public override void OnDie()
+        {
+            UnitUtil.VipDeath(owner);
         }
     }
 }

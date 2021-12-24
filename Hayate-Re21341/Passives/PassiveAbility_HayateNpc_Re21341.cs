@@ -13,6 +13,7 @@ namespace Hayate_Re21341.Passives
     public class PassiveAbility_HayateNpc_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtil_Hayate _util;
+        private bool _wiltonCase;
 
         public override void OnWaveStart()
         {
@@ -42,6 +43,7 @@ namespace Hayate_Re21341.Passives
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 903),
                 SecondaryMechCard = new LorId(ModParameters.PackageId, 904)
             });
+            _wiltonCase = false;
         }
 
         public override int SpeedDiceNumAdder()
@@ -94,6 +96,19 @@ namespace Hayate_Re21341.Passives
         public override void OnRoundEndTheLast()
         {
             _util.DeleteTarget();
+        }
+
+        public void SetWiltonCaseOn() => _wiltonCase = true;
+        public override void OnKill(BattleUnitModel target)
+        {
+            if (!_wiltonCase) return;
+            var unit = BattleObjectManager.instance.GetAliveList(Faction.Player).FirstOrDefault();
+            if (unit != null)
+            {
+                unit.forceRetreat = true;
+                unit.Die();
+            }
+            owner.DieFake();
         }
 
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)

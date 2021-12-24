@@ -12,11 +12,5 @@ namespace Util_Re21341.CommonPassives
             owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Strength, 1, owner);
             owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Endurance, 1, owner);
         }
-
-        public override void OnWaveStart()
-        {
-            if (owner.faction == Faction.Enemy)
-                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
-        }
     }
 }

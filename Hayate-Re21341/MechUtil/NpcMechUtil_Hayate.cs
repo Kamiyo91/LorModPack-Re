@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
+using BLL_Re21341.Models;
 using Hayate_Re21341.Buffs;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
@@ -90,6 +91,20 @@ namespace Hayate_Re21341.MechUtil
             var cards = _model.Owner.allyCardDetail.GetAllDeck().Where(x =>
                 x.GetID() == _model.LorIdEgoMassAttack || x.GetID() == _model.SecondaryMechCard);
             foreach (var card in cards) _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
+        }
+        public override BattleUnitModel ChooseEgoAttackTarget(LorId cardId)
+        {
+            if (cardId != _model.LorIdEgoMassAttack) return null;
+            if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+                new LorId(ModParameters.PackageId, 6))
+            {
+                return BattleObjectManager.instance.GetAliveList(Faction.Player).FirstOrDefault(x => x.UnitData.unitData.bookItem.ClassInfo.id != new LorId(ModParameters.PackageId, 10000004));
+            }
+            if (BattleObjectManager.instance
+                .GetAliveList(Faction.Player).Any(x => !x.UnitData.unitData.isSephirah))
+                return RandomUtil.SelectOne(BattleObjectManager.instance.GetAliveList(Faction.Player)
+                    .Where(x => !x.UnitData.unitData.isSephirah).ToList());
+            return null;
         }
     }
 }

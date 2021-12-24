@@ -1,17 +1,21 @@
-﻿using BLL_Re21341.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BLL_Re21341.Models;
 using Util_Re21341;
-using Wilton_Re21341.Buffs;
 
-namespace Wilton_Re21341.Cards
+namespace Raziel_Re21341.Cards
 {
-    public class DiceCardSelfAbility_WiltonMassAttack_Re21341 : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RazielMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChanged;
         private bool _used;
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return owner.bufListDetail.HasBuf<BattleUnitBuf_Vengeance_Re21341>();
+            return owner.emotionDetail.EmotionLevel > 3;
         }
 
         public override void OnEndAreaAttack()
@@ -33,11 +37,11 @@ namespace Wilton_Re21341.Cards
         {
             MapUtil.ChangeMap(new MapModel
             {
-                Stage = "Wilton_Re21341",
-                StageId = 6,
+                Stage = "Raziel_Re21341",
+                StageId = 7,
                 OneTurnEgo = true,
                 IsPlayer = true,
-                Component = new Wilton_Re21341MapManager(),
+                Component = new Raziel_Re21341MapManager(),
                 Bgy = 0.2f
             });
         }
@@ -54,7 +58,7 @@ namespace Wilton_Re21341.Cards
             if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
                 owner.UnitData.unitData.bookItem != owner.UnitData.unitData.CustomBookItem) return;
             _motionChanged = true;
-            owner.view.charAppearance.ChangeMotion(ActionDetail.Slash);
+            owner.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }
 
         public override void OnReleaseCard()

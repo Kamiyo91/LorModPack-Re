@@ -122,7 +122,7 @@ namespace Wilton_Re21341
                 SingletonBehavior<BattleSoundManager>.Instance.CurrentPlayingTheme.loop = true;
                 _loop = true;
             }
-
+            sephirahColor = Color.black;
             base.EnableMap(b);
         }
     }

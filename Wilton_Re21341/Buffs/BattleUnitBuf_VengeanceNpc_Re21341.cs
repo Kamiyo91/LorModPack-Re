@@ -3,6 +3,8 @@ using BLL_Re21341.Models;
 using Sound;
 using UnityEngine;
 using Util_Re21341;
+using Util_Re21341.CommonBuffs;
+using Wilton_Re21341.Passives;
 
 namespace Wilton_Re21341.Buffs
 {
@@ -25,15 +27,17 @@ namespace Wilton_Re21341.Buffs
         {
             base.Init(owner);
             PlayChangingEffect(owner);
-            for (var i = 1; i < 4; i++)
-
-                UnitUtil.AddNewUnitEnemySide(new UnitModel
+            var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
+                PassiveAbility_MysticEyes_Re21341;
+            passive?.ChangeStacks(2);
+            var unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
                 {
                     Id = 9,
-                    Pos = i,
-                    EmotionLevel = owner.emotionDetail.EmotionLevel,
-                    OnWaveStart = true
+                    Pos = 1,
+                    EmotionLevel = 3,
+                    AddEmotionPassive = false
                 });
+            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
             UnitUtil.RefreshCombatUI();
         }
 
@@ -67,7 +71,7 @@ namespace Wilton_Re21341.Buffs
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
         {
-            return cardBuf.positiveType == BufPositiveType.Negative ? 1 : 0;
+            return target != _owner ? 1 : 0;
         }
     }
 }
