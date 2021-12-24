@@ -5,6 +5,7 @@ namespace Wilton_Re21341.Passives
     public class PassiveAbility_MysticEyes_Re21341 : PassiveAbilityBase
     {
         private int _stacks;
+
         public override void OnWaveStart()
         {
             _stacks = 1;
@@ -18,6 +19,9 @@ namespace Wilton_Re21341.Passives
                 behavior.card.target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Bleeding, _stacks, owner);
         }
 
-        public void ChangeStacks(int value) => _stacks = value;
+        public void ChangeStacks(int value)
+        {
+            _stacks = value;
+        }
     }
 }

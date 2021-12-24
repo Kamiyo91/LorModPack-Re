@@ -98,7 +98,11 @@ namespace Hayate_Re21341.Passives
             _util.DeleteTarget();
         }
 
-        public void SetWiltonCaseOn() => _wiltonCase = true;
+        public void SetWiltonCaseOn()
+        {
+            _wiltonCase = true;
+        }
+
         public override void OnKill(BattleUnitModel target)
         {
             if (!_wiltonCase) return;
@@ -108,6 +112,7 @@ namespace Hayate_Re21341.Passives
                 unit.forceRetreat = true;
                 unit.Die();
             }
+
             owner.DieFake();
         }
 

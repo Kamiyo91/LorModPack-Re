@@ -1,19 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL_Re21341.Models;
+using HarmonyLib;
 using Sound;
 
 namespace Raziel_Re21341.Buffs
 {
     public class BattleUnitBuf_OwlSpiritNpc_Re21341 : BattleUnitBuf
     {
-        private static int Power = RandomUtil.Range(0, 2);
+        private static readonly int Power = RandomUtil.Range(0, 2);
+
+        public BattleUnitBuf_OwlSpiritNpc_Re21341()
+        {
+            stack = 0;
+        }
+
+        public override bool isAssimilation => true;
+        public override int paramInBufDesc => 0;
+        protected override string keywordId => "Kaioken_Re21341";
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising", 1f, _owner.view, _owner.view);
+            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
+                ?.SetValue(this, ModParameters.ArtWorks["Kaioken_Re21341"]);
+            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
+            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising",
+                1f, _owner.view, _owner.view);
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
         }
 

@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using LOR_XML;
 using Raziel_Re21341.Passives;
 using Util_Re21341;
-using Util_Re21341.CommonBuffs;
 using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace Raziel_Re21341
 {
     public class EnemyTeamStageManager_Raziel_Re21341 : EnemyTeamStageManager
     {
-        private BattleUnitModel _mainEnemyModel;
         private int _count;
+        private BattleUnitModel _mainEnemyModel;
         private PassiveAbility_InquisitorEnemy_Re21341 _razielEnemyPassive;
 
         public override void OnWaveStart()
         {
-            CustomMapHandler.InitCustomMap("Raziel_Re21341", new Raziel_Re21341MapManager(), false, true, 0.5f, 0.15f,0.5f,0.8f);
+            CustomMapHandler.InitCustomMap("Raziel_Re21341", new Raziel_Re21341MapManager(), false, true, 0.5f, 0.15f,
+                0.5f, 0.8f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
@@ -33,16 +30,19 @@ namespace Raziel_Re21341
                         PassiveAbility_InquisitorEnemy_Re21341;
             _count = 0;
         }
+
         public override void OnRoundStart()
         {
             CustomMapHandler.EnforceMap();
         }
+
         public override void OnRoundEndTheLast()
         {
             RazielIsDeadBeforeTurn10();
             CheckPhase();
             _count++;
         }
+
         private void CheckPhase()
         {
             switch (_count)
@@ -59,6 +59,7 @@ namespace Raziel_Re21341
                     break;
             }
         }
+
         private void RazielIsDeadBeforeTurn10()
         {
             if (_count > 6) return;
@@ -71,7 +72,7 @@ namespace Raziel_Re21341
                     {
                         id = "RazielEnemy",
                         dialog = ModParameters.EffectTexts
-                            .FirstOrDefault(x => x.Key.Equals($"RazielImmortal_Re21341")).Value.Desc
+                            .FirstOrDefault(x => x.Key.Equals("RazielImmortal_Re21341")).Value.Desc
                     }
                 }, AbColorType.Negative);
         }

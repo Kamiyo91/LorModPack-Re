@@ -31,12 +31,12 @@ namespace Wilton_Re21341.Buffs
                 PassiveAbility_MysticEyes_Re21341;
             passive?.ChangeStacks(2);
             var unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
-                {
-                    Id = 9,
-                    Pos = 1,
-                    EmotionLevel = 3,
-                    AddEmotionPassive = false
-                });
+            {
+                Id = 9,
+                Pos = 1,
+                EmotionLevel = 3,
+                AddEmotionPassive = false
+            });
             unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
             UnitUtil.RefreshCombatUI();
         }

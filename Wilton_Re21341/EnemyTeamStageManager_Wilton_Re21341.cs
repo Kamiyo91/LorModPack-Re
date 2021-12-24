@@ -10,10 +10,10 @@ namespace Wilton_Re21341
 {
     public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
+        private bool _checkEnd;
         private BattleUnitModel _mainEnemyModel;
         private Wilton_Re21341MapManager _mapManager;
         private bool _phaseChanged;
-        private bool _checkEnd;
         private PassiveAbility_KurosawaButlerEnemy_Re21341 _wiltonEnemyPassive;
 
         public override void OnWaveStart()
@@ -28,9 +28,7 @@ namespace Wilton_Re21341
                         as
                         PassiveAbility_KurosawaButlerEnemy_Re21341;
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-            {
                 unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
-            }
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject is Wilton_Re21341MapManager)
                 _mapManager = SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject as Wilton_Re21341MapManager;
             _phaseChanged = false;
@@ -70,9 +68,7 @@ namespace Wilton_Re21341
             if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count >= 1 || _checkEnd) return;
             _checkEnd = true;
             foreach (var playerUnit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-            {
                 playerUnit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Vip_Re21341));
-            }
             var unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
             {
                 Id = 6,

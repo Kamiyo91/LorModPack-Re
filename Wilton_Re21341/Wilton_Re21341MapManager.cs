@@ -59,7 +59,7 @@ namespace Wilton_Re21341
                     if (!_snap)
                     {
                         SingletonBehavior<BattleSoundManager>.Instance.PlaySound(EffectSoundType.CHANGE_THEME,
-                            transform.position, false);
+                            transform.position);
                         _snap = true;
                     }
 
@@ -92,7 +92,7 @@ namespace Wilton_Re21341
             {
                 if (!_snap)
                     SingletonBehavior<BattleSoundManager>.Instance.PlaySound(EffectSoundType.CHANGE_THEME,
-                        transform.position, false);
+                        transform.position);
                 // snap = true;
                 var samples = SingletonBehavior<BattleSoundManager>.Instance.CurrentPlayingTheme.timeSamples + 583636;
                 SingletonBehavior<BattleSoundManager>.Instance.CurrentPlayingTheme.clip = _multiClip[Phase];
@@ -122,6 +122,7 @@ namespace Wilton_Re21341
                 SingletonBehavior<BattleSoundManager>.Instance.CurrentPlayingTheme.loop = true;
                 _loop = true;
             }
+
             sephirahColor = Color.black;
             base.EnableMap(b);
         }

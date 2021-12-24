@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
@@ -15,10 +12,12 @@ namespace Raziel_Re21341.Passives
     public class PassiveAbility_InquisitorEnemy_Re21341 : PassiveAbilityBase
     {
         private NpcMechUtilBase _util;
+
         public override int SpeedDiceNumAdder()
         {
             return 2;
         }
+
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(new DiceStatBonus
@@ -53,6 +52,7 @@ namespace Raziel_Re21341.Passives
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 906)
             });
         }
+
         public override void OnRoundStart()
         {
             if (!_util.EgoCheck()) return;
@@ -65,6 +65,7 @@ namespace Raziel_Re21341.Passives
             _util.SetOneTurnCard(false);
             _util.RaiseCounter();
         }
+
         public void ForcedEgo()
         {
             _util.ForcedEgo();

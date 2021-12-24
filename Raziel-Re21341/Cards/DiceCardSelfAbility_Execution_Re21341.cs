@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Util_Re21341;
+﻿using Util_Re21341;
 
 namespace Raziel_Re21341.Cards
 {
@@ -22,10 +17,11 @@ namespace Raziel_Re21341.Cards
         {
             _atkLand += damage;
         }
+
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            UnitUtil.ReadyCounterCard(owner,56);
+            UnitUtil.ReadyCounterCard(owner, 56);
         }
     }
 }
