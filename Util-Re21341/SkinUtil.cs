@@ -73,7 +73,7 @@ namespace Util_Re21341
             }
         }
 
-        public static void UISettingInvenEquipPageListSlot_SetBooksData(UIOriginEquipPageList instance,
+        public static void SetBooksData(UIOriginEquipPageList instance,
             List<BookModel> books, UIStoryKeyData storyKey)
         {
             if (storyKey.workshopId != ModParameters.PackageId) return;

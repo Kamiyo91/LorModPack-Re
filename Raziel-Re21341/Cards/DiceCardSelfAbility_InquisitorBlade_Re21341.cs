@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Raziel_Re21341.Cards
 {
-    public class DiceCardSelfAbility_Meeting_Re21341 : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_InquisitorBlade_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 8;
+        private const int Check = 12;
         private int _atkLand;
         public override void OnUseCard()
         {
@@ -21,13 +21,7 @@ namespace Raziel_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-            owner.cardSlotDetail.RecoverPlayPoint(1);
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Strength,1,owner);
         }
     }
 }

@@ -30,10 +30,10 @@ namespace Raziel_Re21341.Cards
             if (owner.faction != Faction.Player ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             _used = true;
-            ChangeToWiltonEgoMap();
+            ChangeToRazielEgoMap();
         }
 
-        private static void ChangeToWiltonEgoMap()
+        private static void ChangeToRazielEgoMap()
         {
             MapUtil.ChangeMap(new MapModel
             {
@@ -50,7 +50,7 @@ namespace Raziel_Re21341.Cards
         {
             if (!_used) return;
             _used = false;
-            MapUtil.ReturnFromEgoMap("Wilton_Re21341", 6);
+            MapUtil.ReturnFromEgoMap("Raziel_Re21341", 7);
         }
 
         public override void OnApplyCard()

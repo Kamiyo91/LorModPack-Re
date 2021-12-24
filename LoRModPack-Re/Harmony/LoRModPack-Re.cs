@@ -23,19 +23,17 @@ namespace LoRModPack_Re21341.Harmony
             var harmony = new HarmonyLib.Harmony("LOR.LorModPackRe21341_MOD");
             var method = typeof(LoRModPack_Re).GetMethod("BookModel_SetXmlInfo");
             harmony.Patch(typeof(BookModel).GetMethod("SetXmlInfo", AccessTools.all), null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("BookModel_GetThumbSprite");
+            method = typeof(LoRModPack_Re).GetMethod("General_GetThumbSprite");
             harmony.Patch(typeof(BookModel).GetMethod("GetThumbSprite", AccessTools.all), null,
                 new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("BookXmlInfo_GetThumbSprite");
             harmony.Patch(typeof(BookXmlInfo).GetMethod("GetThumbSprite", AccessTools.all), null,
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("StageLibraryFloorModel_InitUnitList");
             harmony.Patch(typeof(StageLibraryFloorModel).GetMethod("InitUnitList", AccessTools.all),
                 null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UISettingInvenEquipPageListSlot_SetBooksData");
+            method = typeof(LoRModPack_Re).GetMethod("General_SetBooksData");
             harmony.Patch(typeof(UISettingInvenEquipPageListSlot).GetMethod("SetBooksData", AccessTools.all),
                 null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UIInvenEquipPageListSlot_SetBooksData");
             harmony.Patch(typeof(UIInvenEquipPageListSlot).GetMethod("SetBooksData", AccessTools.all),
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_GetStoryIcon");
@@ -74,7 +72,7 @@ namespace LoRModPack_Re21341.Harmony
             var stageModel =
                 (StageModel)__instance.GetType().GetField("_stageModel", AccessTools.all)?.GetValue(__instance);
             if (stageModel?.ClassInfo.id != null &&
-                !ModParameters.BannedEmotionStages.ContainsKey(stageModel?.ClassInfo.id)) return true;
+                !ModParameters.BannedEmotionStages.ContainsKey(stageModel.ClassInfo.id)) return true;
             if (ModParameters.BannedEmotionStages.FirstOrDefault(x => x.Key.Equals(stageModel?.ClassInfo.id)).Value)
             {
                 var currentWaveModel = __instance.GetCurrentWaveModel();
@@ -87,14 +85,17 @@ namespace LoRModPack_Re21341.Harmony
             return false;
         }
 
-        public static void BookXmlInfo_GetThumbSprite(BookXmlInfo __instance, ref Sprite __result)
+        public static void General_GetThumbSprite(object __instance, ref Sprite __result)
         {
-            SkinUtil.GetThumbSprite(__instance.id, ref __result);
-        }
-
-        public static void BookModel_GetThumbSprite(BookModel __instance, ref Sprite __result)
-        {
-            SkinUtil.GetThumbSprite(__instance.BookId, ref __result);
+            switch (__instance)
+            {
+                case BookXmlInfo bookInfo:
+                    SkinUtil.GetThumbSprite(bookInfo.id, ref __result);
+                    break;
+                case BookModel bookModel:
+                    SkinUtil.GetThumbSprite(bookModel.BookId, ref __result);
+                    break;
+            }
         }
 
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
@@ -167,16 +168,11 @@ namespace LoRModPack_Re21341.Harmony
             LocalizeUtil.AddLocalize();
         }
 
-        public static void UIInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
+        public static void General_SetBooksData(object __instance,
             List<BookModel> books, UIStoryKeyData storyKey)
         {
-            SkinUtil.UISettingInvenEquipPageListSlot_SetBooksData(__instance, books, storyKey);
-        }
-
-        public static void UISettingInvenEquipPageListSlot_SetBooksData(UISettingInvenEquipPageListSlot __instance,
-            List<BookModel> books, UIStoryKeyData storyKey)
-        {
-            SkinUtil.UISettingInvenEquipPageListSlot_SetBooksData(__instance, books, storyKey);
+            var uiOrigin = __instance as UIOriginEquipPageList;
+            SkinUtil.SetBooksData(uiOrigin, books, storyKey);
         }
 
         public static void UISpriteDataManager_GetStoryIcon(UISpriteDataManager __instance,

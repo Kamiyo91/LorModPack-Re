@@ -25,7 +25,7 @@ namespace Raziel_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            UnitUtil.ReadyCounterCard(owner,1);
+            UnitUtil.ReadyCounterCard(owner,56);
         }
     }
 }

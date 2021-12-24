@@ -55,7 +55,6 @@ namespace Wilton_Re21341.Passives
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905)
             });
-            UnitUtil.TestingUnitValues();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
