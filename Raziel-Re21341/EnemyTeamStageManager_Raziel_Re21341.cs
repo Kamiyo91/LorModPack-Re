@@ -61,7 +61,7 @@ namespace Raziel_Re21341
         }
         private void RazielIsDeadBeforeTurn10()
         {
-            if (_count > 9) return;
+            if (_count > 6) return;
             if (!_mainEnemyModel.IsDead()) return;
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, _mainEnemyModel.MaxHp, false);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
