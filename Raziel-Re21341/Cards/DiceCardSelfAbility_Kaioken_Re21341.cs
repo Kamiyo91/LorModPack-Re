@@ -1,13 +1,14 @@
-﻿using Raziel_Re21341.Buffs;
+﻿using System.Linq;
+using Raziel_Re21341.Buffs;
 
 namespace Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_Kaioken_Re21341 : DiceCardSelfAbilityBase
     {
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.emotionDetail.EmotionLevel > 2;
-        }
+        //public override bool OnChooseCard(BattleUnitModel owner)
+        //{
+        //    return owner.emotionDetail.EmotionLevel > 2;
+        //}
 
         public override void OnApplyCard()
         {
@@ -16,7 +17,7 @@ namespace Raziel_Re21341.Cards
 
         public override void OnReleaseCard()
         {
-            owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_OwlSpirit_Re21341));
+            owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_OwlSpirit_Re21341)?.Destroy();
         }
     }
 }
