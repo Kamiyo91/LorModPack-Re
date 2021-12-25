@@ -17,8 +17,8 @@ namespace Raziel_Re21341
 
         public override void OnWaveStart()
         {
-            CustomMapHandler.InitCustomMap("Raziel_Re21341", new Raziel_Re21341MapManager(), false, true, 0.5f, 0.15f,
-                0.5f, 0.8f);
+            CustomMapHandler.InitCustomMap("Raziel_Re21341", new Raziel_Re21341MapManager(), false, true, 0.5f,
+                0.375f, 0.5f, 0.225f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();

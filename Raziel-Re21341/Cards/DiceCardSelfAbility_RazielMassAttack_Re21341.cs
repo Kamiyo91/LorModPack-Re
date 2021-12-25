@@ -37,7 +37,8 @@ namespace Raziel_Re21341.Cards
                 OneTurnEgo = true,
                 IsPlayer = true,
                 Component = new Raziel_Re21341MapManager(),
-                Bgy = 0.2f
+                Bgy = 0.375f,
+                Fy = 0.225f
             });
         }
 
