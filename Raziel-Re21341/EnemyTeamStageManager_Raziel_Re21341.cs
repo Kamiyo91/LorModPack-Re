@@ -18,7 +18,7 @@ namespace Raziel_Re21341
         public override void OnWaveStart()
         {
             CustomMapHandler.InitCustomMap("Raziel_Re21341", new Raziel_Re21341MapManager(), false, true, 0.5f,
-                0.375f, 0.5f,0.225f);
+                0.375f, 0.5f, 0.225f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
@@ -47,7 +47,7 @@ namespace Raziel_Re21341
         {
             switch (_count)
             {
-                case 1:
+                case 2:
                     _razielEnemyPassive.ForcedEgo();
                     UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -4, 5);
                     _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
