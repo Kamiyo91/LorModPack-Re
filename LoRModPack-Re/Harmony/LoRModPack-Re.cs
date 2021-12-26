@@ -42,8 +42,15 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBook");
+            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPrefix");
+            var methodPostfix = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPostfix");
             harmony.Patch(typeof(UnitDataModel).GetMethod("EquipBook", AccessTools.all),
+                new HarmonyMethod(method), new HarmonyMethod(methodPostfix));
+            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_LoadFromSaveData");
+            harmony.Patch(typeof(UnitDataModel).GetMethod("LoadFromSaveData", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UICustomizePopup_OnClickSave");
+            harmony.Patch(typeof(UICustomizePopup).GetMethod("OnClickSave", AccessTools.all),
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
             harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
@@ -142,8 +149,14 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
-        [HarmonyPriority(0)]
-        public static void UnitDataModel_EquipBook(BookModel newBook, bool force)
+        public static void UnitDataModel_EquipBookPrefix(UnitDataModel __instance, BookModel newBook, bool force)
+        {
+            if (force) return;
+            if (ModParameters.PackageId == __instance.bookItem.ClassInfo.id.packageId &&
+                ModParameters.DynamicNames.ContainsKey(__instance.bookItem.ClassInfo.id.id)) __instance.ResetTempName();
+        }
+
+        public static void UnitDataModel_EquipBookPostfix(UnitDataModel __instance, BookModel newBook, bool force)
         {
             if (force) return;
             if (newBook != null && newBook.ClassInfo.id.packageId == ModParameters.PackageId &&
@@ -154,6 +167,42 @@ namespace LoRModPack_Re21341.Harmony
                     ModParameters.SkinNameIds.FirstOrDefault(x => newBook.ClassInfo.CharacterSkin.Contains(x.Item1))
                         ?.Item3
                 };
+            if (newBook == null || ModParameters.PackageId != newBook.ClassInfo.workshopID ||
+                !ModParameters.DynamicNames.ContainsKey(newBook.ClassInfo.id.id)) return;
+            __instance.EquipCustomCoreBook(null);
+            __instance.workshopSkin = "";
+            var nameId = ModParameters.DynamicNames[newBook.ClassInfo.id.id].ToString();
+            __instance.SetTempName(ModParameters.NameTexts[nameId]);
+        }
+
+        public static void UnitDataModel_LoadFromSaveData(UnitDataModel __instance)
+        {
+            if ((!string.IsNullOrEmpty(__instance.workshopSkin) || __instance.bookItem != __instance.CustomBookItem) &&
+                __instance.bookItem.ClassInfo.id.packageId == ModParameters.PackageId &&
+                ModParameters.DynamicNames.ContainsKey(__instance.bookItem.ClassInfo.id.id))
+                __instance.ResetTempName();
+        }
+
+        public static void UICustomizePopup_OnClickSave(UICustomizePopup __instance)
+        {
+            if (__instance.SelectedUnit.bookItem.ClassInfo.id.packageId != ModParameters.PackageId ||
+                !ModParameters.DynamicNames.ContainsKey(__instance.SelectedUnit.bookItem.ClassInfo.id.id)) return;
+            var tempName =
+                (string)__instance.SelectedUnit.GetType().GetField("_tempName", AccessTools.all)
+                    ?.GetValue(__instance.SelectedUnit);
+            __instance.SelectedUnit.ResetTempName();
+            if (__instance.SelectedUnit.bookItem == __instance.SelectedUnit.CustomBookItem &&
+                string.IsNullOrEmpty(__instance.SelectedUnit.workshopSkin))
+            {
+                __instance.previewData.Name = __instance.SelectedUnit.name;
+                var nameId = ModParameters.DynamicNames[__instance.SelectedUnit.bookItem.ClassInfo.id.id].ToString();
+                __instance.SelectedUnit.SetTempName(ModParameters.NameTexts[nameId]);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(tempName) || __instance.previewData.Name == tempName)
+                    __instance.previewData.Name = __instance.SelectedUnit.name;
+            }
         }
 
         public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Raziel_Re21341.Buffs;
+﻿using Raziel_Re21341.Buffs;
 
 namespace Raziel_Re21341.Cards
 {

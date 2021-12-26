@@ -23,6 +23,15 @@ namespace BLL_Re21341.Models
             new Tuple<string, List<int>, int>("RazielPage_Re21341", new List<int> { 52, 53, 54, 55 }, 10000007)
         };
 
+        public static readonly Dictionary<int, int> DynamicNames = new Dictionary<int, int>
+        {
+            { 10000003, 3 },
+            { 10000004, 4 },
+            { 10000005, 6 },
+            { 10000006, 8 },
+            { 10000007, 10 }
+        };
+
         public static readonly List<int> PersonalCardList = new List<int>
             { 1, 9, 17, 28, 29, 31, 32, 33, 34, 35, 42, 47, 57 };
 

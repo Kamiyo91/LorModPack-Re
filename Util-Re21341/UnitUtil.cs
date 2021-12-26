@@ -31,8 +31,8 @@ namespace Util_Re21341
 
         public static bool CheckSkinProjection(BattleUnitModel owner)
         {
-            if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
-                owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem) return false;
+            if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin)) return true;
+            if (owner.UnitData.unitData.bookItem == owner.UnitData.unitData.CustomBookItem) return false;
             owner.view.ChangeSkin(owner.UnitData.unitData.CustomBookItem.GetCharacterName());
             return true;
         }
