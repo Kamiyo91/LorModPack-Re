@@ -78,7 +78,13 @@ namespace Util_Re21341
 
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight)
         {
-            if (owner.IsDead()) owner.Revive(hp);
+            if (owner.IsDead())
+            {
+                owner.Revive(hp);
+                owner.moveDetail.ReturnToFormationByBlink(true);
+                owner.view.EnableView(true);
+                owner.view.CreateSkin();
+            }
             else owner.RecoverHP(hp);
             owner.bufListDetail.RemoveBufAll(BufPositiveType.Negative);
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_sealTemp));

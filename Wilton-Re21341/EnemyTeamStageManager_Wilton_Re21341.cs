@@ -83,6 +83,7 @@ namespace Wilton_Re21341
                 unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_HayateNpc_Re21341) as
                     PassiveAbility_HayateNpc_Re21341;
             passive?.SetWiltonCaseOn();
+            unit.moveDetail.ReturnToFormationByBlink(true);
             UnitUtil.RefreshCombatUI();
         }
     }
