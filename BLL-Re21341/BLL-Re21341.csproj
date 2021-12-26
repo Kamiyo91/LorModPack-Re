@@ -56,6 +56,7 @@
     <Compile Include="Models\MechUtilModels\MechUtilBaseModel.cs" />
     <Compile Include="Models\MechUtilModels\NpcMechUtilBaseModel.cs" />
     <Compile Include="Models\ModParameters.cs" />
+    <Compile Include="Models\PreBattleUnitModel.cs" />
     <Compile Include="Models\SkinParameters.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

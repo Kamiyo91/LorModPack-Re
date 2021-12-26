@@ -85,7 +85,11 @@ namespace Util_Re21341
                 owner.view.EnableView(true);
                 owner.view.CreateSkin();
             }
-            else owner.RecoverHP(hp);
+            else
+            {
+                owner.RecoverHP(hp);
+            }
+
             owner.bufListDetail.RemoveBufAll(BufPositiveType.Negative);
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_sealTemp));
             owner.breakDetail.ResetGauge();
@@ -231,22 +235,25 @@ namespace Util_Re21341
         public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage,
             List<UnitBattleDataModel> unitList, int dictionaryId)
         {
-            var stageParameters =
-                ModParameters.PreBattleUnits.FirstOrDefault(x =>
-                    x.Item3.Contains(instance.Sephirah) && x.Item1 == dictionaryId);
-            if (stageParameters == null) return;
-            foreach (var unitParameters in stageParameters.Item2.Zip(stageParameters.Item4,
-                         (id, name) => new { UnitId = id, UnitName = name }))
+            if (!ModParameters.PreBattleUnits.TryGetValue(dictionaryId, out var stageParameters)) return;
+            if (!stageParameters.Exists(x => x.SephirahUnit == instance.Sephirah)) return;
+            foreach (var unitParameters in stageParameters)
             {
                 var unitDataModel = new UnitDataModel(new LorId(ModParameters.PackageId, unitParameters.UnitId),
                     instance.Sephirah, true);
-                unitDataModel.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId, unitParameters.UnitId));
+                unitDataModel.SetTemporaryPlayerUnitByBook(new LorId(ModParameters.PackageId,
+                    unitParameters.UnitId));
                 unitDataModel.bookItem.ClassInfo.categoryList.Add(BookCategory.DeckFixed);
                 unitDataModel.isSephirah = false;
                 unitDataModel.SetCustomName(ModParameters.NameTexts
-                    .FirstOrDefault(x => x.Key == unitParameters.UnitName).Value);
+                    .FirstOrDefault(x => x.Key == unitParameters.UnitNameId).Value);
+                if (unitParameters.PassiveIds.Any())
+                    foreach (var passive in unitParameters.PassiveIds)
+                        unitDataModel.bookItem.ClassInfo.EquipEffect.PassiveList.Add(passive);
                 unitDataModel.CreateDeckByDeckInfo();
                 unitDataModel.forceItemChangeLock = true;
+                if (!string.IsNullOrEmpty(unitParameters.SkinName))
+                    unitDataModel.bookItem.ClassInfo.CharacterSkin = new List<string> { unitParameters.SkinName };
                 var unitBattleDataModel = new UnitBattleDataModel(stage, unitDataModel);
                 unitBattleDataModel.Init();
                 unitList.Add(unitBattleDataModel);

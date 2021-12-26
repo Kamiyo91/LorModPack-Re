@@ -63,12 +63,33 @@ namespace BLL_Re21341.Models
                 { "Sprites/Books/Thumb/243003", new List<int> { 10000001, 10000002 } }
             };
 
-        public static readonly List<Tuple<int, List<int>, List<SephirahType>, List<string>>> PreBattleUnits =
-            new List<Tuple<int, List<int>, List<SephirahType>, List<string>>>
-            {
-                new Tuple<int, List<int>, List<SephirahType>, List<string>>(6, new List<int> { 10000004, 10000003 },
-                    new List<SephirahType> { SephirahType.Keter }, new List<string> { "4", "3" })
-            };
+        public static readonly Dictionary<int, List<PreBattleUnitModel>>
+            PreBattleUnits =
+                new Dictionary<int, List<PreBattleUnitModel>>
+                {
+                    {
+                        6,
+                        new List<PreBattleUnitModel>
+                        {
+                            new PreBattleUnitModel
+                            {
+                                UnitId = 10000004,
+                                SephirahUnit = SephirahType.Keter,
+                                UnitNameId = "4",
+                                SkinName = "KamiyoNormal_Re21341",
+                                PassiveIds = new List<LorId> { new LorId(PackageId, 17) }
+                            },
+                            new PreBattleUnitModel
+                            {
+                                UnitId = 10000003,
+                                SephirahUnit = SephirahType.Keter,
+                                UnitNameId = "3",
+                                SkinName = "MioNormalEye_Re21341",
+                                PassiveIds = new List<LorId> { new LorId(PackageId, 37) }
+                            }
+                        }
+                    }
+                };
 
         public static readonly Dictionary<LorId, bool> BannedEmotionStages = new Dictionary<LorId, bool>
             { { new LorId(PackageId, 6), false } };
