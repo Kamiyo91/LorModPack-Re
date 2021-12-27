@@ -4,10 +4,10 @@ namespace Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_Kaioken_Re21341 : DiceCardSelfAbilityBase
     {
-        //public override bool OnChooseCard(BattleUnitModel owner)
-        //{
-        //    return owner.emotionDetail.EmotionLevel > 2;
-        //}
+        public override bool OnChooseCard(BattleUnitModel owner)
+        {
+            return owner.emotionDetail.EmotionLevel > 2;
+        }
 
         public override void OnApplyCard()
         {
