@@ -103,12 +103,12 @@ namespace BLL_Re21341.Models
                 {
                     new SkinParameters
                     {
-                        PivotPosX = float.Parse("-27.6"), PivotPosY = float.Parse("-377.0001"),
+                        PivotPosX = float.Parse("-28"), PivotPosY = float.Parse("-377"),
                         Motion = ActionDetail.Special, FileName = "Special.png"
                     },
                     new SkinParameters
                     {
-                        PivotPosX = float.Parse("101.2"), PivotPosY = float.Parse("-326.4001"),
+                        PivotPosX = float.Parse("101"), PivotPosY = float.Parse("-326"),
                         Motion = ActionDetail.S1, FileName = "S1.png"
                     }
                 }
