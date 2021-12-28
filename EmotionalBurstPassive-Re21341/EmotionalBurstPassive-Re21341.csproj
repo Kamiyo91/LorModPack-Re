@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffs\BattleUnitBuf_Angry_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_Happy_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_Sad_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Angry_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Happy_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Neutral_Re21341.cs" />

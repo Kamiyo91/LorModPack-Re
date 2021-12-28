@@ -8,7 +8,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
     {
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
-            Activate(unit);
+            Activate(targetUnit);
             self.exhaust = true;
             EmotionalBurstUtil.RemoveEmotionalBurstCards(unit);
         }
@@ -32,6 +32,16 @@ namespace EmotionalBurstPassive_Re21341.Cards
             passive?.ChangeNameAndSetStacks(1);
             passive?.AfterInit();
             unit.passiveDetail.OnCreated();
+        }
+
+        public override bool IsTargetableAllUnit()
+        {
+            return true;
+        }
+
+        public override bool IsTargetableSelf()
+        {
+            return true;
         }
     }
 }

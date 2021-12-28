@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BLL_Re21341.Models;
+using EmotionalBurstPassive_Re21341.Buffs;
 using Util_Re21341;
 
 namespace EmotionalBurstPassive_Re21341.Passives
@@ -35,6 +36,20 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
+
+            if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Happy_Re21341) is
+                BattleUnitBuf_Happy_Re21341 buf)
+            {
+                buf.stack = stack;
+            }
+            else
+            {
+                buf = new BattleUnitBuf_Happy_Re21341
+                {
+                    stack = stack
+                };
+                owner.bufListDetail.AddBufWithoutDuplication(buf);
+            }
         }
 
         public override void OnRoundStartAfter()
@@ -45,6 +60,7 @@ namespace EmotionalBurstPassive_Re21341.Passives
         public void RemoveBuff()
         {
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Quickness, _stack);
+            owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Happy_Re21341)?.Destroy();
         }
 
         public void AfterInit()

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
+using EmotionalBurstPassive_Re21341.Buffs;
 using Util_Re21341;
 
 namespace EmotionalBurstPassive_Re21341.Passives
@@ -33,6 +34,20 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
+
+            if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Angry_Re21341) is
+                BattleUnitBuf_Angry_Re21341 buf)
+            {
+                buf.stack = stack;
+            }
+            else
+            {
+                buf = new BattleUnitBuf_Angry_Re21341
+                {
+                    stack = stack
+                };
+                owner.bufListDetail.AddBufWithoutDuplication(buf);
+            }
         }
 
         public override void OnRoundStartAfter()
@@ -47,6 +62,7 @@ namespace EmotionalBurstPassive_Re21341.Passives
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Strength, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Disarm, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Vulnerable, _stack * 3);
+            owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Angry_Re21341)?.Destroy();
         }
 
         public void InstantIncrease()
@@ -54,13 +70,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Disarm, 1);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Vulnerable, 3);
-        }
-
-        public void DecreaseStacksBufType(KeywordBuf bufType, int stacks)
-        {
-            var buf = owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x.bufType == bufType);
-            if (buf != null) buf.stack -= stacks;
-            if (buf != null && buf.stack < 1) owner.bufListDetail.RemoveBuf(buf);
         }
 
         public void AfterInit()

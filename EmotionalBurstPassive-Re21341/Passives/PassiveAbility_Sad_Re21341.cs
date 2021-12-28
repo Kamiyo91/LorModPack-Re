@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
+using EmotionalBurstPassive_Re21341.Buffs;
 
 namespace EmotionalBurstPassive_Re21341.Passives
 {
@@ -32,6 +33,20 @@ namespace EmotionalBurstPassive_Re21341.Passives
                     _stack = 3;
                     break;
             }
+
+            if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Sad_Re21341) is
+                BattleUnitBuf_Sad_Re21341 buf)
+            {
+                buf.stack = stack;
+            }
+            else
+            {
+                buf = new BattleUnitBuf_Sad_Re21341
+                {
+                    stack = stack
+                };
+                owner.bufListDetail.AddBufWithoutDuplication(buf);
+            }
         }
 
         public override void OnRoundStartAfter()
@@ -46,6 +61,7 @@ namespace EmotionalBurstPassive_Re21341.Passives
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Endurance, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Binding, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Protection, _stack * 2);
+            owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Sad_Re21341)?.Destroy();
         }
 
         public void InstantIncrease()
