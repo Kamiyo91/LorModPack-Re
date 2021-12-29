@@ -9,6 +9,7 @@ using LOR_DiceSystem;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Util_Re21341;
 using Workshop;
 using Object = UnityEngine.Object;
@@ -42,6 +43,9 @@ namespace LoRModPack_Re21341.Harmony
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UIBookStoryChapterSlot_SetEpisodeSlots");
             harmony.Patch(typeof(UIBookStoryChapterSlot).GetMethod("SetEpisodeSlots", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UIBookStoryPanel_OnSelectEpisodeSlot");
+            harmony.Patch(typeof(UIBookStoryPanel).GetMethod("OnSelectEpisodeSlot", AccessTools.all),
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
@@ -111,7 +115,15 @@ namespace LoRModPack_Re21341.Harmony
                     break;
             }
         }
-
+        public static void UIBookStoryPanel_OnSelectEpisodeSlot(UIBookStoryPanel __instance, UIBookStoryEpisodeSlot slot, TextMeshProUGUI ___selectedEpisodeText, Image ___selectedEpisodeIcon, Image ___selectedEpisodeIconGlow)
+        {
+            if (slot == null || slot.books.Find(x => x.id.packageId == ModParameters.PackageId) == null) return;
+            ___selectedEpisodeText.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
+                .Name;
+            ___selectedEpisodeIcon.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            ___selectedEpisodeIconGlow.sprite = ModParameters.ArtWorks["Light_Re21341"];
+            __instance.UpdateBookSlots();
+        }
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
             if (__instance.BookId.packageId != ModParameters.PackageId) return;
