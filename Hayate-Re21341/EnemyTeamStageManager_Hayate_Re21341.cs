@@ -67,6 +67,7 @@ namespace Hayate_Re21341
             if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
             _phaseChanged = true;
             _hayateEnemyPassive.ForcedEgo();
+            _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
             MapUtil.ActiveCreatureBattleCamFilterComponent();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.mp3", true, "Hayate_Re21341");
@@ -135,7 +136,6 @@ namespace Hayate_Re21341
             UnitUtil.ChangeCardCostByValue(allyUnit, -5, 6);
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
             _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
-            _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 50, true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>
