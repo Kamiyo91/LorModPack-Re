@@ -47,7 +47,7 @@ namespace Raziel_Re21341.Passives
 
         public override void OnBattleEnd()
         {
-            if (owner.IsDead()) UnitUtil.UnitReviveAndRecovery(owner, 5, false);
+            if (owner.IsDead() && !MapUtil.CheckStageMap(4)) UnitUtil.UnitReviveAndRecovery(owner, 5, false);
         }
     }
 }

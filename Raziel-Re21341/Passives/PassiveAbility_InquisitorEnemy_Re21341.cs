@@ -59,7 +59,7 @@ namespace Raziel_Re21341.Passives
             _util.EgoActive();
         }
 
-        public override void OnRoundEnd()
+        public override void OnRoundEndTheLast_ignoreDead()
         {
             _util.ExhaustEgoAttackCards();
             _util.SetOneTurnCard(false);

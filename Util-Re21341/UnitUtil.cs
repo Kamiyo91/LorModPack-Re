@@ -29,6 +29,13 @@ namespace Util_Re21341
             }
         }
 
+        public static void DrawUntilX(BattleUnitModel owner, int x)
+        {
+            var count = owner.allyCardDetail.GetHand().Count;
+            var num = x - count;
+            if (num > 0) owner.allyCardDetail.DrawCards(num);
+        }
+
         public static bool CheckSkinProjection(BattleUnitModel owner)
         {
             if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin)) return true;

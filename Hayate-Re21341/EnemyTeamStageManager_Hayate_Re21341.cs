@@ -126,15 +126,17 @@ namespace Hayate_Re21341
             var allyUnit = PrepareAllyUnit();
             UnitUtil.RefreshCombatUI();
             var specialPassive = allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 17));
+            allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 43));
             var passive = allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_AlterEgoPlayer_Re21341) as
                 PassiveAbility_AlterEgoPlayer_Re21341;
             specialPassive.OnWaveStart();
             passive?.ForcedEgo();
             passive?.SetDieAtEnd();
-            UnitUtil.ChangeCardCostByValue(allyUnit, -2, 4);
+            UnitUtil.ChangeCardCostByValue(allyUnit, -5, 6);
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
             _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 25, true);
+            _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
+            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 50, true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>
                 {

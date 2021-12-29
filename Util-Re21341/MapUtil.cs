@@ -31,7 +31,7 @@ namespace Util_Re21341
             if (!(battleCamera is null)) battleCamera.GetComponent<CameraFilterPack_Drawing_Paper3>().enabled = true;
         }
 
-        private static bool CheckStageMap(int id)
+        public static bool CheckStageMap(int id)
         {
             return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
                    new LorId(ModParameters.PackageId, id);

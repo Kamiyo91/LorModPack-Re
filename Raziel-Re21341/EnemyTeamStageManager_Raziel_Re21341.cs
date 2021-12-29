@@ -49,7 +49,6 @@ namespace Raziel_Re21341
             {
                 case 2:
                     _razielEnemyPassive.ForcedEgo();
-                    UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -4, 5);
                     _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
                     CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.mp3", true, "Raziel_Re21341");
                     break;
