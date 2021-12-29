@@ -99,10 +99,13 @@ namespace LoRModPack_Re21341.Harmony
             __result = true;
             return false;
         }
-        public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance, UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
+
+        public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
+            UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
         {
             SkinUtil.SetEpisodeSlots(__instance, ___panel, ___EpisodeSlots);
         }
+
         public static void General_GetThumbSprite(object __instance, ref Sprite __result)
         {
             switch (__instance)
@@ -115,15 +118,20 @@ namespace LoRModPack_Re21341.Harmony
                     break;
             }
         }
-        public static void UIBookStoryPanel_OnSelectEpisodeSlot(UIBookStoryPanel __instance, UIBookStoryEpisodeSlot slot, TextMeshProUGUI ___selectedEpisodeText, Image ___selectedEpisodeIcon, Image ___selectedEpisodeIconGlow)
+
+        public static void UIBookStoryPanel_OnSelectEpisodeSlot(UIBookStoryPanel __instance,
+            UIBookStoryEpisodeSlot slot, TextMeshProUGUI ___selectedEpisodeText, Image ___selectedEpisodeIcon,
+            Image ___selectedEpisodeIconGlow)
         {
             if (slot == null || slot.books.Find(x => x.id.packageId == ModParameters.PackageId) == null) return;
-            ___selectedEpisodeText.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
+            ___selectedEpisodeText.text = ModParameters.EffectTexts
+                .FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
                 .Name;
             ___selectedEpisodeIcon.sprite = ModParameters.ArtWorks["Light_Re21341"];
             ___selectedEpisodeIconGlow.sprite = ModParameters.ArtWorks["Light_Re21341"];
             __instance.UpdateBookSlots();
         }
+
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
             if (__instance.BookId.packageId != ModParameters.PackageId) return;

@@ -86,20 +86,30 @@ namespace Util_Re21341
             image2.enabled = true;
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
-            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
+            textMeshProUGUI.text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341"))
+                .Value
                 .Name;
         }
-        public static void SetEpisodeSlots(UIBookStoryChapterSlot instance, UIBookStoryPanel panel, List<UIBookStoryEpisodeSlot> episodeSlots)
+
+        public static void SetEpisodeSlots(UIBookStoryChapterSlot instance, UIBookStoryPanel panel,
+            List<UIBookStoryEpisodeSlot> episodeSlots)
         {
             if (instance.chapter != 7) return;
-            var uibookStoryEpisodeSlot = episodeSlots.Find(x => x.books.Find(y => y.id.packageId == ModParameters.PackageId) != null);
+            var uibookStoryEpisodeSlot =
+                episodeSlots.Find(x => x.books.Find(y => y.id.packageId == ModParameters.PackageId) != null);
             if (uibookStoryEpisodeSlot == null) return;
             var books = uibookStoryEpisodeSlot.books;
-            uibookStoryEpisodeSlot.Init(panel.panel.GetChapterBooksData(instance.chapter).FindAll(x => x.id.packageId == ModParameters.PackageId && ModParameters.BooksIds.Contains(x.id.id)), instance);
-            ((TextMeshProUGUI)uibookStoryEpisodeSlot.GetType().GetField("episodeText", AccessTools.all).GetValue(uibookStoryEpisodeSlot)).text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
+            uibookStoryEpisodeSlot.Init(
+                panel.panel.GetChapterBooksData(instance.chapter).FindAll(x =>
+                    x.id.packageId == ModParameters.PackageId && ModParameters.BooksIds.Contains(x.id.id)), instance);
+            ((TextMeshProUGUI)uibookStoryEpisodeSlot.GetType().GetField("episodeText", AccessTools.all)
+                .GetValue(uibookStoryEpisodeSlot)).text = ModParameters.EffectTexts
+                .FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
                 .Name;
-            var image = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIconGlow", AccessTools.all).GetValue(uibookStoryEpisodeSlot);
-            var image2 = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIcon", AccessTools.all).GetValue(uibookStoryEpisodeSlot);
+            var image = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIconGlow", AccessTools.all)
+                .GetValue(uibookStoryEpisodeSlot);
+            var image2 = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIcon", AccessTools.all)
+                .GetValue(uibookStoryEpisodeSlot);
             image2.sprite = ModParameters.ArtWorks["Light_Re21341"];
             image.sprite = ModParameters.ArtWorks["Light_Re21341"];
             instance.InstatiateAdditionalSlot();
@@ -107,6 +117,7 @@ namespace Util_Re21341
             books.RemoveAll(x => x.id.packageId == ModParameters.PackageId);
             uibookStoryEpisodeSlot2.Init(instance.chapter, books, instance);
         }
+
         public static void GetThumbSprite(LorId bookId, ref Sprite result)
         {
             if (bookId.packageId != ModParameters.PackageId) return;
