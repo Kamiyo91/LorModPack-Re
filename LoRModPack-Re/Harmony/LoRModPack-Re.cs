@@ -6,6 +6,7 @@ using System.Reflection;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
+using TMPro;
 using UI;
 using UnityEngine;
 using Util_Re21341;
@@ -38,6 +39,9 @@ namespace LoRModPack_Re21341.Harmony
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_GetStoryIcon");
             harmony.Patch(typeof(UISpriteDataManager).GetMethod("GetStoryIcon", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UIBookStoryChapterSlot_SetEpisodeSlots");
+            harmony.Patch(typeof(UIBookStoryChapterSlot).GetMethod("SetEpisodeSlots", AccessTools.all),
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
@@ -91,7 +95,10 @@ namespace LoRModPack_Re21341.Harmony
             __result = true;
             return false;
         }
-
+        public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance, UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
+        {
+            SkinUtil.SetEpisodeSlots(__instance, ___panel, ___EpisodeSlots);
+        }
         public static void General_GetThumbSprite(object __instance, ref Sprite __result)
         {
             switch (__instance)

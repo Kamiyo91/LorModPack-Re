@@ -44,5 +44,10 @@ namespace Raziel_Re21341.Passives
                 }, AbColorType.Negative);
             owner.forceRetreat = true;
         }
+
+        public override void OnBattleEnd()
+        {
+            if(owner.IsDead()) UnitUtil.UnitReviveAndRecovery(owner,5,false);
+        }
     }
 }

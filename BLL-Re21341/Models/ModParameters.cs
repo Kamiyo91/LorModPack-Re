@@ -32,6 +32,11 @@ namespace BLL_Re21341.Models
             { 10000007, 10 }
         };
 
+        public static readonly List<int> BooksIds = new List<int>
+        {
+            10000001,10000003,10000004,10000005,10000006,10000007
+        };
+
         public static readonly List<int> PersonalCardList = new List<int>
             { 1, 9, 17, 28, 29, 31, 32, 33, 34, 35, 42, 47, 57 };
 
