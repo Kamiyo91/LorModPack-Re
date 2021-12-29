@@ -96,7 +96,7 @@ namespace Util_Re21341
             if (uibookStoryEpisodeSlot == null) return;
             var books = uibookStoryEpisodeSlot.books;
             uibookStoryEpisodeSlot.Init(panel.panel.GetChapterBooksData(instance.chapter).FindAll(x => x.id.packageId == ModParameters.PackageId && ModParameters.BooksIds.Contains(x.id.id)), instance);
-            ((TextMeshProUGUI)uibookStoryEpisodeSlot.GetType().GetField("episodeText", AccessTools.all).GetValue(uibookStoryEpisodeSlot)).text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("ModName_Re21341")).Value
+            ((TextMeshProUGUI)uibookStoryEpisodeSlot.GetType().GetField("episodeText", AccessTools.all).GetValue(uibookStoryEpisodeSlot)).text = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("CredenzaName_Re21341")).Value
                 .Name;
             var image = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIconGlow", AccessTools.all).GetValue(uibookStoryEpisodeSlot);
             var image2 = (Image)uibookStoryEpisodeSlot.GetType().GetField("episodeIcon", AccessTools.all).GetValue(uibookStoryEpisodeSlot);
