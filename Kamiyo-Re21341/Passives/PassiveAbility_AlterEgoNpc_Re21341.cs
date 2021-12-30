@@ -90,6 +90,15 @@ namespace Kamiyo_Re21341.Passives
             _util.EgoActive();
         }
 
+        public override void OnRoundStartAfter()
+        {
+            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>()) return;
+            SkinUtil.BurnEffect(owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 3, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, owner);
+        }
+
         public override void OnRoundEnd()
         {
             _util.ExhaustEgoAttackCards();

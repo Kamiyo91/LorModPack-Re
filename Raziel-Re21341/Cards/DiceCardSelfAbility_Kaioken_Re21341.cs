@@ -11,7 +11,7 @@ namespace Raziel_Re21341.Cards
 
         public override void OnApplyCard()
         {
-            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_OwlSpirit_Re21341());
+            owner.bufListDetail.AddBuf(new BattleUnitBuf_OwlSpirit_Re21341());
         }
 
         public override void OnReleaseCard()

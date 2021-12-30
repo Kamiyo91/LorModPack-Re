@@ -29,6 +29,7 @@ namespace Mio_Re21341.Passives
                 MechHp = 271,
                 Counter = 0,
                 MaxCounter = 4,
+                SpecialCardCost = 2,
                 Survive = true,
                 HasEgo = true,
                 HasMechOnHp = true,
@@ -37,6 +38,7 @@ namespace Mio_Re21341.Passives
                 ReloadMassAttackOnLethal = true,
                 SkinName = "MioRedEye_Re21341",
                 EgoType = typeof(BattleUnitBuf_CorruptedGodAuraRelease_Re21341),
+                SpecialBufType = typeof(BattleUnitBuf_SakuraPetal_Re21341),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,
@@ -88,6 +90,8 @@ namespace Mio_Re21341.Passives
 
         public override void OnRoundStart()
         {
+            if (_util.UseSpecialBuffCard())
+                SkinUtil.SakuraEffect(owner);
             if (!_util.EgoCheck()) return;
             _util.EgoActive();
         }

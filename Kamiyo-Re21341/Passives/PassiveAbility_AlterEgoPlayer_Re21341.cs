@@ -85,6 +85,13 @@ namespace Kamiyo_Re21341.Passives
                 _util.DoNotChangeSkinOnEgo();
         }
 
+        public override void OnRoundStartAfter()
+        {
+            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>()) return;
+            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 60));
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 60));
+        }
+
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _util.SurviveCheck(dmg);

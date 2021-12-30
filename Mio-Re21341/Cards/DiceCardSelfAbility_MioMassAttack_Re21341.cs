@@ -17,6 +17,14 @@ namespace Mio_Re21341.Cards
 
         public override void OnEndAreaAttack()
         {
+            if (!(owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
+                    BattleUnitBuf_SakuraPetal_Re21341 buf))
+            {
+                buf = new BattleUnitBuf_SakuraPetal_Re21341();
+                owner.bufListDetail.AddBufWithoutDuplication(buf);
+                owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 59));
+            }
+
             if (!_motionChanged) return;
             _motionChanged = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);

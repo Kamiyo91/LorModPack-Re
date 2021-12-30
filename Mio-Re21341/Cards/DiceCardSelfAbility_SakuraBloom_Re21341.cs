@@ -1,4 +1,7 @@
-﻿namespace Mio_Re21341.Cards
+﻿using BLL_Re21341.Models;
+using Mio_Re21341.Buffs;
+
+namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_SakuraBloom_Re21341 : DiceCardSelfAbilityBase
     {
@@ -17,6 +20,11 @@
             {
                 power = 1
             });
+            if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
+                BattleUnitBuf_SakuraPetal_Re21341 buf) return;
+            buf = new BattleUnitBuf_SakuraPetal_Re21341();
+            owner.bufListDetail.AddBufWithoutDuplication(buf);
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 59));
         }
     }
 }

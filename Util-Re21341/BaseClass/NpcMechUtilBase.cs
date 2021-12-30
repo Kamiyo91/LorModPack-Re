@@ -113,5 +113,17 @@ namespace Util_Re21341.BaseClass
                     .Where(x => !x.UnitData.unitData.isSephirah).ToList());
             return null;
         }
+
+        public virtual bool UseSpecialBuffCard()
+        {
+            if (_model.Owner.cardSlotDetail.PlayPoint < _model.SpecialCardCost || !_model.Owner.bufListDetail
+                    .GetActivatedBufList()
+                    .Exists(x => _model.SpecialBufType.IsInstanceOfType(x))) return false;
+            _model.Owner.bufListDetail.RemoveBufAll(_model.SpecialBufType);
+            _model.Owner.cardSlotDetail.RecoverPlayPoint(-_model.SpecialCardCost);
+            _model.Owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, _model.Owner);
+            _model.Owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, _model.Owner);
+            return true;
+        }
     }
 }

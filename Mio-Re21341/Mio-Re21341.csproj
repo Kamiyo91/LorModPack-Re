@@ -56,11 +56,13 @@
     <Compile Include="Buffs\BattleUnitBuf_GodAuraRelease_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_CorruptedGodAuraRelease_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_KurosawaEmblem_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_SakuraPetal_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_EnergyRelease_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_GodAuraCard_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_MioMassAttack_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Rush_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_SakuraBloom_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_SakuraPetal_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_WaterBlade_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Mio_Re21341.cs" />
     <Compile Include="Mio_Re21341MapManager.cs" />

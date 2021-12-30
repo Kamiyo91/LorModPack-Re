@@ -62,6 +62,7 @@
     <Compile Include="Cards\DiceCardSelfAbility_AlterEgoCard_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireAbsorb_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FireBlade_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FireOverflow_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_OutragingFire_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_KurosawaFireMagic_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
