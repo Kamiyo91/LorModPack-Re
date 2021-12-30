@@ -11,6 +11,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
+using Util_Re21341.CommonPassives;
 using Workshop;
 using Object = UnityEngine.Object;
 
@@ -50,6 +51,9 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("BattleUnitModel_ChangeBaseDeck");
+            harmony.Patch(typeof(BattleUnitModel).GetMethod("ChangeBaseDeck", AccessTools.all),
+                null,new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPrefix");
             var methodPostfix = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPostfix");
             harmony.Patch(typeof(UnitDataModel).GetMethod("EquipBook", AccessTools.all),
@@ -106,6 +110,12 @@ namespace LoRModPack_Re21341.Harmony
             SkinUtil.SetEpisodeSlots(__instance, ___panel, ___EpisodeSlots);
         }
 
+        public static void BattleUnitModel_ChangeBaseDeck(BattleUnitModel __instance)
+        {
+            if (__instance.passiveDetail.HasPassive<PassiveAbility_PlayerShimmering_Re21341>() && UnitUtil.CheckCardCost(__instance,0))
+                UnitUtil.ChangeCardCostByValue(__instance,-99,99);
+            
+        }
         public static void General_GetThumbSprite(object __instance, ref Sprite __result)
         {
             switch (__instance)

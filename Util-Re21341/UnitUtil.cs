@@ -83,6 +83,10 @@ namespace Util_Re21341
             if (owner.faction == Faction.Enemy) owner.allyCardDetail.DrawCards(owner.UnitData.unitData.GetStartDraw());
         }
 
+        public static bool CheckCardCost(BattleUnitModel owner, int baseValue)
+        {
+            return owner.allyCardDetail.GetAllDeck().Any(x => x.GetCost() > baseValue);
+        }
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight)
         {
             if (owner.IsDead())
