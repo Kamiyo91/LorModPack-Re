@@ -4,7 +4,7 @@
     {
         public override void OnRoundStartAfter()
         {
-            if(UnitUtil.CheckCardCost(owner,0))UnitUtil.ChangeCardCostByValue(owner, -99, 99);
+            if (UnitUtil.CheckCardCost(owner, 0)) UnitUtil.ChangeCardCostByValue(owner, -99, 99);
             UnitUtil.DrawUntilX(owner, 6);
         }
     }

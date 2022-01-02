@@ -15,12 +15,25 @@ namespace EmotionalBurstPassive_Re21341
             unit.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 35));
         }
 
-        public static void AddEmotionalBurstCards(BattleUnitModel unit)
+        public static void AddEmotionalBurstCard(BattleUnitModel unit, EmotionBufEnum type)
         {
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 32));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 33));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 34));
-            unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 35));
+            switch (type)
+            {
+                case EmotionBufEnum.Neutral:
+                    unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 35));
+                    return;
+                case EmotionBufEnum.Angry:
+                    unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 32));
+                    return;
+                case EmotionBufEnum.Happy:
+                    unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 34));
+                    return;
+                case EmotionBufEnum.Sad:
+                    unit.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 33));
+                    return;
+                default:
+                    return;
+            }
         }
 
         public static void RemoveAllEmotionalPassives(BattleUnitModel unit,

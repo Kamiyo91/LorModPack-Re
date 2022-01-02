@@ -87,6 +87,7 @@ namespace Util_Re21341
         {
             return owner.allyCardDetail.GetAllDeck().Any(x => x.GetCost() > baseValue);
         }
+
         public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight)
         {
             if (owner.IsDead())
