@@ -53,14 +53,14 @@ namespace EmotionalBurstPassive_Re21341.Passives
         {
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, _stack);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Binding, _stack);
-            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, _stack * 2);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, _stack);
         }
 
         public void RemoveBuff()
         {
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Endurance, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Binding, _stack);
-            EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Protection, _stack * 2);
+            EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Protection, _stack);
             owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Sad_Re21341)?.Destroy();
         }
 

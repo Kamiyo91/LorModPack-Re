@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -42,15 +46,22 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffs\BattleUnitBuf_Angry_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Happy_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_Mock_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Sad_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Angry_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Comeback_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Happy_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Headbutt_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_LuckySlice_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Mock_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Neutral_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Sad_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Stab_Re21341.cs" />
     <Compile Include="EmotionalBurstUtil.cs" />
     <Compile Include="Passives\PassiveAbility_Angry_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_EmotionalBurst_Re21341.cs" />

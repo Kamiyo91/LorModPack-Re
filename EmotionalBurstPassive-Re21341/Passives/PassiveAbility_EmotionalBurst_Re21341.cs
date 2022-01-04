@@ -29,6 +29,7 @@ namespace EmotionalBurstPassive_Re21341.Passives
                 default:
                     return;
             }
+
             EmotionalBurstUtil.AddEmotionalBurstCard(owner, emotionCardType);
         }
 

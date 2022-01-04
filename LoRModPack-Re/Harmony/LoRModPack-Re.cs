@@ -70,8 +70,11 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("WorkshopSkinDataSetter_SetMotionData");
             harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),
                 new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("StageController_RoundEndPhase_ChoiceEmotionCard");
-            harmony.Patch(typeof(StageController).GetMethod("RoundEndPhase_ChoiceEmotionCard", AccessTools.all),
+            method = typeof(LoRModPack_Re).GetMethod("StageLibraryFloorModel_StartPickEmotionCard");
+            harmony.Patch(typeof(StageLibraryFloorModel).GetMethod("StartPickEmotionCard", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("StageWaveModel_PickRandomEmotionCard");
+            harmony.Patch(typeof(StageWaveModel).GetMethod("PickRandomEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
             harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
@@ -85,23 +88,24 @@ namespace LoRModPack_Re21341.Harmony
             LocalizeUtil.RemoveError();
         }
 
-        public static bool StageController_RoundEndPhase_ChoiceEmotionCard(StageController __instance,
-            ref bool __result)
+        [HarmonyPriority(0)]
+        public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
         {
-            var stageModel =
-                (StageModel)__instance.GetType().GetField("_stageModel", AccessTools.all)?.GetValue(__instance);
-            if (stageModel?.ClassInfo.id != null &&
-                !ModParameters.BannedEmotionStages.ContainsKey(stageModel.ClassInfo.id)) return true;
-            if (ModParameters.BannedEmotionStages.FirstOrDefault(x => x.Key.Equals(stageModel?.ClassInfo.id)).Value)
-            {
-                var currentWaveModel = __instance.GetCurrentWaveModel();
-                if (currentWaveModel != null && currentWaveModel.HasSkillPoint())
-                    currentWaveModel.PickRandomEmotionCard();
-            }
-
+            if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
+                    .ClassInfo.id)) return;
+            __instance.team.currentSelectEmotionLevel++;
+            __instance.team.egoSelectionPoint--;
             SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
-            __result = true;
-            return false;
+            SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.OnSelectHide(true);
+        }
+
+        [HarmonyPriority(0)]
+        public static void StageWaveModel_PickRandomEmotionCard(StageWaveModel __instance)
+        {
+            if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
+                    .ClassInfo.id) || ModParameters.BannedEmotionStages.FirstOrDefault(x =>
+                    x.Key.Equals(Singleton<StageController>.Instance.GetStageModel().ClassInfo.id)).Value) return;
+            __instance.team.currentSelectEmotionLevel++;
         }
 
         public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
