@@ -61,6 +61,7 @@
     <Compile Include="Cards\DiceCardSelfAbility_MysticEyeVision_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Vengeance_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Wilton_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_ButlerStiletto_Re21341.cs" />
     <Compile Include="Wilton_Re21341MapManager.cs" />
     <Compile Include="Passives\PassiveAbility_KurosawaButler_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_KurosawaButlerEnemy_Re21341.cs" />

@@ -9,7 +9,8 @@ namespace EmotionalBurstPassive_Re21341.Cards
         {
             owner.allyCardDetail.DrawCards(1);
             if (card.target == null || !card.target.passiveDetail.HasPassive<PassiveAbility_Angry_Re21341>()) return;
-            if (card.target.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Mock_Re21341) is BattleUnitBuf_Mock_Re21341 buf)
+            if (card.target.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Mock_Re21341) is
+                BattleUnitBuf_Mock_Re21341 buf)
             {
                 if (buf.stack < 3) buf.stack++;
             }
@@ -21,7 +22,6 @@ namespace EmotionalBurstPassive_Re21341.Cards
                 };
                 card.target.bufListDetail.AddBufWithoutDuplication(buf);
             }
-
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Raziel_Re21341.Passives
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 dmg = 1,
-                dmgRate = 50
+                dmgRate = 25
             });
         }
 

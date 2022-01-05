@@ -38,7 +38,7 @@ namespace Raziel_Re21341
 
         public override void OnRoundEndTheLast()
         {
-            RazielIsDeadBeforeTurn10();
+            RazielIsDeadBeforeTurn6();
             CheckPhase();
             _count++;
         }
@@ -52,14 +52,14 @@ namespace Raziel_Re21341
                     _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
                     CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.mp3", true, "Raziel_Re21341");
                     break;
-                case 7:
+                case 5:
                     _mainEnemyModel.forceRetreat = true;
                     _mainEnemyModel.Die();
                     break;
             }
         }
 
-        private void RazielIsDeadBeforeTurn10()
+        private void RazielIsDeadBeforeTurn6()
         {
             if (_count > 6) return;
             if (!_mainEnemyModel.IsDead()) return;

@@ -4,15 +4,15 @@ using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
+using Kamiyo_Re21341.MechUtil;
 using LOR_XML;
 using Util_Re21341;
-using Util_Re21341.BaseClass;
 
 namespace Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_AlterEgoNpc_Re21341 : PassiveAbilityBase
     {
-        private NpcMechUtilBase _util;
+        private NpcMechUtil_Kamiyo _util;
 
         public override void OnBattleEnd()
         {
@@ -21,7 +21,7 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
+            _util = new NpcMechUtil_Kamiyo(new NpcMechUtilBaseModel
             {
                 Owner = owner,
                 Hp = 0,

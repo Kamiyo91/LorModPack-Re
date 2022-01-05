@@ -6,6 +6,7 @@ namespace EmotionalBurstPassive_Re21341.Buffs
     public class BattleUnitBuf_Mock_Re21341 : BattleUnitBuf
     {
         protected override string keywordId => "Mock_Re21341";
+
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(
@@ -15,6 +16,7 @@ namespace EmotionalBurstPassive_Re21341.Buffs
                     max = -stack
                 });
         }
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
@@ -22,6 +24,7 @@ namespace EmotionalBurstPassive_Re21341.Buffs
                 ?.SetValue(this, ModParameters.ArtWorks["Mock_Re21341"]);
             typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
         }
+
         public override void OnRoundEnd()
         {
             Destroy();

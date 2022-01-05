@@ -6,7 +6,7 @@ namespace Hayate_Re21341.Passives
     {
         public override int SpeedDiceNumAdder()
         {
-            return 4;
+            return 2;
         }
 
         public override void OnRoundStartAfter()

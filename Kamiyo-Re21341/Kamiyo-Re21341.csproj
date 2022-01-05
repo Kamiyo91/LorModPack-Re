@@ -69,6 +69,7 @@
     <Compile Include="EnemyTeamStageManager_Kamiyo_Re21341.cs" />
     <Compile Include="MapManager\Kamiyo2_Re21341MapManager.cs" />
     <Compile Include="MapManager\Kamiyo1_Re21341MapManager.cs" />
+    <Compile Include="MechUtil\NpcMechUtil_Kamiyo.cs" />
     <Compile Include="Passives\PassiveAbility_AlterEgoNpc_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_KamiyoFakeShimmering_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_MaskOfPerceptionNpc_Re21341.cs" />

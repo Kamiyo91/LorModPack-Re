@@ -6,11 +6,12 @@ namespace Raziel_Re21341.Passives
     {
         public override int SpeedDiceNumAdder()
         {
-            return 4;
+            return 2;
         }
 
         public override void OnRoundStartAfter()
         {
+            owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
             SetCards();
         }
 
@@ -31,7 +32,8 @@ namespace Raziel_Re21341.Passives
         private void AddNewCard(LorId id)
         {
             var card = owner.allyCardDetail.AddTempCard(id);
-            card?.SetCostToZero();
+            if (card.GetOriginCost() < 4)
+                card?.SetCostToZero();
         }
     }
 }
