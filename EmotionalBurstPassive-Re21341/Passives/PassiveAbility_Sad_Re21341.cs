@@ -74,7 +74,7 @@ namespace EmotionalBurstPassive_Re21341.Passives
         {
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Binding, 1);
-            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 2);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 1);
         }
 
         public void AfterInit()

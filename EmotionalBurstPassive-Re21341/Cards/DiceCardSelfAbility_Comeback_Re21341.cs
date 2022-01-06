@@ -1,4 +1,6 @@
-﻿using EmotionalBurstPassive_Re21341.Passives;
+﻿using BLL_Re21341.Models;
+using BLL_Re21341.Models.Enum;
+using EmotionalBurstPassive_Re21341.Passives;
 
 namespace EmotionalBurstPassive_Re21341.Cards
 {
@@ -15,9 +17,28 @@ namespace EmotionalBurstPassive_Re21341.Cards
                 owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, owner);
                 owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, owner);
             }
+            ActiveHappy();
+        }
 
-            var tempCard = new DiceCardSelfAbility_Happy_Re21341();
-            tempCard.OnUseInstance(owner, tempCard.card.card, owner);
+        private void ActiveHappy()
+        {
+            EmotionalBurstUtil.RemoveAllEmotionalPassives(owner, EmotionBufEnum.Happy);
+            if (owner.passiveDetail.PassiveList.Find(x =>
+                    x is PassiveAbility_Happy_Re21341) is PassiveAbility_Happy_Re21341 passiveHappy)
+            {
+                var stacks = passiveHappy.GetStack();
+                if (stacks >= 3) return;
+                passiveHappy.ChangeNameAndSetStacks(stacks + 1);
+                passiveHappy.InstantIncrease();
+                return;
+            }
+
+            var passive =
+                owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 29)) as
+                    PassiveAbility_Happy_Re21341;
+            passive?.ChangeNameAndSetStacks(1);
+            passive?.AfterInit();
+            owner.passiveDetail.OnCreated();
         }
     }
 }
