@@ -5,6 +5,11 @@ namespace EmotionalBurstPassive_Re21341.Buffs
     public class BattleUnitBuf_Sad_Re21341 : BattleUnitBuf
     {
         private BattleUnitModel _attacker;
+        public override int paramInBufDesc => 0;
+        protected override string keywordId =>
+            stack == 1 ? "Sad_Re21341" : stack == 2 ? "Depressed_Re21341" : "Miserable_Re21341";
+
+        protected override string keywordIconId => "Hero_Re21341";
 
         public override void BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {

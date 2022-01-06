@@ -1,4 +1,5 @@
 ﻿using BLL_Re21341.Models;
+using EmotionalBurstPassive_Re21341.Buffs;
 using EmotionalBurstPassive_Re21341.Passives;
 
 namespace EmotionalBurstPassive_Re21341.Cards
@@ -22,6 +23,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
         {
             if (unit.passiveDetail.HasPassive<PassiveAbility_Neutral_Re21341>()) return;
             unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 32));
+            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Neutral_Re21341());
             unit.passiveDetail.OnCreated();
         }
 

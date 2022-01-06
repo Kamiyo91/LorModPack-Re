@@ -52,6 +52,7 @@
     <Compile Include="Buffs\BattleUnitBuf_Angry_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Happy_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Mock_Re21341.cs" />
+    <Compile Include="Buffs\BattleUnitBuf_Neutral_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_Sad_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Angry_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Comeback_Re21341.cs" />

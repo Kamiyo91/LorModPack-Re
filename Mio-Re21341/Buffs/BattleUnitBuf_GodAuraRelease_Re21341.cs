@@ -1,6 +1,4 @@
-﻿using BLL_Re21341.Models;
-using HarmonyLib;
-using Sound;
+﻿using Sound;
 
 namespace Mio_Re21341.Buffs
 {
@@ -14,6 +12,7 @@ namespace Mio_Re21341.Buffs
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "GodAura_Re21341";
+        protected override string keywordIconId => "GodAura_Re21341";
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -27,9 +26,6 @@ namespace Mio_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["Light_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
             InitAuraAndPlaySound();
         }
 

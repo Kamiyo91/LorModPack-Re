@@ -167,5 +167,16 @@ namespace Util_Re21341
 
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Buf/Effect_Index_Unlock");
         }
+
+        public static void PreLoadBufIcons()
+        {
+            foreach (var baseGameIcon in Resources.LoadAll<Sprite>("Sprites/BufIconSheet/")
+                         .Where(x => !BattleUnitBuf._bufIconDictionary.ContainsKey(x.name)))
+                BattleUnitBuf._bufIconDictionary.Add(baseGameIcon.name, baseGameIcon);
+            foreach (var artWork in ModParameters.ArtWorks.Where(x =>
+                         !x.Key.Contains("Glow") && !x.Key.Contains("Default") &&
+                         !BattleUnitBuf._bufIconDictionary.ContainsKey(x.Key)))
+                BattleUnitBuf._bufIconDictionary.Add(artWork.Key, artWork.Value);
+        }
     }
 }

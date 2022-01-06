@@ -1,6 +1,4 @@
-﻿using BLL_Re21341.Models;
-using HarmonyLib;
-using Sound;
+﻿using Sound;
 
 namespace Raziel_Re21341.Buffs
 {
@@ -16,13 +14,11 @@ namespace Raziel_Re21341.Buffs
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "Kaioken_Re21341";
+        protected override string keywordIconId => "Kaioken_Re21341";
 
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["Kaioken_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
             SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising",
                 1f, _owner.view, _owner.view);
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");

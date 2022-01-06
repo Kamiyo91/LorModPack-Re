@@ -16,6 +16,12 @@ namespace EmotionalBurstPassive_Re21341.Passives
             return _stack;
         }
 
+        public override void Init(BattleUnitModel self)
+        {
+            base.Init(self);
+            Hide();
+        }
+
         public void ChangeNameAndSetStacks(int stack)
         {
             switch (stack)

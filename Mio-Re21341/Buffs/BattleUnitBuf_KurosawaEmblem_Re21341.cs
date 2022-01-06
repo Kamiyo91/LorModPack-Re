@@ -1,5 +1,4 @@
 ﻿using BLL_Re21341.Models;
-using HarmonyLib;
 
 namespace Mio_Re21341.Buffs
 {
@@ -12,6 +11,7 @@ namespace Mio_Re21341.Buffs
 
         public override int paramInBufDesc => 0;
         protected override string keywordId => "KurosawaEmblem_Re21341";
+        protected override string keywordIconId => "KurosawaEmblem_Re21341";
 
         public override void Init(BattleUnitModel owner)
         {
@@ -23,10 +23,6 @@ namespace Mio_Re21341.Buffs
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["KurosawaEmblem_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
         }
     }
 }

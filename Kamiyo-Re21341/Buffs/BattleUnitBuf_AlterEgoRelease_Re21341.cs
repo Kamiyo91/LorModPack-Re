@@ -1,6 +1,4 @@
 ﻿using Battle.CreatureEffect;
-using BLL_Re21341.Models;
-using HarmonyLib;
 using Sound;
 using UnityEngine;
 
@@ -19,6 +17,7 @@ namespace Kamiyo_Re21341.Buffs
         public override int paramInBufDesc => 0;
         public override bool isAssimilation => true;
         protected override string keywordId => "AlterEgoMask_Re21341";
+        protected override string keywordIconId => "AlterEgoMask_Re21341";
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -32,9 +31,6 @@ namespace Kamiyo_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["AlterEgoMask_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
             PlayChangingEffect(owner);
         }
 

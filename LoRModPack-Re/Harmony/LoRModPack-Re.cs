@@ -11,7 +11,6 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
-using Util_Re21341.CommonPassives;
 using Workshop;
 using Object = UnityEngine.Object;
 
@@ -39,9 +38,9 @@ namespace LoRModPack_Re21341.Harmony
                 null, new HarmonyMethod(method));
             harmony.Patch(typeof(UIInvenEquipPageListSlot).GetMethod("SetBooksData", AccessTools.all),
                 null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_GetStoryIcon");
-            harmony.Patch(typeof(UISpriteDataManager).GetMethod("GetStoryIcon", AccessTools.all),
-                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_Init");
+            harmony.Patch(typeof(UISpriteDataManager).GetMethod("Init", AccessTools.all),
+                new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UIBookStoryChapterSlot_SetEpisodeSlots");
             harmony.Patch(typeof(UIBookStoryChapterSlot).GetMethod("SetEpisodeSlots", AccessTools.all),
                 null, new HarmonyMethod(method));
@@ -50,9 +49,6 @@ namespace LoRModPack_Re21341.Harmony
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("BattleUnitModel_ChangeBaseDeck");
-            harmony.Patch(typeof(BattleUnitModel).GetMethod("ChangeBaseDeck", AccessTools.all),
                 null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPrefix");
             var methodPostfix = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPostfix");
@@ -84,11 +80,11 @@ namespace LoRModPack_Re21341.Harmony
             UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
             UnitUtil.ChangePassiveItem();
             SkinUtil.LoadBookSkinsExtra();
+            SkinUtil.PreLoadBufIcons();
             LocalizeUtil.AddLocalize();
             LocalizeUtil.RemoveError();
         }
 
-        [HarmonyPriority(0)]
         public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
         {
             if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
@@ -99,7 +95,6 @@ namespace LoRModPack_Re21341.Harmony
             SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.OnSelectHide(true);
         }
 
-        [HarmonyPriority(0)]
         public static void StageWaveModel_PickRandomEmotionCard(StageWaveModel __instance)
         {
             if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
@@ -112,13 +107,6 @@ namespace LoRModPack_Re21341.Harmony
             UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
         {
             SkinUtil.SetEpisodeSlots(__instance, ___panel, ___EpisodeSlots);
-        }
-
-        public static void BattleUnitModel_ChangeBaseDeck(BattleUnitModel __instance)
-        {
-            if (__instance.passiveDetail.HasPassive<PassiveAbility_PlayerShimmering_Re21341>() &&
-                UnitUtil.CheckCardCost(__instance, 0))
-                UnitUtil.ChangeCardCostByValue(__instance, -99, 99);
         }
 
         public static void General_GetThumbSprite(object __instance, ref Sprite __result)
@@ -266,21 +254,21 @@ namespace LoRModPack_Re21341.Harmony
             SkinUtil.SetBooksData(uiOrigin, books, storyKey);
         }
 
-        public static void UISpriteDataManager_GetStoryIcon(UISpriteDataManager __instance,
-            ref UIIconManager.IconSet __result, string story)
+        public static void UISpriteDataManager_Init(UISpriteDataManager __instance)
         {
-            if (!ModParameters.ArtWorks.ContainsKey(story)) return;
-            __result = new UIIconManager.IconSet
-            {
-                type = story,
-                icon = ModParameters.ArtWorks[story],
-                iconGlow = ModParameters.ArtWorks[story + "Glow"]
-            };
+            foreach (var artWork in ModParameters.ArtWorks.Where(x =>
+                         !x.Key.Contains("Glow") && !__instance._storyicons.Exists(y => y.type.Equals(x.Key))))
+                __instance._storyicons.Add(new UIIconManager.IconSet
+                {
+                    type = artWork.Key,
+                    icon = artWork.Value,
+                    iconGlow = ModParameters.ArtWorks.FirstOrDefault(x => x.Key.Equals($"{artWork.Key}Glow")).Value ?? artWork.Value
+                });
         }
 
-        public static bool BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
+        public static void BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
-            if (!ModParameters.SkinNameIds.Exists(x => x.Item1.Contains(charName))) return true;
+            if (!ModParameters.SkinNameIds.Exists(x => x.Item1.Contains(charName))) return;
             var skinInfo =
                 typeof(BattleUnitView).GetField("_skinInfo", AccessTools.all)?.GetValue(__instance) as
                     BattleUnitView.SkinInfo;
@@ -302,7 +290,6 @@ namespace LoRModPack_Re21341.Harmony
             __instance.charAppearance.ChangeLayer("Character");
             __instance.charAppearance.SetLibrarianOnlySprites(__instance.model.faction);
             __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
-            return false;
         }
     }
 }

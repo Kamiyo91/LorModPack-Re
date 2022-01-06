@@ -1,5 +1,4 @@
 ﻿using BLL_Re21341.Models;
-using HarmonyLib;
 using Sound;
 
 namespace Kamiyo_Re21341.Buffs
@@ -13,6 +12,7 @@ namespace Kamiyo_Re21341.Buffs
 
         public override int paramInBufDesc => 0;
         protected override string keywordId => "MioLight_Re21341";
+        protected override string keywordIconId => "MioLight_Re21341";
 
         public override void Init(BattleUnitModel owner)
         {
@@ -25,9 +25,6 @@ namespace Kamiyo_Re21341.Buffs
                 battleDiceCardModel.AddCost(-1);
             }
 
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["Light_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
             InitAuraAndPlaySound();
         }
 

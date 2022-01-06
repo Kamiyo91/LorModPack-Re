@@ -1,7 +1,4 @@
-﻿using BLL_Re21341.Models;
-using HarmonyLib;
-
-namespace Kamiyo_Re21341.Buffs
+﻿namespace Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_NearDeath_Re21341 : BattleUnitBuf
     {
@@ -12,14 +9,7 @@ namespace Kamiyo_Re21341.Buffs
 
         public override int paramInBufDesc => 0;
         protected override string keywordId => "SuddenDeath_Re21341";
-
-        public override void Init(BattleUnitModel owner)
-        {
-            base.Init(owner);
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["SuddenDeath_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
-        }
+        protected override string keywordIconId => "SuddenDeath_Re21341";
 
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {

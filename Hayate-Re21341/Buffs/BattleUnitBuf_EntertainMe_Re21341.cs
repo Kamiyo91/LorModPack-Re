@@ -1,7 +1,4 @@
-﻿using BLL_Re21341.Models;
-using HarmonyLib;
-
-namespace Hayate_Re21341.Buffs
+﻿namespace Hayate_Re21341.Buffs
 {
     public class BattleUnitBuf_EntertainMe_Re21341 : BattleUnitBuf
     {
@@ -11,12 +8,11 @@ namespace Hayate_Re21341.Buffs
         protected override string keywordId =>
             _owner.faction == Faction.Player ? "EntertainMePlayer_Re21341" : "EntertainMeNpc_Re21341";
 
+        protected override string keywordIconId => "EntertainMe_Re21341";
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all)
-                ?.SetValue(this, ModParameters.ArtWorks["EntertainMe_Re21341"]);
-            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all)?.SetValue(this, true);
             _addValue = 1;
         }
 
