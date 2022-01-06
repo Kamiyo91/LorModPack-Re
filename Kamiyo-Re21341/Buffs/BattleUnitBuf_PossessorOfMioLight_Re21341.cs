@@ -12,7 +12,7 @@ namespace Kamiyo_Re21341.Buffs
 
         public override int paramInBufDesc => 0;
         protected override string keywordId => "MioLight_Re21341";
-        protected override string keywordIconId => "MioLight_Re21341";
+        protected override string keywordIconId => "Light_Re21341";
 
         public override void Init(BattleUnitModel owner)
         {
