@@ -4,13 +4,16 @@ namespace EmotionalBurstPassive_Re21341.Buffs
 {
     public class BattleUnitBuf_Sad_Re21341 : BattleUnitBuf
     {
+        public BattleUnitBuf_Sad_Re21341()
+        {
+            stack = 0;
+        }
         private BattleUnitModel _attacker;
+        public int BufValue { get; set; }
         public override int paramInBufDesc => 0;
         protected override string keywordId =>
-            stack == 1 ? "Sad_Re21341" : stack == 2 ? "Depressed_Re21341" : "Miserable_Re21341";
-
+            BufValue == 1 ? "Sad_Re21341" : BufValue == 2 ? "Depressed_Re21341" : "Miserable_Re21341";
         protected override string keywordIconId => "Hero_Re21341";
-
         public override void BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             _attacker = attacker;
@@ -20,14 +23,14 @@ namespace EmotionalBurstPassive_Re21341.Buffs
         public override int GetDamageReductionRate()
         {
             if (_attacker != null && _attacker.passiveDetail.HasPassive<PassiveAbility_Happy_Re21341>())
-                return 10 * stack;
+                return 10 * BufValue;
             return base.GetDamageReductionRate();
         }
 
         public override int GetBreakDamageReductionRate()
         {
             if (_attacker != null && _attacker.passiveDetail.HasPassive<PassiveAbility_Happy_Re21341>())
-                return 10 * stack;
+                return 10 * BufValue;
             return base.GetBreakDamageReductionRate();
         }
 
@@ -36,8 +39,8 @@ namespace EmotionalBurstPassive_Re21341.Buffs
             if (!behavior.card.target.passiveDetail.HasPassive<PassiveAbility_Happy_Re21341>()) return;
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
-                dmgRate = 10 * stack,
-                breakRate = 10 * stack
+                dmgRate = 10 * BufValue,
+                breakRate = 10 * BufValue
             });
         }
     }

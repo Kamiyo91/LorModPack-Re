@@ -46,13 +46,13 @@ namespace EmotionalBurstPassive_Re21341.Passives
             if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Happy_Re21341) is
                 BattleUnitBuf_Happy_Re21341 buf)
             {
-                buf.stack = stack;
+                buf.BufValue = stack;
             }
             else
             {
                 buf = new BattleUnitBuf_Happy_Re21341
                 {
-                    stack = stack
+                    BufValue = stack
                 };
                 owner.bufListDetail.AddBufWithoutDuplication(buf);
             }
