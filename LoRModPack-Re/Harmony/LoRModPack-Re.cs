@@ -47,6 +47,9 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("UIBookStoryPanel_OnSelectEpisodeSlot");
             harmony.Patch(typeof(UIBookStoryPanel).GetMethod("OnSelectEpisodeSlot", AccessTools.all),
                 null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("UIBattleSettingPanel_SetToggles");
+            harmony.Patch(typeof(UIBattleSettingPanel).GetMethod("SetToggles", AccessTools.all),
+                null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
             harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
                 null, new HarmonyMethod(method));
@@ -133,6 +136,19 @@ namespace LoRModPack_Re21341.Harmony
             ___selectedEpisodeIcon.sprite = ModParameters.ArtWorks["Light_Re21341"];
             ___selectedEpisodeIconGlow.sprite = ModParameters.ArtWorks["Light_Re21341"];
             __instance.UpdateBookSlots();
+        }
+        public static void UIBattleSettingPanel_SetToggles(UIBattleSettingPanel __instance)
+        {
+            if (!Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId
+                    .Contains(ModParameters.PackageId) ||
+                !ModParameters.PreBattleUnits.ContainsKey(Singleton<StageController>.Instance.GetStageModel().ClassInfo
+                    .id.id)) return;
+            foreach (var currentAvailbleUnitslot in __instance.currentAvailbleUnitslots)
+            {
+                currentAvailbleUnitslot.SetToggle(false);
+                currentAvailbleUnitslot.SetYesToggleState();
+            }
+            __instance.SetAvailibleText();
         }
 
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
