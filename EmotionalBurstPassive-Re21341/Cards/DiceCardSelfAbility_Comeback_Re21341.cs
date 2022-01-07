@@ -9,13 +9,13 @@ namespace EmotionalBurstPassive_Re21341.Cards
         public override void OnStartBattle()
         {
             owner.allyCardDetail.DrawCards(1);
-            if (owner.passiveDetail.HasPassive<PassiveAbility_Sad_Re21341>())
+            if (owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Sad_Re21341) is PassiveAbility_Sad_Re21341 passive)
             {
-                owner.RecoverHP(20);
-                owner.breakDetail.RecoverBreak(20);
-                owner.cardSlotDetail.RecoverPlayPoint(2);
-                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, owner);
-                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, owner);
+                owner.RecoverHP(10 * passive.GetStack());
+                owner.breakDetail.RecoverBreak(10 * passive.GetStack());
+                owner.cardSlotDetail.RecoverPlayPoint(passive.GetStack());
+                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, passive.GetStack(), owner);
+                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, passive.GetStack(), owner);
             }
             ActiveHappy();
         }
@@ -39,6 +39,10 @@ namespace EmotionalBurstPassive_Re21341.Cards
             passive?.ChangeNameAndSetStacks(1);
             passive?.AfterInit();
             owner.passiveDetail.OnCreated();
+        }
+        public override bool OnChooseCard(BattleUnitModel owner)
+        {
+            return owner.hp < owner.MaxHp * 0.25f;
         }
     }
 }

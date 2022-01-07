@@ -78,7 +78,7 @@ namespace BLL_Re21341.Models
                         {
                             new PreBattleUnitModel
                             {
-                                UnitId = 10000004,
+                                UnitId = 10000901,
                                 SephirahUnit = SephirahType.Keter,
                                 UnitNameId = "4",
                                 SkinName = "KamiyoNormal_Re21341",
@@ -86,7 +86,7 @@ namespace BLL_Re21341.Models
                             },
                             new PreBattleUnitModel
                             {
-                                UnitId = 10000003,
+                                UnitId = 10000900,
                                 SephirahUnit = SephirahType.Keter,
                                 UnitNameId = "3",
                                 SkinName = "MioNormalEye_Re21341",
