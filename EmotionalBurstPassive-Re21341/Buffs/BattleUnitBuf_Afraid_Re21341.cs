@@ -1,5 +1,5 @@
 ﻿using BLL_Re21341.Models.Enum;
-using LOR_DiceSystem;
+using Util_Re21341;
 
 namespace EmotionalBurstPassive_Re21341.Buffs
 {
@@ -33,10 +33,7 @@ namespace EmotionalBurstPassive_Re21341.Buffs
 
         public override bool IsCardChoosable(BattleDiceCardModel card)
         {
-            if (card.XmlData.Spec.Ranged == CardRange.FarArea ||
-                card.XmlData.Spec.Ranged == CardRange.FarAreaEach || card.GetOriginCost() > 3 ||
-                card.XmlData.IsEgo()) return false;
-            return base.IsCardChoosable(card);
+            return !UnitUtil.CantUseCardAfraid(card) && base.IsCardChoosable(card);
         }
     }
 }

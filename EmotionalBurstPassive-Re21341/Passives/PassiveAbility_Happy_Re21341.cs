@@ -66,7 +66,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
         public void RemoveBuff()
         {
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Quickness, _stack);
-            owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Happy_Re21341)?.Destroy();
         }
 
         public void AfterInit()

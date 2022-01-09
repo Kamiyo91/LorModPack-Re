@@ -81,6 +81,8 @@ namespace Mio_Re21341
                 allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_GodFragment_Re21341) as
                     PassiveAbility_GodFragment_Re21341;
             passive?.ForcedEgo();
+            if (!allyUnit.passiveDetail.PassiveList.Exists(x => x is PassiveAbility_KurosawaEmblem_Re21341))
+                allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 37));
             allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 57));
         }
     }

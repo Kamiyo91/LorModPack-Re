@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using BLL_Re21341.Models;
 
 namespace Util_Re21341.CommonPassives
 {
@@ -7,9 +6,8 @@ namespace Util_Re21341.CommonPassives
     {
         public override void OnRoundEnd()
         {
-            if (BattleObjectManager.instance.GetAliveList(owner.faction).Count(x =>
-                    !(x.Book.GetBookClassInfoId().packageId == ModParameters.PackageId &&
-                      x.Book.GetBookClassInfoId().id == 10000900)) == 1)
+            if (BattleObjectManager.instance.GetAliveList(owner.faction)
+                    .Count(x => !x.passiveDetail.HasPassive<PassiveAbility_NotEquip_Re21341>()) == 1)
                 owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Endurance, 3);
         }
     }

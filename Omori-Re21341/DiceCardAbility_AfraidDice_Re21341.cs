@@ -11,6 +11,11 @@ namespace Omori_Re21341
             {
                 buf.stack++;
             }
+            else if (target.bufListDetail.GetReadyBufList().Find(x => x is BattleUnitBuf_Afraid_Re21341) is
+                     BattleUnitBuf_Afraid_Re21341 buf2)
+            {
+                buf2.stack++;
+            }
             else
             {
                 buf = new BattleUnitBuf_Afraid_Re21341 { stack = 1 };

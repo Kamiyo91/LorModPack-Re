@@ -68,7 +68,6 @@ namespace EmotionalBurstPassive_Re21341.Passives
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Strength, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Disarm, _stack);
             EmotionalBurstUtil.DecreaseStacksBufType(owner, KeywordBuf.Vulnerable, _stack * 3);
-            owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Angry_Re21341)?.Destroy();
         }
 
         public void InstantIncrease()

@@ -42,8 +42,15 @@ namespace Omori_Re21341.Passives
             }
         }
 
+        public override void AfterTakeDamage(BattleUnitModel attacker, int dmg)
+        {
+            if (owner.hp < 2)
+                owner.breakDetail.LoseBreakLife(attacker);
+        }
+
         public override int GetMaxHpBonus()
         {
+            if (_stageManager == null) return 0;
             switch (_stageManager.GetPhase())
             {
                 case 0:

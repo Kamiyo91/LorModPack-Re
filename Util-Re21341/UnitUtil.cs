@@ -29,6 +29,15 @@ namespace Util_Re21341
             }
         }
 
+        public static bool CantUseCardAfraid(BattleDiceCardModel card)
+        {
+            return card.XmlData.Spec.Ranged == CardRange.FarArea ||
+                   card.XmlData.Spec.Ranged == CardRange.FarAreaEach || card.GetOriginCost() > 3 ||
+                   card.XmlData.IsEgo() || card.XmlData.id.packageId == ModParameters.PackageId &&
+                   (card.XmlData.id.id == 32 || card.XmlData.id.id == 33 || card.XmlData.id.id == 34 ||
+                    card.XmlData.id.id == 35);
+        }
+
         public static void DrawUntilX(BattleUnitModel owner, int x)
         {
             var count = owner.allyCardDetail.GetHand().Count;
@@ -94,14 +103,18 @@ namespace Util_Re21341
             return owner.allyCardDetail.GetAllDeck().Any(x => x.GetCost() > baseValue);
         }
 
-        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight)
+        public static void UnitReviveAndRecovery(BattleUnitModel owner, int hp, bool recoverLight,
+            bool skinChanged = false)
         {
             if (owner.IsDead())
             {
                 owner.Revive(hp);
                 owner.moveDetail.ReturnToFormationByBlink(true);
                 owner.view.EnableView(true);
-                owner.view.CreateSkin();
+                if (skinChanged)
+                    CheckSkinProjection(owner);
+                else
+                    owner.view.CreateSkin();
             }
             else
             {

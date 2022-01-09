@@ -10,6 +10,7 @@ namespace Raziel_Re21341.Passives
     public class PassiveAbility_Inquisitor_Re21341 : PassiveAbilityBase
     {
         private bool _revive;
+        private bool _skinChanged;
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
@@ -22,7 +23,7 @@ namespace Raziel_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            UnitUtil.CheckSkinProjection(owner);
+            _skinChanged = UnitUtil.CheckSkinProjection(owner);
             _revive = false;
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 57));
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 58));
@@ -32,7 +33,7 @@ namespace Raziel_Re21341.Passives
         {
             if (!owner.IsDead() || _revive) return;
             _revive = true;
-            UnitUtil.UnitReviveAndRecovery(owner, owner.MaxHp, false);
+            UnitUtil.UnitReviveAndRecovery(owner, owner.MaxHp, false, _skinChanged);
             UnitUtil.BattleAbDialog(owner.view.dialogUI,
                 new List<AbnormalityCardDialog>
                 {

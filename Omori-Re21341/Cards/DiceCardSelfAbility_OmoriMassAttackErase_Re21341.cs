@@ -31,6 +31,11 @@ namespace Omori_Re21341.Cards
             {
                 buf.stack++;
             }
+            else if (target.bufListDetail.GetReadyBufList().Find(x => x is BattleUnitBuf_Afraid_Re21341) is
+                     BattleUnitBuf_Afraid_Re21341 buf2)
+            {
+                buf2.stack++;
+            }
             else
             {
                 buf = new BattleUnitBuf_Afraid_Re21341 { stack = 1 };
@@ -54,11 +59,10 @@ namespace Omori_Re21341.Cards
 
         public override void OnUseCard()
         {
-            if (owner.emotionDetail.EmotionLevel > 1)
+            if (owner.emotionDetail.EmotionLevel > 2)
             {
                 var dice = card.card.CreateDiceCardBehaviorList().FirstOrDefault();
                 card.AddDice(dice);
-                if (owner.emotionDetail.EmotionLevel > 3) card.AddDice(dice);
                 if (owner.emotionDetail.EmotionLevel > 4) card.AddDice(dice);
             }
 

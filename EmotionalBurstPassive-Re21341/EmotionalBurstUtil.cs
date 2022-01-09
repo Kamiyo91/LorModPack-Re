@@ -55,18 +55,19 @@ namespace EmotionalBurstPassive_Re21341
             EmotionBufEnum type = EmotionBufEnum.Neutral)
         {
             if (type != EmotionBufEnum.Afraid)
-                if (unit.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Afraid_Re21341) is
-                    BattleUnitBuf_Afraid_Re21341 buf)
-                    buf.Destroy();
+                if (unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_Afraid_Re21341))
+                    unit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Afraid_Re21341));
             if (type != EmotionBufEnum.Neutral)
+            {
                 if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Neutral_Re21341) is
                     PassiveAbility_Neutral_Re21341 passiveAbilityNeutral)
-                {
-                    passiveAbilityNeutral.RemoveBuff();
                     unit.passiveDetail.DestroyPassive(passiveAbilityNeutral);
-                }
+                if (unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_Neutral_Re21341))
+                    unit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Neutral_Re21341));
+            }
 
             if (type != EmotionBufEnum.Happy)
+            {
                 if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Happy_Re21341) is
                     PassiveAbility_Happy_Re21341 passiveAbilityHappy)
                 {
@@ -74,7 +75,12 @@ namespace EmotionalBurstPassive_Re21341
                     unit.passiveDetail.DestroyPassive(passiveAbilityHappy);
                 }
 
+                if (unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_Happy_Re21341))
+                    unit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Happy_Re21341));
+            }
+
             if (type != EmotionBufEnum.Angry)
+            {
                 if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Angry_Re21341) is
                     PassiveAbility_Angry_Re21341 passiveAbilityAngry)
                 {
@@ -82,11 +88,20 @@ namespace EmotionalBurstPassive_Re21341
                     unit.passiveDetail.DestroyPassive(passiveAbilityAngry);
                 }
 
+                if (unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_Angry_Re21341))
+                    unit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Angry_Re21341));
+            }
+
             if (type == EmotionBufEnum.Sad) return;
-            if (!(unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Sad_Re21341) is
-                    PassiveAbility_Sad_Re21341 passiveAbilitySad)) return;
-            passiveAbilitySad.RemoveBuff();
-            unit.passiveDetail.DestroyPassive(passiveAbilitySad);
+            if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Sad_Re21341) is
+                PassiveAbility_Sad_Re21341 passiveAbilitySad)
+            {
+                passiveAbilitySad.RemoveBuff();
+                unit.passiveDetail.DestroyPassive(passiveAbilitySad);
+            }
+
+            if (unit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_Sad_Re21341))
+                unit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Sad_Re21341));
         }
 
         public static void DecreaseStacksBufType(BattleUnitModel owner, KeywordBuf bufType, int stacks)
