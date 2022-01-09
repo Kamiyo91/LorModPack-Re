@@ -5,6 +5,8 @@
         Happy,
         Sad,
         Angry,
-        Neutral
+        Neutral,
+        All,
+        Afraid
     }
 }

@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
+using Util_Re21341.CustomMapUtility.Assemblies;
 
-namespace Roland_Re21341
+namespace Util_Re21341.CommonMaps
 {
-    public class BlackSilence_Re21341MapManager : MapManager
+    public class BlackSilence_Re21341MapManager : CustomMapManager
     {
         private GameObject _aura;
         private BlackSilence4thMapManager _mapGameObject;
+        protected internal override string[] CustomBGMs => new[] { "BlackSilence_Re21341.mp3" };
 
         public override void InitializeMap()
         {
             base.InitializeMap();
-            sephirahType = SephirahType.None;
-            sephirahColor = Color.black;
             var map = Util.LoadPrefab("InvitationMaps/InvitationMap_BlackSilence4",
                 SingletonBehavior<BattleSceneRoot>.Instance.transform);
             _mapGameObject = map.GetComponent<MapManager>() as BlackSilence4thMapManager;
             Destroy(map);
+        }
+
+        public override void EnableMap(bool b)
+        {
+            sephirahColor = Color.black;
+            base.EnableMap(b);
         }
 
         public void BoomFirst()

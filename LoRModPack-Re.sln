@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wilton-Re21341", "Wilton-Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel-Re21341", "Raziel-Re21341\Raziel-Re21341.csproj", "{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omori-Re21341", "Omori-Re21341\Omori-Re21341.csproj", "{06BF4F49-5615-45AA-B8ED-544C1626DDB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BF4F49-5615-45AA-B8ED-544C1626DDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BF4F49-5615-45AA-B8ED-544C1626DDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BF4F49-5615-45AA-B8ED-544C1626DDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BF4F49-5615-45AA-B8ED-544C1626DDB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

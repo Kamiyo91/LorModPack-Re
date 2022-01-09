@@ -44,11 +44,17 @@ namespace Util_Re21341
             return true;
         }
 
-        public static void VipDeath(BattleUnitModel owner)
+        public static void VipDeathNpc(BattleUnitModel owner)
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)
                          .Where(x => x != owner))
                 unit.Die();
+        }
+
+        public static void VipDeathPlayer()
+        {
+            StageController.Instance.GetCurrentStageFloorModel().Defeat();
+            StageController.Instance.EndBattle();
         }
 
         public static void RemoveImmortalBuff(BattleUnitModel owner)
@@ -242,6 +248,27 @@ namespace Util_Re21341
                 .Where(x => x.isSephirah)
                 .Select(unit => InitUnitDefault(stage, unit)));
             unitList?.AddRange(sephirahs);
+        }
+
+        public static void Add4SephirahUnits(StageModel stage,
+            List<UnitBattleDataModel> unitList)
+        {
+            var units = new List<UnitBattleDataModel>
+            {
+                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
+                    .FirstOrDefault(x => x.Sephirah == SephirahType.Malkuth)
+                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
+                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
+                    .FirstOrDefault(x => x.Sephirah == SephirahType.Yesod)
+                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
+                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
+                    .FirstOrDefault(x => x.Sephirah == SephirahType.Hod)
+                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
+                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
+                    .FirstOrDefault(x => x.Sephirah == SephirahType.Netzach)
+                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah))
+            };
+            unitList?.AddRange(units);
         }
 
         public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage,
@@ -441,6 +468,11 @@ namespace Util_Re21341
                          passive.id.packageId == ModParameters.PackageId &&
                          ModParameters.UntransferablePassives.Contains(passive.id.id)))
                 passive.CanGivePassive = false;
+            foreach (var (key, value) in ModParameters.SameInnerIdPassives)
+            foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive =>
+                         passive.id.packageId == ModParameters.PackageId &&
+                         value.Contains(passive.id.id)))
+                passive.InnerTypeId = key;
         }
     }
 }

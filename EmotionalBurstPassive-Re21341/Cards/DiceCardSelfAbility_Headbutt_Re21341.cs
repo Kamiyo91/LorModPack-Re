@@ -12,7 +12,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 dmg = 10,
-                dmgRate = 50
+                dmgRate = 25
             });
         }
 

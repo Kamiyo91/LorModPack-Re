@@ -11,14 +11,14 @@ namespace EmotionalBurstPassive_Re21341.Cards
                 owner.allyCardDetail.DrawCards(1);
                 card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
                 {
-                    dmgRate = 50
+                    dmgRate = 25
                 });
             }
 
             if (owner.passiveDetail.HasPassive<PassiveAbility_Sad_Re21341>())
                 card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
                 {
-                    dmgRate = 50
+                    dmgRate = 25
                 });
         }
     }

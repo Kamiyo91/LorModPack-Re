@@ -110,7 +110,7 @@ namespace Wilton_Re21341.Passives
 
         public override void OnDie()
         {
-            UnitUtil.VipDeath(owner);
+            UnitUtil.VipDeathNpc(owner);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BLL_Re21341.Models;
 using Roland_Re21341.Buffs;
 using Util_Re21341;
+using Util_Re21341.CommonMaps;
 
 namespace Roland_Re21341.Cards
 {

@@ -5,6 +5,7 @@ using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_XML;
 using Mod;
+using UnityEngine;
 
 namespace Util_Re21341
 {
@@ -17,6 +18,7 @@ namespace Util_Re21341
                     ?.GetValue(Singleton<BattleEffectTextsXmlList>.Instance) as Dictionary<string, BattleEffectText>;
             var files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/EffectTexts")
                 .GetFiles();
+            Debug.LogError("1");
             ModParameters.EffectTexts.Clear();
             foreach (var t in files)
                 using (var stringReader = new StringReader(File.ReadAllText(t.FullName)))
@@ -35,9 +37,11 @@ namespace Util_Re21341
 
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattlesCards")
                 .GetFiles();
+            Debug.LogError("2");
             foreach (var t in files)
                 using (var stringReader2 = new StringReader(File.ReadAllText(t.FullName)))
                 {
+                    Debug.LogError("2.5");
                     var battleCardDescRoot =
                         (BattleCardDescRoot)new XmlSerializer(typeof(BattleCardDescRoot)).Deserialize(
                             stringReader2);
@@ -47,11 +51,13 @@ namespace Util_Re21341
                         while (enumerator.MoveNext())
                         {
                             var card = enumerator.Current;
+                            Debug.LogError($"{card.Name}");
                             card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
                                 .cardName;
                         }
                     }
 
+                    Debug.LogError("2.7");
                     typeof(ItemXmlDataList).GetField("_cardInfoTable", AccessTools.all)
                         .GetValue(ItemXmlDataList.instance);
                     using (var enumerator2 = ItemXmlDataList.instance.GetCardList()
@@ -60,6 +66,7 @@ namespace Util_Re21341
                         while (enumerator2.MoveNext())
                         {
                             var card = enumerator2.Current;
+                            Debug.LogError($"{card.Name}");
                             card.workshopName = battleCardDescRoot.cardDescList.Find(x => x.cardID == card.id.id)
                                 .cardName;
                             ItemXmlDataList.instance.GetCardItem(card.id).workshopName = card.workshopName;
@@ -67,6 +74,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("3");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/BattleDialog")
                 .GetFiles();
             var dialogDictionary =
@@ -103,6 +111,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("4");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/CharactersName")
                 .GetFiles();
             ModParameters.NameTexts.Clear();
@@ -126,6 +135,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("5");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/Books").GetFiles();
             foreach (var t in files)
                 using (var stringReader4 = new StringReader(File.ReadAllText(t.FullName)))
@@ -161,6 +171,7 @@ namespace Util_Re21341
                         [ModParameters.PackageId] = bookDescRoot.bookDescList;
                 }
 
+            Debug.LogError("6");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/DropBooks")
                 .GetFiles();
             foreach (var t in files)
@@ -195,6 +206,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("7");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/StageName")
                 .GetFiles();
             foreach (var t in files)
@@ -215,6 +227,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("8");
             files = new DirectoryInfo(ModParameters.Path + "/Localize/" + ModParameters.Language + "/PassiveDesc")
                 .GetFiles();
             foreach (var t in files)
@@ -234,6 +247,7 @@ namespace Util_Re21341
                     }
                 }
 
+            Debug.LogError("9");
             var cardAbilityDictionary = typeof(BattleCardAbilityDescXmlList).GetField("_dictionary", AccessTools.all)
                     ?.GetValue(Singleton<BattleCardAbilityDescXmlList>.Instance) as
                 Dictionary<string, BattleCardAbilityDesc>;

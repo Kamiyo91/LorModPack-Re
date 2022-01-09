@@ -75,6 +75,9 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("StageWaveModel_PickRandomEmotionCard");
             harmony.Patch(typeof(StageWaveModel).GetMethod("PickRandomEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("StageController_BonusRewardWithPopup");
+            harmony.Patch(typeof(StageController).GetMethod("BonusRewardWithPopup", AccessTools.all),
+                null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
             harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
                 null, new HarmonyMethod(method));
@@ -137,17 +140,19 @@ namespace LoRModPack_Re21341.Harmony
             ___selectedEpisodeIconGlow.sprite = ModParameters.ArtWorks["Light_Re21341"];
             __instance.UpdateBookSlots();
         }
+
         public static void UIBattleSettingPanel_SetToggles(UIBattleSettingPanel __instance)
         {
             if (!Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId
-                    .Contains(ModParameters.PackageId) ||
-                !ModParameters.PreBattleUnits.ContainsKey(Singleton<StageController>.Instance.GetStageModel().ClassInfo
+                    .Contains(ModParameters.PackageId)) return;
+            if (!ModParameters.PreBattleUnits.ContainsKey(Singleton<StageController>.Instance.GetStageModel().ClassInfo
                     .id.id)) return;
             foreach (var currentAvailbleUnitslot in __instance.currentAvailbleUnitslots)
             {
                 currentAvailbleUnitslot.SetToggle(false);
                 currentAvailbleUnitslot.SetYesToggleState();
             }
+
             __instance.SetAvailibleText();
         }
 
@@ -177,6 +182,13 @@ namespace LoRModPack_Re21341.Harmony
                 case 6:
                     if (__instance.Sephirah == SephirahType.Keter) ____unitList.Clear();
                     UnitUtil.AddCustomUnits(__instance, stage, ____unitList, 6);
+                    return;
+                case 8:
+                    if (__instance.Sephirah == SephirahType.Malkuth ||
+                        __instance.Sephirah == SephirahType.Hod ||
+                        __instance.Sephirah == SephirahType.Yesod ||
+                        __instance.Sephirah == SephirahType.Netzach) ____unitList.Clear();
+                    UnitUtil.Add4SephirahUnits(stage, ____unitList);
                     return;
             }
         }
@@ -278,8 +290,19 @@ namespace LoRModPack_Re21341.Harmony
                 {
                     type = artWork.Key,
                     icon = artWork.Value,
-                    iconGlow = ModParameters.ArtWorks.FirstOrDefault(x => x.Key.Equals($"{artWork.Key}Glow")).Value ?? artWork.Value
+                    iconGlow = ModParameters.ArtWorks.FirstOrDefault(x => x.Key.Equals($"{artWork.Key}Glow")).Value ??
+                               artWork.Value
                 });
+        }
+
+        public static void StageController_BonusRewardWithPopup(LorId stageId)
+        {
+            if (stageId.packageId != ModParameters.PackageId) return;
+            if (ModParameters.ExtraReward.ContainsKey(stageId.id))
+                UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
+                        x.Key.Contains(ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id)).Value))
+                    .Value
+                    .Desc);
         }
 
         public static void BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)

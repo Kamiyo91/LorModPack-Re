@@ -13,7 +13,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
             EmotionalBurstUtil.RemoveEmotionalBurstCards(unit);
         }
 
-        private static void Activate(BattleUnitModel unit)
+        public static void Activate(BattleUnitModel unit)
         {
             EmotionalBurstUtil.RemoveAllEmotionalPassives(unit);
             AddNeutralPassive(unit);
@@ -24,7 +24,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
             if (unit.passiveDetail.HasPassive<PassiveAbility_Neutral_Re21341>()) return;
             unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 32));
             unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Neutral_Re21341());
-            unit.passiveDetail.OnCreated();
+            if (unit.faction == Faction.Player) unit.passiveDetail.OnCreated();
         }
 
         public override bool IsTargetableAllUnit()

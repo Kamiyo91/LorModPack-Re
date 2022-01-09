@@ -22,6 +22,7 @@ namespace Raziel_Re21341.Passives
 
         public override void OnWaveStart()
         {
+            UnitUtil.CheckSkinProjection(owner);
             _revive = false;
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 57));
             owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 58));

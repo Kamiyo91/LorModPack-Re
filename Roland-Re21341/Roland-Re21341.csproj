@@ -50,7 +50,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackSilence_Re21341MapManager.cs" />
     <Compile Include="Buffs\BattleUnitBuf_BlackSilenceEgoMask_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_BlackSilenceEgoMaskScream_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_BlackSilenceEgoMask_Re21341.cs" />

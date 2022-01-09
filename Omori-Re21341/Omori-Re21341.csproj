@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06BF4F49-5615-45AA-B8ED-544C1626DDB7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Omori_Re21341</RootNamespace>
+    <AssemblyName>Omori-Re21341</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buffs\BattleUnitBuf_UntargetableOmori_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FlowerCrown_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Basil_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_BrokenHope_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Friends_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Hopeless_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_OmoriMassAttackSlash_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_OmoriMassAttackErase_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_Picnic_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_OmoriStab_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_SomethingGuilt_Re21341.cs" />
+    <Compile Include="DiceCardAbility_AfraidDice_Re21341.cs" />
+    <Compile Include="DiceEffects\FarAreaEffect_OmoriCustomEgoAreaStrong_Re21341.cs" />
+    <Compile Include="EnemyTeamStageManager_Omori_Re21341.cs" />
+    <Compile Include="MapManagers\Omori6_Re21341MapManager.cs" />
+    <Compile Include="MapManagers\Omori5_Re21341MapManager.cs" />
+    <Compile Include="MapManagers\Omori1_Re21341MapManager.cs" />
+    <Compile Include="MapManagers\Omori4_Re21341MapManager.cs" />
+    <Compile Include="MapManagers\Omori3_Re21341MapManager.cs" />
+    <Compile Include="MapManagers\Omori2_Re21341MapManager.cs" />
+    <Compile Include="MechUtil\MechUtil_Omori.cs" />
+    <Compile Include="MechUtil\NpcMechUtil_Omori.cs" />
+    <Compile Include="Passives\PassiveAbility_MariProtection_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_KitchenKnife_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_OmoriNpc_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_Omori_Re21341.cs" />
+    <Compile Include="Passives\PassiveAbility_YouShouldJustDie_Re21341.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
+      <Project>{1DF30575-B636-45B5-B748-A37D420C63F0}</Project>
+      <Name>BLL-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EmotionalBurstPassive-Re21341\EmotionalBurstPassive-Re21341.csproj">
+      <Project>{afdca036-f151-46a9-919f-aa3abc08dec5}</Project>
+      <Name>EmotionalBurstPassive-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
+      <Project>{DACDC2EA-D97B-47B0-BA6A-1E0D27800C68}</Project>
+      <Name>Util-Re21341</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

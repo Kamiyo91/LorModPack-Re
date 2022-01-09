@@ -19,8 +19,10 @@ namespace BLL_Re21341.Models
             new Tuple<string, List<int>, int>("MioPage_Re21341", new List<int> { 12, 13, 14, 15 }, 10000003),
             new Tuple<string, List<int>, int>("HayatePage_Re21341", new List<int> { 23, 24, 25, 26, 27 }, 10000005),
             new Tuple<string, List<int>, int>("SamuraiPage_Re21341", new List<int> { 3, 4, 5, 6, 7 }, 10000001),
-            new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 43,44, 45, 46 }, 10000006),
-            new Tuple<string, List<int>, int>("RazielPage_Re21341", new List<int> { 52, 53, 54, 55 }, 10000007)
+            new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 43, 44, 45, 46 }, 10000006),
+            new Tuple<string, List<int>, int>("RazielPage_Re21341", new List<int> { 52, 53, 54, 55 }, 10000007),
+            new Tuple<string, List<int>, int>("OmoriPage_Re21341",
+                new List<int> { 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77 }, 10000019)
         };
 
         public static readonly Dictionary<int, int> DynamicNames = new Dictionary<int, int>
@@ -29,7 +31,8 @@ namespace BLL_Re21341.Models
             { 10000004, 4 },
             { 10000005, 6 },
             { 10000006, 8 },
-            { 10000007, 10 }
+            { 10000007, 10 },
+            { 10000019, 12 }
         };
 
         public static readonly List<int> BooksIds = new List<int>
@@ -40,8 +43,8 @@ namespace BLL_Re21341.Models
         public static readonly List<int> PersonalCardList = new List<int>
             { 1, 9, 17, 28, 29, 31, 32, 33, 34, 35, 42, 47, 57, 59, 60 };
 
-        public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 30, 48, 58, 901 };
-        public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40 };
+        public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 30, 48, 58, 66, 901 };
+        public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40, 51, 53 };
 
         public static List<Tuple<string, List<int>, string>> SkinNameIds = new List<Tuple<string, List<int>, string>>
         {
@@ -60,6 +63,16 @@ namespace BLL_Re21341.Models
             { "RazielDefault_Re21341", new List<int> { 10000007 } },
             { "FragmentDefault_Re21341", new List<int> { 10000008, 10000009, 10000010, 10000011, 10000012 } },
             { "FragmentBlueDefault_Re21341", new List<int> { 10000013, 10000014 } }
+        };
+
+        public static readonly Dictionary<int, List<int>> SameInnerIdPassives = new Dictionary<int, List<int>>
+        {
+            { 21341, new List<int> { 28, 46, 47, 48 } }
+        };
+
+        public static readonly Dictionary<int, string> ExtraReward = new Dictionary<int, string>
+        {
+            { 8, "OmoriDropBook_Re21341" }
         };
 
         public static readonly Dictionary<string, List<int>> DefaultSpritePreviewChange =
@@ -93,6 +106,10 @@ namespace BLL_Re21341.Models
                                 PassiveIds = new List<LorId> { new LorId(PackageId, 37) }
                             }
                         }
+                    },
+                    {
+                        8,
+                        null
                     }
                 };
 

@@ -13,7 +13,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
             EmotionalBurstUtil.RemoveEmotionalBurstCards(unit);
         }
 
-        private static void Activate(BattleUnitModel unit)
+        public static void Activate(BattleUnitModel unit)
         {
             EmotionalBurstUtil.RemoveAllEmotionalPassives(unit, EmotionBufEnum.Sad);
             if (unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_Sad_Re21341) is
@@ -31,7 +31,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
                     PassiveAbility_Sad_Re21341;
             passive?.ChangeNameAndSetStacks(1);
             passive?.AfterInit();
-            unit.passiveDetail.OnCreated();
+            if (unit.faction == Faction.Player) unit.passiveDetail.OnCreated();
         }
 
         public override bool IsTargetableAllUnit()

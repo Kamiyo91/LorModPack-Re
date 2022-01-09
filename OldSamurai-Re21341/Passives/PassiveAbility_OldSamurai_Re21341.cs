@@ -37,7 +37,7 @@ namespace OldSamurai_Re21341.Passives
         public override void OnDie()
         {
             if (!owner.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgo_Re21341>()) return;
-            UnitUtil.VipDeath(owner);
+            UnitUtil.VipDeathNpc(owner);
         }
 
         public void ForcedEgo()

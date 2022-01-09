@@ -4,13 +4,16 @@ namespace EmotionalBurstPassive_Re21341.Buffs
 {
     public class BattleUnitBuf_Happy_Re21341 : BattleUnitBuf
     {
+        private BattleUnitModel _attacker;
+
         public BattleUnitBuf_Happy_Re21341()
         {
             stack = 0;
         }
-        private BattleUnitModel _attacker;
+
         public int BufValue { get; set; }
         public override int paramInBufDesc => 0;
+
         protected override string keywordId =>
             BufValue == 1 ? "Happy_Re21341" : BufValue == 2 ? "Ecstatic_Re21341" : "Manic_Re21341";
 
