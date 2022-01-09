@@ -26,7 +26,16 @@ namespace Omori_Re21341.Cards
 
         public override void OnSucceedAreaAttack(BattleUnitModel target)
         {
-            target?.bufListDetail.AddReadyBuf(new BattleUnitBuf_Afraid_Re21341());
+            if (target.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_Afraid_Re21341) is
+                BattleUnitBuf_Afraid_Re21341 buf)
+            {
+                buf.stack++;
+            }
+            else
+            {
+                buf = new BattleUnitBuf_Afraid_Re21341 { stack = 1 };
+                target.bufListDetail.AddReadyBuf(buf);
+            }
         }
 
         public override void OnApplyCard()

@@ -44,6 +44,7 @@ namespace Omori_Re21341.MechUtil
         {
             if (_model.RechargeCount < 5) _model.RechargeCount++;
         }
+
         public void SetSuccumbStatus(bool value)
         {
             _model.NotSuccumb = value;
@@ -83,7 +84,7 @@ namespace Omori_Re21341.MechUtil
         {
             if (!_model.MapChanged) return;
             _model.MapChanged = false;
-            MapUtil.ReturnFromEgoMap("Omori5_Re21341", 8,true);
+            MapUtil.ReturnFromEgoMap("Omori5_Re21341", 8, true);
         }
     }
 }

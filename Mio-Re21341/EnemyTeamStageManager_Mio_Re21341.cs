@@ -60,6 +60,14 @@ namespace Mio_Re21341
 
         private void PrepareAllyUnit()
         {
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+            {
+                if (!(unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_230008) is PassiveAbility_230008
+                        passiveLone)) continue;
+                unit.passiveDetail.DestroyPassive(passiveLone);
+                unit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 56));
+            }
+
             var playerUnitList = BattleObjectManager.instance.GetList(Faction.Player);
             var allyUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
             {
@@ -73,6 +81,7 @@ namespace Mio_Re21341
                 allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_GodFragment_Re21341) as
                     PassiveAbility_GodFragment_Re21341;
             passive?.ForcedEgo();
+            allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 57));
         }
     }
 }

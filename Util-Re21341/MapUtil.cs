@@ -20,6 +20,7 @@ namespace Util_Re21341
                 CustomMapHandler.ChangeToCustomEgoMapByAssimilation(model.Stage, faction);
                 return;
             }
+
             CustomMapHandler.ChangeToCustomEgoMap(model.Stage, faction);
             MapChangedValue(true);
         }
@@ -47,7 +48,7 @@ namespace Util_Re21341
                 mapList?.RemoveAll(x => x.name.Contains(name));
         }
 
-        public static void ReturnFromEgoMap(string mapName, int id,bool isAssimilationMap = false)
+        public static void ReturnFromEgoMap(string mapName, int id, bool isAssimilationMap = false)
         {
             if (CheckStageMap(id)) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
@@ -55,10 +56,10 @@ namespace Util_Re21341
             if (isAssimilationMap) MapChangedValue(true);
             if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.stageType == StageType.Creature)
             {
-                if (!SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSpecialMap(Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo(), true))
-                {
-                    SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSephirahMap(Singleton<StageController>.Instance.CurrentFloor, true);
-                }
+                if (!SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSpecialMap(
+                        Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo(), true))
+                    SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSephirahMap(
+                        Singleton<StageController>.Instance.CurrentFloor, true);
                 SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
                     .Instance.currentMapObject.mapBgm);
                 MapChangedValue(false);
@@ -74,8 +75,10 @@ namespace Util_Re21341
 
         public static void MapChangedValue(bool value)
         {
-            typeof(StageController).GetField("_mapChanged", AccessTools.all)?.SetValue(Singleton<StageController>.Instance,value);
+            typeof(StageController).GetField("_mapChanged", AccessTools.all)
+                ?.SetValue(Singleton<StageController>.Instance, value);
         }
+
         public static void GetArtWorks(DirectoryInfo dir)
         {
             if (dir.GetDirectories().Length != 0)

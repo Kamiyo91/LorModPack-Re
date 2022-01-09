@@ -62,7 +62,8 @@ namespace BLL_Re21341.Models
             { "WiltonDefault_Re21341", new List<int> { 10000006 } },
             { "RazielDefault_Re21341", new List<int> { 10000007 } },
             { "FragmentDefault_Re21341", new List<int> { 10000008, 10000009, 10000010, 10000011, 10000012 } },
-            { "FragmentBlueDefault_Re21341", new List<int> { 10000013, 10000014 } }
+            { "FragmentBlueDefault_Re21341", new List<int> { 10000013, 10000014 } },
+            { "OmoriDefault_Re21341", new List<int> { 10000019 } }
         };
 
         public static readonly Dictionary<int, List<int>> SameInnerIdPassives = new Dictionary<int, List<int>>

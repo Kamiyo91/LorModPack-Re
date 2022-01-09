@@ -45,18 +45,17 @@ namespace Raziel_Re21341
 
         private void CheckPhase()
         {
-            switch (_count)
+            if (_count == 2)
             {
-                case 2:
-                    _razielEnemyPassive.ForcedEgo();
-                    _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
-                    CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.mp3", true, "Raziel_Re21341");
-                    break;
-                case 5:
-                    _mainEnemyModel.forceRetreat = true;
-                    _mainEnemyModel.Die();
-                    break;
+                _razielEnemyPassive.ForcedEgo();
+                _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
+                CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.mp3", true, "Raziel_Re21341");
             }
+
+            if (_count <= 4) return;
+            _mainEnemyModel.forceRetreat = true;
+            if (BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 0)
+                _mainEnemyModel.Die();
         }
 
         private void RazielIsDeadBeforeTurn6()
