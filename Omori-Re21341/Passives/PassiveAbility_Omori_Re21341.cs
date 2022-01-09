@@ -22,6 +22,7 @@ namespace Omori_Re21341.Passives
                 Owner = owner,
                 Hp = 0,
                 SetHp = 20,
+                RechargeCount = 5,
                 RecoverLightOnSurvive = true,
                 HasEgoAbDialog = true,
                 Survive = true,
@@ -65,6 +66,8 @@ namespace Omori_Re21341.Passives
         public override void OnRoundEnd()
         {
             _util.ReturnFromEgoMap();
+            _util.RechargeCheck();
+            _util.IncreaseRecharge();
         }
     }
 }

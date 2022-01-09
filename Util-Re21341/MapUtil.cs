@@ -20,8 +20,8 @@ namespace Util_Re21341
                 CustomMapHandler.ChangeToCustomEgoMapByAssimilation(model.Stage, faction);
                 return;
             }
-
             CustomMapHandler.ChangeToCustomEgoMap(model.Stage, faction);
+            MapChangedValue(true);
         }
 
         public static void ActiveCreatureBattleCamFilterComponent()
@@ -47,17 +47,35 @@ namespace Util_Re21341
                 mapList?.RemoveAll(x => x.name.Contains(name));
         }
 
-        public static void ReturnFromEgoMap(string mapName, int id)
+        public static void ReturnFromEgoMap(string mapName, int id,bool isAssimilationMap = false)
         {
             if (CheckStageMap(id)) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
             RemoveValueInAddedMap(mapName);
-            Singleton<StageController>.Instance.CheckMapChange();
-            SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
-                .Instance.currentMapObject.mapBgm);
-            SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
+            if (isAssimilationMap) MapChangedValue(true);
+            if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.stageType == StageType.Creature)
+            {
+                if (!SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSpecialMap(Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo(), true))
+                {
+                    SingletonBehavior<BattleSceneRoot>.Instance.ChangeToSephirahMap(Singleton<StageController>.Instance.CurrentFloor, true);
+                }
+                SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
+                    .Instance.currentMapObject.mapBgm);
+                MapChangedValue(false);
+            }
+            else
+            {
+                Singleton<StageController>.Instance.CheckMapChange();
+                SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
+                    .Instance.currentMapObject.mapBgm);
+                SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
+            }
         }
 
+        public static void MapChangedValue(bool value)
+        {
+            typeof(StageController).GetField("_mapChanged", AccessTools.all)?.SetValue(Singleton<StageController>.Instance,value);
+        }
         public static void GetArtWorks(DirectoryInfo dir)
         {
             if (dir.GetDirectories().Length != 0)

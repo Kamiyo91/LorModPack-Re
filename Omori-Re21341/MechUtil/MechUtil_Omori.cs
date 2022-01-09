@@ -1,4 +1,5 @@
-﻿using BLL_Re21341.Extensions.MechUtilModelExtensions;
+﻿using System;
+using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using Omori_Re21341.MapManagers;
 using Util_Re21341;
@@ -20,6 +21,7 @@ namespace Omori_Re21341.MechUtil
         {
             if (_model.Owner.hp - dmg > _model.Hp || !_model.Survive) return;
             _model.Survive = false;
+            _model.RechargeCount = 0;
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
             _model.Owner.SetHp(_model.SetHp);
             UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, _model.RecoverLightOnSurvive);
@@ -32,6 +34,16 @@ namespace Omori_Re21341.MechUtil
             return _model.NotSuccumb;
         }
 
+        public void RechargeCheck()
+        {
+            if (_model.RechargeCount > 4 && !_model.Survive)
+                _model.Survive = true;
+        }
+
+        public void IncreaseRecharge()
+        {
+            if (_model.RechargeCount < 5) _model.RechargeCount++;
+        }
         public void SetSuccumbStatus(bool value)
         {
             _model.NotSuccumb = value;
@@ -52,17 +64,26 @@ namespace Omori_Re21341.MechUtil
                 Stage = "Omori5_Re21341",
                 StageId = 8,
                 IsPlayer = true,
-                OneTurnEgo = true,
                 Component = new Omori5_Re21341MapManager(),
-                Bgy = 0.45f
+                Bgy = 0.55f
             });
+        }
+
+        public override void EgoActive()
+        {
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(
+                (BattleUnitBuf)Activator.CreateInstance(_model.EgoType));
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
+            _model.Owner.cardSlotDetail.RecoverPlayPoint(_model.Owner.cardSlotDetail.GetMaxPlayPoint());
+            if (_model.HasEgoAbDialog)
+                UnitUtil.BattleAbDialog(_model.Owner.view.dialogUI, _model.EgoAbDialogList, _model.EgoAbColorColor);
         }
 
         public void ReturnFromEgoMap()
         {
             if (!_model.MapChanged) return;
             _model.MapChanged = false;
-            MapUtil.ReturnFromEgoMap("Omori5_Re21341", 8);
+            MapUtil.ReturnFromEgoMap("Omori5_Re21341", 8,true);
         }
     }
 }

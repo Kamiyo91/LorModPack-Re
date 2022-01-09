@@ -6,6 +6,7 @@ namespace EmotionalBurstPassive_Re21341.Cards
     {
         public override void OnUseCard()
         {
+            owner.allyCardDetail.DrawCards(1);
             if (card.target != null && card.target.passiveDetail.HasPassive<PassiveAbility_Happy_Re21341>())
             {
                 owner.allyCardDetail.DrawCards(1);

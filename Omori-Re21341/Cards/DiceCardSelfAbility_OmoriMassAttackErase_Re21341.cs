@@ -75,7 +75,7 @@ namespace Omori_Re21341.Cards
                 IsPlayer = true,
                 OneTurnEgo = true,
                 Component = new Omori2_Re21341MapManager(),
-                Bgy = 0.45f
+                Bgy = 0.55f
             });
         }
     }

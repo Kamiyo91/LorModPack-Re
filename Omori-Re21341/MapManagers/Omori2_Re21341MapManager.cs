@@ -1,4 +1,6 @@
-﻿using Util_Re21341.CommonMaps;
+﻿using HarmonyLib;
+using UnityEngine;
+using Util_Re21341.CommonMaps;
 
 namespace Omori_Re21341.MapManagers
 {
@@ -6,4 +8,5 @@ namespace Omori_Re21341.MapManagers
     {
         protected override string[] CustomBGMs => new[] { "OmoriPhase1_Re21341.mp3" };
     }
+
 }

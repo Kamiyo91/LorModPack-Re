@@ -1,4 +1,5 @@
-﻿using BLL_Re21341.Models;
+﻿using System.Linq;
+using BLL_Re21341.Models;
 
 namespace Omori_Re21341.Cards
 {
@@ -30,6 +31,13 @@ namespace Omori_Re21341.Cards
         {
             _motionChanged = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
+        }
+
+        public override void OnUseCard()
+        {
+            if (owner.emotionDetail.EmotionLevel <= 4) return;
+            var dice = card.card.CreateDiceCardBehaviorList().FirstOrDefault();
+            card.AddDice(dice);
         }
 
         public override bool OnChooseCard(BattleUnitModel owner)

@@ -77,7 +77,7 @@ namespace Hayate_Re21341
         {
             var allyUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
             {
-                Id = 10000004,
+                Id = 10000901,
                 Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("4")).Value,
                 EmotionLevel = 5,
                 Pos = 0,

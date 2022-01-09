@@ -63,7 +63,7 @@ namespace Mio_Re21341
             var playerUnitList = BattleObjectManager.instance.GetList(Faction.Player);
             var allyUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
             {
-                Id = 10000003,
+                Id = 10000900,
                 Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("3")).Value + "?",
                 EmotionLevel = 4,
                 Pos = playerUnitList.Count,

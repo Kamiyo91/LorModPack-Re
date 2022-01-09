@@ -8,7 +8,7 @@ namespace Omori_Re21341.Cards
         public override void OnUseCard()
         {
             owner.allyCardDetail.DrawCards(1);
-            if (!BattleObjectManager.instance.GetAliveList(Faction.Player).All(x =>
+            if (BattleObjectManager.instance.GetAliveList(Faction.Player).Count < 2 || !BattleObjectManager.instance.GetAliveList(Faction.Player).All(x =>
                     x.passiveDetail.PassiveList.Exists(y => !y.destroyed && y is PassiveAbility_Happy_Re21341))) return;
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player).Where(x => x != owner))
             {
