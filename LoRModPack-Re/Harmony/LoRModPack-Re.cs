@@ -176,6 +176,7 @@ namespace LoRModPack_Re21341.Harmony
                     UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
                     return;
                 case 4:
+                case 10:
                     ____unitList.Clear();
                     UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
                     return;

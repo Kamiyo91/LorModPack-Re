@@ -64,7 +64,9 @@
     <Compile Include="Cards\DiceCardSelfAbility_OmoriStab_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_SomethingGuilt_Re21341.cs" />
     <Compile Include="DiceCardAbility_AfraidDice_Re21341.cs" />
+    <Compile Include="DiceEffects\BehaviourAction_OmoriHackAway_Re21341.cs" />
     <Compile Include="DiceEffects\FarAreaEffect_OmoriCustomEgoAreaStrong_Re21341.cs" />
+    <Compile Include="DiceEffects\FarAreaEffect_OmoriHackAway_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Omori_Re21341.cs" />
     <Compile Include="MapManagers\Omori6_Re21341MapManager.cs" />
     <Compile Include="MapManagers\Omori5_Re21341MapManager.cs" />
