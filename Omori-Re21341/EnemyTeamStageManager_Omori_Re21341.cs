@@ -184,7 +184,6 @@ namespace Omori_Re21341
 
         private void BattleEnding()
         {
-            Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, 11), 5);
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.Die();
             _omoriModel.DieFake();
         }

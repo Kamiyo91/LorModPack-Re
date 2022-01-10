@@ -300,11 +300,15 @@ namespace LoRModPack_Re21341.Harmony
         public static void StageController_BonusRewardWithPopup(LorId stageId)
         {
             if (stageId.packageId != ModParameters.PackageId) return;
-            if (ModParameters.ExtraReward.ContainsKey(stageId.id))
-                UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
-                        x.Key.Contains(ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id)).Value))
-                    .Value
-                    .Desc);
+            if (!ModParameters.ExtraReward.ContainsKey(stageId.id)) return;
+            var parameters = ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id));
+            foreach (var book in parameters.Value.DroppedBooks)
+                Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, book.BookId),
+                    book.Quantity);
+            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
+                    x.Key.Contains(parameters.Value.MessageId))
+                .Value
+                .Desc);
         }
 
         public static void BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)

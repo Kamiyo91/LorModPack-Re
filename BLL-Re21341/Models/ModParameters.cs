@@ -71,9 +71,16 @@ namespace BLL_Re21341.Models
             { 21341, new List<int> { 28, 46, 47, 48 } }
         };
 
-        public static readonly Dictionary<int, string> ExtraReward = new Dictionary<int, string>
+        public static readonly Dictionary<int, ExtraRewards> ExtraReward = new Dictionary<int, ExtraRewards>
         {
-            { 8, "OmoriDropBook_Re21341" }
+            {
+                8,
+                new ExtraRewards
+                {
+                    MessageId = "OmoriDropBook_Re21341",
+                    DroppedBooks = new List<DropIdQuantity> { new DropIdQuantity { BookId = 11, Quantity = 5 } }
+                }
+            }
         };
 
         public static readonly Dictionary<string, List<int>> DefaultSpritePreviewChange =
