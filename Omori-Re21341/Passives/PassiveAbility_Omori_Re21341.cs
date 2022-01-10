@@ -17,6 +17,7 @@ namespace Omori_Re21341.Passives
 
         public override void OnWaveStart()
         {
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_AfraidImmunity_Re21341());
             _util = new MechUtil_Omori(new MechUtil_OmoriModel
             {
                 Owner = owner,

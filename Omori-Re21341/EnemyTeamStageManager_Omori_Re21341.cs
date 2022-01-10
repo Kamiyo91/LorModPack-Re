@@ -161,7 +161,8 @@ namespace Omori_Re21341
                     _mechUtil.IncreasePhase();
                     if (_mechUtil.GetPhase() == 3)
                         _omoriModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 54));
-                    _linesCount = 0;
+                    else
+                        _linesCount = 0;
                 }
                 else
                 {

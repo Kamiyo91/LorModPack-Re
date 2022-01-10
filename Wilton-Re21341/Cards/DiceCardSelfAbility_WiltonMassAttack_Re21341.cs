@@ -54,7 +54,7 @@ namespace Wilton_Re21341.Cards
             if (!string.IsNullOrEmpty(owner.UnitData.unitData.workshopSkin) ||
                 owner.UnitData.unitData.bookItem != owner.UnitData.unitData.CustomBookItem) return;
             _motionChanged = true;
-            owner.view.charAppearance.ChangeMotion(ActionDetail.Slash);
+            owner.view.charAppearance.ChangeMotion(ActionDetail.Special);
         }
 
         public override void OnReleaseCard()

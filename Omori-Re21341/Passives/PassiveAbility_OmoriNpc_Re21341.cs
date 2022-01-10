@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BLL_Re21341.Models.Enum;
 using EmotionalBurstPassive_Re21341.Cards;
+using Omori_Re21341.Buffs;
 
 namespace Omori_Re21341.Passives
 {
@@ -13,6 +14,7 @@ namespace Omori_Re21341.Passives
 
         public override void OnWaveStart()
         {
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_AfraidImmunity_Re21341());
             if (Singleton<StageController>.Instance.EnemyStageManager is EnemyTeamStageManager_Omori_Re21341 manager)
                 _stageManager = manager;
         }
@@ -66,7 +68,7 @@ namespace Omori_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return _stageManager.GetPhase() + 3;
+            return _stageManager.GetPhase() + 2;
         }
 
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)

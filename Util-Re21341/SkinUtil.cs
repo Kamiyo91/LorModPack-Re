@@ -21,7 +21,6 @@ namespace Util_Re21341
             characterMotion.transform.parent = apprearance._motionList[0].transform.parent;
             characterMotion.transform.name = apprearance._motionList[0].transform.name;
             characterMotion.actionDetail = detail;
-            characterMotion.motionSpriteSet.Clear();
             characterMotion.motionSpriteSet.Add(new SpriteSet(
                 characterMotion.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>(),
                 CharacterAppearanceType.Body));
@@ -31,6 +30,7 @@ namespace Util_Re21341
             characterMotion.motionSpriteSet.Add(new SpriteSet(
                 characterMotion.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>(),
                 CharacterAppearanceType.Body));
+            characterMotion.transform.localScale = new Vector3(1, 1, 1);
             return characterMotion;
         }
 

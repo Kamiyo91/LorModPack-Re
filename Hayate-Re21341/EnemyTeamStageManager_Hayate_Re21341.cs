@@ -19,6 +19,7 @@ namespace Hayate_Re21341
             _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
 
         private bool _allySummon;
+        private bool _finalMech;
         private PassiveAbility_HayateNpc_Re21341 _hayateEnemyPassive;
         private bool _lastPhaseStarted;
         private BattleUnitModel _mainEnemyModel;
@@ -27,6 +28,7 @@ namespace Hayate_Re21341
 
         public override void OnWaveStart()
         {
+            _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4;
             CustomMapHandler.InitCustomMap("Hayate_Re21341", new Hayate_Re21341MapManager(), false, true, 0.5f, 0.3f,
                 0.5f, 0.475f);
             CustomMapHandler.EnforceMap();
@@ -39,6 +41,7 @@ namespace Hayate_Re21341
                 _hayateEnemyPassive =
                     _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_HayateNpc_Re21341) as
                         PassiveAbility_HayateNpc_Re21341;
+            if (!_finalMech) _mainEnemyModel?.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
             _phaseChanged = false;
             _lastPhaseStarted = false;
             _allySummon = false;
@@ -88,6 +91,7 @@ namespace Hayate_Re21341
 
         private void HayateIsDeadBeforePhase3()
         {
+            if (!_finalMech) return;
             if (_lastPhaseStarted) return;
             if (!_mainEnemyModel.IsDead()) return;
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5, false);
@@ -118,7 +122,7 @@ namespace Hayate_Re21341
 
         private void CheckLastPhase()
         {
-            if (_lastPhaseStarted || !_phaseChanged || _mainEnemyModel.hp > 100 ||
+            if (!_finalMech || _lastPhaseStarted || !_phaseChanged || _mainEnemyModel.hp > 100 ||
                 BattleObjectManager.instance.GetAliveList(Faction.Player).Count > 0) return;
             _lastPhaseStarted = true;
             CustomMapHandler.SetMapBgm("HayatePhase3_Re21341.mp3", true, "Hayate_Re21341");

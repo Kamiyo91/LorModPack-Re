@@ -11,6 +11,7 @@ namespace Hayate_Re21341.MechUtil
     public class NpcMechUtil_Hayate : NpcMechUtilBase
     {
         private readonly BattleUnitBuf_EntertainMe_Re21341 _buf;
+        private readonly bool _finalMech;
         private readonly NpcMechUtil_HayateModel _model;
 
         public NpcMechUtil_Hayate(NpcMechUtil_HayateModel model) : base(model)
@@ -18,6 +19,7 @@ namespace Hayate_Re21341.MechUtil
             _model = model;
             _buf = new BattleUnitBuf_EntertainMe_Re21341();
             model.Owner.bufListDetail.AddBufWithoutDuplication(_buf);
+            _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4;
         }
 
         public override void ForcedEgo()
@@ -30,10 +32,20 @@ namespace Hayate_Re21341.MechUtil
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
             {
-                _model.DrawBack = _model.Owner.allyCardDetail.GetHand().Count;
-                _model.Owner.allyCardDetail.DiscardACardByAbility(_model.Owner.allyCardDetail.GetHand());
-                origin = BattleDiceCardModel.CreatePlayingCard(
-                    ItemXmlDataList.instance.GetCardItem(_model.SecondaryMechCard));
+                if (_finalMech)
+                {
+                    _model.DrawBack = _model.Owner.allyCardDetail.GetHand().Count;
+                    _model.Owner.allyCardDetail.DiscardACardByAbility(_model.Owner.allyCardDetail.GetHand());
+                    origin = BattleDiceCardModel.CreatePlayingCard(
+                        ItemXmlDataList.instance.GetCardItem(_model.SecondaryMechCard));
+                }
+                else
+                {
+                    _buf.stack = 40;
+                    origin = BattleDiceCardModel.CreatePlayingCard(
+                        ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
+                }
+
                 SetOneTurnCard(true);
                 return;
             }

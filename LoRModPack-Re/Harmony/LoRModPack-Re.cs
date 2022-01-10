@@ -193,9 +193,11 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
-        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion)
+        public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion,
+            ClothCustomizeData data)
         {
-            if (__instance.Appearance.GetCharacterMotion(motion) != null) return;
+            if (__instance.Appearance.GetCharacterMotion(motion) != null ||
+                !ModParameters.SkinParameters.Exists(x => data.spritePath.Contains(x.Name))) return;
             var item = SkinUtil.CopyCharacterMotion(__instance.Appearance, motion);
             __instance.Appearance._motionList.Add(item);
             if (__instance.Appearance._motionList.Count <= 0) return;

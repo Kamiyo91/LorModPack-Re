@@ -23,8 +23,8 @@ namespace Omori_Re21341.MechUtil
             _model.Survive = false;
             _model.RechargeCount = 0;
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEnd_Re21341());
-            _model.Owner.SetHp(_model.SetHp);
             UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, _model.RecoverLightOnSurvive);
+            _model.Owner.SetHp(_model.SetHp);
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmunityToStatusAliment_Re21341());
             SetSuccumbStatus(true);
         }

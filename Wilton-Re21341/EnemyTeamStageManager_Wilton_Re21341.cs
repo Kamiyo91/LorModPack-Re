@@ -11,6 +11,7 @@ namespace Wilton_Re21341
     public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
         private bool _checkEnd;
+        private bool _finalMech;
         private BattleUnitModel _mainEnemyModel;
         private Wilton_Re21341MapManager _mapManager;
         private bool _phaseChanged;
@@ -18,6 +19,7 @@ namespace Wilton_Re21341
 
         public override void OnWaveStart()
         {
+            _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
             CustomMapHandler.InitCustomMap("Wilton_Re21341", new Wilton_Re21341MapManager(), false, true, 0.5f, 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
@@ -27,8 +29,9 @@ namespace Wilton_Re21341
                     _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_KurosawaButlerEnemy_Re21341)
                         as
                         PassiveAbility_KurosawaButlerEnemy_Re21341;
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-                unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
+            if (_finalMech)
+                foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+                    unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject is Wilton_Re21341MapManager)
                 _mapManager = SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject as Wilton_Re21341MapManager;
             _phaseChanged = false;
@@ -65,7 +68,7 @@ namespace Wilton_Re21341
 
         private void HayateEntry()
         {
-            if (BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count >= 1 || _checkEnd) return;
+            if (!_finalMech || BattleObjectManager.instance.GetAliveList(Faction.Enemy).Count >= 1 || _checkEnd) return;
             _checkEnd = true;
             foreach (var playerUnit in BattleObjectManager.instance.GetAliveList(Faction.Player))
                 playerUnit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Vip_Re21341));

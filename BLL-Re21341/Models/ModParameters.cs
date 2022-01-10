@@ -115,7 +115,7 @@ namespace BLL_Re21341.Models
                 };
 
         public static readonly Dictionary<LorId, bool> BannedEmotionStages = new Dictionary<LorId, bool>
-            { { new LorId(PackageId, 6), false } };
+            { { new LorId(PackageId, 6), false }, { new LorId(PackageId, 11), false } };
 
         public static readonly List<SkinNames> SkinParameters = new List<SkinNames>
         {

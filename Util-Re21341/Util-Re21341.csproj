@@ -101,6 +101,7 @@
     <Compile Include="CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_NotEquip_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_PlayerShimmering_Re21341.cs" />
+    <Compile Include="CommonPassives\PassiveAbility_UnitTestingValue_Re21341.cs" />
     <Compile Include="CommonPassives\PassiveAbility_WillOTheWisp_Re21341.cs" />
     <Compile Include="CustomMapUtility\Assemblies\CustomMapUtility.cs" />
     <Compile Include="CustomMapUtility\Assemblies\Wav.cs" />

@@ -22,14 +22,14 @@
             _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
         }
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
-        {
-            behavior.ApplyDiceStatBonus(
-                new DiceStatBonus
-                {
-                    min = 50,
-                    max = 50
-                });
-        }
+        //public override void BeforeRollDice(BattleDiceBehavior behavior)
+        //{
+        //    behavior.ApplyDiceStatBonus(
+        //        new DiceStatBonus
+        //        {
+        //            min = 50,
+        //            max = 50
+        //        });
+        //}
     }
 }

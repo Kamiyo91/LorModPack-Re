@@ -12,12 +12,15 @@ namespace Mio_Re21341
         private readonly StageLibraryFloorModel
             _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
 
+        private bool _allySummon;
+
         private BattleUnitModel _mainEnemyModel;
         private PassiveAbility_GodFragmentEnemy_Re21341 _mioEnemyPassive;
         private bool _phaseChanged;
 
         public override void OnWaveStart()
         {
+            _allySummon = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 2;
             CustomMapHandler.InitCustomMap("Mio_Re21341", new Mio_Re21341MapManager(), false, true, 0.5f, 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
@@ -54,7 +57,7 @@ namespace Mio_Re21341
             MapUtil.ActiveCreatureBattleCamFilterComponent();
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
-            PrepareAllyUnit();
+            if (_allySummon) PrepareAllyUnit();
             CustomMapHandler.SetMapBgm("MioPhase2_Re21341.mp3", true, "Mio_Re21341");
         }
 

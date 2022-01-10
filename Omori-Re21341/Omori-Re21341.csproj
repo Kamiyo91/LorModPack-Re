@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffs\BattleUnitBuf_AfraidImmunity_Re21341.cs" />
     <Compile Include="Buffs\BattleUnitBuf_UntargetableOmori_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FlowerCrown_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Basil_Re21341.cs" />
