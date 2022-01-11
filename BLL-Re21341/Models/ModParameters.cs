@@ -41,7 +41,7 @@ namespace BLL_Re21341.Models
             { 1, 9, 17, 28, 29, 31, 42, 47, 57, 59, 60 };
 
         public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 30, 48, 58, 901 };
-        public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40 };
+        public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40,58 };
 
         public static List<Tuple<string, List<int>, string>> SkinNameIds = new List<Tuple<string, List<int>, string>>
         {
