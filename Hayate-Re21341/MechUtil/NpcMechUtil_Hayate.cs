@@ -41,7 +41,7 @@ namespace Hayate_Re21341.MechUtil
                     origin = BattleDiceCardModel.CreatePlayingCard(
                         ItemXmlDataList.instance.GetCardItem(_model.SecondaryMechCard));
                 }
-                else if(!_singleUseMechCard)
+                else if (!_singleUseMechCard)
                 {
                     _singleUseMechCard = true;
                     _buf.stack = 40;

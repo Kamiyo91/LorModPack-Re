@@ -75,11 +75,11 @@ namespace LoRModPack_Re21341.Harmony
             method = typeof(LoRModPack_Re).GetMethod("StageWaveModel_PickRandomEmotionCard");
             harmony.Patch(typeof(StageWaveModel).GetMethod("PickRandomEmotionCard", AccessTools.all),
                 new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("StageController_BonusRewardWithPopup");
-            harmony.Patch(typeof(StageController).GetMethod("BonusRewardWithPopup", AccessTools.all),
-                null, new HarmonyMethod(method));
             method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
             harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
+                null, new HarmonyMethod(method));
+            method = typeof(LoRModPack_Re).GetMethod("DropBookInventoryModel_LoadFromSaveData");
+            harmony.Patch(typeof(DropBookInventoryModel).GetMethod("LoadFromSaveData", AccessTools.all),
                 null, new HarmonyMethod(method));
             ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
@@ -183,13 +183,6 @@ namespace LoRModPack_Re21341.Harmony
                 case 6:
                     if (__instance.Sephirah == SephirahType.Keter) ____unitList.Clear();
                     UnitUtil.AddCustomUnits(__instance, stage, ____unitList, 6);
-                    return;
-                case 8:
-                    if (__instance.Sephirah == SephirahType.Malkuth ||
-                        __instance.Sephirah == SephirahType.Hod ||
-                        __instance.Sephirah == SephirahType.Yesod ||
-                        __instance.Sephirah == SephirahType.Netzach) ____unitList.Clear();
-                    UnitUtil.Add4SephirahUnits(stage, ____unitList);
                     return;
             }
         }
@@ -298,20 +291,6 @@ namespace LoRModPack_Re21341.Harmony
                 });
         }
 
-        public static void StageController_BonusRewardWithPopup(LorId stageId)
-        {
-            if (stageId.packageId != ModParameters.PackageId) return;
-            if (!ModParameters.ExtraReward.ContainsKey(stageId.id)) return;
-            var parameters = ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id));
-            foreach (var book in parameters.Value.DroppedBooks)
-                Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, book.BookId),
-                    book.Quantity);
-            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
-                    x.Key.Contains(parameters.Value.MessageId))
-                .Value
-                .Desc);
-        }
-
         public static void BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNameIds.Exists(x => x.Item1.Contains(charName))) return;
@@ -336,6 +315,12 @@ namespace LoRModPack_Re21341.Harmony
             __instance.charAppearance.ChangeLayer("Character");
             __instance.charAppearance.SetLibrarianOnlySprites(__instance.model.faction);
             __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
+        }
+
+        public static void DropBookInventoryModel_LoadFromSaveData(DropBookInventoryModel __instance)
+        {
+            var bookCount = __instance.GetBookCount(new LorId(ModParameters.PackageId, 10));
+            if (bookCount < 99) __instance.AddBook(new LorId(ModParameters.PackageId, 10), 99 - bookCount);
         }
     }
 }

@@ -108,6 +108,8 @@ namespace Util_Re21341
         {
             if (owner.IsDead())
             {
+                owner.bufListDetail.GetActivatedBufList()
+                    .RemoveAll(x => !x.CanRecoverHp(999) || !x.CanRecoverBreak(999));
                 owner.Revive(hp);
                 owner.moveDetail.ReturnToFormationByBlink(true);
                 owner.view.EnableView(true);
@@ -118,6 +120,8 @@ namespace Util_Re21341
             }
             else
             {
+                owner.bufListDetail.GetActivatedBufList()
+                    .RemoveAll(x => !x.CanRecoverHp(999) || !x.CanRecoverBreak(999));
                 owner.RecoverHP(hp);
             }
 
@@ -261,27 +265,6 @@ namespace Util_Re21341
                 .Where(x => x.isSephirah)
                 .Select(unit => InitUnitDefault(stage, unit)));
             unitList?.AddRange(sephirahs);
-        }
-
-        public static void Add4SephirahUnits(StageModel stage,
-            List<UnitBattleDataModel> unitList)
-        {
-            var units = new List<UnitBattleDataModel>
-            {
-                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
-                    .FirstOrDefault(x => x.Sephirah == SephirahType.Malkuth)
-                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
-                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
-                    .FirstOrDefault(x => x.Sephirah == SephirahType.Yesod)
-                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
-                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
-                    .FirstOrDefault(x => x.Sephirah == SephirahType.Hod)
-                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah)),
-                InitUnitDefault(stage, LibraryModel.Instance.GetOpenedFloorList()
-                    .FirstOrDefault(x => x.Sephirah == SephirahType.Netzach)
-                    ?.GetUnitDataList().FirstOrDefault(y => y.isSephirah))
-            };
-            unitList?.AddRange(units);
         }
 
         public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage,
@@ -481,11 +464,6 @@ namespace Util_Re21341
                          passive.id.packageId == ModParameters.PackageId &&
                          ModParameters.UntransferablePassives.Contains(passive.id.id)))
                 passive.CanGivePassive = false;
-            foreach (var (key, value) in ModParameters.SameInnerIdPassives)
-            foreach (var passive in Singleton<PassiveXmlList>.Instance.GetDataAll().Where(passive =>
-                         passive.id.packageId == ModParameters.PackageId &&
-                         value.Contains(passive.id.id)))
-                passive.InnerTypeId = key;
         }
     }
 }
