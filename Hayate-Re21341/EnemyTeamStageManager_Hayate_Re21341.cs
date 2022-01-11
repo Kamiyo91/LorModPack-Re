@@ -2,12 +2,12 @@
 using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
+using CustomMapUtility;
 using Hayate_Re21341.Passives;
 using Kamiyo_Re21341.Passives;
 using LOR_XML;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
-using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace Hayate_Re21341
 {

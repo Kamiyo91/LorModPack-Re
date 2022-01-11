@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
+using CustomMapUtility;
 using Hayate_Re21341.Passives;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
-using Util_Re21341.CustomMapUtility.Assemblies;
 using Wilton_Re21341.Passives;
 
 namespace Wilton_Re21341

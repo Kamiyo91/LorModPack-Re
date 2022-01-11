@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Util_Re21341.CustomMapUtility.Assemblies;
+﻿using CustomMapUtility;
+using UnityEngine;
 
 namespace Hayate_Re21341
 {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
+using CustomMapUtility;
 using Mio_Re21341.Passives;
 using Sound;
 using Util_Re21341;
-using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace Mio_Re21341
 {

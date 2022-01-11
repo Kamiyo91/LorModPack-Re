@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Util_Re21341.CustomMapUtility.Assemblies;
+﻿using CustomMapUtility;
+using UnityEngine;
 
 namespace Kamiyo_Re21341.MapManager
 {

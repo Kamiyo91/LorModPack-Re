@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
+using CustomMapUtility;
 using OldSamurai_Re21341.MapManager;
 using Util_Re21341;
-using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace OldSamurai_Re21341.Buffs
 {

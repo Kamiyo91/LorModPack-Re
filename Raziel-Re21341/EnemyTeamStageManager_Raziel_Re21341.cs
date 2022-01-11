@@ -2,10 +2,10 @@
 using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
+using CustomMapUtility;
 using LOR_XML;
 using Raziel_Re21341.Passives;
 using Util_Re21341;
-using Util_Re21341.CustomMapUtility.Assemblies;
 
 namespace Raziel_Re21341
 {

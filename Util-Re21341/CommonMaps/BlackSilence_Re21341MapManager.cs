@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Util_Re21341.CustomMapUtility.Assemblies;
+﻿using CustomMapUtility;
+using UnityEngine;
 
 namespace Util_Re21341.CommonMaps
 {
