@@ -319,8 +319,8 @@ namespace LoRModPack_Re21341.Harmony
 
         public static void DropBookInventoryModel_LoadFromSaveData(DropBookInventoryModel __instance)
         {
-            var bookCount = __instance.GetBookCount(new LorId(ModParameters.PackageId, 10));
-            if (bookCount < 99) __instance.AddBook(new LorId(ModParameters.PackageId, 10), 99 - bookCount);
+            var bookCount = __instance.GetBookCount(new LorId(ModParameters.PackageId, 6));
+            if (bookCount < 99) __instance.AddBook(new LorId(ModParameters.PackageId, 6), 99 - bookCount);
         }
     }
 }
