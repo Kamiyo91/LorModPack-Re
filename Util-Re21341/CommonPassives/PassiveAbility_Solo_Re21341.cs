@@ -10,7 +10,7 @@ namespace Util_Re21341.CommonPassives
         public override void OnWaveStart()
         {
             SetCardValue(false);
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 1));
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 61));
         }
 
         public override void OnRoundStartAfter()

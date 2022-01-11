@@ -18,5 +18,15 @@ namespace Util_Re21341.CommonCards
             foreach (var allyUnit in BattleObjectManager.instance.GetAliveList(unit.faction).Where(x => x != unit))
                 allyUnit.Die();
         }
+
+        public override bool IsTargetableSelf()
+        {
+            return true;
+        }
+
+        public override bool IsTargetableAllUnit()
+        {
+            return true;
+        }
     }
 }
