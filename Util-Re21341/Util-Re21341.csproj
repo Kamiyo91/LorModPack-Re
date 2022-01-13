@@ -81,6 +81,7 @@
     <Compile Include="BaseClass\MechUtilBase.cs" />
     <Compile Include="BaseClass\NpcMechUtilBase.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_CustomInstantIndexRelease_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_BigDamageForTestPurpose_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToStatusAliment_Re21341.cs" />

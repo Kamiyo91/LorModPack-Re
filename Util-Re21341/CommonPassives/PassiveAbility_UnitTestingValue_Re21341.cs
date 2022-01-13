@@ -4,7 +4,15 @@
     {
         public override void OnWaveStart()
         {
-            UnitUtil.TestingUnitValues();
+            switch (id.id)
+            {
+                case 58:
+                    UnitUtil.TestingUnitValuesImmortality();
+                    break;
+                case 60:
+                    UnitUtil.TestingUnitValuesBigDamage();
+                    break;
+            }
         }
     }
 }

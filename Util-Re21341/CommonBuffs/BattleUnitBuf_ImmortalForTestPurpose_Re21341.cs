@@ -20,16 +20,7 @@
         public override void OnRoundStart()
         {
             _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
+            UnitUtil.DrawUntilX(_owner,6);
         }
-
-        //public override void BeforeRollDice(BattleDiceBehavior behavior)
-        //{
-        //    behavior.ApplyDiceStatBonus(
-        //        new DiceStatBonus
-        //        {
-        //            min = 50,
-        //            max = 50
-        //        });
-        //}
     }
 }

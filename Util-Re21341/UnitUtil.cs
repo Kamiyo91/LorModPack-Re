@@ -216,7 +216,7 @@ namespace Util_Re21341
             return allyUnit;
         }
 
-        public static void TestingUnitValues()
+        public static void TestingUnitValuesImmortality()
         {
             var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
             if (playerUnit == null) return;
@@ -225,7 +225,19 @@ namespace Util_Re21341
                 if (!unit.bufListDetail.GetActivatedBufList()
                         .Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
-                unit.emotionDetail.SetEmotionLevel(5);
+                if (unit.emotionDetail.EmotionLevel < 5) unit.emotionDetail.SetEmotionLevel(5);
+            }
+        }
+        public static void TestingUnitValuesBigDamage()
+        {
+            var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            if (playerUnit == null) return;
+            foreach (var unit in playerUnit)
+            {
+                if (!unit.bufListDetail.GetActivatedBufList()
+                        .Exists(x => x is BattleUnitBuf_BigDamageForTestingPurpose_Re21341))
+                    unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_BigDamageForTestingPurpose_Re21341());
+                if (unit.emotionDetail.EmotionLevel < 5) unit.emotionDetail.SetEmotionLevel(5);
             }
         }
 
