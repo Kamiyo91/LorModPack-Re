@@ -20,9 +20,10 @@ namespace Kamiyo_Re21341
             _phaseChanged = Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>("Phase", out var curPhase) && curPhase;
             _restart = _phaseChanged;
-            CustomMapHandler.InitCustomMap("Kamiyo1_Re21341", new Kamiyo1_Re21341MapManager(), false, true, 0.5f, 0.2f,
+            CustomMapHandler.InitCustomMap("Kamiyo1_Re21341", typeof(Kamiyo1_Re21341MapManager), false, true, 0.5f,
+                0.2f,
                 0.5f, 0.45f);
-            CustomMapHandler.InitCustomMap("Kamiyo2_Re21341", new Kamiyo2_Re21341MapManager(), false, true, 0.5f,
+            CustomMapHandler.InitCustomMap("Kamiyo2_Re21341", typeof(Kamiyo2_Re21341MapManager), false, true, 0.5f,
                 0.475f, 0.5f, 0.225f);
             CustomMapHandler.EnforceMap(_phaseChanged ? 1 : 0);
             Singleton<StageController>.Instance.CheckMapChange();

@@ -36,7 +36,7 @@ namespace Raziel_Re21341.Cards
                 StageId = 7,
                 OneTurnEgo = true,
                 IsPlayer = true,
-                Component = new Raziel_Re21341MapManager(),
+                Component = typeof(Raziel_Re21341MapManager),
                 Bgy = 0.375f,
                 Fy = 0.225f
             });

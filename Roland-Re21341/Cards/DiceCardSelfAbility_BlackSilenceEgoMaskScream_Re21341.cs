@@ -33,7 +33,7 @@ namespace Roland_Re21341.Cards
                 Stage = "BlackSilenceMassEgo_Re21341",
                 OneTurnEgo = true,
                 IsPlayer = true,
-                Component = new BlackSilence_Re21341MapManager(),
+                Component = typeof(BlackSilence_Re21341MapManager),
                 InitBgm = false,
                 Fy = 0.285f
             }, owner.faction);

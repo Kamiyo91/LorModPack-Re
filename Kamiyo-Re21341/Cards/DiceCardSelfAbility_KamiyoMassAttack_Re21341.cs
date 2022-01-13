@@ -59,7 +59,7 @@ namespace Kamiyo_Re21341.Cards
                 StageId = 3,
                 IsPlayer = true,
                 OneTurnEgo = true,
-                Component = new Kamiyo2_Re21341MapManager(),
+                Component = typeof(Kamiyo2_Re21341MapManager),
                 Bgy = 0.475f,
                 Fy = 0.225f
             });

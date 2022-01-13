@@ -29,7 +29,7 @@ namespace Hayate_Re21341
         public override void OnWaveStart()
         {
             _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4;
-            CustomMapHandler.InitCustomMap("Hayate_Re21341", new Hayate_Re21341MapManager(), false, true, 0.5f, 0.3f,
+            CustomMapHandler.InitCustomMap("Hayate_Re21341", typeof(Hayate_Re21341MapManager), false, true, 0.5f, 0.3f,
                 0.5f, 0.475f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();

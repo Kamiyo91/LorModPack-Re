@@ -37,7 +37,7 @@ namespace Wilton_Re21341.Cards
                 StageId = 6,
                 OneTurnEgo = true,
                 IsPlayer = true,
-                Component = new Wilton_Re21341MapManager(),
+                Component = typeof(Wilton_Re21341MapManager),
                 Bgy = 0.2f
             });
         }

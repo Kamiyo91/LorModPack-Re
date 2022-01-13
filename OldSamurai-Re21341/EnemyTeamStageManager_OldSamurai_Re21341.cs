@@ -16,7 +16,8 @@ namespace OldSamurai_Re21341
 
         public override void OnWaveStart()
         {
-            CustomMapHandler.InitCustomMap("OldSamurai_Re21341", new OldSamurai_Re21341MapManager(), false, true, 0.5f,
+            CustomMapHandler.InitCustomMap("OldSamurai_Re21341", typeof(OldSamurai_Re21341MapManager), false, true,
+                0.5f,
                 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();

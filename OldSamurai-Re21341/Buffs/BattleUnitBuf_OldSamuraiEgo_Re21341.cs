@@ -45,7 +45,7 @@ namespace OldSamurai_Re21341.Buffs
                 Stage = "OldSamurai_Re21341",
                 StageId = 1,
                 IsPlayer = true,
-                Component = new OldSamuraiPlayer_Re21341MapManager(),
+                Component = typeof(OldSamuraiPlayer_Re21341MapManager),
                 Bgy = 0.2f
             });
         }

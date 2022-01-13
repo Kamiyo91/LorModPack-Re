@@ -21,7 +21,7 @@ namespace Mio_Re21341
         public override void OnWaveStart()
         {
             _allySummon = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 2;
-            CustomMapHandler.InitCustomMap("Mio_Re21341", new Mio_Re21341MapManager(), false, true, 0.5f, 0.2f);
+            CustomMapHandler.InitCustomMap("Mio_Re21341", typeof(Mio_Re21341MapManager), false, true, 0.5f, 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();

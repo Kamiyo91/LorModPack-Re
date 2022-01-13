@@ -20,7 +20,7 @@ namespace Wilton_Re21341
         public override void OnWaveStart()
         {
             _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
-            CustomMapHandler.InitCustomMap("Wilton_Re21341", new Wilton_Re21341MapManager(), false, true, 0.5f, 0.2f);
+            CustomMapHandler.InitCustomMap("Wilton_Re21341", typeof(Wilton_Re21341MapManager), false, true, 0.5f, 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();

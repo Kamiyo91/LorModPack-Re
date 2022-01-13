@@ -46,7 +46,7 @@ namespace Mio_Re21341.Cards
                 StageId = 2,
                 OneTurnEgo = true,
                 IsPlayer = true,
-                Component = new Mio_Re21341MapManager(),
+                Component = typeof(Mio_Re21341MapManager),
                 Bgy = 0.2f
             });
         }
