@@ -128,7 +128,7 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
-        [HarmonyPostfix]
+        [HarmonyPrefix]
         [HarmonyPatch(typeof(WorkshopSkinDataSetter), "SetMotionData")]
         public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion,
             ClothCustomizeData data)
@@ -186,7 +186,7 @@ namespace LoRModPack_Re21341.Harmony
                 __instance.ResetTempName();
         }
 
-        [HarmonyPostfix]
+        [HarmonyPrefix]
         [HarmonyPatch(typeof(UICustomizePopup), "OnClickSave")]
         public static void UICustomizePopup_OnClickSave(UICustomizePopup __instance)
         {
