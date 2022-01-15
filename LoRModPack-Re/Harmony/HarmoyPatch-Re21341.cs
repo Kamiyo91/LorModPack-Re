@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
@@ -12,85 +9,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
 using Workshop;
-using Object = UnityEngine.Object;
 
 namespace LoRModPack_Re21341.Harmony
 {
-    public class LoRModPack_Re : ModInitializer
+    [HarmonyPatch]
+    public class HarmoyPatch_Re21341
     {
-        public override void OnInitializeMod()
-        {
-            ModParameters.Path = Path.GetDirectoryName(
-                Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
-            var harmony = new HarmonyLib.Harmony("LOR.LorModPackRe21341_MOD");
-            var method = typeof(LoRModPack_Re).GetMethod("BookModel_SetXmlInfo");
-            harmony.Patch(typeof(BookModel).GetMethod("SetXmlInfo", AccessTools.all), null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("General_GetThumbSprite");
-            harmony.Patch(typeof(BookModel).GetMethod("GetThumbSprite", AccessTools.all), null,
-                new HarmonyMethod(method));
-            harmony.Patch(typeof(BookXmlInfo).GetMethod("GetThumbSprite", AccessTools.all), null,
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("StageLibraryFloorModel_InitUnitList");
-            harmony.Patch(typeof(StageLibraryFloorModel).GetMethod("InitUnitList", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("General_SetBooksData");
-            harmony.Patch(typeof(UISettingInvenEquipPageListSlot).GetMethod("SetBooksData", AccessTools.all),
-                null, new HarmonyMethod(method));
-            harmony.Patch(typeof(UIInvenEquipPageListSlot).GetMethod("SetBooksData", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UISpriteDataManager_Init");
-            harmony.Patch(typeof(UISpriteDataManager).GetMethod("Init", AccessTools.all),
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UIBookStoryChapterSlot_SetEpisodeSlots");
-            harmony.Patch(typeof(UIBookStoryChapterSlot).GetMethod("SetEpisodeSlots", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UIBookStoryPanel_OnSelectEpisodeSlot");
-            harmony.Patch(typeof(UIBookStoryPanel).GetMethod("OnSelectEpisodeSlot", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UIBattleSettingPanel_SetToggles");
-            harmony.Patch(typeof(UIBattleSettingPanel).GetMethod("SetToggles", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("BattleUnitView_ChangeSkin");
-            harmony.Patch(typeof(BattleUnitView).GetMethod("ChangeSkin", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPrefix");
-            var methodPostfix = typeof(LoRModPack_Re).GetMethod("UnitDataModel_EquipBookPostfix");
-            harmony.Patch(typeof(UnitDataModel).GetMethod("EquipBook", AccessTools.all),
-                new HarmonyMethod(method), new HarmonyMethod(methodPostfix));
-            method = typeof(LoRModPack_Re).GetMethod("UnitDataModel_LoadFromSaveData");
-            harmony.Patch(typeof(UnitDataModel).GetMethod("LoadFromSaveData", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("UICustomizePopup_OnClickSave");
-            harmony.Patch(typeof(UICustomizePopup).GetMethod("OnClickSave", AccessTools.all),
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("TextDataModel_InitTextData");
-            harmony.Patch(typeof(TextDataModel).GetMethod("InitTextData", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("WorkshopSkinDataSetter_SetMotionData");
-            harmony.Patch(typeof(WorkshopSkinDataSetter).GetMethod("SetMotionData", AccessTools.all),
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("StageLibraryFloorModel_StartPickEmotionCard");
-            harmony.Patch(typeof(StageLibraryFloorModel).GetMethod("StartPickEmotionCard", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("StageWaveModel_PickRandomEmotionCard");
-            harmony.Patch(typeof(StageWaveModel).GetMethod("PickRandomEmotionCard", AccessTools.all),
-                new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("FarAreaEffect_Xiao_Taotie_LateInit");
-            harmony.Patch(typeof(FarAreaEffect_Xiao_Taotie).GetMethod("LateInit", AccessTools.all),
-                null, new HarmonyMethod(method));
-            method = typeof(LoRModPack_Re).GetMethod("DropBookInventoryModel_LoadFromSaveData");
-            harmony.Patch(typeof(DropBookInventoryModel).GetMethod("LoadFromSaveData", AccessTools.all),
-                null, new HarmonyMethod(method));
-            ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
-            MapUtil.GetArtWorks(new DirectoryInfo(ModParameters.Path + "/ArtWork"));
-            UnitUtil.ChangeCardItem(ItemXmlDataList.instance);
-            UnitUtil.ChangePassiveItem();
-            SkinUtil.LoadBookSkinsExtra();
-            SkinUtil.PreLoadBufIcons();
-            LocalizeUtil.AddLocalize();
-            LocalizeUtil.RemoveError();
-        }
-
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StageLibraryFloorModel), "StartPickEmotionCard")]
         public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
         {
             if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
@@ -101,6 +27,8 @@ namespace LoRModPack_Re21341.Harmony
             SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.OnSelectHide(true);
         }
 
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(StageWaveModel), "PickRandomEmotionCard")]
         public static void StageWaveModel_PickRandomEmotionCard(StageWaveModel __instance)
         {
             if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
@@ -109,12 +37,17 @@ namespace LoRModPack_Re21341.Harmony
             __instance.team.currentSelectEmotionLevel++;
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UIBookStoryChapterSlot), "SetEpisodeSlots")]
         public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
             UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
         {
             SkinUtil.SetEpisodeSlots(__instance, ___panel, ___EpisodeSlots);
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(BookModel), "GetThumbSprite")]
+        [HarmonyPatch(typeof(BookXmlInfo), "GetThumbSprite")]
         public static void General_GetThumbSprite(object __instance, ref Sprite __result)
         {
             switch (__instance)
@@ -128,6 +61,8 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UIBookStoryPanel), "OnSelectEpisodeSlot")]
         public static void UIBookStoryPanel_OnSelectEpisodeSlot(UIBookStoryPanel __instance,
             UIBookStoryEpisodeSlot slot, TextMeshProUGUI ___selectedEpisodeText, Image ___selectedEpisodeIcon,
             Image ___selectedEpisodeIconGlow)
@@ -141,6 +76,8 @@ namespace LoRModPack_Re21341.Harmony
             __instance.UpdateBookSlots();
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UIBattleSettingPanel), "SetToggles")]
         public static void UIBattleSettingPanel_SetToggles(UIBattleSettingPanel __instance)
         {
             if (!Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId
@@ -156,6 +93,8 @@ namespace LoRModPack_Re21341.Harmony
             __instance.SetAvailibleText();
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(BookModel), "SetXmlInfo")]
         public static void BookModel_SetXmlInfo(BookModel __instance, ref List<DiceCardXmlInfo> ____onlyCards)
         {
             if (__instance.BookId.packageId != ModParameters.PackageId) return;
@@ -165,6 +104,8 @@ namespace LoRModPack_Re21341.Harmony
                     ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, id))));
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StageLibraryFloorModel), "InitUnitList")]
         public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance,
             List<UnitBattleDataModel> ____unitList, StageModel stage)
         {
@@ -187,6 +128,8 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(WorkshopSkinDataSetter), "SetMotionData")]
         public static void WorkshopSkinDataSetter_SetMotionData(WorkshopSkinDataSetter __instance, ActionDetail motion,
             ClothCustomizeData data)
         {
@@ -203,13 +146,17 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
-        public static void UnitDataModel_EquipBookPrefix(UnitDataModel __instance, BookModel newBook, bool force)
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(UnitDataModel), "EquipBook")]
+        public static void UnitDataModel_EquipBookPrefix(UnitDataModel __instance, bool force)
         {
             if (force) return;
             if (ModParameters.PackageId == __instance.bookItem.ClassInfo.id.packageId &&
                 ModParameters.DynamicNames.ContainsKey(__instance.bookItem.ClassInfo.id.id)) __instance.ResetTempName();
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UnitDataModel), "EquipBook")]
         public static void UnitDataModel_EquipBookPostfix(UnitDataModel __instance, BookModel newBook, bool force)
         {
             if (force) return;
@@ -229,6 +176,8 @@ namespace LoRModPack_Re21341.Harmony
             __instance.SetTempName(ModParameters.NameTexts[nameId]);
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UnitDataModel), "LoadFromSaveData")]
         public static void UnitDataModel_LoadFromSaveData(UnitDataModel __instance)
         {
             if ((!string.IsNullOrEmpty(__instance.workshopSkin) || __instance.bookItem != __instance.CustomBookItem) &&
@@ -237,6 +186,8 @@ namespace LoRModPack_Re21341.Harmony
                 __instance.ResetTempName();
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UICustomizePopup), "OnClickSave")]
         public static void UICustomizePopup_OnClickSave(UICustomizePopup __instance)
         {
             if (__instance.SelectedUnit.bookItem.ClassInfo.id.packageId != ModParameters.PackageId ||
@@ -259,18 +210,25 @@ namespace LoRModPack_Re21341.Harmony
             }
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(FarAreaEffect_Xiao_Taotie), "LateInit")]
         public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
         {
             if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
                 ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TextDataModel), "InitTextData")]
         public static void TextDataModel_InitTextData(string currentLanguage)
         {
             ModParameters.Language = currentLanguage;
             LocalizeUtil.AddLocalize();
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(UISettingInvenEquipPageListSlot), "SetBooksData")]
+        [HarmonyPatch(typeof(UIInvenEquipPageListSlot), "SetBooksData")]
         public static void General_SetBooksData(object __instance,
             List<BookModel> books, UIStoryKeyData storyKey)
         {
@@ -278,6 +236,8 @@ namespace LoRModPack_Re21341.Harmony
             SkinUtil.SetBooksData(uiOrigin, books, storyKey);
         }
 
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(UISpriteDataManager), "Init")]
         public static void UISpriteDataManager_Init(UISpriteDataManager __instance)
         {
             foreach (var artWork in ModParameters.ArtWorks.Where(x =>
@@ -291,6 +251,8 @@ namespace LoRModPack_Re21341.Harmony
                 });
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(BattleUnitView), "ChangeSkin")]
         public static void BattleUnitView_ChangeSkin(BattleUnitView __instance, string charName)
         {
             if (!ModParameters.SkinNameIds.Exists(x => x.Item1.Contains(charName))) return;
@@ -317,6 +279,8 @@ namespace LoRModPack_Re21341.Harmony
             __instance.model.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { charName };
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(DropBookInventoryModel), "LoadFromSaveData")]
         public static void DropBookInventoryModel_LoadFromSaveData(DropBookInventoryModel __instance)
         {
             var bookCount = __instance.GetBookCount(new LorId(ModParameters.PackageId, 6));

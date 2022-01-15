@@ -228,6 +228,7 @@ namespace Util_Re21341
                 if (unit.emotionDetail.EmotionLevel < 5) unit.emotionDetail.SetEmotionLevel(5);
             }
         }
+
         public static void TestingUnitValuesBigDamage()
         {
             var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player);

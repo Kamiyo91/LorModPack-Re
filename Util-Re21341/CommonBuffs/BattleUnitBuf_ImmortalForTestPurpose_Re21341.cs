@@ -20,7 +20,7 @@
         public override void OnRoundStart()
         {
             _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
-            UnitUtil.DrawUntilX(_owner,6);
+            UnitUtil.DrawUntilX(_owner, 6);
         }
     }
 }
