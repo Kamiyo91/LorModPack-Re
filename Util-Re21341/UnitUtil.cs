@@ -138,8 +138,13 @@ namespace Util_Re21341
             var allyUnit = Singleton<StageController>.Instance.CreateLibrarianUnit_fromBattleUnitData(index);
             allyUnit.OnWaveStart();
             allyUnit.allyCardDetail.DrawCards(allyUnit.UnitData.unitData.GetStartDraw());
-            allyUnit.emotionDetail.SetEmotionLevel(emotionLevel);
-            allyUnit.emotionDetail.Reset();
+            for (var i = 0; i < emotionLevel; i++)
+            {
+                allyUnit.emotionDetail.LevelUp_Forcely(1);
+                allyUnit.emotionDetail.CheckLevelUp();
+            }
+
+            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
             allyUnit.cardSlotDetail.RecoverPlayPoint(allyUnit.cardSlotDetail.GetMaxPlayPoint());
             AddEmotionPassives(allyUnit);
             return allyUnit;
@@ -149,11 +154,14 @@ namespace Util_Re21341
         {
             var unitWithIndex = Singleton<StageController>.Instance.AddNewUnit(Faction.Enemy,
                 new LorId(ModParameters.PackageId, unit.Id), unit.Pos);
-            unitWithIndex.emotionDetail.SetEmotionLevel(unit.EmotionLevel);
+            for (var i = 0; i < unit.EmotionLevel; i++)
+            {
+                unitWithIndex.emotionDetail.LevelUp_Forcely(1);
+                unitWithIndex.emotionDetail.CheckLevelUp();
+            }
+
             if (unit.LockedEmotion)
                 unitWithIndex.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
-            else
-                unitWithIndex.emotionDetail.Reset();
             unitWithIndex.cardSlotDetail.RecoverPlayPoint(unitWithIndex.cardSlotDetail.GetMaxPlayPoint());
             unitWithIndex.allyCardDetail.DrawCards(unitWithIndex.UnitData.unitData.GetStartDraw());
             unitWithIndex.formation = new FormationPosition(unitWithIndex.formation._xmlInfo);
@@ -203,11 +211,15 @@ namespace Util_Re21341
             allyUnit.OnCreated();
             BattleObjectManager.instance.RegisterUnit(allyUnit);
             allyUnit.passiveDetail.OnUnitCreated();
-            allyUnit.emotionDetail.SetEmotionLevel(unit.EmotionLevel);
+            for (var i = 0; i < unit.EmotionLevel; i++)
+            {
+                allyUnit.emotionDetail.LevelUp_Forcely(1);
+                allyUnit.emotionDetail.CheckLevelUp();
+            }
+
             if (unit.LockedEmotion)
                 allyUnit.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
-            else
-                allyUnit.emotionDetail.Reset();
+            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
             allyUnit.allyCardDetail.DrawCards(allyUnit.UnitData.unitData.GetStartDraw());
             allyUnit.cardSlotDetail.RecoverPlayPoint(allyUnit.cardSlotDetail.GetMaxPlayPoint());
             if (unit.AddEmotionPassive)
@@ -228,10 +240,12 @@ namespace Util_Re21341
                         unit.emotionDetail.LevelUp_Forcely(1);
                         unit.emotionDetail.CheckLevelUp();
                     }
+
                 if (!unit.bufListDetail.GetActivatedBufList()
                         .Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
             }
+
             StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
         }
 
@@ -247,11 +261,13 @@ namespace Util_Re21341
                         unit.emotionDetail.LevelUp_Forcely(1);
                         unit.emotionDetail.CheckLevelUp();
                     }
+
                 if (!unit.bufListDetail.GetActivatedBufList()
                         .Exists(x => x is BattleUnitBuf_BigDamageForTestingPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_BigDamageForTestingPurpose_Re21341());
                 unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
             }
+
             StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
         }
 
