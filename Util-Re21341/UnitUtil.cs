@@ -222,11 +222,17 @@ namespace Util_Re21341
             if (playerUnit == null) return;
             foreach (var unit in playerUnit)
             {
+                if (unit.emotionDetail.EmotionLevel < 5)
+                    for (var i = 0; i < 5; i++)
+                    {
+                        unit.emotionDetail.LevelUp_Forcely(1);
+                        unit.emotionDetail.CheckLevelUp();
+                    }
                 if (!unit.bufListDetail.GetActivatedBufList()
                         .Exists(x => x is BattleUnitBuf_ImmortalForTestPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
-                if (unit.emotionDetail.EmotionLevel < 5) unit.emotionDetail.SetEmotionLevel(5);
             }
+            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
         }
 
         public static void TestingUnitValuesBigDamage()
@@ -235,11 +241,18 @@ namespace Util_Re21341
             if (playerUnit == null) return;
             foreach (var unit in playerUnit)
             {
+                if (unit.emotionDetail.EmotionLevel < 5)
+                    for (var i = 0; i < 5; i++)
+                    {
+                        unit.emotionDetail.LevelUp_Forcely(1);
+                        unit.emotionDetail.CheckLevelUp();
+                    }
                 if (!unit.bufListDetail.GetActivatedBufList()
                         .Exists(x => x is BattleUnitBuf_BigDamageForTestingPurpose_Re21341))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_BigDamageForTestingPurpose_Re21341());
-                if (unit.emotionDetail.EmotionLevel < 5) unit.emotionDetail.SetEmotionLevel(5);
+                unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalForTestPurpose_Re21341());
             }
+            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
         }
 
         public static void ReadyCounterCard(BattleUnitModel owner, int id)
