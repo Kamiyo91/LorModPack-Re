@@ -114,7 +114,7 @@ namespace Hayate_Re21341.MechUtil
             if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
                 new LorId(ModParameters.PackageId, 6))
                 return BattleObjectManager.instance.GetAliveList(Faction.Player).FirstOrDefault(x =>
-                    x.UnitData.unitData.bookItem.ClassInfo.id != new LorId(ModParameters.PackageId, 10000004));
+                    x.UnitData.unitData.bookItem.ClassInfo.id != new LorId(ModParameters.PackageId, 10000901));
             if (BattleObjectManager.instance
                 .GetAliveList(Faction.Player).Any(x => !x.UnitData.unitData.isSephirah))
                 return RandomUtil.SelectOne(BattleObjectManager.instance.GetAliveList(Faction.Player)

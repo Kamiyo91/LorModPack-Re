@@ -89,5 +89,11 @@ namespace Wilton_Re21341
             unit.moveDetail.ReturnToFormationByBlink(true);
             UnitUtil.RefreshCombatUI();
         }
+
+        public override void OnEndBattle()
+        {
+            if (_finalMech)
+                BattleObjectManager.instance.GetList(Faction.Player).FirstOrDefault(x => x.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)?.Revive(1);
+        }
     }
 }

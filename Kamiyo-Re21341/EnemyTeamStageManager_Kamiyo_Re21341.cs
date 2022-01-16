@@ -60,7 +60,7 @@ namespace Kamiyo_Re21341
 
         private void CheckPhase()
         {
-            if (_mainEnemyModel.hp > 100 || _phaseChanged) return;
+            if (_mainEnemyModel.hp > 161 || _phaseChanged) return;
             _phaseChanged = true;
             CustomMapHandler.EnforceMap(1);
             Singleton<StageController>.Instance.CheckMapChange();

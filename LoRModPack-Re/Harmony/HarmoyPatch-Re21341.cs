@@ -214,7 +214,9 @@ namespace LoRModPack_Re21341.Harmony
         [HarmonyPatch(typeof(FarAreaEffect_Xiao_Taotie), "LateInit")]
         public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
         {
-            if (____self.UnitData.unitData.bookItem.ClassInfo.id == new LorId(ModParameters.PackageId, 10000004))
+            if (____self.UnitData.unitData.bookItem.ClassInfo.id.packageId != ModParameters.PackageId) return;
+            if (____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000004 || 
+                ____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)
                 ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
 using CustomMapUtility;
+using Mio_Re21341.Buffs;
 using Mio_Re21341.Passives;
 using Sound;
 using Util_Re21341;
@@ -86,6 +87,8 @@ namespace Mio_Re21341
             passive?.ForcedEgo();
             if (!allyUnit.passiveDetail.PassiveList.Exists(x => x is PassiveAbility_KurosawaEmblem_Re21341))
                 allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 37));
+            if (!allyUnit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_KurosawaEmblem_Re21341))
+                allyUnit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_KurosawaEmblem_Re21341());
             allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 57));
         }
     }

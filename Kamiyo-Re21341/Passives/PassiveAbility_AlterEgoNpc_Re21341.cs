@@ -26,7 +26,7 @@ namespace Kamiyo_Re21341.Passives
                 Owner = owner,
                 Hp = 0,
                 SetHp = 161,
-                MechHp = 100,
+                MechHp = 161,
                 Counter = 0,
                 MaxCounter = 4,
                 Survive = true,
