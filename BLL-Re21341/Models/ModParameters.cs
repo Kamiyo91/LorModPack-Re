@@ -119,5 +119,10 @@ namespace BLL_Re21341.Models
                 }
             }
         };
+
+        public static readonly List<int> OnlySephirahStage = new List<int>
+        {
+            1, 4, 10
+        };
     }
 }

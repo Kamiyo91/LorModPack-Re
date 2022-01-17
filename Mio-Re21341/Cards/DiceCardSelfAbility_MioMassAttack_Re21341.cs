@@ -1,13 +1,11 @@
 ﻿using BLL_Re21341.Models;
 using Mio_Re21341.Buffs;
-using Util_Re21341;
 
 namespace Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_MioMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChanged;
-        private bool _used;
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
@@ -28,34 +26,6 @@ namespace Mio_Re21341.Cards
             if (!_motionChanged) return;
             _motionChanged = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
-        }
-
-        public override void OnStartBattle()
-        {
-            if (owner.faction != Faction.Player ||
-                SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
-            _used = true;
-            ChangeToMioEgoMap();
-        }
-
-        private static void ChangeToMioEgoMap()
-        {
-            MapUtil.ChangeMap(new MapModel
-            {
-                Stage = "Mio_Re21341",
-                StageId = 2,
-                OneTurnEgo = true,
-                IsPlayer = true,
-                Component = typeof(Mio_Re21341MapManager),
-                Bgy = 0.2f
-            });
-        }
-
-        public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
-        {
-            if (!_used) return;
-            _used = false;
-            MapUtil.ReturnFromEgoMap("Mio_Re21341", 2);
         }
 
         public override void OnApplyCard()

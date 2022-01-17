@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
 using Util_Re21341.CommonBuffs;
@@ -65,6 +66,30 @@ namespace Util_Re21341.BaseClass
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
             _model.Owner.breakDetail.nextTurnBreak = false;
             _model.EgoActivated = true;
+        }
+
+        public virtual void ChangeToEgoMap(LorId cardId)
+        {
+            if (cardId != _model.EgoAttackCardId || _model.Owner.faction != Faction.Player ||
+                SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
+            _model.MapUsed = true;
+            MapUtil.ChangeMap(new MapModel
+            {
+                Stage = _model.EgoMapName,
+                StageId = _model.OriginalMapStageId,
+                OneTurnEgo = true,
+                IsPlayer = true,
+                Component = _model.EgoMapType,
+                Bgy = _model.BgY ?? 0.5f,
+                Fy = _model.FlY ?? 407.5f / 1080f
+            });
+        }
+
+        public virtual void ReturnFromEgoMap()
+        {
+            if (!_model.MapUsed) return;
+            _model.MapUsed = false;
+            MapUtil.ReturnFromEgoMap(_model.EgoMapName, _model.OriginalMapStageId);
         }
 
         public virtual void DoNotChangeSkinOnEgo()

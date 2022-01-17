@@ -24,6 +24,10 @@ namespace Wilton_Re21341.Passives
                 EgoType = typeof(BattleUnitBuf_Vengeance_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 47),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 48),
+                EgoMapName = "Wilton_Re21341",
+                EgoMapType = typeof(Wilton_Re21341MapManager),
+                BgY = 0.2f,
+                OriginalMapStageId = 6,
                 HasEgoAbDialog = true,
                 EgoAbColorColor = AbColorType.Negative,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
@@ -53,6 +57,12 @@ namespace Wilton_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

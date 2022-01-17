@@ -33,7 +33,6 @@ namespace Hayate_Re21341
                 0.5f, 0.475f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
-            UnitUtil.FillBaseUnit(_floor);
             _sephiraModel = BattleObjectManager.instance.GetList(Faction.Player).FirstOrDefault();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
             _mainEnemyModel?.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_Re21341());

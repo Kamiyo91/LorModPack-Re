@@ -87,7 +87,7 @@ namespace Mio_Re21341
             passive?.ForcedEgo();
             if (!allyUnit.passiveDetail.PassiveList.Exists(x => x is PassiveAbility_KurosawaEmblem_Re21341))
                 allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 37));
-            if (!allyUnit.bufListDetail.GetActivatedBufList().Exists(x => x is BattleUnitBuf_KurosawaEmblem_Re21341))
+            if (!allyUnit.bufListDetail.HasBuf<BattleUnitBuf_KurosawaEmblem_Re21341>())
                 allyUnit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_KurosawaEmblem_Re21341());
             allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 57));
         }

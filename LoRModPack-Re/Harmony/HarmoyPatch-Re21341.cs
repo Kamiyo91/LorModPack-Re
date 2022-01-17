@@ -105,6 +105,18 @@ namespace LoRModPack_Re21341.Harmony
         }
 
         [HarmonyPostfix]
+        [HarmonyPatch(typeof(UnitDataModel), "IsLockUnit")]
+        public static void UnitDataModel_IsLockUnit(UnitDataModel __instance, ref bool __result,
+            SephirahType ____ownerSephirah)
+        {
+            if (UI.UIController.Instance.CurrentUIPhase != UIPhase.BattleSetting) return;
+            var stageModel = Singleton<StageController>.Instance.GetStageModel();
+            if (stageModel == null || stageModel.ClassInfo.id.packageId != ModParameters.PackageId) return;
+            if (ModParameters.OnlySephirahStage.Contains(stageModel.ClassInfo.id.id))
+                __result = !__instance.isSephirah && ____ownerSephirah != SephirahType.None;
+        }
+
+        [HarmonyPostfix]
         [HarmonyPatch(typeof(StageLibraryFloorModel), "InitUnitList")]
         public static void StageLibraryFloorModel_InitUnitList(StageLibraryFloorModel __instance,
             List<UnitBattleDataModel> ____unitList, StageModel stage)
@@ -112,15 +124,6 @@ namespace LoRModPack_Re21341.Harmony
             if (stage.ClassInfo.id.packageId != ModParameters.PackageId) return;
             switch (stage.ClassInfo.id.id)
             {
-                case 1:
-                    ____unitList.Clear();
-                    UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
-                    return;
-                case 4:
-                case 10:
-                    ____unitList.Clear();
-                    UnitUtil.AddUnitSephiraOnly(__instance, stage, ____unitList);
-                    return;
                 case 6:
                     if (__instance.Sephirah == SephirahType.Keter) ____unitList.Clear();
                     UnitUtil.AddCustomUnits(__instance, stage, ____unitList, 6);
@@ -215,7 +218,7 @@ namespace LoRModPack_Re21341.Harmony
         public static void FarAreaEffect_Xiao_Taotie_LateInit(BattleUnitModel ____self)
         {
             if (____self.UnitData.unitData.bookItem.ClassInfo.id.packageId != ModParameters.PackageId) return;
-            if (____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000004 || 
+            if (____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000004 ||
                 ____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)
                 ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }

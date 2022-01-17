@@ -4,6 +4,7 @@ using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
+using Kamiyo_Re21341.MapManager;
 using LOR_XML;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
@@ -35,6 +36,11 @@ namespace Kamiyo_Re21341.Passives
                 NearDeathBuffExist = true,
                 RecoverLightOnSurvive = false,
                 SkinName = "KamiyoMask_Re21341",
+                EgoMapName = "Kamiyo2_Re21341",
+                EgoMapType = typeof(Kamiyo2_Re21341MapManager),
+                BgY = 0.475f,
+                FlY = 0.225f,
+                OriginalMapStageId = 3,
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
@@ -139,6 +145,12 @@ namespace Kamiyo_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

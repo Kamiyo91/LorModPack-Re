@@ -299,16 +299,6 @@ namespace Util_Re21341
             battleCardResultLog?.SetPassiveAbility(passive);
         }
 
-        public static void AddUnitSephiraOnly(StageLibraryFloorModel instance, StageModel stage,
-            List<UnitBattleDataModel> unitList)
-        {
-            var sephirahs = new List<UnitBattleDataModel>();
-            sephirahs.AddRange(instance._floorModel.GetUnitDataList()
-                .Where(x => x.isSephirah)
-                .Select(unit => InitUnitDefault(stage, unit)));
-            unitList?.AddRange(sephirahs);
-        }
-
         public static void AddCustomUnits(StageLibraryFloorModel instance, StageModel stage,
             List<UnitBattleDataModel> unitList, int dictionaryId)
         {
@@ -335,24 +325,6 @@ namespace Util_Re21341
                 unitBattleDataModel.Init();
                 unitList.Add(unitBattleDataModel);
             }
-        }
-
-        public static void FillBaseUnit(StageLibraryFloorModel floor)
-        {
-            var modelTeam = (List<UnitBattleDataModel>)typeof(StageLibraryFloorModel).GetField("_unitList",
-                    AccessTools.all)
-                ?.GetValue(Singleton<StageController>.Instance.GetStageModel().GetFloor(floor.Sephirah));
-            var stage = Singleton<StageController>.Instance.GetStageModel();
-            modelTeam?.AddRange(floor._floorModel.GetUnitDataList()
-                .Where(x => x.OwnerSephirah == floor.Sephirah && !x.isSephirah)
-                .Select(unit => InitUnitDefault(stage, unit)));
-        }
-
-        private static UnitBattleDataModel InitUnitDefault(StageModel stage, UnitDataModel data)
-        {
-            var unitBattleDataModel = new UnitBattleDataModel(stage, data);
-            unitBattleDataModel.Init();
-            return unitBattleDataModel;
         }
 
         public static void BattleAbDialog(BattleDialogUI instance, List<AbnormalityCardDialog> dialogs,

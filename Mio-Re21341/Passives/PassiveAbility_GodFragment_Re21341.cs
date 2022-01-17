@@ -33,6 +33,10 @@ namespace Mio_Re21341.Passives
                 RefreshUI = true,
                 RecoverLightOnSurvive = false,
                 SkinName = "MioRedEye_Re21341",
+                EgoMapName = "Mio_Re21341",
+                EgoMapType = typeof(Mio_Re21341MapManager),
+                BgY = 0.2f,
+                OriginalMapStageId = 2,
                 EgoType = typeof(BattleUnitBuf_GodAuraRelease_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 9),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 10),
@@ -111,6 +115,12 @@ namespace Mio_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

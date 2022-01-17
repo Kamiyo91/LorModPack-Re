@@ -1,14 +1,10 @@
-﻿using BLL_Re21341.Models;
-using Kamiyo_Re21341.Buffs;
-using Kamiyo_Re21341.MapManager;
-using Util_Re21341;
+﻿using Kamiyo_Re21341.Buffs;
 
 namespace Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_KamiyoMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChanged;
-        private bool _used;
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
@@ -34,35 +30,6 @@ namespace Kamiyo_Re21341.Cards
         {
             _motionChanged = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
-        }
-
-        public override void OnStartBattle()
-        {
-            if (owner.faction != Faction.Player ||
-                SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
-            _used = true;
-            ChangeToKamiyoEgoMap();
-        }
-
-        public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
-        {
-            if (!_used) return;
-            _used = false;
-            MapUtil.ReturnFromEgoMap("Kamiyo2_Re21341", 3);
-        }
-
-        private static void ChangeToKamiyoEgoMap()
-        {
-            MapUtil.ChangeMap(new MapModel
-            {
-                Stage = "Kamiyo2_Re21341",
-                StageId = 3,
-                IsPlayer = true,
-                OneTurnEgo = true,
-                Component = typeof(Kamiyo2_Re21341MapManager),
-                Bgy = 0.475f,
-                Fy = 0.225f
-            });
         }
     }
 }

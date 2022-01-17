@@ -93,7 +93,8 @@ namespace Wilton_Re21341
         public override void OnEndBattle()
         {
             if (_finalMech)
-                BattleObjectManager.instance.GetList(Faction.Player).FirstOrDefault(x => x.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)?.Revive(1);
+                BattleObjectManager.instance.GetList(Faction.Player)
+                    .FirstOrDefault(x => x.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)?.Revive(1);
         }
     }
 }

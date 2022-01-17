@@ -8,8 +8,12 @@ namespace BLL_Re21341.Models.MechUtilModels
     public class MechUtilBaseModel
     {
         public BattleUnitModel Owner { get; set; }
+        public string EgoMapName { get; set; }
         public int Hp { get; set; }
         public int SetHp { get; set; }
+        public float? BgY { get; set; }
+        public float? FlY { get; set; }
+        public int OriginalMapStageId { get; set; }
         public bool Survive { get; set; }
         public bool HasEgo { get; set; }
         public bool HasEgoAttack { get; set; }
@@ -21,6 +25,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool HasAdditionalPassive { get; set; }
         public string SkinName { get; set; }
         public bool DieOnFightEnd { get; set; }
+        public bool MapUsed { get; set; }
         public List<AbnormalityCardDialog> SurviveAbDialogList { get; set; }
         public List<AbnormalityCardDialog> EgoAbDialogList { get; set; }
         public bool HasEgoAbDialog { get; set; }
@@ -30,6 +35,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public AbColorType EgoAbColorColor { get; set; }
         public Type NearDeathBuffType { get; set; }
         public Type EgoType { get; set; }
+        public Type EgoMapType { get; set; }
         public LorId[] LorIdArray { get; set; } = null;
         public LorId EgoCardId { get; set; }
         public LorId SecondaryEgoCardId { get; set; }

@@ -11,6 +11,7 @@ namespace Raziel_Re21341.Passives
     {
         private bool _revive;
         private bool _skinChanged;
+        private bool _used;
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
@@ -31,6 +32,12 @@ namespace Raziel_Re21341.Passives
 
         public override void OnRoundEndTheLast_ignoreDead()
         {
+            if (_used)
+            {
+                _used = false;
+                MapUtil.ReturnFromEgoMap("Raziel_Re21341", 7);
+            }
+
             if (!owner.IsDead() || _revive) return;
             _revive = true;
             UnitUtil.UnitReviveAndRecovery(owner, owner.MaxHp, false, _skinChanged);
@@ -45,6 +52,29 @@ namespace Raziel_Re21341.Passives
                     }
                 }, AbColorType.Negative);
             owner.forceRetreat = true;
+        }
+
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            if (curCard.card.GetID().packageId != ModParameters.PackageId) return;
+            if (curCard.card.GetID().id != 58 || owner.faction != Faction.Player ||
+                SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
+            _used = true;
+            ChangeToRazielEgoMap();
+        }
+
+        private static void ChangeToRazielEgoMap()
+        {
+            MapUtil.ChangeMap(new MapModel
+            {
+                Stage = "Raziel_Re21341",
+                StageId = 7,
+                OneTurnEgo = true,
+                IsPlayer = true,
+                Component = typeof(Raziel_Re21341MapManager),
+                Bgy = 0.375f,
+                Fy = 0.225f
+            });
         }
 
         public override void OnBattleEnd()

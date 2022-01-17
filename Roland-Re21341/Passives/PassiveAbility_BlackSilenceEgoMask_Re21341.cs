@@ -1,6 +1,7 @@
 ﻿using BLL_Re21341.Models;
 using BLL_Re21341.Models.MechUtilModels;
 using Roland_Re21341.Buffs;
+using Util_Re21341.CommonMaps;
 
 namespace Roland_Re21341.Passives
 {
@@ -21,6 +22,9 @@ namespace Roland_Re21341.Passives
                 Owner = owner,
                 HasEgo = true,
                 SkinName = "BlackSilence3",
+                EgoMapName = "BlackSilenceMassEgo_Re21341",
+                EgoMapType = typeof(BlackSilence_Re21341MapManager),
+                FlY = 0.285f,
                 EgoType = typeof(BattleUnitBuf_BlackSilenceEgoMask_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 31),
                 HasEgoAttack = true,
@@ -31,6 +35,12 @@ namespace Roland_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
 
         public override void OnRoundEndTheLast()
