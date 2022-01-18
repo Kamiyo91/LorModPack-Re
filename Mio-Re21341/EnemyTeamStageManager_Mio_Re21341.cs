@@ -59,7 +59,7 @@ namespace Mio_Re21341
             UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             if (_allySummon) PrepareAllyUnit();
-            CustomMapHandler.SetMapBgm("MioPhase2_Re21341.mp3", true, "Mio_Re21341");
+            CustomMapHandler.SetMapBgm("MioPhase2_Re21341.ogg", true, "Mio_Re21341");
         }
 
         private void PrepareAllyUnit()

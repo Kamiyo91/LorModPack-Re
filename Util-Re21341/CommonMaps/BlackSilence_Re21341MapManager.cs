@@ -7,7 +7,7 @@ namespace Util_Re21341.CommonMaps
     {
         private GameObject _aura;
         private BlackSilence4thMapManager _mapGameObject;
-        protected internal override string[] CustomBGMs => new[] { "BlackSilence_Re21341.mp3" };
+        protected internal override string[] CustomBGMs => new[] { "BlackSilence_Re21341.ogg" };
 
         public override void InitializeMap()
         {

@@ -5,7 +5,7 @@ namespace Kamiyo_Re21341.MapManager
 {
     public class Kamiyo1_Re21341MapManager : CustomMapManager
     {
-        protected override string[] CustomBGMs => new[] { "KamiyoPhase1_Re21341.mp3" };
+        protected override string[] CustomBGMs => new[] { "KamiyoPhase1_Re21341.ogg" };
 
         public override void EnableMap(bool b)
         {
