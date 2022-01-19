@@ -193,7 +193,7 @@ namespace Util_Re21341
 
         public static void LevelUpEmotion(BattleUnitModel owner, int value)
         {
-            for (var i = 0; i < owner.emotionDetail.EmotionLevel; i++)
+            for (var i = 0; i < value; i++)
             {
                 owner.emotionDetail.LevelUp_Forcely(1);
                 owner.emotionDetail.CheckLevelUp();

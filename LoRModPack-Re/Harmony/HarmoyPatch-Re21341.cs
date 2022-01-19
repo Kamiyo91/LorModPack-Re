@@ -219,7 +219,8 @@ namespace LoRModPack_Re21341.Harmony
         {
             if (____self.UnitData.unitData.bookItem.ClassInfo.id.packageId != ModParameters.PackageId) return;
             if (____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000004 ||
-                ____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901)
+                ____self.UnitData.unitData.bookItem.ClassInfo.id.id == 10000901 ||
+                ____self.UnitData.unitData.bookItem.ClassInfo.id.id == 4)
                 ____self.view.charAppearance.ChangeMotion(ActionDetail.Guard);
         }
 

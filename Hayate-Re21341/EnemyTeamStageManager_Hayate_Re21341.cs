@@ -58,6 +58,7 @@ namespace Hayate_Re21341
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
+            _phaseChanged = true;
             MapUtil.ActiveCreatureBattleCamFilterComponent();
             CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.ogg", true, "Hayate_Re21341");
         }

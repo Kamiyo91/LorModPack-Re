@@ -13,7 +13,7 @@ namespace Hayate_Re21341.Buffs
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "TrueGodAuraRelease_Re21341";
-        protected override string keywordIconId => "TrueGodAuraRelease_Re21341";
+        protected override string keywordIconId => "TrueGodAura_Re21341";
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {

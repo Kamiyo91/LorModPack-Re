@@ -12,7 +12,7 @@ namespace Mio_Re21341.Buffs
         public override bool isAssimilation => true;
         public override int paramInBufDesc => 0;
         protected override string keywordId => "GodAura_Re21341";
-        protected override string keywordIconId => "GodAura_Re21341";
+        protected override string keywordIconId => "Light_Re21341";
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {

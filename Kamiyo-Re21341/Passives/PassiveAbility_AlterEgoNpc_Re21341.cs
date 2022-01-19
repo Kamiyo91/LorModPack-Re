@@ -4,6 +4,7 @@ using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using Kamiyo_Re21341.Buffs;
+using Kamiyo_Re21341.MapManager;
 using Kamiyo_Re21341.MechUtil;
 using LOR_XML;
 using Util_Re21341;
@@ -24,6 +25,7 @@ namespace Kamiyo_Re21341.Passives
         {
             var continueCheck = Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>("Phase", out var curPhase) && curPhase;
+            if (continueCheck) owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 11));
             _util = new NpcMechUtil_Kamiyo(new NpcMechUtil_KamiyoModel
             {
                 Owner = owner,
@@ -41,6 +43,11 @@ namespace Kamiyo_Re21341.Passives
                 ReloadMassAttackOnLethal = true,
                 RecoverLightOnSurvive = true,
                 SkinName = "KamiyoMask_Re21341",
+                EgoMapName = "Kamiyo2_Re21341",
+                EgoMapType = typeof(Kamiyo2_Re21341MapManager),
+                BgY = 0.475f,
+                FlY = 0.225f,
+                OriginalMapStageId = 3,
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 11),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeathNpc_Re21341),

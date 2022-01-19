@@ -52,7 +52,7 @@ namespace OldSamurai_Re21341.Buffs
         {
             if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id !=
                 new LorId(ModParameters.PackageId, 1)) CustomMapHandler.EnforceTheme();
-            if (BattleObjectManager.instance.GetAliveList(Faction.Player).Count <= 1) RemoveSamuraiEgoMap();
+            if (BattleObjectManager.instance.GetAliveList(_owner.faction).Count <= 1) RemoveSamuraiEgoMap();
         }
 
         private static void ChangeToSamuraiEgoMap()

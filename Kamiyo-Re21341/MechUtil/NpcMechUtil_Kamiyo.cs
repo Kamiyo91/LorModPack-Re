@@ -53,7 +53,7 @@ namespace Kamiyo_Re21341.MechUtil
         {
             if (!_model.Restart) return;
             _model.Restart = false;
-            PrepareKamiyoUnit(true, false, false, true);
+            PrepareKamiyoUnit(true);
             PrepareMioEnemyUnit();
             UnitUtil.RefreshCombatUI();
         }
