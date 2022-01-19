@@ -3,7 +3,6 @@ using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using CustomMapUtility;
-using Hayate_Re21341.Passives;
 using Kamiyo_Re21341.Passives;
 using LOR_XML;
 using Util_Re21341;
@@ -20,7 +19,6 @@ namespace Hayate_Re21341
 
         private bool _allySummon;
         private bool _finalMech;
-        private PassiveAbility_HayateNpc_Re21341 _hayateEnemyPassive;
         private bool _lastPhaseStarted;
         private BattleUnitModel _mainEnemyModel;
         private bool _phaseChanged;
@@ -35,12 +33,6 @@ namespace Hayate_Re21341
             Singleton<StageController>.Instance.CheckMapChange();
             _sephiraModel = BattleObjectManager.instance.GetList(Faction.Player).FirstOrDefault();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
-            _mainEnemyModel?.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_Re21341());
-            if (_mainEnemyModel != null)
-                _hayateEnemyPassive =
-                    _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_HayateNpc_Re21341) as
-                        PassiveAbility_HayateNpc_Re21341;
-            if (!_finalMech) _mainEnemyModel?.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
             _phaseChanged = false;
             _lastPhaseStarted = false;
             _allySummon = false;
@@ -48,7 +40,6 @@ namespace Hayate_Re21341
 
         public override void OnRoundEndTheLast()
         {
-            HayateIsDeadBeforePhase3();
             CheckPhase();
             CheckUnitSummon();
             CheckLastPhase();
@@ -67,11 +58,7 @@ namespace Hayate_Re21341
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
-            _phaseChanged = true;
-            _hayateEnemyPassive.ForcedEgo();
-            _mainEnemyModel.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
             MapUtil.ActiveCreatureBattleCamFilterComponent();
-            UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.ogg", true, "Hayate_Re21341");
         }
 
@@ -86,14 +73,6 @@ namespace Hayate_Re21341
                 Sephirah = _floor.Sephirah
             });
             return allyUnit;
-        }
-
-        private void HayateIsDeadBeforePhase3()
-        {
-            if (!_finalMech) return;
-            if (_lastPhaseStarted) return;
-            if (!_mainEnemyModel.IsDead()) return;
-            UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 5, false);
         }
 
         private void CheckUnitSummon()

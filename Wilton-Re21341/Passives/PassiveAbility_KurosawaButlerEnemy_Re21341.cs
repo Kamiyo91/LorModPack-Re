@@ -5,18 +5,18 @@ using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
 using Util_Re21341;
-using Util_Re21341.BaseClass;
 using Wilton_Re21341.Buffs;
+using Wilton_Re21341.MechUtil;
 
 namespace Wilton_Re21341.Passives
 {
     public class PassiveAbility_KurosawaButlerEnemy_Re21341 : PassiveAbilityBase
     {
-        private NpcMechUtilBase _util;
+        private NpcMechUtil_Wilton _util;
 
         public override void OnWaveStart()
         {
-            _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
+            _util = new NpcMechUtil_Wilton(new NpcMechUtilBaseModel
             {
                 Owner = owner,
                 Hp = 1,
@@ -30,6 +30,10 @@ namespace Wilton_Re21341.Passives
                 RecoverLightOnSurvive = true,
                 ReloadMassAttackOnLethal = true,
                 EgoType = typeof(BattleUnitBuf_VengeanceNpc_Re21341),
+                EgoMapName = "Wilton_Re21341",
+                EgoMapType = typeof(Wilton_Re21341MapManager),
+                BgY = 0.2f,
+                OriginalMapStageId = 6,
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,
@@ -53,7 +57,8 @@ namespace Wilton_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("WiltonEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905)
+                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905),
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 905)
             });
         }
 
@@ -82,19 +87,9 @@ namespace Wilton_Re21341.Passives
             _util.RaiseCounter();
         }
 
-        public void SetCountToMax()
+        public override void OnRoundEndTheLast()
         {
-            _util.SetCounter(5);
-        }
-
-        public void ActiveMassAttackCount()
-        {
-            _util.SetMassAttack(true);
-        }
-
-        public void ForcedEgo()
-        {
-            _util.ForcedEgo();
+            _util.CheckPhase();
         }
 
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
@@ -106,11 +101,17 @@ namespace Wilton_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseCardResetCount(curCard);
+            _util.ChangeToEgoMap(curCard.card.GetID());
         }
 
         public override void OnDie()
         {
             UnitUtil.VipDeathNpc(owner);
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

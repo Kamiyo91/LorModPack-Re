@@ -61,6 +61,7 @@
     <Compile Include="Cards\DiceCardSelfAbility_RazielMassAttack_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Kaioken_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Raziel_Re21341.cs" />
+    <Compile Include="MechUtil\NpcMechUtil_Raziel.cs" />
     <Compile Include="Passives\PassiveAbility_GodTrial_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_InquisitorBlade_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_InquisitorEnemy_Re21341.cs" />

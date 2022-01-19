@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MechUtilModelExtensions\NpcMechUtil_HayateModel.cs" />
+    <Compile Include="Extensions\MechUtilModelExtensions\NpcMechUtil_KamiyoModel.cs" />
     <Compile Include="Models\EffectTextModel.cs" />
     <Compile Include="Models\Enum\ColorTypeEnum.cs" />
     <Compile Include="Models\Enum\EmotionBufEnum.cs" />

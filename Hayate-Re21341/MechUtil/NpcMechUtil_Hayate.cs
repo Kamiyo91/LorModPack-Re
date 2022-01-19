@@ -11,17 +11,13 @@ namespace Hayate_Re21341.MechUtil
     public class NpcMechUtil_Hayate : NpcMechUtilBase
     {
         private readonly BattleUnitBuf_EntertainMe_Re21341 _buf;
-        private readonly bool _finalMech;
         private readonly NpcMechUtil_HayateModel _model;
-        private bool _singleUseMechCard;
 
         public NpcMechUtil_Hayate(NpcMechUtil_HayateModel model) : base(model)
         {
             _model = model;
             _buf = new BattleUnitBuf_EntertainMe_Re21341();
             model.Owner.bufListDetail.AddBufWithoutDuplication(_buf);
-            _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4;
-            _singleUseMechCard = false;
         }
 
         public override void ForcedEgo()
@@ -30,20 +26,25 @@ namespace Hayate_Re21341.MechUtil
             _buf.stack = 40;
         }
 
+        public bool GetFinalMechValue()
+        {
+            return _model.FinalMech;
+        }
+
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)
             {
-                if (_finalMech)
+                if (_model.FinalMech)
                 {
                     _model.DrawBack = _model.Owner.allyCardDetail.GetHand().Count;
                     _model.Owner.allyCardDetail.DiscardACardByAbility(_model.Owner.allyCardDetail.GetHand());
                     origin = BattleDiceCardModel.CreatePlayingCard(
                         ItemXmlDataList.instance.GetCardItem(_model.SecondaryMechCard));
                 }
-                else if (!_singleUseMechCard)
+                else if (!_model.SingleUseMech)
                 {
-                    _singleUseMechCard = true;
+                    _model.SingleUseMech = true;
                     _buf.stack = 40;
                     origin = BattleDiceCardModel.CreatePlayingCard(
                         ItemXmlDataList.instance.GetCardItem(_model.LorIdEgoMassAttack));
@@ -68,6 +69,7 @@ namespace Hayate_Re21341.MechUtil
             {
                 _model.FinalMechStart = false;
                 _model.MassAttackStartCount = false;
+                _model.LastPhaseStart = true;
                 _model.Owner.allyCardDetail.DrawCards(_model.DrawBack);
                 _model.DrawBack = 0;
                 _model.Owner.bufListDetail.RemoveBuf(_buf);
@@ -120,6 +122,23 @@ namespace Hayate_Re21341.MechUtil
                 return RandomUtil.SelectOne(BattleObjectManager.instance.GetAliveList(Faction.Player)
                     .Where(x => !x.UnitData.unitData.isSephirah).ToList());
             return null;
+        }
+
+        public void CheckPhase()
+        {
+            if (_model.Owner.hp > 527 || _model.PhaseChanged) return;
+            _model.PhaseChanged = true;
+            ForcedEgo();
+            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
+            UnitUtil.ChangeCardCostByValue(_model.Owner, -2, 4);
+        }
+
+        public void HayateIsDeadBeforePhase3()
+        {
+            if (!_model.FinalMech) return;
+            if (_model.LastPhaseStart) return;
+            if (!_model.Owner.IsDead()) return;
+            UnitUtil.UnitReviveAndRecovery(_model.Owner, 5, false);
         }
     }
 }

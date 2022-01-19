@@ -70,7 +70,7 @@ namespace Util_Re21341.BaseClass
 
         public virtual void ChangeToEgoMap(LorId cardId)
         {
-            if (cardId != _model.EgoAttackCardId || _model.Owner.faction != Faction.Player ||
+            if (cardId != _model.EgoAttackCardId ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             _model.MapUsed = true;
             MapUtil.ChangeMap(new MapModel

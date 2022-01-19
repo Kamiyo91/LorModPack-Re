@@ -5,14 +5,14 @@ using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
 using LOR_XML;
 using Mio_Re21341.Buffs;
+using Mio_Re21341.MechUtil;
 using Util_Re21341;
-using Util_Re21341.BaseClass;
 
 namespace Mio_Re21341.Passives
 {
     public class PassiveAbility_GodFragmentEnemy_Re21341 : PassiveAbilityBase
     {
-        private NpcMechUtilBase _util;
+        private NpcMechUtil_Mio _util;
 
         public override void OnBattleEnd()
         {
@@ -21,7 +21,7 @@ namespace Mio_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            _util = new NpcMechUtilBase(new NpcMechUtilBaseModel
+            _util = new NpcMechUtil_Mio(new NpcMechUtilBaseModel
             {
                 Owner = owner,
                 Hp = 0,
@@ -37,6 +37,10 @@ namespace Mio_Re21341.Passives
                 RefreshUI = true,
                 ReloadMassAttackOnLethal = true,
                 SkinName = "MioRedEye_Re21341",
+                EgoMapName = "Mio_Re21341",
+                EgoMapType = typeof(Mio_Re21341MapManager),
+                BgY = 0.2f,
+                OriginalMapStageId = 2,
                 EgoType = typeof(BattleUnitBuf_CorruptedGodAuraRelease_Re21341),
                 SpecialBufType = typeof(BattleUnitBuf_SakuraPetal_Re21341),
                 HasEgoAbDialog = true,
@@ -61,7 +65,8 @@ namespace Mio_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900)
+                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900),
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 900)
             });
         }
 
@@ -103,19 +108,9 @@ namespace Mio_Re21341.Passives
             _util.RaiseCounter();
         }
 
-        public void SetCountToMax()
+        public override void OnRoundEndTheLast()
         {
-            _util.SetCounter(4);
-        }
-
-        public void ActiveMassAttackCount()
-        {
-            _util.SetMassAttack(true);
-        }
-
-        public void ForcedEgo()
-        {
-            _util.ForcedEgo();
+            _util.CheckPhase();
         }
 
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
@@ -127,6 +122,12 @@ namespace Mio_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseCardResetCount(curCard);
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

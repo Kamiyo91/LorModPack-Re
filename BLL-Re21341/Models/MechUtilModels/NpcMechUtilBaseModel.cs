@@ -14,5 +14,6 @@ namespace BLL_Re21341.Models.MechUtilModels
         public bool OneTurnCard { get; set; }
         public LorId LorIdEgoMassAttack { get; set; }
         public bool MassAttackStartCount { get; set; }
+        public int Phase { get; set; }
     }
 }

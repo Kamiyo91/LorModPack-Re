@@ -1,4 +1,5 @@
-﻿using Battle.CreatureEffect;
+﻿using System.Linq;
+using Battle.CreatureEffect;
 using BLL_Re21341.Models;
 using Sound;
 using UnityEngine;
@@ -11,6 +12,10 @@ namespace Wilton_Re21341.Buffs
     public class BattleUnitBuf_VengeanceNpc_Re21341 : BattleUnitBuf
     {
         private const string Path = "6/RedHood_Emotion_Aura";
+
+        private readonly StageLibraryFloorModel
+            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+
         private CreatureEffect _aura;
 
         public BattleUnitBuf_VengeanceNpc_Re21341()
@@ -30,13 +35,30 @@ namespace Wilton_Re21341.Buffs
             var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
                 PassiveAbility_MysticEyes_Re21341;
             passive?.ChangeStacks(2);
-            var unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
+            BattleUnitModel unit;
+            if (owner.faction == Faction.Enemy)
             {
-                Id = 9,
-                Pos = 1,
-                EmotionLevel = 3,
-                AddEmotionPassive = false
-            });
+                unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
+                {
+                    Id = 9,
+                    Pos = 1,
+                    EmotionLevel = 3,
+                    AddEmotionPassive = false
+                });
+            }
+            else
+            {
+                var playerUnitList = BattleObjectManager.instance.GetList(Faction.Player);
+                unit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
+                {
+                    Id = 9,
+                    Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("9")).Value + "?",
+                    EmotionLevel = 4,
+                    Pos = playerUnitList.Count,
+                    Sephirah = _floor.Sephirah
+                });
+            }
+
             unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());
             UnitUtil.RefreshCombatUI();
         }

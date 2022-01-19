@@ -4,7 +4,6 @@ using CustomMapUtility;
 using Hayate_Re21341.Passives;
 using Util_Re21341;
 using Util_Re21341.CommonBuffs;
-using Wilton_Re21341.Passives;
 
 namespace Wilton_Re21341
 {
@@ -15,7 +14,6 @@ namespace Wilton_Re21341
         private BattleUnitModel _mainEnemyModel;
         private Wilton_Re21341MapManager _mapManager;
         private bool _phaseChanged;
-        private PassiveAbility_KurosawaButlerEnemy_Re21341 _wiltonEnemyPassive;
 
         public override void OnWaveStart()
         {
@@ -24,11 +22,6 @@ namespace Wilton_Re21341
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
-            if (_mainEnemyModel != null)
-                _wiltonEnemyPassive =
-                    _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_KurosawaButlerEnemy_Re21341)
-                        as
-                        PassiveAbility_KurosawaButlerEnemy_Re21341;
             if (_finalMech)
                 foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
                     unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
@@ -58,10 +51,6 @@ namespace Wilton_Re21341
         {
             if (_mainEnemyModel.hp > 271 || _phaseChanged) return;
             _phaseChanged = true;
-            _wiltonEnemyPassive.ForcedEgo();
-            _wiltonEnemyPassive.ActiveMassAttackCount();
-            _wiltonEnemyPassive.SetCountToMax();
-            UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
             _mapManager.Phase = 1;
             _mapManager.Update();
         }

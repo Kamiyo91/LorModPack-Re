@@ -7,6 +7,7 @@ using Hayate_Re21341.Buffs;
 using Hayate_Re21341.MechUtil;
 using LOR_XML;
 using Util_Re21341;
+using Util_Re21341.CommonBuffs;
 
 namespace Hayate_Re21341.Passives
 {
@@ -41,9 +42,12 @@ namespace Hayate_Re21341.Passives
                     }
                 },
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 903),
-                SecondaryMechCard = new LorId(ModParameters.PackageId, 904)
+                SecondaryMechCard = new LorId(ModParameters.PackageId, 904),
+                FinalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4
             });
             _wiltonCase = false;
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_Re21341());
+            if (!_util.GetFinalMechValue()) owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
         }
 
         public override int SpeedDiceNumAdder()
@@ -61,6 +65,11 @@ namespace Hayate_Re21341.Passives
         public override void OnStartBattle()
         {
             UnitUtil.RemoveImmortalBuff(owner);
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.HayateIsDeadBeforePhase3();
         }
 
         public override void OnRoundStart()
@@ -88,14 +97,10 @@ namespace Hayate_Re21341.Passives
             _util.SetOneTurnCard(false);
         }
 
-        public void ForcedEgo()
-        {
-            _util.ForcedEgo();
-        }
-
         public override void OnRoundEndTheLast()
         {
             _util.DeleteTarget();
+            _util.CheckPhase();
         }
 
         public void SetWiltonCaseOn()

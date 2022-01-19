@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
 using Kamiyo_Re21341.MechUtil;
 using LOR_XML;
@@ -17,11 +17,14 @@ namespace Kamiyo_Re21341.Passives
         public override void OnBattleEnd()
         {
             owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { "KamiyoNormal_Re21341" };
+            _util.OnEndBattle();
         }
 
         public override void OnWaveStart()
         {
-            _util = new NpcMechUtil_Kamiyo(new NpcMechUtilBaseModel
+            var continueCheck = Singleton<StageController>.Instance.GetStageModel()
+                .GetStageStorageData<bool>("Phase", out var curPhase) && curPhase;
+            _util = new NpcMechUtil_Kamiyo(new NpcMechUtil_KamiyoModel
             {
                 Owner = owner,
                 Hp = 0,
@@ -63,7 +66,10 @@ namespace Kamiyo_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902)
+                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902),
+                EgoAttackCardId = new LorId(ModParameters.PackageId, 902),
+                PhaseChanged = continueCheck,
+                Restart = continueCheck
             });
         }
 
@@ -86,6 +92,7 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnRoundStart()
         {
+            _util.CheckRestart();
             if (!_util.EgoCheck()) return;
             _util.EgoActive();
         }
@@ -106,30 +113,9 @@ namespace Kamiyo_Re21341.Passives
             _util.RaiseCounter();
         }
 
-        public void AddAdditionalPassive()
+        public override void OnRoundEndTheLast()
         {
-            _util.AddAdditionalPassive();
-        }
-
-        public void SetCountToMax()
-        {
-            _util.SetCounter(4);
-        }
-
-        public void ActiveMassAttackCount()
-        {
-            _util.SetMassAttack(true);
-        }
-
-        public void ForcedEgo()
-        {
-            _util.ForcedEgo();
-        }
-
-        public void ForcedEgoRestart()
-        {
-            _util.TurnEgoAbDialogOff();
-            _util.ForcedEgo();
+            _util.CheckPhase();
         }
 
         public override BattleDiceCardModel OnSelectCardAuto(BattleDiceCardModel origin, int currentDiceSlotIdx)
@@ -146,6 +132,12 @@ namespace Kamiyo_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseCardResetCount(curCard);
+            _util.ChangeToEgoMap(curCard.card.GetID());
+        }
+
+        public override void OnRoundEndTheLast_ignoreDead()
+        {
+            _util.ReturnFromEgoMap();
         }
     }
 }

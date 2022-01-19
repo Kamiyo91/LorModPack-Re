@@ -65,6 +65,7 @@
     <Compile Include="Cards\DiceCardSelfAbility_SakuraPetal_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_WaterBlade_Re21341.cs" />
     <Compile Include="EnemyTeamStageManager_Mio_Re21341.cs" />
+    <Compile Include="MechUtil\NpcMechUtil_Mio.cs" />
     <Compile Include="Mio_Re21341MapManager.cs" />
     <Compile Include="Passives\PassiveAbility_GodFragmentEnemy_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_GodFragment_Re21341.cs" />
@@ -83,5 +84,6 @@
       <Name>Util-Re21341</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,7 +3,6 @@ using BLL_Re21341.Models;
 using CustomMapUtility;
 using Mio_Re21341.Buffs;
 using Mio_Re21341.Passives;
-using Sound;
 using Util_Re21341;
 
 namespace Mio_Re21341
@@ -14,9 +13,7 @@ namespace Mio_Re21341
             _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
 
         private bool _allySummon;
-
         private BattleUnitModel _mainEnemyModel;
-        private PassiveAbility_GodFragmentEnemy_Re21341 _mioEnemyPassive;
         private bool _phaseChanged;
 
         public override void OnWaveStart()
@@ -26,10 +23,6 @@ namespace Mio_Re21341
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
-            if (_mainEnemyModel != null)
-                _mioEnemyPassive =
-                    _mainEnemyModel.passiveDetail.PassiveList.Find(x => x is PassiveAbility_GodFragmentEnemy_Re21341) as
-                        PassiveAbility_GodFragmentEnemy_Re21341;
             _phaseChanged = false;
         }
 
@@ -52,12 +45,7 @@ namespace Mio_Re21341
         {
             if (_mainEnemyModel.hp > 271 || _phaseChanged) return;
             _phaseChanged = true;
-            _mioEnemyPassive.ForcedEgo();
-            _mioEnemyPassive.ActiveMassAttackCount();
-            _mioEnemyPassive.SetCountToMax();
             MapUtil.ActiveCreatureBattleCamFilterComponent();
-            UnitUtil.ChangeCardCostByValue(_mainEnemyModel, -2, 4);
-            SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
             if (_allySummon) PrepareAllyUnit();
             CustomMapHandler.SetMapBgm("MioPhase2_Re21341.ogg", true, "Mio_Re21341");
         }

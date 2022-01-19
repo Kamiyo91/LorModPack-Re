@@ -17,6 +17,11 @@ namespace Util_Re21341
 {
     public static class UnitUtil
     {
+        public static Faction ReturnOtherSideFaction(Faction faction)
+        {
+            return faction == Faction.Player ? Faction.Enemy : Faction.Player;
+        }
+
         public static void PhaseChangeAllPlayerUnitRecoverBonus(int hp, int stagger, int light,
             bool fullLightRecover = false)
         {
@@ -138,13 +143,7 @@ namespace Util_Re21341
             var allyUnit = Singleton<StageController>.Instance.CreateLibrarianUnit_fromBattleUnitData(index);
             allyUnit.OnWaveStart();
             allyUnit.allyCardDetail.DrawCards(allyUnit.UnitData.unitData.GetStartDraw());
-            for (var i = 0; i < emotionLevel; i++)
-            {
-                allyUnit.emotionDetail.LevelUp_Forcely(1);
-                allyUnit.emotionDetail.CheckLevelUp();
-            }
-
-            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
+            LevelUpEmotion(allyUnit, emotionLevel);
             allyUnit.cardSlotDetail.RecoverPlayPoint(allyUnit.cardSlotDetail.GetMaxPlayPoint());
             AddEmotionPassives(allyUnit);
             return allyUnit;
@@ -154,12 +153,7 @@ namespace Util_Re21341
         {
             var unitWithIndex = Singleton<StageController>.Instance.AddNewUnit(Faction.Enemy,
                 new LorId(ModParameters.PackageId, unit.Id), unit.Pos);
-            for (var i = 0; i < unit.EmotionLevel; i++)
-            {
-                unitWithIndex.emotionDetail.LevelUp_Forcely(1);
-                unitWithIndex.emotionDetail.CheckLevelUp();
-            }
-
+            LevelUpEmotion(unitWithIndex, unit.EmotionLevel);
             if (unit.LockedEmotion)
                 unitWithIndex.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
             unitWithIndex.cardSlotDetail.RecoverPlayPoint(unitWithIndex.cardSlotDetail.GetMaxPlayPoint());
@@ -197,6 +191,17 @@ namespace Util_Re21341
             return unit.emotionDetail.PassiveList.ToList();
         }
 
+        public static void LevelUpEmotion(BattleUnitModel owner, int value)
+        {
+            for (var i = 0; i < owner.emotionDetail.EmotionLevel; i++)
+            {
+                owner.emotionDetail.LevelUp_Forcely(1);
+                owner.emotionDetail.CheckLevelUp();
+            }
+
+            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
+        }
+
         public static BattleUnitModel AddNewUnitPlayerSide(StageLibraryFloorModel floor, UnitModel unit)
         {
             var unitData = new UnitDataModel(new LorId(ModParameters.PackageId, unit.Id), floor.Sephirah);
@@ -211,15 +216,9 @@ namespace Util_Re21341
             allyUnit.OnCreated();
             BattleObjectManager.instance.RegisterUnit(allyUnit);
             allyUnit.passiveDetail.OnUnitCreated();
-            for (var i = 0; i < unit.EmotionLevel; i++)
-            {
-                allyUnit.emotionDetail.LevelUp_Forcely(1);
-                allyUnit.emotionDetail.CheckLevelUp();
-            }
-
+            LevelUpEmotion(allyUnit, unit.EmotionLevel);
             if (unit.LockedEmotion)
                 allyUnit.emotionDetail.SetMaxEmotionLevel(unit.MaxEmotionLevel);
-            StageController.Instance.GetCurrentStageFloorModel().team.UpdateCoin();
             allyUnit.allyCardDetail.DrawCards(allyUnit.UnitData.unitData.GetStartDraw());
             allyUnit.cardSlotDetail.RecoverPlayPoint(allyUnit.cardSlotDetail.GetMaxPlayPoint());
             if (unit.AddEmotionPassive)
