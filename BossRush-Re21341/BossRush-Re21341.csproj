@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7E6E131E-7DFB-46F2-AE55-5889932B9476}</ProjectGuid>
+    <ProjectGuid>{A2C0BCBC-B173-464B-A771-C38751144CED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OldSamurai_Re21341</RootNamespace>
-    <AssemblyName>OldSamurai-Re21341</AssemblyName>
+    <RootNamespace>BossRush_Re21341</RootNamespace>
+    <AssemblyName>BossRush-Re21341</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -46,43 +42,46 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgoNpc_Re21341.cs" />
-    <Compile Include="Buffs\BattleUnitBuf_OldSamuraiEgo_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_SpecialTypeAncestralCall_Re21341 - Copy.cs" />
-    <Compile Include="Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
-    <Compile Include="Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
-    <Compile Include="EnemyTeamStageManager_OldSamurai_Re21341.cs" />
-    <Compile Include="MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
-    <Compile Include="MapManager\OldSamurai_Re21341MapManager.cs" />
-    <Compile Include="MechUtil\NpcMechUtil_OldSamurai.cs" />
-    <Compile Include="Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_GhostSamurai_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_OldSamuraiEnemyDesc_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_OldSamurai_Re21341.cs" />
-    <Compile Include="Passives\PassiveAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="EnemyTeamStageManager_BossRush_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BLL-Re21341\BLL-Re21341.csproj">
-      <Project>{1DF30575-B636-45B5-B748-A37D420C63F0}</Project>
+      <Project>{1df30575-b636-45b5-b748-a37d420c63f0}</Project>
       <Name>BLL-Re21341</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hayate-Re21341\Hayate-Re21341.csproj">
+      <Project>{8f00951c-2936-4691-812a-89accc8d649a}</Project>
+      <Name>Hayate-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kamiyo-Re21341\Kamiyo-Re21341.csproj">
+      <Project>{e8e54f99-6663-487b-910a-69bac555d6d4}</Project>
+      <Name>Kamiyo-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mio-Re21341\Mio-Re21341.csproj">
+      <Project>{d8511094-97e9-4b2b-9d69-d59bd85d2260}</Project>
+      <Name>Mio-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OldSamurai-Re21341\OldSamurai-Re21341.csproj">
+      <Project>{7e6e131e-7dfb-46f2-ae55-5889932b9476}</Project>
+      <Name>OldSamurai-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Raziel-Re21341\Raziel-Re21341.csproj">
+      <Project>{0a10bae6-9c1e-450d-a0ce-7c6dbfe92b96}</Project>
+      <Name>Raziel-Re21341</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
-      <Project>{DACDC2EA-D97B-47B0-BA6A-1E0D27800C68}</Project>
+      <Project>{dacdc2ea-d97b-47b0-ba6a-1e0d27800c68}</Project>
       <Name>Util-Re21341</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wilton-Re21341\Wilton-Re21341.csproj">
+      <Project>{de205abd-5b43-41be-bee4-5b2fd3e4224c}</Project>
+      <Name>Wilton-Re21341</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

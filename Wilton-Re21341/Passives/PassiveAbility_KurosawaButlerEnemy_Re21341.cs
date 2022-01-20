@@ -60,6 +60,12 @@ namespace Wilton_Re21341.Passives
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 905)
             });
+            _util.Restart();
+        }
+
+        public override void OnBattleEnd()
+        {
+            _util.OnEndBattle();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

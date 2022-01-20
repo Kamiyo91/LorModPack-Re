@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
-using CustomMapUtility;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -43,8 +42,6 @@ namespace Kamiyo_Re21341.MechUtil
         {
             if (_model.Owner.hp > 161 || _model.PhaseChanged) return;
             _model.PhaseChanged = true;
-            CustomMapHandler.EnforceMap(1);
-            Singleton<StageController>.Instance.CheckMapChange();
             PrepareKamiyoUnit(false, true, true, true);
             PrepareMioEnemyUnit();
         }

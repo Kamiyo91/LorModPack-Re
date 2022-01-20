@@ -26,17 +26,19 @@ namespace Util_Re21341
             MapChangedValue(true);
         }
 
-        public static void ActiveCreatureBattleCamFilterComponent()
+        public static void ActiveCreatureBattleCamFilterComponent(bool value = true)
         {
             var battleCamera = (Camera)typeof(BattleCamManager).GetField("_effectCam",
                 AccessTools.all)?.GetValue(SingletonBehavior<BattleCamManager>.Instance);
-            if (!(battleCamera is null)) battleCamera.GetComponent<CameraFilterPack_Drawing_Paper3>().enabled = true;
+            if (!(battleCamera is null)) battleCamera.GetComponent<CameraFilterPack_Drawing_Paper3>().enabled = value;
         }
 
         public static bool CheckStageMap(int id)
         {
             return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                   new LorId(ModParameters.PackageId, id);
+                   new LorId(ModParameters.PackageId, id) ||
+                   Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+                   new LorId(ModParameters.PackageId, 12);
         }
 
         private static void RemoveValueInAddedMap(string name, bool removeAll = false)
@@ -62,7 +64,7 @@ namespace Util_Re21341
             SingletonBehavior<BattleSoundManager>.Instance.CheckTheme();
         }
 
-        public static void MapChangedValue(bool value)
+        private static void MapChangedValue(bool value)
         {
             typeof(StageController).GetField("_mapChanged", AccessTools.all)
                 ?.SetValue(Singleton<StageController>.Instance, value);

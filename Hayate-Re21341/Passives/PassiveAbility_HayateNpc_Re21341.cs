@@ -48,6 +48,12 @@ namespace Hayate_Re21341.Passives
             _wiltonCase = false;
             owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_Re21341());
             if (!_util.GetFinalMechValue()) owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
+            _util.Restart();
+        }
+
+        public override void OnBattleEnd()
+        {
+            _util.OnEndBattle();
         }
 
         public override int SpeedDiceNumAdder()

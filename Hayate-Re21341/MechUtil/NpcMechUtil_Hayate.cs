@@ -20,6 +20,34 @@ namespace Hayate_Re21341.MechUtil
             model.Owner.bufListDetail.AddBufWithoutDuplication(_buf);
         }
 
+        public void OnEndBattle()
+        {
+            var stageModel = Singleton<StageController>.Instance.GetStageModel();
+            var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
+            if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
+            stageModel.SetStageStorgeData("Phase", _model.PhaseChanged);
+            stageModel.SetStageStorgeData("PhaseFinal", _model.SecondMechHpExist);
+            var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction).Select(unit => unit.UnitData)
+                .ToList();
+            currentWaveModel.ResetUnitBattleDataList(list);
+        }
+
+        public void Restart()
+        {
+            Singleton<StageController>.Instance.GetStageModel()
+                .GetStageStorageData<bool>("Phase", out var curPhase);
+            if (Singleton<StageController>.Instance.GetStageModel()
+                .GetStageStorageData<bool>("PhaseFinal", out var curPhaseFinal))
+                _model.SecondMechHpExist = curPhaseFinal;
+            _model.PhaseChanged = curPhase;
+            if (!_model.PhaseChanged) return;
+            _model.PhaseChanged = false;
+            ForcedEgo();
+            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
+            UnitUtil.ChangeCardCostByValue(_model.Owner, -2, 4);
+            _buf.stack = 1;
+        }
+
         public override void ForcedEgo()
         {
             base.ForcedEgo();

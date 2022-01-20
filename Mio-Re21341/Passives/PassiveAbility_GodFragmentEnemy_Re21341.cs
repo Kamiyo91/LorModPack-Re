@@ -17,6 +17,7 @@ namespace Mio_Re21341.Passives
         public override void OnBattleEnd()
         {
             owner.UnitData.unitData.bookItem.ClassInfo.CharacterSkin = new List<string> { "MioNormalEye_Re21341" };
+            _util.OnEndBattle();
         }
 
         public override void OnWaveStart()
@@ -68,6 +69,7 @@ namespace Mio_Re21341.Passives
                 LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 900)
             });
+            _util.Restart();
         }
 
         public override int SpeedDiceNumAdder()

@@ -17,6 +17,12 @@ namespace OldSamurai_Re21341.Passives
                 HasEgo = true,
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgoNpc_Re21341)
             });
+            _mechUtil.Restart();
+        }
+
+        public override void OnBattleEnd()
+        {
+            _mechUtil.OnEndBattle();
         }
 
         public override int SpeedDiceNumAdder()

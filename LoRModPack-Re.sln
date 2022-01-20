@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wilton-Re21341", "Wilton-Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel-Re21341", "Raziel-Re21341\Raziel-Re21341.csproj", "{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BossRush-Re21341", "BossRush-Re21341\BossRush-Re21341.csproj", "{A2C0BCBC-B173-464B-A771-C38751144CED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A10BAE6-9C1E-450D-A0CE-7C6DBFE92B96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C0BCBC-B173-464B-A771-C38751144CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C0BCBC-B173-464B-A771-C38751144CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C0BCBC-B173-464B-A771-C38751144CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C0BCBC-B173-464B-A771-C38751144CED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

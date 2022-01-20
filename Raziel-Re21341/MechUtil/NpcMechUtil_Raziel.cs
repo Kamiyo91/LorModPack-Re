@@ -3,7 +3,6 @@ using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
-using CustomMapUtility;
 using LOR_XML;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
@@ -24,13 +23,33 @@ namespace Raziel_Re21341.MechUtil
             _model.Phase++;
         }
 
+        public void OnEndBattle()
+        {
+            var stageModel = Singleton<StageController>.Instance.GetStageModel();
+            var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
+            if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
+            stageModel.SetStageStorgeData("Phase", _model.Phase);
+            var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction).Select(unit => unit.UnitData)
+                .ToList();
+            currentWaveModel.ResetUnitBattleDataList(list);
+        }
+
+        public void Restart()
+        {
+            Singleton<StageController>.Instance.GetStageModel()
+                .GetStageStorageData<int>("Phase", out var curPhase);
+            _model.Phase = curPhase;
+            if (_model.Phase < 2) return;
+            ForcedEgo();
+            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
+        }
+
         public void CheckPhase()
         {
             if (_model.Phase == 2)
             {
                 ForcedEgo();
                 _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
-                CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.ogg", true, "Raziel_Re21341");
             }
 
             if (_model.Phase < 5) return;

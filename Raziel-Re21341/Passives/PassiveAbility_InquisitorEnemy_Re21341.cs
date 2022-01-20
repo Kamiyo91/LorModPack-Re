@@ -59,6 +59,12 @@ namespace Raziel_Re21341.Passives
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 906)
             });
             UnitUtil.ChangeCardCostByValue(owner, -2, 4);
+            _util.Restart();
+        }
+
+        public override void OnBattleEnd()
+        {
+            _util.OnEndBattle();
         }
 
         public override void OnRoundStart()
