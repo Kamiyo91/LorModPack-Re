@@ -461,6 +461,12 @@ namespace Util_Re21341
                     continue;
                 }
 
+                if (ModParameters.NoInventoryCardList.Contains(key.id))
+                {
+                    SetCustomCardOption(CardOption.NoInventory, key, false, ref dictionary, ref list);
+                    continue;
+                }
+
                 if (onlyPageCardList.Contains(key.id))
                 {
                     SetCustomCardOption(CardOption.OnlyPage, key, true, ref dictionary, ref list);

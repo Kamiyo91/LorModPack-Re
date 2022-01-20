@@ -51,6 +51,9 @@ namespace BLL_Re21341.Models
                 "MioNormalEye_Re21341")
         };
 
+        public static readonly List<int> NoInventoryCardList = new List<int>
+            { 61 };
+
         public static readonly Dictionary<string, List<int>> SpritePreviewChange = new Dictionary<string, List<int>>
         {
             { "MioDefault_Re21341", new List<int> { 10000003 } },

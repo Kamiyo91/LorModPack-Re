@@ -6,10 +6,12 @@ namespace Util_Re21341.CommonBuffs
     public class BattleUnitBuf_CustomInstantIndexRelease_Re21341 : BattleUnitBuf
     {
         private GameObject _aura;
+
         public BattleUnitBuf_CustomInstantIndexRelease_Re21341()
         {
             stack = 0;
         }
+
         public override KeywordBuf bufType => KeywordBuf.IndexRelease;
         protected override string keywordId => "IndexRelease";
         protected override string keywordIconId => "IndexRelease";
