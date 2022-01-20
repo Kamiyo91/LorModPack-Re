@@ -6,6 +6,7 @@ namespace BLL_Re21341.Models
     {
         public string MessageId { get; set; }
         public List<DropIdQuantity> DroppedBooks { get; set; }
+        public List<int> DroppedKeypages { get; set; }
     }
 
     public class DropIdQuantity

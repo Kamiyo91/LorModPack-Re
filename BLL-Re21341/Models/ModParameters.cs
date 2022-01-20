@@ -127,5 +127,17 @@ namespace BLL_Re21341.Models
         {
             1, 4, 10
         };
+
+        public static readonly Dictionary<int, ExtraRewards> ExtraReward = new Dictionary<int, ExtraRewards>
+        {
+            {
+                12,
+                new ExtraRewards
+                {
+                    MessageId = "KurosawaStoryDrop_Re21341",
+                    DroppedKeypages = new List<int> { 10000016 }
+                }
+            }
+        };
     }
 }

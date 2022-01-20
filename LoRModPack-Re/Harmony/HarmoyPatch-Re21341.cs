@@ -292,5 +292,25 @@ namespace LoRModPack_Re21341.Harmony
             var bookCount = __instance.GetBookCount(new LorId(ModParameters.PackageId, 6));
             if (bookCount < 99) __instance.AddBook(new LorId(ModParameters.PackageId, 6), 99 - bookCount);
         }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(StageController), "BonusRewardWithPopup")]
+        public static void BonusRewardWithPopup(LorId stageId)
+        {
+            if (stageId.packageId != ModParameters.PackageId) return;
+            if (!ModParameters.ExtraReward.ContainsKey(stageId.id)) return;
+            var parameters = ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id));
+            if (parameters.Value.DroppedBooks != null)
+                foreach (var book in parameters.Value.DroppedBooks)
+                    Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, book.BookId),
+                        book.Quantity);
+            if (parameters.Value.DroppedKeypages != null)
+                foreach (var keypageId in parameters.Value.DroppedKeypages.Where(keypageId => !Singleton<BookInventoryModel>.Instance.GetBookListAll().Exists(x => x.GetBookClassInfoId() == new LorId(ModParameters.PackageId, keypageId))))
+                    Singleton<BookInventoryModel>.Instance.CreateBook(new LorId(ModParameters.PackageId, keypageId));
+            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
+                    x.Key.Contains(parameters.Value.MessageId))
+                .Value
+                .Desc);
+        }
     }
 }
