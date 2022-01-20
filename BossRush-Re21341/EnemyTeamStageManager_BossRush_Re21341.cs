@@ -71,8 +71,8 @@ namespace BossRush_Re21341
                             wiltonMapManager.Update();
                         }
                     }
-                    break;
 
+                    break;
             }
         }
 

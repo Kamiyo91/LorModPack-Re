@@ -36,7 +36,7 @@ namespace Hayate_Re21341.MechUtil
         {
             Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>("Phase", out var curPhase);
-            if(Singleton<StageController>.Instance.GetStageModel()
+            if (Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>("PhaseFinal", out var curPhaseFinal))
                 _model.SecondMechHpExist = curPhaseFinal;
             _model.PhaseChanged = curPhase;

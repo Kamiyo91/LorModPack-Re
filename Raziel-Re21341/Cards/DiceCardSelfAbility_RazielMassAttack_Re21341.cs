@@ -1,4 +1,6 @@
-﻿namespace Raziel_Re21341.Cards
+﻿using Util_Re21341.CommonPassives;
+
+namespace Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_RazielMassAttack_Re21341 : DiceCardSelfAbilityBase
     {
@@ -6,7 +8,8 @@
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return owner.emotionDetail.EmotionLevel > 3;
+            return owner.emotionDetail.EmotionLevel > 3 ||
+                   owner.passiveDetail.HasPassive<PassiveAbility_KurosawaStory_Re21341>();
         }
 
         public override void OnEndAreaAttack()
