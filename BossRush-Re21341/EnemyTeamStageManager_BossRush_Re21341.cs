@@ -14,7 +14,7 @@ namespace BossRush_Re21341
 {
     public class EnemyTeamStageManager_BossRush_Re21341 : EnemyTeamStageManager
     {
-        private readonly List<int> _filterPhases = new List<int> { 2, 6, 8 };
+        private readonly List<int> _filterPhases = new List<int> { 3, 7, 9 };
         private int _mapInfo;
         private int _phase;
         private List<bool> _phaseChanged = new List<bool>();
@@ -113,6 +113,8 @@ namespace BossRush_Re21341
                         foreach (var unit in BattleObjectManager.instance.GetList(Faction.Enemy))
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(3, 3);
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
@@ -136,6 +138,8 @@ namespace BossRush_Re21341
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(4, 4);
                         MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
@@ -146,6 +150,8 @@ namespace BossRush_Re21341
                         _phaseChanged[_phase] = true;
                         _phase++;
                         _mapInfo++;
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
@@ -158,6 +164,8 @@ namespace BossRush_Re21341
                         foreach (var unit in BattleObjectManager.instance.GetList(Faction.Enemy))
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(6, 5);
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
@@ -181,6 +189,8 @@ namespace BossRush_Re21341
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(8, 5);
                         MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
@@ -215,6 +225,8 @@ namespace BossRush_Re21341
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(10, 5);
                         MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        CustomMapHandler.EnforceMap(_mapInfo);
+                        Singleton<StageController>.Instance.CheckMapChange();
                     }
 
                     break;
