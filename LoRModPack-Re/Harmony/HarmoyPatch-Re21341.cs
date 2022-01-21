@@ -308,6 +308,7 @@ namespace LoRModPack_Re21341.Harmony
                     Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, book.BookId),
                         book.Quantity);
             }
+
             if (parameters.Value.DroppedKeypages != null)
                 foreach (var keypageId in parameters.Value.DroppedKeypages.Where(keypageId =>
                              !Singleton<BookInventoryModel>.Instance.GetBookListAll().Exists(x =>
@@ -316,10 +317,12 @@ namespace LoRModPack_Re21341.Harmony
                     if (!message) message = true;
                     Singleton<BookInventoryModel>.Instance.CreateBook(new LorId(ModParameters.PackageId, keypageId));
                 }
-            if (message) UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
-                      x.Key.Contains(parameters.Value.MessageId))
-                  .Value
-                  .Desc);
+
+            if (message)
+                UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
+                        x.Key.Contains(parameters.Value.MessageId))
+                    .Value
+                    .Desc);
         }
     }
 }

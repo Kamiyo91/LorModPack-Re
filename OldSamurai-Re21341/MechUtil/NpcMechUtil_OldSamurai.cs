@@ -28,7 +28,7 @@ namespace OldSamurai_Re21341.MechUtil
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
-            stageModel.SetStageStorgeData("Phase", _model.Phase);
+            stageModel.SetStageStorgeData("PhaseOldSamuraiRe21341", _model.Phase);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction)
                 .Where(x => x.Book.BookId != new LorId(ModParameters.PackageId, 2)).Select(unit => unit.UnitData)
                 .ToList();
@@ -38,7 +38,7 @@ namespace OldSamurai_Re21341.MechUtil
         public void Restart()
         {
             Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<int>("Phase", out var curPhase);
+                .GetStageStorageData<int>("PhaseOldSamuraiRe21341", out var curPhase);
             _model.Phase = curPhase;
             if (_model.Phase > 0) ForcedEgo();
         }

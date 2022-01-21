@@ -28,7 +28,7 @@ namespace Raziel_Re21341.MechUtil
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
-            stageModel.SetStageStorgeData("Phase", _model.Phase);
+            stageModel.SetStageStorgeData("PhaseRazielRe21341", _model.Phase);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction).Select(unit => unit.UnitData)
                 .ToList();
             currentWaveModel.ResetUnitBattleDataList(list);
@@ -37,7 +37,7 @@ namespace Raziel_Re21341.MechUtil
         public void Restart()
         {
             Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<int>("Phase", out var curPhase);
+                .GetStageStorageData<int>("PhaseRazielRe21341", out var curPhase);
             _model.Phase = curPhase;
             if (_model.Phase < 2) return;
             ForcedEgo();

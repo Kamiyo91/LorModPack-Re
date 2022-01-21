@@ -24,7 +24,7 @@ namespace Kamiyo_Re21341.Passives
         public override void OnWaveStart()
         {
             var continueCheck = Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<bool>("Phase", out var curPhase) && curPhase;
+                .GetStageStorageData<bool>("PhaseKamiyoRe21341", out var curPhase) && curPhase;
             if (continueCheck) owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 11));
             _util = new NpcMechUtil_Kamiyo(new NpcMechUtil_KamiyoModel
             {

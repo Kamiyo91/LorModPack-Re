@@ -31,7 +31,7 @@ namespace Kamiyo_Re21341.MechUtil
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
-            stageModel.SetStageStorgeData("Phase", _model.PhaseChanged);
+            stageModel.SetStageStorgeData("PhaseKamiyoRe21341", _model.PhaseChanged);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction)
                 .Where(x => x.Book.BookId != new LorId(ModParameters.PackageId, 5)).Select(unit => unit.UnitData)
                 .ToList();

@@ -25,8 +25,8 @@ namespace Hayate_Re21341.MechUtil
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
-            stageModel.SetStageStorgeData("Phase", _model.PhaseChanged);
-            stageModel.SetStageStorgeData("PhaseFinal", _model.SecondMechHpExist);
+            stageModel.SetStageStorgeData("PhaseHayateRe21341", _model.PhaseChanged);
+            stageModel.SetStageStorgeData("PhaseFinalHayateRe21341", _model.SecondMechHpExist);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction).Select(unit => unit.UnitData)
                 .ToList();
             currentWaveModel.ResetUnitBattleDataList(list);
@@ -35,9 +35,9 @@ namespace Hayate_Re21341.MechUtil
         public void Restart()
         {
             Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<bool>("Phase", out var curPhase);
+                .GetStageStorageData<bool>("PhaseHayateRe21341", out var curPhase);
             if (Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<bool>("PhaseFinal", out var curPhaseFinal))
+                .GetStageStorageData<bool>("PhaseFinalHayateRe21341", out var curPhaseFinal))
                 _model.SecondMechHpExist = curPhaseFinal;
             _model.PhaseChanged = curPhase;
             if (!_model.PhaseChanged) return;

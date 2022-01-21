@@ -24,12 +24,12 @@ namespace BossRush_Re21341
             _phase = 0;
             _mapInfo = 0;
             if (Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<int>("PhaseRush", out var phase)) _phase = phase;
+                .GetStageStorageData<int>("PhaseRushRe21341", out var phase)) _phase = phase;
             if (Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<int>("MapInfoRush", out var mapInfo))
+                .GetStageStorageData<int>("MapInfoRushRe21341", out var mapInfo))
                 _mapInfo = mapInfo;
             if (Singleton<StageController>.Instance.GetStageModel()
-                .GetStageStorageData<List<bool>>("PhaseChangedRush", out var phaseChanged))
+                .GetStageStorageData<List<bool>>("PhaseChangedRushRe21341", out var phaseChanged))
                 _phaseChanged = phaseChanged;
             else
                 for (var i = 0; i < 10; i++)
@@ -250,9 +250,9 @@ namespace BossRush_Re21341
             var stageModel = Singleton<StageController>.Instance.GetStageModel();
             var currentWaveModel = Singleton<StageController>.Instance.GetCurrentWaveModel();
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
-            stageModel.SetStageStorgeData("PhaseRush", _phase);
-            stageModel.SetStageStorgeData("MapInfoRush", _mapInfo);
-            stageModel.SetStageStorgeData("PhaseChangedRush", _phaseChanged);
+            stageModel.SetStageStorgeData("PhaseRushRe21341", _phase);
+            stageModel.SetStageStorgeData("MapInfoRushRe21341", _mapInfo);
+            stageModel.SetStageStorgeData("PhaseChangedRushRe21341", _phaseChanged);
         }
     }
 }
