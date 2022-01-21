@@ -299,18 +299,27 @@ namespace LoRModPack_Re21341.Harmony
         {
             if (stageId.packageId != ModParameters.PackageId) return;
             if (!ModParameters.ExtraReward.ContainsKey(stageId.id)) return;
+            var message = false;
             var parameters = ModParameters.ExtraReward.FirstOrDefault(y => y.Key.Equals(stageId.id));
             if (parameters.Value.DroppedBooks != null)
+            {
+                message = true;
                 foreach (var book in parameters.Value.DroppedBooks)
                     Singleton<DropBookInventoryModel>.Instance.AddBook(new LorId(ModParameters.PackageId, book.BookId),
                         book.Quantity);
+            }
             if (parameters.Value.DroppedKeypages != null)
-                foreach (var keypageId in parameters.Value.DroppedKeypages.Where(keypageId => !Singleton<BookInventoryModel>.Instance.GetBookListAll().Exists(x => x.GetBookClassInfoId() == new LorId(ModParameters.PackageId, keypageId))))
+                foreach (var keypageId in parameters.Value.DroppedKeypages.Where(keypageId =>
+                             !Singleton<BookInventoryModel>.Instance.GetBookListAll().Exists(x =>
+                                 x.GetBookClassInfoId() == new LorId(ModParameters.PackageId, keypageId))))
+                {
+                    if (!message) message = true;
                     Singleton<BookInventoryModel>.Instance.CreateBook(new LorId(ModParameters.PackageId, keypageId));
-            UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
-                    x.Key.Contains(parameters.Value.MessageId))
-                .Value
-                .Desc);
+                }
+            if (message) UIAlarmPopup.instance.SetAlarmText(ModParameters.EffectTexts.FirstOrDefault(x =>
+                      x.Key.Contains(parameters.Value.MessageId))
+                  .Value
+                  .Desc);
         }
     }
 }
