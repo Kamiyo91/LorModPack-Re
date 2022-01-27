@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\EmotionSelectionUnitPatch-Re21341.cs" />
     <Compile Include="Harmony\HarmoyPatch-Re21341.cs" />
     <Compile Include="Harmony\ModInit-Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
