@@ -3,7 +3,9 @@ using System.Linq;
 using BLL_Re21341.Models;
 using BLL_Re21341.Models.Enum;
 using BLL_Re21341.Models.MechUtilModels;
+using CustomMapUtility;
 using LOR_XML;
+using Raziel_Re21341.Buffs;
 using Util_Re21341;
 using Util_Re21341.BaseClass;
 
@@ -46,10 +48,14 @@ namespace Raziel_Re21341.MechUtil
 
         public void CheckPhase()
         {
-            if (_model.Phase == 2)
+            if (_model.Phase > 1 && !_model.Owner.bufListDetail.HasBuf<BattleUnitBuf_OwlSpiritNpc_Re21341>())
             {
                 ForcedEgo();
                 _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
+                if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+                    new LorId(ModParameters.PackageId, 7) || Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+                    new LorId(ModParameters.PackageId, 12))
+                    CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.ogg", true, "Raziel_Re21341");
             }
 
             if (_model.Phase < 5) return;

@@ -10,18 +10,22 @@ namespace BLL_Re21341.Models
         public static string Path;
         public static readonly Dictionary<string, Sprite> ArtWorks = new Dictionary<string, Sprite>();
         public static string Language;
-        public static Dictionary<string, EffectTextModel> EffectTexts = new Dictionary<string, EffectTextModel>();
-        public static Dictionary<string, string> NameTexts = new Dictionary<string, string>();
 
-        public static List<Tuple<string, List<int>, int>> OnlyCardKeywords = new List<Tuple<string, List<int>, int>>
-        {
-            new Tuple<string, List<int>, int>("KamiyoPage_Re21341", new List<int> { 19, 20, 21, 22 }, 10000004),
-            new Tuple<string, List<int>, int>("MioPage_Re21341", new List<int> { 12, 13, 14, 15 }, 10000003),
-            new Tuple<string, List<int>, int>("HayatePage_Re21341", new List<int> { 23, 24, 25, 26, 27 }, 10000005),
-            new Tuple<string, List<int>, int>("SamuraiPage_Re21341", new List<int> { 3, 4, 5, 6, 7 }, 10000001),
-            new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 43, 44, 45, 46 }, 10000006),
-            new Tuple<string, List<int>, int>("RazielPage_Re21341", new List<int> { 52, 53, 54, 55 }, 10000007)
-        };
+        public static readonly Dictionary<string, EffectTextModel> EffectTexts =
+            new Dictionary<string, EffectTextModel>();
+
+        public static readonly Dictionary<string, string> NameTexts = new Dictionary<string, string>();
+
+        public static readonly List<Tuple<string, List<int>, int>> OnlyCardKeywords =
+            new List<Tuple<string, List<int>, int>>
+            {
+                new Tuple<string, List<int>, int>("KamiyoPage_Re21341", new List<int> { 19, 20, 21, 22 }, 10000004),
+                new Tuple<string, List<int>, int>("MioPage_Re21341", new List<int> { 12, 13, 14, 15 }, 10000003),
+                new Tuple<string, List<int>, int>("HayatePage_Re21341", new List<int> { 23, 24, 25, 26, 27 }, 10000005),
+                new Tuple<string, List<int>, int>("SamuraiPage_Re21341", new List<int> { 3, 4, 5, 6, 7 }, 10000001),
+                new Tuple<string, List<int>, int>("WiltonPage_Re21341", new List<int> { 43, 44, 45, 46 }, 10000006),
+                new Tuple<string, List<int>, int>("RazielPage_Re21341", new List<int> { 52, 53, 54, 55 }, 10000007)
+            };
 
         public static readonly Dictionary<int, int> DynamicNames = new Dictionary<int, int>
         {
@@ -43,13 +47,14 @@ namespace BLL_Re21341.Models
         public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 30, 48, 58, 901 };
         public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40, 58 };
 
-        public static List<Tuple<string, List<int>, string>> SkinNameIds = new List<Tuple<string, List<int>, string>>
-        {
-            new Tuple<string, List<int>, string>("KamiyoMask_Re21341", new List<int> { 10000004, 4 },
-                "KamiyoNormal_Re21341"),
-            new Tuple<string, List<int>, string>("MioRedEye_Re21341", new List<int> { 10000003, 3 },
-                "MioNormalEye_Re21341")
-        };
+        public static readonly List<Tuple<string, List<int>, string>> SkinNameIds =
+            new List<Tuple<string, List<int>, string>>
+            {
+                new Tuple<string, List<int>, string>("KamiyoMask_Re21341", new List<int> { 10000004, 4 },
+                    "KamiyoNormal_Re21341"),
+                new Tuple<string, List<int>, string>("MioRedEye_Re21341", new List<int> { 10000003, 3 },
+                    "MioNormalEye_Re21341")
+            };
 
         public static readonly List<int> NoInventoryCardList = new List<int>
             { 61 };

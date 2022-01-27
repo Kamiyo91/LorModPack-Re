@@ -41,7 +41,7 @@ namespace Hayate_Re21341.MechUtil
                 _model.SecondMechHpExist = curPhaseFinal;
             _model.PhaseChanged = curPhase;
             if (!_model.PhaseChanged) return;
-            _model.PhaseChanged = false;
+            _model.HasMechOnHp = false;
             ForcedEgo();
             _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
             UnitUtil.ChangeCardCostByValue(_model.Owner, -2, 4);
