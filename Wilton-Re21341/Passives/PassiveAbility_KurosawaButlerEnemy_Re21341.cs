@@ -33,7 +33,7 @@ namespace Wilton_Re21341.Passives
                 EgoMapName = "Wilton_Re21341",
                 EgoMapType = typeof(Wilton_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageId = 6,
+                OriginalMapStageIds = new List<int> { 6, 11 },
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,

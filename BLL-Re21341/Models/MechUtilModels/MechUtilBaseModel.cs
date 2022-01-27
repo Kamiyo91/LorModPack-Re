@@ -13,7 +13,7 @@ namespace BLL_Re21341.Models.MechUtilModels
         public int SetHp { get; set; }
         public float? BgY { get; set; }
         public float? FlY { get; set; }
-        public int OriginalMapStageId { get; set; }
+        public List<int> OriginalMapStageIds { get; set; }
         public bool Survive { get; set; }
         public bool HasEgo { get; set; }
         public bool HasEgoAttack { get; set; }

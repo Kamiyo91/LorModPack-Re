@@ -40,7 +40,7 @@ namespace Kamiyo_Re21341.Passives
                 EgoMapType = typeof(Kamiyo2_Re21341MapManager),
                 BgY = 0.475f,
                 FlY = 0.225f,
-                OriginalMapStageId = 3,
+                OriginalMapStageIds = new List<int> { 3 },
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
                 AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),

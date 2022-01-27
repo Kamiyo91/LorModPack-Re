@@ -11,7 +11,7 @@ namespace Util_Re21341
     {
         public static void ChangeMap(MapModel model, Faction faction = Faction.Player)
         {
-            if (CheckStageMap(model.StageId) || SingletonBehavior<BattleSceneRoot>
+            if (CheckStageMap(model.StageIds) || SingletonBehavior<BattleSceneRoot>
                     .Instance.currentMapObject.isEgo ||
                 Singleton<StageController>.Instance.GetStageModel().ClassInfo.stageType == StageType.Creature) return;
             CustomMapHandler.InitCustomMap(model.Stage, model.Component, model.IsPlayer, model.InitBgm, model.Bgx,
@@ -33,12 +33,12 @@ namespace Util_Re21341
             if (!(battleCamera is null)) battleCamera.GetComponent<CameraFilterPack_Drawing_Paper3>().enabled = value;
         }
 
-        public static bool CheckStageMap(int id)
+        public static bool CheckStageMap(List<int> ids)
         {
-            return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                   new LorId(ModParameters.PackageId, id) ||
-                   Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                   new LorId(ModParameters.PackageId, 12);
+            ids.Add(12);
+            return Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId ==
+                   ModParameters.PackageId &&
+                   ids.Contains(Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id);
         }
 
         private static void RemoveValueInAddedMap(string name, bool removeAll = false)
@@ -51,9 +51,9 @@ namespace Util_Re21341
                 mapList?.RemoveAll(x => x.name.Contains(name));
         }
 
-        public static void ReturnFromEgoMap(string mapName, int id, bool isAssimilationMap = false)
+        public static void ReturnFromEgoMap(string mapName, List<int> ids, bool isAssimilationMap = false)
         {
-            if (CheckStageMap(id) || Singleton<StageController>.Instance.GetStageModel().ClassInfo.stageType ==
+            if (CheckStageMap(ids) || Singleton<StageController>.Instance.GetStageModel().ClassInfo.stageType ==
                 StageType.Creature) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
             RemoveValueInAddedMap(mapName);

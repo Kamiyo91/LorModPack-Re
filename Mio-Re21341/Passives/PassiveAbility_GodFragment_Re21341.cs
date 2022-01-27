@@ -36,7 +36,7 @@ namespace Mio_Re21341.Passives
                 EgoMapName = "Mio_Re21341",
                 EgoMapType = typeof(Mio_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageId = 2,
+                OriginalMapStageIds = new List<int> { 2, 9 },
                 EgoType = typeof(BattleUnitBuf_GodAuraRelease_Re21341),
                 EgoCardId = new LorId(ModParameters.PackageId, 9),
                 EgoAttackCardId = new LorId(ModParameters.PackageId, 10),

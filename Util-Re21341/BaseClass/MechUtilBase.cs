@@ -76,7 +76,7 @@ namespace Util_Re21341.BaseClass
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = _model.EgoMapName,
-                StageId = _model.OriginalMapStageId,
+                StageIds = _model.OriginalMapStageIds,
                 OneTurnEgo = true,
                 IsPlayer = true,
                 Component = _model.EgoMapType,
@@ -89,7 +89,7 @@ namespace Util_Re21341.BaseClass
         {
             if (!_model.MapUsed) return;
             _model.MapUsed = false;
-            MapUtil.ReturnFromEgoMap(_model.EgoMapName, _model.OriginalMapStageId);
+            MapUtil.ReturnFromEgoMap(_model.EgoMapName, _model.OriginalMapStageIds);
         }
 
         public virtual void DoNotChangeSkinOnEgo()

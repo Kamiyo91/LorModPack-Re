@@ -53,7 +53,8 @@ namespace Raziel_Re21341.MechUtil
                 ForcedEgo();
                 _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
                 if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                    new LorId(ModParameters.PackageId, 7) || Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
+                    new LorId(ModParameters.PackageId, 7) ||
+                    Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
                     new LorId(ModParameters.PackageId, 12))
                     CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.ogg", true, "Raziel_Re21341");
             }

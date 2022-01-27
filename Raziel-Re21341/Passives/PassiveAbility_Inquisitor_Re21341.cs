@@ -35,7 +35,7 @@ namespace Raziel_Re21341.Passives
             if (_used)
             {
                 _used = false;
-                MapUtil.ReturnFromEgoMap("Raziel_Re21341", 7);
+                MapUtil.ReturnFromEgoMap("Raziel_Re21341", new List<int> { 7 });
             }
 
             if (!owner.IsDead() || _revive) return;
@@ -68,7 +68,7 @@ namespace Raziel_Re21341.Passives
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Raziel_Re21341",
-                StageId = 7,
+                StageIds = new List<int> { 7 },
                 OneTurnEgo = true,
                 IsPlayer = true,
                 Component = typeof(Raziel_Re21341MapManager),
@@ -79,7 +79,8 @@ namespace Raziel_Re21341.Passives
 
         public override void OnBattleEnd()
         {
-            if (owner.IsDead() && !MapUtil.CheckStageMap(4)) UnitUtil.UnitReviveAndRecovery(owner, 5, false);
+            if (owner.IsDead() && !MapUtil.CheckStageMap(new List<int> { 7 }))
+                UnitUtil.UnitReviveAndRecovery(owner, 5, false);
         }
     }
 }

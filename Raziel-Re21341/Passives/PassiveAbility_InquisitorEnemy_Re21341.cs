@@ -44,7 +44,7 @@ namespace Raziel_Re21341.Passives
                 EgoMapType = typeof(Raziel_Re21341MapManager),
                 BgY = 0.375f,
                 FlY = 0.225f,
-                OriginalMapStageId = 7,
+                OriginalMapStageIds = new List<int> { 7 },
                 EgoAbColorColor = AbColorType.Negative,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {

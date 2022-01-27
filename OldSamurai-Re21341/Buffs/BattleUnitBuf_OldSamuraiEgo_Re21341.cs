@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BLL_Re21341.Models;
 using CustomMapUtility;
 using OldSamurai_Re21341.MapManager;
@@ -43,7 +44,7 @@ namespace OldSamurai_Re21341.Buffs
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "OldSamurai_Re21341",
-                StageId = 1,
+                StageIds = new List<int> { 1 },
                 IsPlayer = true,
                 Component = typeof(OldSamuraiPlayer_Re21341MapManager),
                 Bgy = 0.2f
@@ -53,7 +54,7 @@ namespace OldSamurai_Re21341.Buffs
         private void RemoveSamuraiEgoMap()
         {
             Destroy();
-            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", 1, true);
+            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", new List<int> { 1 }, true);
         }
     }
 }

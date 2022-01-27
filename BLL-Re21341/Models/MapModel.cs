@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BLL_Re21341.Models
 {
@@ -6,7 +7,7 @@ namespace BLL_Re21341.Models
     {
         public Type Component { get; set; }
         public string Stage { get; set; }
-        public int StageId { get; set; }
+        public List<int> StageIds { get; set; }
         public bool IsPlayer { get; set; }
         public bool OneTurnEgo { get; set; }
         public float Bgx { get; set; } = 0.5f;
