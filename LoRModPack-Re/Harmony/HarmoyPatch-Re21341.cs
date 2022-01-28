@@ -20,8 +20,7 @@ namespace LoRModPack_Re21341.Harmony
         public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
         {
             if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
-                    .ClassInfo.id) && BattleObjectManager.instance.GetAliveList(Faction.Player).Exists(x =>
-                    x.UnitData.unitData.bookItem.BookId != new LorId(ModParameters.PackageId, 10000002))) return;
+                    .ClassInfo.id)) return;
             __instance.team.currentSelectEmotionLevel++;
             __instance.team.egoSelectionPoint--;
             SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
