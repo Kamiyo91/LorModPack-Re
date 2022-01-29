@@ -15,6 +15,12 @@ namespace LoRModPack_Re21341.Harmony
     [HarmonyPatch]
     public class HarmoyPatch_Re21341
     {
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(EmotionBattleTeamModel), "UpdateCoin")]
+        public static void EmotionBattleTeamModel_UpdateCoin(List<UnitBattleDataModel> ____unitlist)
+        {
+            ____unitlist.RemoveAll(x => x.unitData.bookItem.BookId == new LorId(ModParameters.PackageId, 10000002));
+        }
         [HarmonyPostfix]
         [HarmonyPatch(typeof(StageLibraryFloorModel), "StartPickEmotionCard")]
         public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
