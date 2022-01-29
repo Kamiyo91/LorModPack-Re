@@ -42,9 +42,9 @@ namespace BLL_Re21341.Models
         };
 
         public static readonly List<int> PersonalCardList = new List<int>
-            { 1, 9, 17, 28, 29, 31, 42, 47, 57, 59, 60, 61 };
+            { 1, 9, 17, 28, 29, 42, 47, 57, 59, 60, 61 };
 
-        public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 30, 48, 58, 901 };
+        public static readonly List<int> EgoPersonalCardList = new List<int> { 8, 10, 16, 48, 58, 901 };
         public static readonly List<int> UntransferablePassives = new List<int> { 6, 8, 12, 20, 24, 35, 40, 58 };
 
         public static readonly List<Tuple<string, List<int>, string>> SkinNameIds =
@@ -66,7 +66,7 @@ namespace BLL_Re21341.Models
             { "HayateDefault_Re21341", new List<int> { 10000005 } },
             { "WiltonDefault_Re21341", new List<int> { 10000006 } },
             { "RazielDefault_Re21341", new List<int> { 10000007 } },
-            { "FragmentDefault_Re21341", new List<int> { 10000008, 10000009, 10000010, 10000011, 10000012 } },
+            { "FragmentDefault_Re21341", new List<int> { 10000008, 10000011, 10000012 } },
             { "FragmentBlueDefault_Re21341", new List<int> { 10000013, 10000014, 10000015 } },
             { "FragmentRedDefault_Re21341", new List<int> { 10000016 } }
         };

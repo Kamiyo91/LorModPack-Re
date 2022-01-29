@@ -67,10 +67,6 @@
       <Project>{1df30575-b636-45b5-b748-a37d420c63f0}</Project>
       <Name>BLL-Re21341</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Roland-Re21341\Roland-Re21341.csproj">
-      <Project>{4B7A5F90-ADEB-4437-90DB-B5C809AD0B2F}</Project>
-      <Name>Roland-Re21341</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Util-Re21341\Util-Re21341.csproj">
       <Project>{dacdc2ea-d97b-47b0-ba6a-1e0d27800c68}</Project>
       <Name>Util-Re21341</Name>
