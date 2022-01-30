@@ -145,5 +145,11 @@ namespace BLL_Re21341.Models
                 }
             }
         };
+
+        public static readonly List<LorId> BannedEmotionSelectionUnit = new List<LorId>
+        {
+            new LorId(PackageId, 2), new LorId(PackageId, 10000002), new LorId(PackageId, 10000901),
+            new LorId(PackageId, 10000900)
+        };
     }
 }

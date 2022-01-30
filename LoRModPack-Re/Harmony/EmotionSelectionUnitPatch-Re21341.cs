@@ -19,7 +19,7 @@ namespace LoRModPack_Re21341.Harmony
             NeedUnitSelection = AccessTools.Field(typeof(LevelUpUI), "_needUnitSelection");
 
         private static readonly Predicate<BattleUnitModel> MatchAddon = x =>
-            x.UnitData.unitData.bookItem.BookId == new LorId(ModParameters.PackageId, 10000002);
+            ModParameters.BannedEmotionSelectionUnit.Contains(x.UnitData.unitData.bookItem.BookId);
 
         [HarmonyPatch]
         public class BlockSelectionBubble

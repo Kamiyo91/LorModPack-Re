@@ -15,34 +15,6 @@ namespace LoRModPack_Re21341.Harmony
     [HarmonyPatch]
     public class HarmoyPatch_Re21341
     {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(EmotionBattleTeamModel), "UpdateCoin")]
-        public static void EmotionBattleTeamModel_UpdateCoin(List<UnitBattleDataModel> ____unitlist)
-        {
-            ____unitlist.RemoveAll(x => x.unitData.bookItem.BookId == new LorId(ModParameters.PackageId, 10000002));
-        }
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(StageLibraryFloorModel), "StartPickEmotionCard")]
-        public static void StageLibraryFloorModel_StartPickEmotionCard(StageLibraryFloorModel __instance)
-        {
-            if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
-                    .ClassInfo.id)) return;
-            __instance.team.currentSelectEmotionLevel++;
-            __instance.team.egoSelectionPoint--;
-            SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
-            SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.OnSelectHide(true);
-        }
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(StageWaveModel), "PickRandomEmotionCard")]
-        public static void StageWaveModel_PickRandomEmotionCard(StageWaveModel __instance)
-        {
-            if (!ModParameters.BannedEmotionStages.ContainsKey(Singleton<StageController>.Instance.GetStageModel()
-                    .ClassInfo.id) || ModParameters.BannedEmotionStages.FirstOrDefault(x =>
-                    x.Key.Equals(Singleton<StageController>.Instance.GetStageModel().ClassInfo.id)).Value) return;
-            __instance.team.currentSelectEmotionLevel++;
-        }
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(UIBookStoryChapterSlot), "SetEpisodeSlots")]
         public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
