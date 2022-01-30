@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
@@ -304,13 +303,6 @@ namespace LoRModPack_Re21341.Harmony
                     .Desc);
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(BattleUnitEmotionDetail), "ApplyEmotionCard")]
-        public static bool BattleUnitEmotionDetail_ApplyEmotionCard(BattleUnitEmotionDetail __instance,
-            BattleUnitModel ____self)
-        {
-            return !ModParameters.BannedEmotionSelectionUnit.Contains(____self.UnitData.unitData.bookItem.BookId);
-        }
         [HarmonyPostfix]
         [HarmonyPatch(typeof(BattleUnitCardsInHandUI), "UpdateCardList")]
         public static void BattleUnitCardsInHandUI_UpdateCardList(BattleUnitCardsInHandUI __instance,
