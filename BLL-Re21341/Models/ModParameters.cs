@@ -71,6 +71,8 @@ namespace BLL_Re21341.Models
             { "FragmentRedDefault_Re21341", new List<int> { 10000016 } }
         };
 
+        public static readonly List<int> NoEgoFloorUnit = new List<int> { 10000900, 10000002 };
+
         public static readonly Dictionary<string, List<int>> DefaultSpritePreviewChange =
             new Dictionary<string, List<int>>
             {

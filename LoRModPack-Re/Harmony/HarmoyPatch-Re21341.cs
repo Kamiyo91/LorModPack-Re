@@ -16,6 +16,22 @@ namespace LoRModPack_Re21341.Harmony
     public class HarmoyPatch_Re21341
     {
         [HarmonyPostfix]
+        [HarmonyPatch(typeof(BattleUnitCardsInHandUI), "UpdateCardList")]
+        public static void BattleUnitCardsInHandUI_UpdateCardList(BattleUnitCardsInHandUI __instance,
+            List<BattleDiceCardUI> ____activatedCardList, ref float ____xInterval)
+        {
+            if (__instance.CurrentHandState != BattleUnitCardsInHandUI.HandState.EgoCard) return;
+            var unit = __instance.SelectedModel ?? __instance.HOveredModel;
+            if (unit.UnitData.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
+                !ModParameters.NoEgoFloorUnit.Contains(unit.UnitData.unitData.bookItem.BookId.id)) return;
+            var list = SkinUtil.ReloadEgoHandUI(__instance, __instance.GetCardUIList(), unit, ____activatedCardList,
+                ref ____xInterval).ToList();
+            __instance.SetSelectedCardUI(null);
+            for (var i = list.Count; i < __instance.GetCardUIList().Count; i++)
+                __instance.GetCardUIList()[i].gameObject.SetActive(false);
+        }
+
+        [HarmonyPostfix]
         [HarmonyPatch(typeof(UIBookStoryChapterSlot), "SetEpisodeSlots")]
         public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
             UIBookStoryPanel ___panel, List<UIBookStoryEpisodeSlot> ___EpisodeSlots)
