@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using BLL_Re21341.Models;
 using HarmonyLib;
 using LOR_DiceSystem;
@@ -15,22 +16,6 @@ namespace LoRModPack_Re21341.Harmony
     [HarmonyPatch]
     public class HarmoyPatch_Re21341
     {
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(BattleUnitCardsInHandUI), "UpdateCardList")]
-        public static void BattleUnitCardsInHandUI_UpdateCardList(BattleUnitCardsInHandUI __instance,
-            List<BattleDiceCardUI> ____activatedCardList, ref float ____xInterval)
-        {
-            if (__instance.CurrentHandState != BattleUnitCardsInHandUI.HandState.EgoCard) return;
-            var unit = __instance.SelectedModel ?? __instance.HOveredModel;
-            if (unit.UnitData.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
-                !ModParameters.NoEgoFloorUnit.Contains(unit.UnitData.unitData.bookItem.BookId.id)) return;
-            var list = SkinUtil.ReloadEgoHandUI(__instance, __instance.GetCardUIList(), unit, ____activatedCardList,
-                ref ____xInterval).ToList();
-            __instance.SetSelectedCardUI(null);
-            for (var i = list.Count; i < __instance.GetCardUIList().Count; i++)
-                __instance.GetCardUIList()[i].gameObject.SetActive(false);
-        }
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(UIBookStoryChapterSlot), "SetEpisodeSlots")]
         public static void UIBookStoryChapterSlot_SetEpisodeSlots(UIBookStoryChapterSlot __instance,
@@ -317,6 +302,29 @@ namespace LoRModPack_Re21341.Harmony
                         x.Key.Contains(parameters.Value.MessageId))
                     .Value
                     .Desc);
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(BattleUnitEmotionDetail), "ApplyEmotionCard")]
+        public static bool BattleUnitEmotionDetail_ApplyEmotionCard(BattleUnitEmotionDetail __instance,
+            BattleUnitModel ____self)
+        {
+            return !ModParameters.BannedEmotionSelectionUnit.Contains(____self.UnitData.unitData.bookItem.BookId);
+        }
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(BattleUnitCardsInHandUI), "UpdateCardList")]
+        public static void BattleUnitCardsInHandUI_UpdateCardList(BattleUnitCardsInHandUI __instance,
+            List<BattleDiceCardUI> ____activatedCardList, ref float ____xInterval)
+        {
+            if (__instance.CurrentHandState != BattleUnitCardsInHandUI.HandState.EgoCard) return;
+            var unit = __instance.SelectedModel ?? __instance.HOveredModel;
+            if (unit.UnitData.unitData.bookItem.BookId.packageId != ModParameters.PackageId ||
+                !ModParameters.NoEgoFloorUnit.Contains(unit.UnitData.unitData.bookItem.BookId.id)) return;
+            var list = SkinUtil.ReloadEgoHandUI(__instance, __instance.GetCardUIList(), unit, ____activatedCardList,
+                ref ____xInterval).ToList();
+            __instance.SetSelectedCardUI(null);
+            for (var i = list.Count; i < __instance.GetCardUIList().Count; i++)
+                __instance.GetCardUIList()[i].gameObject.SetActive(false);
         }
     }
 }

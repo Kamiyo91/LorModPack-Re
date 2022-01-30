@@ -17,7 +17,7 @@ namespace OldSamurai_Re21341.Passives
                 ? _count = 0
                 : _count++;
             if (_count != 3) return;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 900));
+            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 1));
             _count = 0;
         }
 
