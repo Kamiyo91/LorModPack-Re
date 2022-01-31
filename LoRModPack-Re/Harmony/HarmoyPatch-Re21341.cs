@@ -151,8 +151,7 @@ namespace LoRModPack_Re21341.Harmony
                 };
             if (newBook == null || ModParameters.PackageId != newBook.ClassInfo.workshopID ||
                 !ModParameters.DynamicNames.ContainsKey(newBook.ClassInfo.id.id)) return;
-            __instance.EquipCustomCoreBook(null);
-            __instance.workshopSkin = "";
+            if (UnitUtil.CheckSkinUnitData(__instance)) return;
             var nameId = ModParameters.DynamicNames[newBook.ClassInfo.id.id].ToString();
             __instance.SetTempName(ModParameters.NameTexts[nameId]);
         }

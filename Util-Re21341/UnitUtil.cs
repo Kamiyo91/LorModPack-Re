@@ -58,6 +58,12 @@ namespace Util_Re21341
             return true;
         }
 
+        public static bool CheckSkinUnitData(UnitDataModel unitData)
+        {
+            if (!string.IsNullOrEmpty(unitData.workshopSkin)) return true;
+            return unitData.bookItem != unitData.CustomBookItem;
+        }
+
         public static void VipDeathNpc(BattleUnitModel owner)
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction)
