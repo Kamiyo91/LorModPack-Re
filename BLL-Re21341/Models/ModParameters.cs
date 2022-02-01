@@ -161,8 +161,8 @@ namespace BLL_Re21341.Models
             new Tuple<LorId, List<LorId>>(new LorId(PackageId, 61),
                 new List<LorId>
                 {
-                    new LorId(PackageId, 2), new LorId(PackageId, 8), new LorId(PackageId, 12),
-                    new LorId(PackageId, 18), new LorId(PackageId, 24), new LorId(PackageId, 40),
+                    new LorId(PackageId, 6), new LorId(PackageId, 8), new LorId(PackageId, 12),
+                    new LorId(PackageId, 20), new LorId(PackageId, 24), new LorId(PackageId, 40),
                     new LorId("SephirahBundleSe21341.Mod", 27)
                 })
         };
