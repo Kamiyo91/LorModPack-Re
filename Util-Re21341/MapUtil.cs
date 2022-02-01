@@ -59,7 +59,8 @@ namespace Util_Re21341
             RemoveValueInAddedMap(mapName);
             if (!isAssimilationMap) return;
             MapChangedValue(true);
-            if(!string.IsNullOrEmpty(Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo())) CustomMapHandler.EnforceTheme();
+            if (!string.IsNullOrEmpty(Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo()))
+                CustomMapHandler.EnforceTheme();
             Singleton<StageController>.Instance.CheckMapChange();
             SingletonBehavior<BattleSoundManager>.Instance.SetEnemyTheme(SingletonBehavior<BattleSceneRoot>
                 .Instance.currentMapObject.mapBgm);

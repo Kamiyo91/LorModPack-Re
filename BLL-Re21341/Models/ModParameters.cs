@@ -153,5 +153,29 @@ namespace BLL_Re21341.Models
             new LorId(PackageId, 2), new LorId(PackageId, 10000002), new LorId(PackageId, 10000901),
             new LorId(PackageId, 10000900)
         };
+
+        public static readonly List<Tuple<LorId, List<LorId>>> UniquePassives = new List<Tuple<LorId, List<LorId>>>
+        {
+            new Tuple<LorId, List<LorId>>(new LorId(PackageId, 37), new List<LorId> { new LorId(PackageId, 8) }),
+            new Tuple<LorId, List<LorId>>(new LorId(PackageId, 17), new List<LorId> { new LorId(PackageId, 12) }),
+            new Tuple<LorId, List<LorId>>(new LorId(PackageId, 61),
+                new List<LorId>
+                {
+                    new LorId(PackageId, 2), new LorId(PackageId, 8), new LorId(PackageId, 12),
+                    new LorId(PackageId, 18), new LorId(PackageId, 24), new LorId(PackageId, 40),
+                    new LorId("SephirahBundleSe21341.Mod", 27)
+                })
+        };
+
+        public static readonly List<Tuple<LorId, LorId>> ExtraConditionPassives = new List<Tuple<LorId, LorId>>
+        {
+            new Tuple<LorId, LorId>(new LorId(PackageId, 22), new LorId("SaeModSa21341.Mod", 3))
+        };
+
+        public static readonly List<Tuple<LorId, LorId>> ChainRelease = new List<Tuple<LorId, LorId>>
+        {
+            new Tuple<LorId, LorId>(new LorId("SephirahBundleSe21341.Mod", 27),
+                new LorId(PackageId, 61))
+        };
     }
 }

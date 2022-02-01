@@ -178,6 +178,7 @@ namespace Util_Re21341
                          !BattleUnitBuf._bufIconDictionary.ContainsKey(x.Key)))
                 BattleUnitBuf._bufIconDictionary.Add(artWork.Key, artWork.Value);
         }
+
         public static IEnumerable<BattleDiceCardModel> ReloadEgoHandUI(BattleUnitCardsInHandUI instance,
             List<BattleDiceCardUI> cardList, BattleUnitModel unit, List<BattleDiceCardUI> activatedCardList,
             ref float xInt)
