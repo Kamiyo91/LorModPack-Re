@@ -55,6 +55,12 @@ namespace Hayate_Re21341.Passives
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             _util.OnUseExpireCard(curCard.card.GetID());
+            _util.OnUseCardResetCount(curCard);
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            _util.DeleteTarget();
         }
     }
 }

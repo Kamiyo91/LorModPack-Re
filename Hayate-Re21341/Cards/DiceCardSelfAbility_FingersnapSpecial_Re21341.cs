@@ -3,6 +3,7 @@
     public class DiceCardSelfAbility_FingersnapSpecial_Re21341 : DiceCardSelfAbilityBase
     {
         private bool _motionChange;
+
         public override void OnStartBattle()
         {
             if (_motionChange)
@@ -10,9 +11,8 @@
                 _motionChange = false;
                 owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
             }
-            var target = card.target;
-            target.Die(owner);
-            BattleObjectManager.instance.UnregisterUnit(target);
+
+            card.target.Die(owner);
         }
 
         public override bool IsTargetChangable(BattleUnitModel attacker)
@@ -32,6 +32,11 @@
         {
             _motionChange = false;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
+        }
+
+        public override void OnRoundEnd_inHand(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            self.exhaust = true;
         }
     }
 }

@@ -81,7 +81,7 @@ namespace Hayate_Re21341.Passives
 
         public override void OnLoseParrying(BattleDiceBehavior behavior)
         {
-            if(behavior.TargetDice.DiceResultValue >= 50) _util.TooCocky();
+            if (behavior.TargetDice.DiceResultValue >= 50) _util.TooCocky();
         }
 
         public override void OnDrawParrying(BattleDiceBehavior behavior)
