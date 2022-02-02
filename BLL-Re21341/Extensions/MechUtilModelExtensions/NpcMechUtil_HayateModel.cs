@@ -9,6 +9,7 @@ namespace BLL_Re21341.Extensions.MechUtilModelExtensions
         public bool SecondMechHpExist { get; set; }
         public int SecondMechHp { get; set; }
         public int DrawBack { get; set; }
+        public bool TooCocky { get; set; }
         public bool PhaseChanged { get; set; }
         public bool LastPhaseStart { get; set; }
         public bool FinalMech { get; set; }

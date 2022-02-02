@@ -59,6 +59,7 @@
     <Compile Include="Cards\DiceCardSelfAbility_FerventCut_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_FingersnapNpc_Re21341.cs" />
+    <Compile Include="Cards\DiceCardSelfAbility_FingersnapSpecial_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_Fingersnap_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_LightingBlade_Re21341.cs" />
     <Compile Include="Cards\DiceCardSelfAbility_PowerSlash_Re21341.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Hayate_Re21341MapManager.cs" />
     <Compile Include="MechUtil\MechUtil_Hayate.cs" />
     <Compile Include="MechUtil\NpcMechUtil_Hayate.cs" />
+    <Compile Include="Passives\PassiveAbility_DontGetTooCocky_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HayateShimmering_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_Hayate_Re21341.cs" />
     <Compile Include="Passives\PassiveAbility_HayateNpc_Re21341.cs" />

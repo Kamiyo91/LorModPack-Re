@@ -48,6 +48,18 @@ namespace Hayate_Re21341.MechUtil
             _buf.stack = 1;
         }
 
+        public void TooCocky()
+        {
+            if (_model.TooCocky) return;
+            _model.TooCocky = true;
+        }
+
+        public void CheckTooCocky()
+        {
+            if (!_model.TooCocky) return;
+            _model.TooCocky = false;
+            _buf.stack = 50;
+        }
         public override void ForcedEgo()
         {
             base.ForcedEgo();
@@ -58,7 +70,6 @@ namespace Hayate_Re21341.MechUtil
         {
             return _model.FinalMech;
         }
-
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
             if (_model.FinalMechStart && !_model.OneTurnCard)

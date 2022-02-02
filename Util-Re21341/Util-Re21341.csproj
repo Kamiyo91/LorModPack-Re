@@ -83,6 +83,7 @@
     <Compile Include="CommonBuffs\BattleUnitBuf_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_BigDamageForTestPurpose_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341.cs" />
+    <Compile Include="CommonBuffs\BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_Immortal_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToStatusAliment_Re21341.cs" />
     <Compile Include="CommonBuffs\BattleUnitBuf_ImmunityToBinding_Re21341.cs" />

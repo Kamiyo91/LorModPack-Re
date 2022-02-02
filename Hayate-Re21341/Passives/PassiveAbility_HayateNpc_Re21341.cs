@@ -75,7 +75,23 @@ namespace Hayate_Re21341.Passives
 
         public override void OnRoundEndTheLast_ignoreDead()
         {
+            _util.CheckTooCocky();
             _util.HayateIsDeadBeforePhase3();
+        }
+
+        public override void OnLoseParrying(BattleDiceBehavior behavior)
+        {
+            if(behavior.TargetDice.DiceResultValue >= 50) _util.TooCocky();
+        }
+
+        public override void OnDrawParrying(BattleDiceBehavior behavior)
+        {
+            if (behavior.TargetDice.DiceResultValue >= 50) _util.TooCocky();
+        }
+
+        public override void OnTakeBreakDamageByAttack(BattleDiceBehavior atkDice, int breakdmg)
+        {
+            if (atkDice.TargetDice.DiceResultValue >= 50) _util.TooCocky();
         }
 
         public override void OnRoundStart()
