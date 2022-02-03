@@ -184,9 +184,20 @@ namespace LoRModPack_Re21341.Harmony
         [HarmonyPatch(typeof(BookModel), "ReleasePassive")]
         public static void BookModel_ReleasePassive(BookModel __instance, PassiveModel passive)
         {
+            var currentPassive = passive.originData.currentpassive.id != new LorId(9999999) ? passive.originData.currentpassive : passive.reservedData.currentpassive;
+            var passiveItem = ModParameters.ChainRelease.FirstOrDefault(x => x.Item1 == currentPassive.id);
+            if (passiveItem != null && __instance.GetPassiveModelList()
+                    .Exists(x => x.reservedData.currentpassive.id == passiveItem.Item2))
+                __instance.ReleasePassive(__instance.GetPassiveModelList()
+                    .Find(x => x.reservedData.currentpassive.id == passiveItem.Item2));
+        }
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(BookModel), "UnEquipGivePassiveBook")]
+        public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook)
+        {
             var passiveItem =
-                ModParameters.ChainRelease.FirstOrDefault(x => x.Item1 == passive.originData.currentpassive.id);
-            if (passiveItem != null)
+                ModParameters.ChainRelease.FirstOrDefault(x => __instance.GetSuccessionPassivesByBook(unequipbook).Exists(y => x.Item1 == y.originData.currentpassive.id || x.Item1 == y.reservedData.currentpassive.id));
+            if (passiveItem != null && __instance.GetPassiveModelList().Exists(x => x.reservedData.currentpassive.id == passiveItem.Item2))
                 __instance.ReleasePassive(__instance.GetPassiveModelList()
                     .Find(x => x.reservedData.currentpassive.id == passiveItem.Item2));
         }
