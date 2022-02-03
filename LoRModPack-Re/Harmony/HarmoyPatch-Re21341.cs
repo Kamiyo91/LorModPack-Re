@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
 using HarmonyLib;
@@ -9,6 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Util_Re21341;
 using Workshop;
+using Object = UnityEngine.Object;
 
 namespace LoRModPack_Re21341.Harmony
 {
@@ -193,13 +195,22 @@ namespace LoRModPack_Re21341.Harmony
         }
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BookModel), "UnEquipGivePassiveBook")]
-        public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook)
+        public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook,bool origin)
         {
             var passiveItem =
-                ModParameters.ChainRelease.FirstOrDefault(x => __instance.GetSuccessionPassivesByBook(unequipbook).Exists(y => x.Item1 == y.originData.currentpassive.id || x.Item1 == y.reservedData.currentpassive.id));
-            if (passiveItem != null && __instance.GetPassiveModelList().Exists(x => x.reservedData.currentpassive.id == passiveItem.Item2))
-                __instance.ReleasePassive(__instance.GetPassiveModelList()
-                    .Find(x => x.reservedData.currentpassive.id == passiveItem.Item2));
+                ModParameters.ChainRelease.FirstOrDefault(x => unequipbook.GetPassiveModelList().Exists(y => x.Item1 == y.originData.currentpassive.id));
+            if (passiveItem == null) return;
+            try
+            {
+                var chainPassive = __instance.GetPassiveModelList()
+                    .FirstOrDefault(x => x.reservedData.currentpassive.id == passiveItem.Item2 || x.originData.currentpassive.id == passiveItem.Item2);
+                if (chainPassive == null) return;
+                __instance.ReleasePassive(chainPassive);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         [HarmonyPostfix]
