@@ -137,7 +137,8 @@ namespace LoRModPack_Re21341.Harmony
                 : __instance.reservedData;
             if (currentPassive == null || currentPassive.currentpassive.id != new LorId("SephirahBundleSe21341.Mod", 27)) return;
             var book = Singleton<BookInventoryModel>.Instance.GetBookByInstanceId(currentPassive.givePassiveBookId);
-            var passiveModel = book == null ? Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook().GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61)) : book.GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61));
+            var passiveModel = book == null ? Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook().GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61))
+                : book.GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61));
             passiveModel?.ReleaseSuccesionReceivePassive(true);
         }
         [HarmonyPrefix]
@@ -206,7 +207,7 @@ namespace LoRModPack_Re21341.Harmony
         }
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BookModel), "UnEquipGivePassiveBook")]
-        public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook, bool origin)
+        public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook)
         {
             var passiveItem =
                 ModParameters.ChainRelease.FirstOrDefault(x => unequipbook.GetPassiveModelList().Exists(y => x.Item1 == y.originData.currentpassive.id));
