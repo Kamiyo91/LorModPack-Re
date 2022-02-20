@@ -128,6 +128,7 @@ namespace LoRModPack_Re21341.Harmony
                 characterMotion.gameObject.SetActive(false);
             }
         }
+
         [HarmonyPrefix]
         [HarmonyPatch(typeof(PassiveModel), "ReleaseSuccesionGivePassive")]
         public static void PassiveModel_ReleaseSuccesionGivePassive(PassiveModel __instance)
@@ -135,12 +136,17 @@ namespace LoRModPack_Re21341.Harmony
             var currentPassive = __instance.originData.currentpassive.id != new LorId(9999999)
                 ? __instance.originData
                 : __instance.reservedData;
-            if (currentPassive == null || currentPassive.currentpassive.id != new LorId("SephirahBundleSe21341.Mod", 27)) return;
+            if (currentPassive == null ||
+                currentPassive.currentpassive.id != new LorId("SephirahBundleSe21341.Mod", 27)) return;
             var book = Singleton<BookInventoryModel>.Instance.GetBookByInstanceId(currentPassive.givePassiveBookId);
-            var passiveModel = book == null ? Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook().GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61))
-                : book.GetPassiveModelList().FirstOrDefault(x => x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61));
+            var passiveModel = book == null
+                ? Singleton<BookInventoryModel>.Instance.GetBlackSilenceBook().GetPassiveModelList().FirstOrDefault(x =>
+                    x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61))
+                : book.GetPassiveModelList().FirstOrDefault(x =>
+                    x.originData.currentpassive.id == new LorId(ModParameters.PackageId, 61));
             passiveModel?.ReleaseSuccesionReceivePassive(true);
         }
+
         [HarmonyPrefix]
         [HarmonyPatch(typeof(UnitDataModel), "EquipBook")]
         public static void UnitDataModel_EquipBookPrefix(UnitDataModel __instance, bool force)
@@ -198,24 +204,30 @@ namespace LoRModPack_Re21341.Harmony
         [HarmonyPatch(typeof(BookModel), "ReleasePassive")]
         public static void BookModel_ReleasePassive(BookModel __instance, PassiveModel passive)
         {
-            var currentPassive = passive.originData.currentpassive.id != new LorId(9999999) ? passive.originData.currentpassive : passive.reservedData.currentpassive;
+            var currentPassive = passive.originData.currentpassive.id != new LorId(9999999)
+                ? passive.originData.currentpassive
+                : passive.reservedData.currentpassive;
             var passiveItem = ModParameters.ChainRelease.FirstOrDefault(x => x.Item1 == currentPassive.id);
             if (passiveItem != null && __instance.GetPassiveModelList()
                     .Exists(x => x.reservedData.currentpassive.id == passiveItem.Item2))
                 __instance.ReleasePassive(__instance.GetPassiveModelList()
                     .Find(x => x.reservedData.currentpassive.id == passiveItem.Item2));
         }
+
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BookModel), "UnEquipGivePassiveBook")]
         public static void BookModel_UnEquipGivePassiveBook(BookModel __instance, BookModel unequipbook)
         {
             var passiveItem =
-                ModParameters.ChainRelease.FirstOrDefault(x => unequipbook.GetPassiveModelList().Exists(y => x.Item1 == y.originData.currentpassive.id));
+                ModParameters.ChainRelease.FirstOrDefault(x =>
+                    unequipbook.GetPassiveModelList().Exists(y => x.Item1 == y.originData.currentpassive.id));
             if (passiveItem == null) return;
             try
             {
                 var chainPassive = __instance.GetPassiveModelList()
-                    .FirstOrDefault(x => x.reservedData.currentpassive.id == passiveItem.Item2 || x.originData.currentpassive.id == passiveItem.Item2);
+                    .FirstOrDefault(x =>
+                        x.reservedData.currentpassive.id == passiveItem.Item2 ||
+                        x.originData.currentpassive.id == passiveItem.Item2);
                 if (chainPassive == null) return;
                 __instance.ReleasePassive(chainPassive);
             }

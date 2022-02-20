@@ -171,8 +171,8 @@ namespace BLL_Re21341.Models
         public static readonly List<Tuple<LorId, LorId>> ExtraConditionPassives = new List<Tuple<LorId, LorId>>
         {
             new Tuple<LorId, LorId>(new LorId(PackageId, 22), new LorId("SaeModSa21341.Mod", 3)),
-            new Tuple<LorId, LorId>(new LorId(PackageId, 21),new LorId(250115)),
-            new Tuple<LorId, LorId>(new LorId(250115),new LorId(PackageId, 21))
+            new Tuple<LorId, LorId>(new LorId(PackageId, 21), new LorId(250115)),
+            new Tuple<LorId, LorId>(new LorId(250115), new LorId(PackageId, 21))
         };
 
         public static readonly List<Tuple<LorId, LorId>> ChainRelease = new List<Tuple<LorId, LorId>>
@@ -180,5 +180,7 @@ namespace BLL_Re21341.Models
             new Tuple<LorId, LorId>(new LorId("SephirahBundleSe21341.Mod", 27),
                 new LorId(PackageId, 61))
         };
+
+        public static readonly int EgoEmotionLevel = 3;
     }
 }
