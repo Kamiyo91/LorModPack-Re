@@ -1,5 +1,5 @@
-﻿using Sound;
-using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
+using Sound;
 
 namespace Mio_Re21341.Buffs
 {

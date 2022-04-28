@@ -1,4 +1,5 @@
-﻿using Util_Re21341;
+﻿using BLL_Re21341.Models;
+using KamiyoStaticUtil.Utils;
 
 namespace Raziel_Re21341.Cards
 {
@@ -21,7 +22,7 @@ namespace Raziel_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            UnitUtil.ReadyCounterCard(owner, 56);
+            UnitUtil.ReadyCounterCard(owner, 56, KamiyoModParameters.PackageId);
         }
     }
 }

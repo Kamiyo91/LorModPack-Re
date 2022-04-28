@@ -1,5 +1,5 @@
-﻿using OldSamurai_Re21341.Buffs;
-using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
+using OldSamurai_Re21341.Buffs;
 using Util_Re21341.CommonBuffs;
 
 namespace OldSamurai_Re21341.Passives

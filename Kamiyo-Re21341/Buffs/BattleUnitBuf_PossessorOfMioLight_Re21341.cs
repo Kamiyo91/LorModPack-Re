@@ -18,8 +18,8 @@ namespace Kamiyo_Re21341.Buffs
         {
             base.Init(owner);
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x =>
-                         x.GetID() == new LorId(ModParameters.PackageId, 22) ||
-                         x.GetID() == new LorId(ModParameters.PackageId, 19)))
+                         x.GetID() == new LorId(KamiyoModParameters.PackageId, 22) ||
+                         x.GetID() == new LorId(KamiyoModParameters.PackageId, 19)))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);

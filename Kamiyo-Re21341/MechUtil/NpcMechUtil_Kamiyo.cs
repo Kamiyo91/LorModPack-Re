@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
+using Util_Re21341.Extentions;
 
 namespace Kamiyo_Re21341.MechUtil
 {
-    public class NpcMechUtil_Kamiyo : NpcMechUtilBase
+    public class NpcMechUtil_Kamiyo : NpcMechUtilBaseEx
     {
         private readonly StageLibraryFloorModel
             _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
@@ -20,9 +21,10 @@ namespace Kamiyo_Re21341.MechUtil
 
         public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
         {
-            if (_model.OneTurnCard && origin.GetID() == new LorId(ModParameters.PackageId, 22))
+            if (_model.OneTurnCard && origin.GetID() == new LorId(KamiyoModParameters.PackageId, 22))
                 origin = BattleDiceCardModel.CreatePlayingCard(
-                    ItemXmlDataList.instance.GetCardItem(new LorId(ModParameters.PackageId, RandomUtil.Range(20, 21))));
+                    ItemXmlDataList.instance.GetCardItem(new LorId(KamiyoModParameters.PackageId,
+                        RandomUtil.Range(20, 21))));
             base.OnSelectCardPutMassAttack(ref origin);
         }
 
@@ -33,7 +35,7 @@ namespace Kamiyo_Re21341.MechUtil
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
             stageModel.SetStageStorgeData("PhaseKamiyoRe21341", _model.PhaseChanged);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction)
-                .Where(x => x.Book.BookId != new LorId(ModParameters.PackageId, 5)).Select(unit => unit.UnitData)
+                .Where(x => x.Book.BookId != new LorId(KamiyoModParameters.PackageId, 5)).Select(unit => unit.UnitData)
                 .ToList();
             currentWaveModel.ResetUnitBattleDataList(list);
         }
@@ -74,9 +76,9 @@ namespace Kamiyo_Re21341.MechUtil
             }
 
             var card = _model.Owner.allyCardDetail.GetAllDeck()
-                .FirstOrDefault(x => x.GetID() == new LorId(ModParameters.PackageId, 21));
+                .FirstOrDefault(x => x.GetID() == new LorId(KamiyoModParameters.PackageId, 21));
             _model.Owner.allyCardDetail.ExhaustACardAnywhere(card);
-            _model.Owner.allyCardDetail.AddNewCardToDeck(new LorId(ModParameters.PackageId, 22));
+            _model.Owner.allyCardDetail.AddNewCardToDeck(new LorId(KamiyoModParameters.PackageId, 22));
             SetMassAttack(true);
             SetCounter(4);
             if (recoverHp) _model.Owner.RecoverHP(514);
@@ -98,7 +100,7 @@ namespace Kamiyo_Re21341.MechUtil
                     EmotionLevel = 4,
                     Pos = 1,
                     OnWaveStart = true
-                });
+                }, KamiyoModParameters.PackageId);
             else
                 mioUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
                 {
@@ -107,7 +109,7 @@ namespace Kamiyo_Re21341.MechUtil
                     EmotionLevel = 4,
                     Pos = BattleObjectManager.instance.GetList(Faction.Player).Count,
                     Sephirah = _floor.Sephirah
-                });
+                }, KamiyoModParameters.PackageId);
 
             UnitUtil.ChangeCardCostByValue(mioUnit, -2, 4);
         }

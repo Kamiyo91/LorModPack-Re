@@ -1,33 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using Util_Re21341.Extentions;
 using Wilton_Re21341.Buffs;
 
 namespace Wilton_Re21341.Passives
 {
     public class PassiveAbility_KurosawaButler_Re21341 : PassiveAbilityBase
     {
-        private MechUtilBase _util;
+        private MechUtilBaseEx _util;
 
         public override void OnWaveStart()
         {
-            _util = new MechUtilBase(new MechUtilBaseModel
+            _util = new MechUtilBaseEx(new MechUtilBaseModel
             {
                 Owner = owner,
                 HasEgo = true,
                 HasEgoAttack = true,
                 EgoType = typeof(BattleUnitBuf_Vengeance_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 47),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 48),
+                EgoCardId = new LorId(KamiyoModParameters.PackageId, 47),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 48),
                 EgoMapName = "Wilton_Re21341",
                 EgoMapType = typeof(Wilton_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageIds = new List<int> { 6, 11 },
+                OriginalMapStageIds = new List<LorId>
+                {
+                    new LorId(KamiyoModParameters.PackageId, 6), new LorId(KamiyoModParameters.PackageId, 11),
+                    new LorId(KamiyoModParameters.PackageId, 12)
+                },
                 HasEgoAbDialog = true,
                 EgoAbColorColor = AbColorType.Negative,
                 EgoAbDialogList = new List<AbnormalityCardDialog>

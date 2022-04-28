@@ -1,5 +1,5 @@
-﻿using Mio_Re21341.Buffs;
-using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
+using Mio_Re21341.Buffs;
 
 namespace Mio_Re21341.Cards
 {

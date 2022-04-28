@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
 using Util_Re21341;
 
@@ -26,8 +28,8 @@ namespace Raziel_Re21341.Passives
         {
             _skinChanged = UnitUtil.CheckSkinProjection(owner);
             _revive = false;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 57));
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 58));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 57));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 58));
         }
 
         public override void OnRoundEndTheLast_ignoreDead()
@@ -35,7 +37,9 @@ namespace Raziel_Re21341.Passives
             if (_used)
             {
                 _used = false;
-                MapUtil.ReturnFromEgoMap("Raziel_Re21341", new List<int> { 7 });
+                MapUtil.ReturnFromEgoMap("Raziel_Re21341",
+                    new List<LorId>
+                        { new LorId(KamiyoModParameters.PackageId, 7), new LorId(KamiyoModParameters.PackageId, 12) });
             }
 
             if (!owner.IsDead() || _revive) return;
@@ -56,7 +60,7 @@ namespace Raziel_Re21341.Passives
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
-            if (curCard.card.GetID().packageId != ModParameters.PackageId) return;
+            if (curCard.card.GetID().packageId != KamiyoModParameters.PackageId) return;
             if (curCard.card.GetID().id != 58 || owner.faction != Faction.Player ||
                 SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
             _used = true;
@@ -68,7 +72,8 @@ namespace Raziel_Re21341.Passives
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "Raziel_Re21341",
-                StageIds = new List<int> { 7 },
+                StageIds = new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 7), new LorId(KamiyoModParameters.PackageId, 12) },
                 OneTurnEgo = true,
                 IsPlayer = true,
                 Component = typeof(Raziel_Re21341MapManager),
@@ -79,7 +84,8 @@ namespace Raziel_Re21341.Passives
 
         public override void OnBattleEnd()
         {
-            if (owner.IsDead() && !MapUtil.CheckStageMap(new List<int> { 7 }))
+            if (owner.IsDead() && !MapStaticUtil.CheckStageMap(new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 7), new LorId(KamiyoModParameters.PackageId, 12) }))
                 UnitUtil.UnitReviveAndRecovery(owner, 5, false);
         }
     }

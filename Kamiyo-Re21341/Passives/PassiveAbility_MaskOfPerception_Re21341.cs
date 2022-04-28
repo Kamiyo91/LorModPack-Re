@@ -1,5 +1,5 @@
-﻿using LOR_DiceSystem;
-using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
+using LOR_DiceSystem;
 
 namespace Kamiyo_Re21341.Passives
 {

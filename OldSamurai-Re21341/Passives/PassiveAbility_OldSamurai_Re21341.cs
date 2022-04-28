@@ -1,8 +1,8 @@
 ﻿using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.BaseClass;
+using KamiyoStaticUtil.Utils;
 using OldSamurai_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
 
 namespace OldSamurai_Re21341.Passives
 {
@@ -18,8 +18,8 @@ namespace OldSamurai_Re21341.Passives
                 HasEgo = true,
                 IsSummonEgo = true,
                 EgoType = typeof(BattleUnitBuf_OldSamuraiEgo_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 8),
-                SecondaryEgoCardId = new LorId(ModParameters.PackageId, 901)
+                EgoCardId = new LorId(KamiyoModParameters.PackageId, 8),
+                SecondaryEgoCardId = new LorId(KamiyoModParameters.PackageId, 901)
             });
         }
 

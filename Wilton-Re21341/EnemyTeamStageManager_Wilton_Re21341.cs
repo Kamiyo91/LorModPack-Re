@@ -2,7 +2,8 @@
 using BLL_Re21341.Models;
 using CustomMapUtility;
 using Hayate_Re21341.Passives;
-using Util_Re21341;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using Util_Re21341.CommonBuffs;
 
 namespace Wilton_Re21341
@@ -44,7 +45,7 @@ namespace Wilton_Re21341
 
         public override void OnRoundStart_After()
         {
-            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_phaseChanged) MapStaticUtil.ActiveCreatureBattleCamFilterComponent();
         }
 
         private void CheckPhase()
@@ -68,9 +69,9 @@ namespace Wilton_Re21341
                 EmotionLevel = 5,
                 AddEmotionPassive = false,
                 OnWaveStart = true
-            });
+            }, KamiyoModParameters.PackageId);
             unit.allyCardDetail.ExhaustAllCards();
-            unit.allyCardDetail.AddNewCard(new LorId(ModParameters.PackageId, 903));
+            unit.allyCardDetail.AddNewCard(new LorId(KamiyoModParameters.PackageId, 903));
             var passive =
                 unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_HayateNpc_Re21341) as
                     PassiveAbility_HayateNpc_Re21341;

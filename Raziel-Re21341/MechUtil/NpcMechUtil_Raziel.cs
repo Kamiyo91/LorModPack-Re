@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
 using CustomMapUtility;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
 using Raziel_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using Util_Re21341.Extentions;
 
 namespace Raziel_Re21341.MechUtil
 {
-    public class NpcMechUtil_Raziel : NpcMechUtilBase
+    public class NpcMechUtil_Raziel : NpcMechUtilBaseEx
     {
         private readonly NpcMechUtilBaseModel _model;
 
@@ -43,7 +44,7 @@ namespace Raziel_Re21341.MechUtil
             _model.Phase = curPhase;
             if (_model.Phase < 2) return;
             ForcedEgo();
-            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
+            _model.Owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 41));
         }
 
         public void CheckPhase()
@@ -51,11 +52,11 @@ namespace Raziel_Re21341.MechUtil
             if (_model.Phase > 1 && !_model.Owner.bufListDetail.HasBuf<BattleUnitBuf_OwlSpiritNpc_Re21341>())
             {
                 ForcedEgo();
-                _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 41));
+                _model.Owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 41));
                 if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                    new LorId(ModParameters.PackageId, 7) ||
+                    new LorId(KamiyoModParameters.PackageId, 7) ||
                     Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                    new LorId(ModParameters.PackageId, 12))
+                    new LorId(KamiyoModParameters.PackageId, 12))
                     CustomMapHandler.SetMapBgm("RazielPhase2_Re21341.ogg", true, "Raziel_Re21341");
             }
 

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
 using Raziel_Re21341.Buffs;
 using Raziel_Re21341.MechUtil;
-using Util_Re21341;
 
 namespace Raziel_Re21341.Passives
 {
@@ -44,7 +45,8 @@ namespace Raziel_Re21341.Passives
                 EgoMapType = typeof(Raziel_Re21341MapManager),
                 BgY = 0.375f,
                 FlY = 0.225f,
-                OriginalMapStageIds = new List<int> { 7 },
+                OriginalMapStageIds = new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 7), new LorId(KamiyoModParameters.PackageId, 12) },
                 EgoAbColorColor = AbColorType.Negative,
                 EgoAbDialogList = new List<AbnormalityCardDialog>
                 {
@@ -55,8 +57,8 @@ namespace Raziel_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("RazielEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 906),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 906)
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 906),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 906)
             });
             UnitUtil.ChangeCardCostByValue(owner, -2, 4);
             _util.Restart();

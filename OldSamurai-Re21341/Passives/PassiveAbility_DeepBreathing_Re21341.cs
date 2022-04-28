@@ -1,4 +1,4 @@
-﻿using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
 
 namespace OldSamurai_Re21341.Passives
 {

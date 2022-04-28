@@ -18,15 +18,15 @@ namespace Raziel_Re21341.Passives
         private void SetCards()
         {
             owner.allyCardDetail.ExhaustAllCards();
-            AddNewCard(new LorId(ModParameters.PackageId, 52));
-            AddNewCard(new LorId(ModParameters.PackageId, 52));
-            AddNewCard(new LorId(ModParameters.PackageId, 52));
-            AddNewCard(new LorId(ModParameters.PackageId, 53));
-            AddNewCard(new LorId(ModParameters.PackageId, 53));
-            AddNewCard(new LorId(ModParameters.PackageId, 54));
-            AddNewCard(new LorId(ModParameters.PackageId, 55));
-            AddNewCard(new LorId(ModParameters.PackageId, 55));
-            AddNewCard(new LorId(ModParameters.PackageId, 55));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 52));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 52));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 52));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 53));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 53));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 54));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 55));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 55));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 55));
         }
 
         private void AddNewCard(LorId id)

@@ -2,12 +2,13 @@
 using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
 using Kamiyo_Re21341.Buffs;
 using Kamiyo_Re21341.MapManager;
 using Kamiyo_Re21341.MechUtil;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
 
 namespace Kamiyo_Re21341.Passives
 {
@@ -25,7 +26,7 @@ namespace Kamiyo_Re21341.Passives
         {
             var continueCheck = Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>("PhaseKamiyoRe21341", out var curPhase) && curPhase;
-            if (continueCheck) owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 11));
+            if (continueCheck) owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 11));
             _util = new NpcMechUtil_Kamiyo(new NpcMechUtil_KamiyoModel
             {
                 Owner = owner,
@@ -47,9 +48,10 @@ namespace Kamiyo_Re21341.Passives
                 EgoMapType = typeof(Kamiyo2_Re21341MapManager),
                 BgY = 0.475f,
                 FlY = 0.225f,
-                OriginalMapStageIds = new List<int> { 3 },
+                OriginalMapStageIds = new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 3), new LorId(KamiyoModParameters.PackageId, 12) },
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
-                AdditionalPassiveId = new LorId(ModParameters.PackageId, 11),
+                AdditionalPassiveId = new LorId(KamiyoModParameters.PackageId, 11),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeathNpc_Re21341),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
@@ -73,8 +75,8 @@ namespace Kamiyo_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("KamiyoEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 902),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 902),
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 902),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 902),
                 PhaseChanged = continueCheck,
                 Restart = continueCheck
             });

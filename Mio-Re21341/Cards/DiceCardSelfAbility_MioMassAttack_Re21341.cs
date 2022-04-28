@@ -20,7 +20,7 @@ namespace Mio_Re21341.Cards
             {
                 buf = new BattleUnitBuf_SakuraPetal_Re21341();
                 owner.bufListDetail.AddBufWithoutDuplication(buf);
-                owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 59));
+                owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 59));
             }
 
             if (!_motionChanged) return;

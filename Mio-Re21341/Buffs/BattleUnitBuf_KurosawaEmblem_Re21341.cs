@@ -17,8 +17,8 @@ namespace Mio_Re21341.Buffs
         {
             base.Init(owner);
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck().FindAll(x =>
-                         x.GetID() == new LorId(ModParameters.PackageId, 14) ||
-                         x.GetID() == new LorId(ModParameters.PackageId, 12)))
+                         x.GetID() == new LorId(KamiyoModParameters.PackageId, 14) ||
+                         x.GetID() == new LorId(KamiyoModParameters.PackageId, 12)))
             {
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);

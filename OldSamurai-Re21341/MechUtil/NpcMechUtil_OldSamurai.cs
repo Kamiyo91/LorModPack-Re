@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.BaseClass;
+using KamiyoStaticUtil.Utils;
 
 namespace OldSamurai_Re21341.MechUtil
 {
@@ -30,7 +30,7 @@ namespace OldSamurai_Re21341.MechUtil
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
             stageModel.SetStageStorgeData("PhaseOldSamuraiRe21341", _model.Phase);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction)
-                .Where(x => x.Book.BookId != new LorId(ModParameters.PackageId, 2)).Select(unit => unit.UnitData)
+                .Where(x => x.Book.BookId != new LorId(KamiyoModParameters.PackageId, 2)).Select(unit => unit.UnitData)
                 .ToList();
             currentWaveModel.ResetUnitBattleDataList(list);
         }

@@ -1,8 +1,8 @@
 ﻿using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
 using Hayate_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.BaseClass;
+using KamiyoStaticUtil.Utils;
 
 namespace Hayate_Re21341.MechUtil
 {
@@ -21,9 +21,9 @@ namespace Hayate_Re21341.MechUtil
 
         public override void OnUseExpireCard(LorId cardId)
         {
-            if (cardId == new LorId(ModParameters.PackageId, 29))
+            if (cardId == new LorId(KamiyoModParameters.PackageId, 29))
                 _buf.stack = 0;
-            if (cardId == new LorId(ModParameters.PackageId, 907))
+            if (cardId == new LorId(KamiyoModParameters.PackageId, 907))
                 _model.Owner.personalEgoDetail.RemoveCard(cardId);
             base.OnUseExpireCard(cardId);
         }
@@ -38,7 +38,7 @@ namespace Hayate_Re21341.MechUtil
 
         public void OnUseCardResetCount(BattlePlayingCardDataInUnitModel curCard)
         {
-            if (curCard.card.GetID() != new LorId(ModParameters.PackageId, 907)) return;
+            if (curCard.card.GetID() != new LorId(KamiyoModParameters.PackageId, 907)) return;
             _model.Owner.personalEgoDetail.RemoveCard(curCard.card.GetID());
             _fingersnapSpecialTarget = curCard.target;
             _model.Owner.allyCardDetail.ExhaustACardAnywhere(curCard.card);

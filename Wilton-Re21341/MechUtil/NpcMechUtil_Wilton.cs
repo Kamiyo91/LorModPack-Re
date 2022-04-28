@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.Utils;
+using Util_Re21341.Extentions;
 
 namespace Wilton_Re21341.MechUtil
 {
-    public class NpcMechUtil_Wilton : NpcMechUtilBase
+    public class NpcMechUtil_Wilton : NpcMechUtilBaseEx
     {
         private readonly NpcMechUtilBaseModel _model;
 
@@ -32,7 +32,7 @@ namespace Wilton_Re21341.MechUtil
             if (currentWaveModel == null || currentWaveModel.IsUnavailable()) return;
             stageModel.SetStageStorgeData("PhaseWiltonRe21341", _model.Phase);
             var list = BattleObjectManager.instance.GetAliveList(_model.Owner.faction)
-                .Where(x => x.Book.BookId != new LorId(ModParameters.PackageId, 9)).Select(unit => unit.UnitData)
+                .Where(x => x.Book.BookId != new LorId(KamiyoModParameters.PackageId, 9)).Select(unit => unit.UnitData)
                 .ToList();
             currentWaveModel.ResetUnitBattleDataList(list);
         }

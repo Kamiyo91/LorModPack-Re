@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
 using Kamiyo_Re21341.Buffs;
 using Kamiyo_Re21341.MapManager;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using Util_Re21341.Extentions;
 
 namespace Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_AlterEgoPlayer_Re21341 : PassiveAbilityBase
     {
-        private MechUtilBase _util;
+        private MechUtilBaseEx _util;
 
         public override void OnBattleEnd()
         {
@@ -23,7 +24,7 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            _util = new MechUtilBase(new MechUtilBaseModel
+            _util = new MechUtilBaseEx(new MechUtilBaseModel
             {
                 Owner = owner,
                 Hp = 25,
@@ -40,12 +41,13 @@ namespace Kamiyo_Re21341.Passives
                 EgoMapType = typeof(Kamiyo2_Re21341MapManager),
                 BgY = 0.475f,
                 FlY = 0.225f,
-                OriginalMapStageIds = new List<int> { 3 },
+                OriginalMapStageIds = new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 3), new LorId(KamiyoModParameters.PackageId, 12) },
                 EgoType = typeof(BattleUnitBuf_AlterEgoRelease_Re21341),
-                AdditionalPassiveId = new LorId(ModParameters.PackageId, 14),
+                AdditionalPassiveId = new LorId(KamiyoModParameters.PackageId, 14),
                 NearDeathBuffType = typeof(BattleUnitBuf_NearDeath_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 17),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 16),
+                EgoCardId = new LorId(KamiyoModParameters.PackageId, 17),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 16),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,
@@ -94,8 +96,8 @@ namespace Kamiyo_Re21341.Passives
         public override void OnRoundStartAfter()
         {
             if (!owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>()) return;
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 60));
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 60));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 60));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 60));
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -118,7 +120,7 @@ namespace Kamiyo_Re21341.Passives
         public override void OnKill(BattleUnitModel target)
         {
             if (_util.CheckOnDieAtFightEnd() &&
-                target.passiveDetail.PassiveList.Exists(x => x.id == new LorId(ModParameters.PackageId, 18)))
+                target.passiveDetail.PassiveList.Exists(x => x.id == new LorId(KamiyoModParameters.PackageId, 18)))
                 owner.Die();
         }
 
@@ -129,7 +131,7 @@ namespace Kamiyo_Re21341.Passives
 
         public void ForcedEgo()
         {
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 17));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 17));
             _util.ForcedEgo();
             _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>
             {

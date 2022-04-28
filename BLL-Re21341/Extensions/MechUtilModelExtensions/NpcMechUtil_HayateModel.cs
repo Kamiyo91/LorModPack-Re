@@ -1,4 +1,4 @@
-﻿using BLL_Re21341.Models.MechUtilModels;
+﻿using KamiyoStaticBLL.MechUtilBaseModels;
 
 namespace BLL_Re21341.Extensions.MechUtilModelExtensions
 {

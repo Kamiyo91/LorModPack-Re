@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
 using CustomMapUtility;
 using Kamiyo_Re21341.Passives;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.CommonBuffs;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
-using Util_Re21341.CommonBuffs;
 
 namespace Hayate_Re21341
 {
@@ -52,14 +53,14 @@ namespace Hayate_Re21341
 
         public override void OnRoundStart_After()
         {
-            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_phaseChanged) MapStaticUtil.ActiveCreatureBattleCamFilterComponent();
         }
 
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 527 || _phaseChanged) return;
             _phaseChanged = true;
-            MapUtil.ActiveCreatureBattleCamFilterComponent();
+            MapStaticUtil.ActiveCreatureBattleCamFilterComponent();
             CustomMapHandler.SetMapBgm("HayatePhase2_Re21341.ogg", true, "Hayate_Re21341");
         }
 
@@ -72,7 +73,7 @@ namespace Hayate_Re21341
                 EmotionLevel = 5,
                 Pos = 0,
                 Sephirah = _floor.Sephirah
-            });
+            }, KamiyoModParameters.PackageId);
             return allyUnit;
         }
 
@@ -109,8 +110,8 @@ namespace Hayate_Re21341
                 BattleObjectManager.instance.UnregisterUnit(unit);
             var allyUnit = PrepareAllyUnit();
             UnitUtil.RefreshCombatUI();
-            var specialPassive = allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 17));
-            allyUnit.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 43));
+            var specialPassive = allyUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 17));
+            allyUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 43));
             var passive = allyUnit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_AlterEgoPlayer_Re21341) as
                 PassiveAbility_AlterEgoPlayer_Re21341;
             specialPassive.OnWaveStart();
@@ -118,7 +119,7 @@ namespace Hayate_Re21341
             passive?.SetDieAtEnd();
             UnitUtil.ChangeCardCostByValue(allyUnit, -5, 6);
             UnitUtil.ApplyEmotionCards(allyUnit, _emotionCards);
-            _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
+            _mainEnemyModel.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_KamiyoImmortal));
             UnitUtil.UnitReviveAndRecovery(_mainEnemyModel, 50, true);
             UnitUtil.BattleAbDialog(_mainEnemyModel.view.dialogUI,
                 new List<AbnormalityCardDialog>

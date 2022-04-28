@@ -1,5 +1,5 @@
 ﻿using BLL_Re21341.Models;
-using Util_Re21341;
+using KamiyoStaticUtil.Utils;
 using Util_Re21341.CommonBuffs;
 
 namespace Hayate_Re21341.Passives
@@ -12,7 +12,7 @@ namespace Hayate_Re21341.Passives
         {
             if (behavior.TargetDice.DiceResultValue < 50 || _used) return;
             _used = true;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 907));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
             owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
         }
@@ -21,7 +21,7 @@ namespace Hayate_Re21341.Passives
         {
             if (behavior.TargetDice.DiceResultValue < 50 || _used) return;
             _used = true;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 907));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
             owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
         }
@@ -30,7 +30,7 @@ namespace Hayate_Re21341.Passives
         {
             if (atkDice.DiceResultValue < 50 || _used) return;
             _used = true;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 907));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
             owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
         }

@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models.MechUtilModels;
+﻿using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.Utils;
 using OldSamurai_Re21341.Buffs;
 using OldSamurai_Re21341.MechUtil;
-using Util_Re21341;
 
 namespace OldSamurai_Re21341.Passives
 {

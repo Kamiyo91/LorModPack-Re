@@ -1,4 +1,5 @@
-﻿using Sound;
+﻿using KamiyoStaticUtil.Utils;
+using Sound;
 
 namespace Util_Re21341.CommonBuffs
 {

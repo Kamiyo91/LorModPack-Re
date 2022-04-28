@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.BaseClass;
+using KamiyoStaticUtil.Utils;
 using Mio_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
 
 namespace Mio_Re21341.Passives
 {
@@ -26,7 +26,7 @@ namespace Mio_Re21341.Passives
                 RefreshUI = true,
                 MassAttackStartCount = true,
                 EgoType = typeof(BattleUnitBuf_GodAuraRelease_Re21341),
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900)
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 900)
             });
             _util.EgoActive();
             if (BattleObjectManager.instance.GetList(owner.faction).FirstOrDefault(x => x != owner)?.hp > 161) return;

@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
 using Mio_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using Util_Re21341.Extentions;
 
 namespace Mio_Re21341.Passives
 {
     public class PassiveAbility_GodFragment_Re21341 : PassiveAbilityBase
     {
-        private MechUtilBase _util;
+        private MechUtilBaseEx _util;
 
         public override void OnBattleEnd()
         {
@@ -22,7 +23,7 @@ namespace Mio_Re21341.Passives
 
         public override void OnWaveStart()
         {
-            _util = new MechUtilBase(new MechUtilBaseModel
+            _util = new MechUtilBaseEx(new MechUtilBaseModel
             {
                 Owner = owner,
                 Hp = 0,
@@ -36,10 +37,14 @@ namespace Mio_Re21341.Passives
                 EgoMapName = "Mio_Re21341",
                 EgoMapType = typeof(Mio_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageIds = new List<int> { 2, 9 },
+                OriginalMapStageIds = new List<LorId>
+                {
+                    new LorId(KamiyoModParameters.PackageId, 2), new LorId(KamiyoModParameters.PackageId, 9),
+                    new LorId(KamiyoModParameters.PackageId, 12)
+                },
                 EgoType = typeof(BattleUnitBuf_GodAuraRelease_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 9),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 10),
+                EgoCardId = new LorId(KamiyoModParameters.PackageId, 9),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 10),
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,
@@ -109,7 +114,7 @@ namespace Mio_Re21341.Passives
                 }
             });
             _util.ForcedEgo();
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 9));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 9));
         }
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)

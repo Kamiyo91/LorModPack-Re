@@ -6,8 +6,8 @@ namespace Util_Re21341.CommonPassives
     {
         public override void OnRoundStartAfter()
         {
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 61));
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 61));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 61));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 61));
         }
     }
 }

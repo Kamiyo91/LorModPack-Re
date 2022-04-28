@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Battle.CreatureEffect;
 using BLL_Re21341.Models;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using Sound;
 using UnityEngine;
-using Util_Re21341;
 using Util_Re21341.CommonBuffs;
 using Wilton_Re21341.Passives;
 
@@ -44,7 +45,7 @@ namespace Wilton_Re21341.Buffs
                     Pos = 1,
                     EmotionLevel = 3,
                     AddEmotionPassive = false
-                });
+                }, KamiyoModParameters.PackageId);
             }
             else
             {
@@ -56,7 +57,7 @@ namespace Wilton_Re21341.Buffs
                     EmotionLevel = 4,
                     Pos = playerUnitList.Count,
                     Sephirah = _floor.Sephirah
-                });
+                }, KamiyoModParameters.PackageId);
             }
 
             unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_WillOWispAura_Re21341());

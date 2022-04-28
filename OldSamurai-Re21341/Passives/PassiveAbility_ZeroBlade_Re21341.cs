@@ -1,5 +1,6 @@
-﻿using OldSamurai_Re21341.Dice;
-using Util_Re21341;
+﻿using BLL_Re21341.Models;
+using KamiyoStaticUtil.Utils;
+using OldSamurai_Re21341.Dice;
 
 namespace OldSamurai_Re21341.Passives
 {
@@ -9,7 +10,7 @@ namespace OldSamurai_Re21341.Passives
 
         public override void OnStartBattle()
         {
-            UnitUtil.ReadyCounterCard(owner, 2);
+            UnitUtil.ReadyCounterCard(owner, 2, KamiyoModParameters.PackageId);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
@@ -44,7 +45,7 @@ namespace OldSamurai_Re21341.Passives
             if (!_counterReload) return;
             _counterReload = false;
             UnitUtil.SetPassiveCombatLog(this, owner);
-            UnitUtil.ReadyCounterCard(owner, 2);
+            UnitUtil.ReadyCounterCard(owner, 2, KamiyoModParameters.PackageId);
         }
     }
 }

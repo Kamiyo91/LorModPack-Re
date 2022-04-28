@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
 using Wilton_Re21341.Buffs;
 using Wilton_Re21341.MechUtil;
 
@@ -33,7 +34,11 @@ namespace Wilton_Re21341.Passives
                 EgoMapName = "Wilton_Re21341",
                 EgoMapType = typeof(Wilton_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageIds = new List<int> { 6, 11 },
+                OriginalMapStageIds = new List<LorId>
+                {
+                    new LorId(KamiyoModParameters.PackageId, 6), new LorId(KamiyoModParameters.PackageId, 11),
+                    new LorId(KamiyoModParameters.PackageId, 12)
+                },
                 HasEgoAbDialog = true,
                 HasSurviveAbDialog = true,
                 SurviveAbDialogColor = AbColorType.Negative,
@@ -57,8 +62,8 @@ namespace Wilton_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("WiltonEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 905),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 905)
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 905),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 905)
             });
             _util.Restart();
         }

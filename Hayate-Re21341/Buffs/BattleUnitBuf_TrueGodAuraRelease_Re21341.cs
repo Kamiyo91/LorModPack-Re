@@ -1,5 +1,5 @@
-﻿using Sound;
-using Util_Re21341;
+﻿using KamiyoStaticUtil.Utils;
+using Sound;
 
 namespace Hayate_Re21341.Buffs
 {

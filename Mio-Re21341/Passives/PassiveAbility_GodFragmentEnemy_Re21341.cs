@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
 using Mio_Re21341.Buffs;
 using Mio_Re21341.MechUtil;
-using Util_Re21341;
 
 namespace Mio_Re21341.Passives
 {
@@ -41,7 +42,11 @@ namespace Mio_Re21341.Passives
                 EgoMapName = "Mio_Re21341",
                 EgoMapType = typeof(Mio_Re21341MapManager),
                 BgY = 0.2f,
-                OriginalMapStageIds = new List<int> { 2, 9 },
+                OriginalMapStageIds = new List<LorId>
+                {
+                    new LorId(KamiyoModParameters.PackageId, 2), new LorId(KamiyoModParameters.PackageId, 9),
+                    new LorId(KamiyoModParameters.PackageId, 12)
+                },
                 EgoType = typeof(BattleUnitBuf_CorruptedGodAuraRelease_Re21341),
                 SpecialBufType = typeof(BattleUnitBuf_SakuraPetal_Re21341),
                 HasEgoAbDialog = true,
@@ -66,8 +71,8 @@ namespace Mio_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("MioEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 900),
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 900)
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 900),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 900)
             });
             _util.Restart();
         }

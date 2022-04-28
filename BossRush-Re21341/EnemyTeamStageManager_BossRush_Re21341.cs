@@ -4,10 +4,11 @@ using BLL_Re21341.Models;
 using CustomMapUtility;
 using Hayate_Re21341;
 using Kamiyo_Re21341.MapManager;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using Mio_Re21341;
 using OldSamurai_Re21341.MapManager;
 using Raziel_Re21341;
-using Util_Re21341;
 using Wilton_Re21341;
 
 namespace BossRush_Re21341
@@ -88,7 +89,7 @@ namespace BossRush_Re21341
 
         public override void OnRoundStart_After()
         {
-            if (_filterPhases.Contains(_phase)) MapUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_filterPhases.Contains(_phase)) MapStaticUtil.ActiveCreatureBattleCamFilterComponent();
         }
 
         private void CheckPhase()
@@ -137,7 +138,7 @@ namespace BossRush_Re21341
                         foreach (var unit in BattleObjectManager.instance.GetList(Faction.Enemy))
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(4, 4);
-                        MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        MapStaticUtil.ActiveCreatureBattleCamFilterComponent(false);
                         CustomMapHandler.EnforceMap(_mapInfo);
                         Singleton<StageController>.Instance.CheckMapChange();
                     }
@@ -188,7 +189,7 @@ namespace BossRush_Re21341
                         foreach (var unit in BattleObjectManager.instance.GetList(Faction.Enemy))
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(8, 5);
-                        MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        MapStaticUtil.ActiveCreatureBattleCamFilterComponent(false);
                         CustomMapHandler.EnforceMap(_mapInfo);
                         Singleton<StageController>.Instance.CheckMapChange();
                     }
@@ -224,7 +225,7 @@ namespace BossRush_Re21341
                         foreach (var unit in BattleObjectManager.instance.GetList(Faction.Enemy))
                             BattleObjectManager.instance.UnregisterUnit(unit);
                         AddEnemyUnit(10, 5);
-                        MapUtil.ActiveCreatureBattleCamFilterComponent(false);
+                        MapStaticUtil.ActiveCreatureBattleCamFilterComponent(false);
                         CustomMapHandler.EnforceMap(_mapInfo);
                         Singleton<StageController>.Instance.CheckMapChange();
                     }
@@ -241,7 +242,7 @@ namespace BossRush_Re21341
                 EmotionLevel = emotionLevel,
                 Pos = 0,
                 OnWaveStart = true
-            });
+            }, KamiyoModParameters.PackageId);
             UnitUtil.RefreshCombatUI();
         }
 

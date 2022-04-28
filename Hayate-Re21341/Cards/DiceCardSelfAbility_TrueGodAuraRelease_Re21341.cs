@@ -7,7 +7,7 @@ namespace Hayate_Re21341.Cards
     {
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return (owner.emotionDetail.EmotionLevel >= ModParameters.EgoEmotionLevel ||
+            return (owner.emotionDetail.EmotionLevel >= KamiyoModParameters.EgoEmotionLevel ||
                     owner.passiveDetail.HasPassive<PassiveAbility_KurosawaStory_Re21341>()) &&
                    !owner.bufListDetail.HasAssimilation();
         }

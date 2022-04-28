@@ -16,7 +16,7 @@ namespace OldSamurai_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 1));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 1));
         }
 
         public override void OnRoundEnd()

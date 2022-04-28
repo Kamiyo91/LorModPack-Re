@@ -6,7 +6,7 @@ namespace Util_Re21341.CommonPassives
     {
         public override void OnWaveStart()
         {
-            if (owner.Book.BookId.packageId != ModParameters.PackageId &&
+            if (owner.Book.BookId.packageId != KamiyoModParameters.PackageId &&
                 (!owner.passiveDetail.HasPassive<PassiveAbility_10012>() ||
                  !owner.passiveDetail.PassiveList.Exists(x =>
                      !x.destroyed && x.id == new LorId("SephirahBundleSe21341.Mod", 27))))

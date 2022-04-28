@@ -2,6 +2,8 @@
 using System.Linq;
 using BLL_Re21341.Models;
 using CustomMapUtility;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using OldSamurai_Re21341.MapManager;
 using Util_Re21341;
 
@@ -27,7 +29,7 @@ namespace OldSamurai_Re21341.Buffs
                         Pos = i,
                         LockedEmotion = true,
                         OnWaveStart = true
-                    });
+                    }, KamiyoModParameters.PackageId);
                 }
                 else
                 {
@@ -39,11 +41,12 @@ namespace OldSamurai_Re21341.Buffs
                         UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
                         {
                             Id = 2,
-                            Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("2")).Value,
+                            Name = ModParameters.NameTexts
+                                .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
                             Pos = indexList[i1],
                             LockedEmotion = true,
                             Sephirah = _floor.Sephirah
-                        });
+                        }, KamiyoModParameters.PackageId);
                 }
 
             UnitUtil.RefreshCombatUI();
@@ -52,7 +55,7 @@ namespace OldSamurai_Re21341.Buffs
         public override void OnRoundStart()
         {
             if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id !=
-                new LorId(ModParameters.PackageId, 1)) CustomMapHandler.EnforceTheme();
+                new LorId(KamiyoModParameters.PackageId, 1)) CustomMapHandler.EnforceTheme();
             if (BattleObjectManager.instance.GetAliveList(_owner.faction).Count <= 1) RemoveSamuraiEgoMap();
         }
 
@@ -61,7 +64,8 @@ namespace OldSamurai_Re21341.Buffs
             MapUtil.ChangeMap(new MapModel
             {
                 Stage = "OldSamurai_Re21341",
-                StageIds = new List<int> { 1 },
+                StageIds = new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 1), new LorId(KamiyoModParameters.PackageId, 12) },
                 IsPlayer = true,
                 Component = typeof(OldSamuraiPlayer_Re21341MapManager),
                 Bgy = 0.2f
@@ -71,7 +75,10 @@ namespace OldSamurai_Re21341.Buffs
         private void RemoveSamuraiEgoMap()
         {
             Destroy();
-            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341", new List<int> { 1 }, true);
+            MapUtil.ReturnFromEgoMap("OldSamurai_Re21341",
+                new List<LorId>
+                    { new LorId(KamiyoModParameters.PackageId, 1), new LorId(KamiyoModParameters.PackageId, 12) },
+                true);
         }
     }
 }

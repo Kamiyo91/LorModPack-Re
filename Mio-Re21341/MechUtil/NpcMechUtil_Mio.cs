@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using BLL_Re21341.Models.MechUtilModels;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticUtil.Utils;
 using Sound;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
+using Util_Re21341.Extentions;
 
 namespace Mio_Re21341.MechUtil
 {
-    public class NpcMechUtil_Mio : NpcMechUtilBase
+    public class NpcMechUtil_Mio : NpcMechUtilBaseEx
     {
         private readonly NpcMechUtilBaseModel _model;
 

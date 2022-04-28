@@ -17,15 +17,15 @@ namespace Hayate_Re21341.Passives
         private void SetCards()
         {
             owner.allyCardDetail.ExhaustAllCards();
-            AddNewCard(new LorId(ModParameters.PackageId, 23));
-            AddNewCard(new LorId(ModParameters.PackageId, 23));
-            AddNewCard(new LorId(ModParameters.PackageId, 24));
-            AddNewCard(new LorId(ModParameters.PackageId, 24));
-            AddNewCard(new LorId(ModParameters.PackageId, 24));
-            AddNewCard(new LorId(ModParameters.PackageId, 25));
-            AddNewCard(new LorId(ModParameters.PackageId, 26));
-            AddNewCard(new LorId(ModParameters.PackageId, 27));
-            AddNewCard(new LorId(ModParameters.PackageId, 27));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 23));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 23));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 24));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 24));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 24));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 25));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 26));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 27));
+            AddNewCard(new LorId(KamiyoModParameters.PackageId, 27));
         }
 
         private void AddNewCard(LorId id)

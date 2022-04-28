@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
-using BLL_Re21341.Models.MechUtilModels;
 using Hayate_Re21341.Buffs;
 using Hayate_Re21341.MechUtil;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.MechUtilBaseModels;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
 
 namespace Hayate_Re21341.Passives
 {
@@ -21,9 +22,9 @@ namespace Hayate_Re21341.Passives
                 Owner = owner,
                 HasEgo = true,
                 EgoType = typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341),
-                EgoCardId = new LorId(ModParameters.PackageId, 28),
+                EgoCardId = new LorId(KamiyoModParameters.PackageId, 28),
                 HasEgoAttack = true,
-                EgoAttackCardId = new LorId(ModParameters.PackageId, 29),
+                EgoAttackCardId = new LorId(KamiyoModParameters.PackageId, 29),
                 HasEgoAbDialog = true,
                 EgoAttackCardExpire = true,
                 EgoAbColorColor = AbColorType.Positive,

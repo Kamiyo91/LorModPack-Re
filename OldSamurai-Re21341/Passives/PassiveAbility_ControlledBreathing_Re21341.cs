@@ -13,11 +13,11 @@ namespace OldSamurai_Re21341.Passives
 
         private void AddDeepBreathingCard()
         {
-            _ = owner.personalEgoDetail.GetHand().Exists(x => x.GetID() == new LorId(ModParameters.PackageId, 1))
+            _ = owner.personalEgoDetail.GetHand().Exists(x => x.GetID() == new LorId(KamiyoModParameters.PackageId, 1))
                 ? _count = 0
                 : _count++;
             if (_count != 3) return;
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 1));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 1));
             _count = 0;
         }
 
@@ -58,13 +58,13 @@ namespace OldSamurai_Re21341.Passives
         {
             _lightUse = true;
             _enemyCount = 0;
-            owner.personalEgoDetail.RemoveCard(new LorId(ModParameters.PackageId, 1));
+            owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 1));
             DiceCardSelfAbility_DeepBreathing_Re21341.Activate(owner);
         }
 
         public override void OnWaveStart()
         {
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 1));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 1));
         }
 
 

@@ -2,9 +2,9 @@
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
 using Hayate_Re21341.Buffs;
-using Util_Re21341;
-using Util_Re21341.BaseClass;
-using Util_Re21341.CommonBuffs;
+using KamiyoStaticUtil.BaseClass;
+using KamiyoStaticUtil.CommonBuffs;
+using KamiyoStaticUtil.Utils;
 
 namespace Hayate_Re21341.MechUtil
 {
@@ -43,7 +43,7 @@ namespace Hayate_Re21341.MechUtil
             if (!_model.PhaseChanged) return;
             _model.HasMechOnHp = false;
             ForcedEgo();
-            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
+            _model.Owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 44));
             UnitUtil.ChangeCardCostByValue(_model.Owner, -2, 4);
             _buf.stack = 1;
         }
@@ -138,7 +138,7 @@ namespace Hayate_Re21341.MechUtil
             _model.SecondMechHpExist = false;
             _model.FinalMechStart = true;
             UnitUtil.UnitReviveAndRecovery(_model.Owner, 0, false);
-            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalUntilRoundEndMech_Re21341());
+            _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_KamiyoImmortalUntilRoundEnd());
             _model.Owner.SetHp(_model.SecondMechHp);
             _model.Owner.breakDetail.ResetGauge();
             _model.Owner.breakDetail.RecoverBreakLife(1, true);
@@ -155,9 +155,9 @@ namespace Hayate_Re21341.MechUtil
         {
             if (cardId != _model.LorIdEgoMassAttack) return null;
             if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id ==
-                new LorId(ModParameters.PackageId, 6))
+                new LorId(KamiyoModParameters.PackageId, 6))
                 return BattleObjectManager.instance.GetAliveList(Faction.Player).FirstOrDefault(x =>
-                    x.UnitData.unitData.bookItem.ClassInfo.id != new LorId(ModParameters.PackageId, 10000901));
+                    x.UnitData.unitData.bookItem.ClassInfo.id != new LorId(KamiyoModParameters.PackageId, 10000901));
             if (BattleObjectManager.instance
                 .GetAliveList(Faction.Player).Any(x => !x.UnitData.unitData.isSephirah))
                 return RandomUtil.SelectOne(BattleObjectManager.instance.GetAliveList(Faction.Player)
@@ -170,7 +170,7 @@ namespace Hayate_Re21341.MechUtil
             if (_model.Owner.hp > 527 || _model.PhaseChanged) return;
             _model.PhaseChanged = true;
             ForcedEgo();
-            _model.Owner.passiveDetail.AddPassive(new LorId(ModParameters.PackageId, 44));
+            _model.Owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 44));
             UnitUtil.ChangeCardCostByValue(_model.Owner, -2, 4);
         }
 

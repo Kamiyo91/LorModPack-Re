@@ -2,12 +2,13 @@
 using System.Linq;
 using BLL_Re21341.Extensions.MechUtilModelExtensions;
 using BLL_Re21341.Models;
-using BLL_Re21341.Models.Enum;
 using Hayate_Re21341.Buffs;
 using Hayate_Re21341.MechUtil;
+using KamiyoStaticBLL.Enums;
+using KamiyoStaticBLL.Models;
+using KamiyoStaticUtil.CommonBuffs;
+using KamiyoStaticUtil.Utils;
 using LOR_XML;
-using Util_Re21341;
-using Util_Re21341.CommonBuffs;
 
 namespace Hayate_Re21341.Passives
 {
@@ -41,13 +42,13 @@ namespace Hayate_Re21341.Passives
                             .FirstOrDefault(x => x.Key.Equals("HayateEnemyEgoActive1_Re21341")).Value.Desc
                     }
                 },
-                LorIdEgoMassAttack = new LorId(ModParameters.PackageId, 903),
-                SecondaryMechCard = new LorId(ModParameters.PackageId, 904),
+                LorIdEgoMassAttack = new LorId(KamiyoModParameters.PackageId, 903),
+                SecondaryMechCard = new LorId(KamiyoModParameters.PackageId, 904),
                 FinalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4
             });
             _wiltonCase = false;
-            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_Re21341());
-            if (!_util.GetFinalMechValue()) owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Immortal_Re21341));
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_KamiyoImmortal());
+            if (!_util.GetFinalMechValue()) owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_KamiyoImmortal));
             _util.Restart();
         }
 

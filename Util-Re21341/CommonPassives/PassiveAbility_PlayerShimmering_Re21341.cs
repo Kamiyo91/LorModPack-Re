@@ -1,4 +1,5 @@
-﻿using Util_Re21341.CommonBuffs;
+﻿using KamiyoStaticUtil.CommonBuffs;
+using KamiyoStaticUtil.Utils;
 
 namespace Util_Re21341.CommonPassives
 {
@@ -6,8 +7,8 @@ namespace Util_Re21341.CommonPassives
     {
         public override void OnRoundStartAfter()
         {
-            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_PlayerShimmeringBuf_Re21341>())
-                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_PlayerShimmeringBuf_Re21341());
+            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_KamiyoPlayerShimmeringBuf>())
+                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_KamiyoPlayerShimmeringBuf());
             UnitUtil.DrawUntilX(owner, 6);
         }
     }

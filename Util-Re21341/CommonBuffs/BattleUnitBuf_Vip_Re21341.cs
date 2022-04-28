@@ -1,4 +1,6 @@
-﻿namespace Util_Re21341.CommonBuffs
+﻿using KamiyoStaticUtil.Utils;
+
+namespace Util_Re21341.CommonBuffs
 {
     public class BattleUnitBuf_Vip_Re21341 : BattleUnitBuf
     {

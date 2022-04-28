@@ -9,7 +9,7 @@ namespace Util_Re21341.CommonPassives
             if (owner.passiveDetail.HasPassive<PassiveAbility_250115>() ||
                 owner.passiveDetail.HasPassiveInReady<PassiveAbility_250115>())
                 owner.passiveDetail.DestroyPassive(this);
-            owner.personalEgoDetail.AddCard(new LorId(ModParameters.PackageId, 42));
+            owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 42));
         }
     }
 }

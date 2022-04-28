@@ -1,4 +1,5 @@
-﻿using Util_Re21341;
+﻿using BLL_Re21341.Models;
+using KamiyoStaticUtil.Utils;
 
 namespace Kamiyo_Re21341.Passives
 {
@@ -6,7 +7,7 @@ namespace Kamiyo_Re21341.Passives
     {
         public override void OnStartBattle()
         {
-            UnitUtil.ReadyCounterCard(owner, 18);
+            UnitUtil.ReadyCounterCard(owner, 18, KamiyoModParameters.PackageId);
         }
     }
 }
