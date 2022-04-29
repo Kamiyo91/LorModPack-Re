@@ -124,10 +124,6 @@ namespace LoRModPack_Re21341.Harmony
                     },
                     "MioNormalEye_Re21341")
             });
-            ModParameters.NoInventoryCardList.AddRange(new List<LorId>
-            {
-                new LorId(KamiyoModParameters.PackageId, 61)
-            });
             ModParameters.SpritePreviewChange.AddRange(new Dictionary<string, List<LorId>>
             {
                 { "MioDefault_Re21341", new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000003) } },

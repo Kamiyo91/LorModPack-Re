@@ -12,7 +12,8 @@
             var targetSlotOrder = card.targetSlotOrder;
             if (targetSlotOrder < 0 || targetSlotOrder >= target.speedDiceResult.Count) return;
             var speedDice = target.speedDiceResult[targetSlotOrder];
-            if (speedDiceResultValue - speedDice.value < Check) return;
+            var targetDiceBroken = target.speedDiceResult[targetSlotOrder].breaked;
+            if (speedDiceResultValue - speedDice.value <= Check && !targetDiceBroken) return;
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
                          .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
             {

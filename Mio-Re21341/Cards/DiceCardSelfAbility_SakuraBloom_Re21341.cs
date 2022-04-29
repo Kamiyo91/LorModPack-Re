@@ -14,7 +14,8 @@ namespace Mio_Re21341.Cards
             var targetSlotOrder = card.targetSlotOrder;
             if (targetSlotOrder < 0 || targetSlotOrder >= target.speedDiceResult.Count) return;
             var speedDice = target.speedDiceResult[targetSlotOrder];
-            if (speedDiceResultValue - speedDice.value < Check) return;
+            var targetDiceBroken = target.speedDiceResult[targetSlotOrder].breaked;
+            if (speedDiceResultValue - speedDice.value <= Check && !targetDiceBroken) return;
             owner.TakeDamage(9, DamageType.Card_Ability, owner);
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {

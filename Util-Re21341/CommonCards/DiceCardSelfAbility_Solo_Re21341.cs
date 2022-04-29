@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using KamiyoStaticUtil.Utils;
 
 namespace Util_Re21341.CommonCards
 {
@@ -13,7 +14,10 @@ namespace Util_Re21341.CommonCards
         private static void Activate(BattleUnitModel unit)
         {
             foreach (var allyUnit in BattleObjectManager.instance.GetAliveList(unit.faction).Where(x => x != unit))
+            {
+                UnitUtil.RemoveDiceTargets(allyUnit);
                 allyUnit.Die();
+            }
         }
 
         public override bool IsTargetableSelf()
