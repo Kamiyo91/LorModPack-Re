@@ -155,6 +155,10 @@ namespace LoRModPack_Re21341.Harmony
             {
                 new LorId(KamiyoModParameters.PackageId, 10000900), new LorId(KamiyoModParameters.PackageId, 10000002)
             });
+            ModParameters.EmotionExcludePassive.AddRange(new List<LorId>
+            {
+                new LorId(KamiyoModParameters.PackageId, 57)
+            });
             ModParameters.DefaultSpritePreviewChange.AddRange(new Dictionary<string, List<LorId>>
             {
                 {
