@@ -37,6 +37,7 @@ namespace Util_Re21341.Extentions
             _model.MapUsed = false;
             MapUtil.ReturnFromEgoMap(_model.EgoMapName, _model.OriginalMapStageIds);
         }
+
         public virtual void SetVipUnit()
         {
             _model.Owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
