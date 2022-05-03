@@ -45,6 +45,9 @@ namespace Hayate_Re21341.Passives
                 }
             });
             UnitUtil.CheckSkinProjection(owner);
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 20),
+                    typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341))) _util.ForcedEgo();
         }
 
         public override void OnRoundStart()
@@ -62,6 +65,13 @@ namespace Hayate_Re21341.Passives
         public override void OnRoundEndTheLast()
         {
             _util.DeleteTarget();
+        }
+
+        public override void OnRoundEnd()
+        {
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 20),
+                    typeof(BattleUnitBuf_TrueGodAuraRelease_Re21341))) _util.ForcedEgo();
         }
     }
 }

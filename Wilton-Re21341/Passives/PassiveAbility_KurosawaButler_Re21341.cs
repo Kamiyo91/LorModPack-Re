@@ -46,6 +46,9 @@ namespace Wilton_Re21341.Passives
                 }
             });
             UnitUtil.CheckSkinProjection(owner);
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 24),
+                    typeof(BattleUnitBuf_Vengeance_Re21341))) _util.ForcedEgo();
         }
 
         public override void OnStartBattle()
@@ -68,6 +71,13 @@ namespace Wilton_Re21341.Passives
         public override void OnRoundEndTheLast_ignoreDead()
         {
             _util.ReturnFromEgoMap();
+        }
+
+        public override void OnRoundEnd()
+        {
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 24),
+                    typeof(BattleUnitBuf_Vengeance_Re21341))) _util.ForcedEgo();
         }
     }
 }

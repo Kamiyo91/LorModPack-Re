@@ -91,6 +91,9 @@ namespace Kamiyo_Re21341.Passives
             });
             if (UnitUtil.CheckSkinProjection(owner))
                 _util.DoNotChangeSkinOnEgo();
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 12),
+                    typeof(BattleUnitBuf_AlterEgoRelease_Re21341))) _util.ForcedEgo();
         }
 
         public override void OnRoundStartAfter()
@@ -153,6 +156,13 @@ namespace Kamiyo_Re21341.Passives
         public override void OnRoundEndTheLast_ignoreDead()
         {
             _util.ReturnFromEgoMap();
+        }
+
+        public override void OnRoundEnd()
+        {
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 12),
+                    typeof(BattleUnitBuf_AlterEgoRelease_Re21341))) _util.ForcedEgo();
         }
     }
 }

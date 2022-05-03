@@ -82,6 +82,9 @@ namespace Mio_Re21341.Passives
             });
             if (UnitUtil.CheckSkinProjection(owner))
                 _util.DoNotChangeSkinOnEgo();
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 8),
+                    typeof(BattleUnitBuf_GodAuraRelease_Re21341))) _util.ForcedEgo();
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -126,6 +129,13 @@ namespace Mio_Re21341.Passives
         public override void OnRoundEndTheLast_ignoreDead()
         {
             _util.ReturnFromEgoMap();
+        }
+
+        public override void OnRoundEnd()
+        {
+            if (owner.faction != Faction.Enemy) return;
+            if (UnitUtil.SpecialCaseEgo(owner.faction, new LorId(KamiyoModParameters.PackageId, 8),
+                    typeof(BattleUnitBuf_GodAuraRelease_Re21341))) _util.ForcedEgo();
         }
     }
 }

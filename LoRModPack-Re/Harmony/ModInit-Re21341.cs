@@ -30,7 +30,6 @@ namespace LoRModPack_Re21341.Harmony
             KamiyoModParameters.Path = Path.GetDirectoryName(
                 Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             ModParameters.Path.Add(KamiyoModParameters.Path);
-            ModParameters.Language = GlobalGameManager.Instance.CurrentOption.language;
             ModParameters.DefaultKeyword.Add(KamiyoModParameters.PackageId, "LoRModPage_Re21341");
             ModParameters.OnlyCardKeywords.AddRange(new List<Tuple<List<string>, List<LorId>, LorId>>
             {
@@ -156,6 +155,10 @@ namespace LoRModPack_Re21341.Harmony
                 new LorId(KamiyoModParameters.PackageId, 10000900), new LorId(KamiyoModParameters.PackageId, 10000002)
             });
             ModParameters.EmotionExcludePassive.AddRange(new List<LorId>
+            {
+                new LorId(KamiyoModParameters.PackageId, 57)
+            });
+            ModParameters.SupportCharPassive.AddRange(new List<LorId>
             {
                 new LorId(KamiyoModParameters.PackageId, 57)
             });
