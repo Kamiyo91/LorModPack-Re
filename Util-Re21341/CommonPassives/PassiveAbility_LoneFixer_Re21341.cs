@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using KamiyoStaticUtil.Utils;
 
 namespace Util_Re21341.CommonPassives
 {
@@ -6,8 +6,7 @@ namespace Util_Re21341.CommonPassives
     {
         public override void OnRoundEnd()
         {
-            if (BattleObjectManager.instance.GetAliveList(owner.faction)
-                    .Count(x => !x.passiveDetail.HasPassive<PassiveAbility_NotEquip_Re21341>()) == 1)
+            if (UnitUtil.SupportCharCheck(owner) == 1)
                 owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Strength, 3);
         }
     }
