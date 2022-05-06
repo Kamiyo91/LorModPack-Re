@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using BLL_Re21341.Models;
 using OldSamurai_Re21341.Passives;
 using Util_Re21341.CommonPassives;
 
@@ -8,10 +8,9 @@ namespace OldSamurai_Re21341.Cards
     {
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return (owner.emotionDetail.EmotionLevel >= 5 ||
+            return (owner.emotionDetail.EmotionLevel >= KamiyoModParameters.EgoEmotionLevel ||
                     owner.passiveDetail.HasPassive<PassiveAbility_KurosawaStory_Re21341>()) &&
-                   !owner.bufListDetail.HasAssimilation() &&
-                   BattleObjectManager.instance.GetAliveList(Faction.Player).All(x => x == owner);
+                   !owner.bufListDetail.HasAssimilation();
         }
 
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)

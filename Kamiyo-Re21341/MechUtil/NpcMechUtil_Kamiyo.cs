@@ -105,7 +105,8 @@ namespace Kamiyo_Re21341.MechUtil
                 mioUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
                 {
                     Id = 5,
-                    Name = ModParameters.NameTexts.FirstOrDefault(x => x.Key.Equals("5")).Value,
+                    Name = ModParameters.NameTexts
+                        .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 5))).Value,
                     EmotionLevel = 4,
                     Pos = BattleObjectManager.instance.GetList(Faction.Player).Count,
                     Sephirah = _floor.Sephirah

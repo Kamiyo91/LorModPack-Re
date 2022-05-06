@@ -22,32 +22,28 @@ namespace OldSamurai_Re21341.Buffs
             ChangeToSamuraiEgoMap();
             for (var i = 1; i < 4; i++)
                 if (owner.faction == Faction.Enemy)
-                {
                     UnitUtil.AddNewUnitEnemySide(new UnitModel
                     {
                         Id = 2,
-                        Pos = i,
+                        Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
                         LockedEmotion = true,
                         OnWaveStart = true
                     }, KamiyoModParameters.PackageId);
-                }
                 else
-                {
-                    var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
-                    foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
-                                 .Where(x => indexList.Contains(x.index)))
-                        BattleObjectManager.instance.UnregisterUnit(unit);
+                    //var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
+                    //foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
+                    //             .Where(x => indexList.Contains(x.index)))
+                    //BattleObjectManager.instance.UnregisterUnit(unit);
                     for (var i1 = 0; i1 < 3; i1++)
                         UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
                         {
                             Id = 2,
                             Name = ModParameters.NameTexts
                                 .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
-                            Pos = indexList[i1],
+                            Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
                             LockedEmotion = true,
                             Sephirah = _floor.Sephirah
                         }, KamiyoModParameters.PackageId);
-                }
 
             UnitUtil.RefreshCombatUI();
         }

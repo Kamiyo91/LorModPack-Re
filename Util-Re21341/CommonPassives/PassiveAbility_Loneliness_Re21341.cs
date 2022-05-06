@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using KamiyoStaticUtil.Utils;
+﻿using KamiyoStaticUtil.Utils;
 
 namespace Util_Re21341.CommonPassives
 {

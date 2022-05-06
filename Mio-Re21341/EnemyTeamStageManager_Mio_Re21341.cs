@@ -53,14 +53,7 @@ namespace Mio_Re21341
 
         private void PrepareAllyUnit()
         {
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-            {
-                if (!(unit.passiveDetail.PassiveList.Find(x => x is PassiveAbility_230008) is PassiveAbility_230008
-                        passiveLone)) continue;
-                unit.passiveDetail.DestroyPassive(passiveLone);
-                unit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 56));
-            }
-
+            UnitUtil.ChangeLoneFixerPassive(Faction.Player, new LorId(KamiyoModParameters.PackageId, 56));
             var playerUnitList = BattleObjectManager.instance.GetList(Faction.Player);
             var allyUnit = UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
             {

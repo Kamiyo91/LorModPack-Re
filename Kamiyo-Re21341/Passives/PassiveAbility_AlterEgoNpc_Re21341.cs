@@ -135,7 +135,9 @@ namespace Kamiyo_Re21341.Passives
 
         public override void OnDie()
         {
-            UnitUtil.VipDeathNpc(owner);
+            foreach (var unit in BattleObjectManager.instance.GetAliveList()
+                         .Where(x => x.Book.BookId == new LorId(KamiyoModParameters.PackageId, 5)))
+                unit.Die();
         }
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)

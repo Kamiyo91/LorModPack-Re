@@ -263,12 +263,18 @@ namespace LoRModPack_Re21341.Harmony
                         new LorId("SephirahBundleSe21341.Mod", 27)
                     })
             });
-            ModParameters.ExtraConditionPassives.AddRange(new List<Tuple<LorId, LorId>>
+            ModParameters.ExtraConditionPassives.AddRange(new List<Tuple<LorId, List<LorId>>>
             {
-                new Tuple<LorId, LorId>(new LorId(KamiyoModParameters.PackageId, 22),
-                    new LorId("SaeModSa21341.Mod", 3)),
-                new Tuple<LorId, LorId>(new LorId(KamiyoModParameters.PackageId, 21), new LorId(250115)),
-                new Tuple<LorId, LorId>(new LorId(250115), new LorId(KamiyoModParameters.PackageId, 21))
+                new Tuple<LorId, List<LorId>>(new LorId(KamiyoModParameters.PackageId, 22),
+                    new List<LorId>
+                    {
+                        new LorId("SaeModSa21341.Mod", 3), new LorId("SaeModSa21341.Mod", 8),
+                        new LorId("MaryIb21341.Mod", 3)
+                    }),
+                new Tuple<LorId, List<LorId>>(new LorId(KamiyoModParameters.PackageId, 21),
+                    new List<LorId> { new LorId(250115) }),
+                new Tuple<LorId, List<LorId>>(new LorId(250115),
+                    new List<LorId> { new LorId(KamiyoModParameters.PackageId, 21) })
             });
             ModParameters.ChainRelease.AddRange(new List<Tuple<LorId, LorId>>
             {
@@ -282,7 +288,7 @@ namespace LoRModPack_Re21341.Harmony
             });
             ModParameters.BookList.AddRange(new List<LorId>
             {
-                new LorId(KamiyoModParameters.PackageId,6)
+                new LorId(KamiyoModParameters.PackageId, 6)
             });
         }
     }

@@ -20,19 +20,29 @@ namespace OldSamurai_Re21341.Buffs
         {
             base.Init(owner);
             ChangeToSamuraiEgoMap();
-            var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
-            foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
-                         .Where(x => indexList.Contains(x.index))) BattleObjectManager.instance.UnregisterUnit(unit);
+            //var indexList = UnitUtil.GetSamuraiGhostIndex(owner.index);
+            //foreach (var unit in BattleObjectManager.instance.GetList(Faction.Player)
+            //             .Where(x => indexList.Contains(x.index))) BattleObjectManager.instance.UnregisterUnit(unit);
             for (var i = 0; i < 3; i++)
-                UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
-                {
-                    Id = 10000002,
-                    Name = ModParameters.NameTexts
-                        .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
-                    Pos = indexList[i],
-                    LockedEmotion = true,
-                    Sephirah = _floor.Sephirah
-                }, KamiyoModParameters.PackageId);
+                if (owner.faction == Faction.Player)
+                    UnitUtil.AddNewUnitPlayerSide(_floor, new UnitModel
+                    {
+                        Id = 10000002,
+                        Name = ModParameters.NameTexts
+                            .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
+                        Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
+                        LockedEmotion = true,
+                        Sephirah = _floor.Sephirah
+                    }, KamiyoModParameters.PackageId);
+                else
+                    UnitUtil.AddNewUnitEnemySide(new UnitModel
+                    {
+                        Id = 2,
+                        Name = ModParameters.NameTexts
+                            .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
+                        Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
+                        LockedEmotion = true
+                    }, KamiyoModParameters.PackageId);
             UnitUtil.RefreshCombatUI();
         }
 
