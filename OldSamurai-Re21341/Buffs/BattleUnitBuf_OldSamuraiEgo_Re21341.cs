@@ -30,7 +30,7 @@ namespace OldSamurai_Re21341.Buffs
                         Id = 10000002,
                         Name = ModParameters.NameTexts
                             .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
-                        Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
+                        Pos = BattleObjectManager.instance.GetList(owner.faction).Count,
                         LockedEmotion = true,
                         Sephirah = _floor.Sephirah
                     }, KamiyoModParameters.PackageId);
@@ -40,7 +40,7 @@ namespace OldSamurai_Re21341.Buffs
                         Id = 2,
                         Name = ModParameters.NameTexts
                             .FirstOrDefault(x => x.Key.Equals(new LorId(KamiyoModParameters.PackageId, 2))).Value,
-                        Pos = BattleObjectManager.instance.GetAliveList(owner.faction).Count,
+                        Pos = BattleObjectManager.instance.GetList(owner.faction).Count,
                         LockedEmotion = true
                     }, KamiyoModParameters.PackageId);
             UnitUtil.RefreshCombatUI();
