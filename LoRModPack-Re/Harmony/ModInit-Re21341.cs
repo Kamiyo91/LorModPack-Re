@@ -37,7 +37,9 @@ namespace LoRModPack_Re21341.Harmony
                     new List<LorId>
                     {
                         new LorId(KamiyoModParameters.PackageId, 19), new LorId(KamiyoModParameters.PackageId, 20),
-                        new LorId(KamiyoModParameters.PackageId, 21), new LorId(KamiyoModParameters.PackageId, 22)
+                        new LorId(KamiyoModParameters.PackageId, 21), new LorId(KamiyoModParameters.PackageId, 22),
+                        new LorId("SaeModSa21341.Mod", 46), new LorId("SaeModSa21341.Mod", 47),
+                        new LorId("SaeModSa21341.Mod", 48)
                     }, new LorId(KamiyoModParameters.PackageId, 10000004)),
                 new Tuple<List<string>, List<LorId>, LorId>(new List<string> { "MioPage_Re21341" },
                     new List<LorId>
