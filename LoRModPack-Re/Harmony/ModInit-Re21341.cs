@@ -30,6 +30,7 @@ namespace LoRModPack_Re21341.Harmony
             KamiyoModParameters.Path = Path.GetDirectoryName(
                 Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             ModParameters.Path.Add(KamiyoModParameters.Path);
+            ModParameters.LocalizePackageIdAndPath.Add(KamiyoModParameters.PackageId, KamiyoModParameters.Path);
             ModParameters.DefaultKeyword.Add(KamiyoModParameters.PackageId, "LoRModPage_Re21341");
             ModParameters.OnlyCardKeywords.AddRange(new List<Tuple<List<string>, List<LorId>, LorId>>
             {
