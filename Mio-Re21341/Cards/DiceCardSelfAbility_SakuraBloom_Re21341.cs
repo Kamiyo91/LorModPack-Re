@@ -9,6 +9,7 @@ namespace Mio_Re21341.Cards
 
         public override void OnUseCard()
         {
+            owner.allyCardDetail.DrawCards(1);
             var speedDiceResultValue = card.speedDiceResultValue;
             var target = card.target;
             var targetSlotOrder = card.targetSlotOrder;
