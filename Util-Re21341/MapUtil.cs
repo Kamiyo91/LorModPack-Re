@@ -2,6 +2,7 @@
 using CustomMapUtility;
 using KamiyoStaticBLL.Models;
 using KamiyoStaticUtil.Utils;
+using UnityEngine;
 
 namespace Util_Re21341
 {
@@ -31,7 +32,11 @@ namespace Util_Re21341
                 StageType.Creature) return;
             CustomMapHandler.RemoveCustomEgoMapByAssimilation(mapName);
             MapStaticUtil.RemoveValueInAddedMap(mapName);
-            if (!isAssimilationMap) return;
+            if (!isAssimilationMap)
+            {
+                Singleton<StageController>.Instance.CheckMapChange();
+                return;
+            }
             MapStaticUtil.MapChangedValue(true);
             if (!string.IsNullOrEmpty(Singleton<StageController>.Instance.GetStageModel().GetCurrentMapInfo()))
                 CustomMapHandler.EnforceTheme();

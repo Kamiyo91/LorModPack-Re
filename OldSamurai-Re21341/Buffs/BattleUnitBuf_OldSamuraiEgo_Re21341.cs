@@ -67,7 +67,7 @@ namespace OldSamurai_Re21341.Buffs
 
         private void RemoveSamuraiEgoMap()
         {
-            Destroy();
+            _owner.bufListDetail.RemoveBuf(this);
             MapUtil.ReturnFromEgoMap("OldSamurai_Re21341",
                 new List<LorId>
                     { new LorId(KamiyoModParameters.PackageId, 1), new LorId(KamiyoModParameters.PackageId, 12) },
