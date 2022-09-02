@@ -26,6 +26,9 @@ namespace Raziel_Re21341.Buffs
                     "8_B/FX_IllusionCard_8_B_Punising", 1f, _owner.view, _owner.view);
             _aura = effect != null ? effect.gameObject : null;
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
+            if (_aura == null) return;
+            foreach (var particle in _aura.gameObject.GetComponentsInChildren<ParticleSystem>())
+                if (particle.gameObject.name.Contains("Bird")) particle.gameObject.SetActive(false);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
@@ -54,7 +57,7 @@ namespace Raziel_Re21341.Buffs
             base.Destroy();
         }
 
-        private void DestroyAura()
+        public void DestroyAura()
         {
             if (_aura == null) return;
             Object.Destroy(_aura);

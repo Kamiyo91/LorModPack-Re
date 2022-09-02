@@ -13,12 +13,15 @@ namespace Raziel_Re21341.Cards
 
         public override void OnApplyCard()
         {
-            owner.bufListDetail.AddBuf(new BattleUnitBuf_OwlSpirit_Re21341());
+            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_OwlSpirit_Re21341>()) owner.bufListDetail.AddBuf(new BattleUnitBuf_OwlSpirit_Re21341());
         }
 
         public override void OnReleaseCard()
         {
-            owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_OwlSpirit_Re21341)?.Destroy();
+            if (!(owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_OwlSpirit_Re21341) is
+                    BattleUnitBuf_OwlSpirit_Re21341 buff)) return;
+            buff.DestroyAura();
+            owner.bufListDetail.RemoveBuf(buff);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Sound;
+using UnityEngine;
 
 namespace Mio_Re21341.Buffs
 {
@@ -31,9 +32,20 @@ namespace Mio_Re21341.Buffs
 
         private void InitAuraAndPlaySound()
         {
-            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
+            var effect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
                 "5_T/FX_IllusionCard_5_T_Happiness", 1f, _owner.view, _owner.view);
             SoundEffectPlayer.PlaySound("Creature/Greed_MakeDiamond");
+            foreach (var particle in effect.gameObject.GetComponentsInChildren<ParticleSystem>())
+            {
+                if (!particle.gameObject.name.Contains("Force"))
+                {
+                    particle.gameObject.SetActive(false);
+                    continue;
+                }
+                var main = particle.main;
+                main.startColor = particle.gameObject.name.Equals("Force_burn") ? new Color(1, 0, 0, 1) : new Color(1, 1, 0.702f, 1);
+
+            }
         }
 
         public override void OnRoundEnd()

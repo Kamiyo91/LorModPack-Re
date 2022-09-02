@@ -1,5 +1,4 @@
-﻿using Battle.CreatureEffect;
-using Sound;
+﻿using Sound;
 using UnityEngine;
 using Wilton_Re21341.Passives;
 
@@ -7,9 +6,6 @@ namespace Wilton_Re21341.Buffs
 {
     public class BattleUnitBuf_Vengeance_Re21341 : BattleUnitBuf
     {
-        private const string Path = "6/RedHood_Emotion_Aura";
-        private CreatureEffect _aura;
-
         public BattleUnitBuf_Vengeance_Re21341()
         {
             stack = 0;
@@ -23,7 +19,11 @@ namespace Wilton_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            PlayChangingEffect(owner);
+            var effect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising",
+                1f, _owner.view, _owner.view);
+            SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
+            foreach (var particle in effect.gameObject.GetComponentsInChildren<ParticleSystem>())
+                if (particle.gameObject.name.Contains("Bird") || particle.gameObject.name.Contains("Main")) particle.gameObject.SetActive(false);
             var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
                 PassiveAbility_MysticEyes_Re21341;
             passive?.ChangeStacks(2);
@@ -38,24 +38,6 @@ namespace Wilton_Re21341.Buffs
                 });
         }
 
-        private void PlayChangingEffect(BattleUnitModel owner)
-        {
-            owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
-            if (_aura == null)
-                _aura = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect(Path, 1f, owner.view,
-                    owner.view);
-            var original = Resources.Load("Prefabs/Battle/SpecialEffect/RedMistRelease_ActivateParticle");
-            if (original != null)
-            {
-                var gameObject = Object.Instantiate(original) as GameObject;
-                gameObject.transform.parent = owner.view.charAppearance.transform;
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
-            }
-
-            SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
-        }
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
         {
