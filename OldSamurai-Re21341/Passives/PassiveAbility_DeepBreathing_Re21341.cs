@@ -1,6 +1,6 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 
-namespace OldSamurai_Re21341.Passives
+namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
     public class PassiveAbility_DeepBreathing_Re21341 : PassiveAbilityBase
     {

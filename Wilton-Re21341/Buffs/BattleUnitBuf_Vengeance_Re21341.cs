@@ -1,8 +1,8 @@
-﻿using Sound;
+﻿using KamiyoModPack.Wilton_Re21341.Passives;
+using Sound;
 using UnityEngine;
-using Wilton_Re21341.Passives;
 
-namespace Wilton_Re21341.Buffs
+namespace KamiyoModPack.Wilton_Re21341.Buffs
 {
     public class BattleUnitBuf_Vengeance_Re21341 : BattleUnitBuf
     {
@@ -19,11 +19,13 @@ namespace Wilton_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
-            var effect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("8_B/FX_IllusionCard_8_B_Punising",
+            var effect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
+                "8_B/FX_IllusionCard_8_B_Punising",
                 1f, _owner.view, _owner.view);
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
             foreach (var particle in effect.gameObject.GetComponentsInChildren<ParticleSystem>())
-                if (particle.gameObject.name.Contains("Bird") || particle.gameObject.name.Contains("Main")) particle.gameObject.SetActive(false);
+                if (particle.gameObject.name.Contains("Bird") || particle.gameObject.name.Contains("Main"))
+                    particle.gameObject.SetActive(false);
             var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
                 PassiveAbility_MysticEyes_Re21341;
             passive?.ChangeStacks(2);

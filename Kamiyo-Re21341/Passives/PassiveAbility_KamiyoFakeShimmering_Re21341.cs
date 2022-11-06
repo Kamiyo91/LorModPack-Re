@@ -1,6 +1,6 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 
-namespace Kamiyo_Re21341.Passives
+namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_KamiyoFakeShimmering_Re21341 : PassiveAbilityBase
     {

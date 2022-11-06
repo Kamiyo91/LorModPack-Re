@@ -1,6 +1,6 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Raziel_Re21341.Passives
+namespace KamiyoModPack.Raziel_Re21341.Passives
 {
     public class PassiveAbility_InquisitorShimmering_Re21341 : PassiveAbilityBase
     {

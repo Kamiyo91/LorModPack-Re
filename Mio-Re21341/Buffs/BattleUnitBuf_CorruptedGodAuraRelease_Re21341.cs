@@ -1,7 +1,7 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 using Sound;
 
-namespace Mio_Re21341.Buffs
+namespace KamiyoModPack.Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_CorruptedGodAuraRelease_Re21341 : BattleUnitBuf
     {
@@ -33,7 +33,7 @@ namespace Mio_Re21341.Buffs
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
-            UnitUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
+            ArtUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
         }
 
         public override void OnRoundEnd()

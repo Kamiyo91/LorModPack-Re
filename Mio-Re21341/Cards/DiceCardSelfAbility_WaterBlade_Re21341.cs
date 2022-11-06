@@ -1,4 +1,4 @@
-﻿namespace Mio_Re21341.Cards
+﻿namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_WaterBlade_Re21341 : DiceCardSelfAbilityBase
     {

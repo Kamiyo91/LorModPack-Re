@@ -1,6 +1,6 @@
 ﻿using LOR_DiceSystem;
 
-namespace Hayate_Re21341.Cards
+namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_Rage_Re21341 : DiceCardSelfAbilityBase
     {

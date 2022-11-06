@@ -1,16 +1,17 @@
-﻿using KamiyoStaticUtil.Utils;
-using OldSamurai_Re21341.Buffs;
-using Util_Re21341.CommonBuffs;
+﻿using BigDLL4221.Buffs;
+using BigDLL4221.Passives;
+using BigDLL4221.Utils;
+using KamiyoModPack.OldSamurai_Re21341.Buffs;
 
-namespace OldSamurai_Re21341.Passives
+namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
-    public class PassiveAbility_GhostSamurai_Re21341 : PassiveAbilityBase
+    public class PassiveAbility_GhostSamurai_Re21341 : PassiveAbility_SupportChar_DLL4221
     {
         private void AddGhostUnitBuffs()
         {
             owner.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_LibrarianAura());
             if (owner.faction == Faction.Player)
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_Re21341());
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_DLL4221());
             else
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_GhostSamuraiEnemy_Re21341());
         }
@@ -24,7 +25,7 @@ namespace OldSamurai_Re21341.Passives
 
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_KeterFinal_LibrarianAura));
             owner.bufListDetail.RemoveBufAll(owner.faction == Faction.Player
-                ? typeof(BattleUnitBuf_Uncontrollable_Re21341)
+                ? typeof(BattleUnitBuf_Uncontrollable_DLL4221)
                 : typeof(BattleUnitBuf_GhostSamuraiEnemy_Re21341));
         }
 
@@ -32,13 +33,14 @@ namespace OldSamurai_Re21341.Passives
         {
             if (owner.IsDead() && owner.faction == Faction.Enemy && BattleObjectManager.instance
                     .GetAliveList(Faction.Enemy)
-                    .Exists(x => x.bufListDetail.HasBuf<BattleUnitBuf_OldSamuraiEgoNpc_Re21341>()))
+                    .Exists(x => x.passiveDetail.HasPassive<PassiveAbility_OldSamuraiEnemyDesc_Re21341>()))
                 UnitUtil.UnitReviveAndRecovery(owner, 25, false);
         }
 
         public override void OnWaveStart()
         {
             AddGhostUnitBuffs();
+            base.OnWaveStart();
         }
 
         public override void OnDie()

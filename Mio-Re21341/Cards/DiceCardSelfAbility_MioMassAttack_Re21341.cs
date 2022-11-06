@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models;
-using Mio_Re21341.Buffs;
+﻿using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.Mio_Re21341.Buffs;
 
-namespace Mio_Re21341.Cards
+namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_MioMassAttack_Re21341 : DiceCardSelfAbilityBase
     {

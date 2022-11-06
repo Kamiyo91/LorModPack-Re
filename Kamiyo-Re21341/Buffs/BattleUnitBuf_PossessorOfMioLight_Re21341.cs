@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 using Sound;
 
-namespace Kamiyo_Re21341.Buffs
+namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_PossessorOfMioLight_Re21341 : BattleUnitBuf
     {

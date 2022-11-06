@@ -1,8 +1,16 @@
-﻿namespace Hayate_Re21341.Buffs
+﻿using BigDLL4221.Buffs;
+
+namespace KamiyoModPack.Hayate_Re21341.Buffs
 {
-    public class BattleUnitBuf_EntertainMe_Re21341 : BattleUnitBuf
+    public class BattleUnitBuf_EntertainMe_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
     {
         private int _addValue;
+
+        public BattleUnitBuf_EntertainMe_Re21341() : base(infinite: true, lastOneScene: false)
+        {
+        }
+
+        public override int MaxStack => 50;
         public override BufPositiveType positiveType => BufPositiveType.Positive;
 
         protected override string keywordId =>
@@ -28,24 +36,9 @@
 
         public override void OnRoundEndTheLast()
         {
-            AddStack(_owner.faction == Faction.Enemy ? 5 : 3);
+            OnAddBuf(_owner.faction == Faction.Enemy ? 5 : 3);
         }
 
-        public void AddStack(int value = 1)
-        {
-            if (stack + _addValue > 50)
-                stack = 50;
-            else
-                stack += _addValue * value;
-        }
-
-        private void SubStack()
-        {
-            if (stack - _addValue < 0)
-                stack = 0;
-            else
-                stack -= _addValue;
-        }
 
         public void SetValue(int value)
         {
@@ -54,13 +47,13 @@
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
-            AddStack();
+            OnAddBuf(_addValue);
         }
 
         public override void BeforeTakeDamage(BattleUnitModel attacker, int dmg)
         {
             if (attacker == null) return;
-            SubStack();
+            OnAddBuf(-_addValue);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models;
-using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
+using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Mio_Re21341.Passives
+namespace KamiyoModPack.Mio_Re21341.Passives
 {
     public class PassiveAbility_HiddenBlade_Re21341 : PassiveAbilityBase
     {

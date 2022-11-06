@@ -1,7 +1,7 @@
 ﻿using Sound;
 using UnityEngine;
 
-namespace Mio_Re21341.Buffs
+namespace KamiyoModPack.Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_GodAuraRelease_Re21341 : BattleUnitBuf
     {
@@ -42,9 +42,11 @@ namespace Mio_Re21341.Buffs
                     particle.gameObject.SetActive(false);
                     continue;
                 }
-                var main = particle.main;
-                main.startColor = particle.gameObject.name.Equals("Force_burn") ? new Color(1, 0, 0, 1) : new Color(1, 1, 0.702f, 1);
 
+                var main = particle.main;
+                main.startColor = particle.gameObject.name.Equals("Force_burn")
+                    ? new Color(1, 0, 0, 1)
+                    : new Color(1, 1, 0.702f, 1);
             }
         }
 

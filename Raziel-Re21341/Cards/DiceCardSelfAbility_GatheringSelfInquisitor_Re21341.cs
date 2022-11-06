@@ -1,4 +1,4 @@
-﻿namespace Raziel_Re21341.Cards
+﻿namespace KamiyoModPack.Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_GatheringSelfInquisitor_Re21341 : DiceCardSelfAbilityBase
     {

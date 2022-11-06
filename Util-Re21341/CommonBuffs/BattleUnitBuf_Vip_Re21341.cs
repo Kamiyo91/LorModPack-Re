@@ -1,6 +1,6 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 
-namespace Util_Re21341.CommonBuffs
+namespace KamiyoModPack.Util_Re21341.CommonBuffs
 {
     public class BattleUnitBuf_Vip_Re21341 : BattleUnitBuf
     {
@@ -15,7 +15,7 @@ namespace Util_Re21341.CommonBuffs
 
         public override void OnDie()
         {
-            UnitUtil.VipDeathPlayer();
+            UnitUtil.VipDeath(_owner);
         }
     }
 }

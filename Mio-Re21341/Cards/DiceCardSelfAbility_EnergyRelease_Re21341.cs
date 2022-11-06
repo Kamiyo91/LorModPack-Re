@@ -1,6 +1,6 @@
-﻿using Util_Re21341.CommonBuffs;
+﻿using BigDLL4221.Buffs;
 
-namespace Mio_Re21341.Cards
+namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_EnergyRelease_Re21341 : DiceCardSelfAbilityBase
     {
@@ -12,7 +12,7 @@ namespace Mio_Re21341.Cards
         public override void OnStartBattle()
         {
             owner.bufListDetail.RemoveBufAll(KeywordBuf.Binding);
-            owner.bufListDetail.AddBuf(new BattleUnitBuf_ImmunityToBinding_Re21341());
+            owner.bufListDetail.AddBuf(new BattleUnitBuf_ImmunityToOneStatus_DLL4221(immunityType: KeywordBuf.Binding));
         }
     }
 }

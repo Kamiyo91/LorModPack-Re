@@ -1,6 +1,6 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 
-namespace OldSamurai_Re21341.Buffs
+namespace KamiyoModPack.OldSamurai_Re21341.Buffs
 {
     public class BattleUnitBuf_DeepBreathing_Re21341 : BattleUnitBuf
     {
@@ -21,7 +21,7 @@ namespace OldSamurai_Re21341.Buffs
 
         public override void OnRoundEnd()
         {
-            Destroy();
+            _owner.bufListDetail.RemoveBuf(this);
         }
     }
 }

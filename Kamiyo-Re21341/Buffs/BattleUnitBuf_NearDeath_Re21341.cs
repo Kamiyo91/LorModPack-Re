@@ -1,4 +1,4 @@
-﻿namespace Kamiyo_Re21341.Buffs
+﻿namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_NearDeath_Re21341 : BattleUnitBuf
     {
@@ -21,8 +21,8 @@
 
         public override bool CanRecoverHp(int amount)
         {
-            if (_owner.hp + amount < 25) return true;
-            _owner.SetHp(25);
+            if (_owner.hp + amount < 64) return true;
+            _owner.SetHp(64);
             return false;
         }
     }

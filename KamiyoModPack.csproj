@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DA034EC-D08C-4E84-B24A-2B75DBBB72F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KamiyoModPack</RootNamespace>
+    <AssemblyName>KamiyoModPack</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="BigDLL4221">
+      <HintPath>..\..\NewDLL\bin\Debug\BigDLL4221.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CommonDLL\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\..\CommonDLL\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL-Re21341\Models\KamiyoModParameters.cs" />
+    <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMeFinalPhase_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FerventCut_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FingersnapNpc_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FingersnapSpecial_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_Fingersnap_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_LightingBlade_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_PowerSlash_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_Rage_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_Ultima_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\EnemyTeamStageManager_Hayate_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Hayate_Re21341MapManager.cs" />
+    <Compile Include="Hayate-Re21341\MechUtil\MechUtil_Hayate.cs" />
+    <Compile Include="Hayate-Re21341\MechUtil\NpcMechUtil_Hayate.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_DontGetTooCocky_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HayateNpc_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HayateShimmering_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_Hayate_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighDivinity_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighGuard_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeathNpc_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_PossessorOfMioLight_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_AlterEgoCard_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_FireAbsorb_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_FireBlade_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_FireOverflow_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KurosawaFireMagic_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_OutragingFire_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\EnemyTeamStageManager_Kamiyo_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo1_Re21341MapManager.cs" />
+    <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo2_Re21341MapManager.cs" />
+    <Compile Include="Kamiyo-Re21341\MechUtil\NpcMechUtil_Kamiyo.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_AlterEgoNpc_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_AlterEgoPlayer_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_KamiyoFakeShimmering_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_MaskOfPerceptionNpc_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_MaskOfPerception_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_PossesorOfMioLight_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_SixthSense_Re21341.cs" />
+    <Compile Include="LoRModPack-Re\Harmony\ModInit-Re21341.cs" />
+    <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_CorruptedGodAuraRelease_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_GodAuraRelease_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_KurosawaEmblem_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_SakuraPetal_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_EnergyRelease_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_GodAuraCard_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_MioMassAttack_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_Rush_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_SakuraBloom_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_SakuraPetal_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_WaterBlade_Re21341.cs" />
+    <Compile Include="Mio-Re21341\EnemyTeamStageManager_Mio_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Mio_Re21341MapManager.cs" />
+    <Compile Include="Mio-Re21341\MechUtil_Mio.cs" />
+    <Compile Include="Mio-Re21341\Passives\PassiveAbility_GodFragmentEnemy_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Passives\PassiveAbility_GodFragment_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Passives\PassiveAbility_HiddenBlade_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Passives\PassiveAbility_KurosawaEmblem_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Passives\PassiveAbility_MioMemory_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\EnemyTeamStageManager_OldSamurai_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
+    <Compile Include="OldSamurai-Re21341\MapManager\OldSamurai_Re21341MapManager.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_GhostSamurai_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_OldSamuraiEnemyDesc_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_OldSamurai_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Raziel-Re21341\Buffs\BattleUnitBuf_OwlSpiritNpc_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Buffs\BattleUnitBuf_OwlSpirit_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Execution_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_GatheringSelfInquisitor_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_InquisitorBlade_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Kaioken_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Meeting_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_RazielMassAttack_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\EnemyTeamStageManager_Raziel_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\MechUtil\NpcMechUtil_Raziel.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GodTrial_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorBlade_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorEnemy_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorShimmering_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_Inquisitor_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\Raziel_Re21341MapManager.cs" />
+    <Compile Include="Util-Re21341\CommonBuffs\BattleUnitBuf_Vip_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonCards\DiceCardSelfAbility_CustomInstantIndexRelease_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonCards\DiceCardSelfAbility_Solo_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_CustomInstantIndexRelease_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaStory_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_NotEquip_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_PlayerShimmering_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_Solo_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_WillOTheWisp_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Buffs\BattleUnitBuf_Vengeance_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_HorizonSlash_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_MysticEyeVision_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_ShockWave_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_Stiletto_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_Vengeance_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_WiltonMassAttack_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\EnemyTeamStageManager_Wilton_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Passives\PassiveAbility_ButlerStiletto_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Passives\PassiveAbility_KurosawaButlerEnemy_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Passives\PassiveAbility_KurosawaButler_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Passives\PassiveAbility_MysticEyes_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Wilton_Re21341MapManager.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

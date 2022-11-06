@@ -1,11 +1,10 @@
 ﻿using Sound;
 using UnityEngine;
 
-namespace Raziel_Re21341.Buffs
+namespace KamiyoModPack.Raziel_Re21341.Buffs
 {
     public class BattleUnitBuf_OwlSpirit_Re21341 : BattleUnitBuf
     {
-        private static readonly int Power = RandomUtil.Range(0, 2);
         private GameObject _aura;
 
         public BattleUnitBuf_OwlSpirit_Re21341()
@@ -28,40 +27,18 @@ namespace Raziel_Re21341.Buffs
             SoundEffectPlayer.PlaySound("Creature/SmallBird_StrongAtk");
             if (_aura == null) return;
             foreach (var particle in _aura.gameObject.GetComponentsInChildren<ParticleSystem>())
-                if (particle.gameObject.name.Contains("Bird")) particle.gameObject.SetActive(false);
+                if (particle.gameObject.name.Contains("Bird"))
+                    particle.gameObject.SetActive(false);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            var pow = Power;
+            var pow = RandomUtil.Range(0, 2);
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 min = pow,
                 max = pow
             });
-        }
-
-        public override void OnRoundEnd()
-        {
-            Destroy();
-        }
-
-        public override void OnDie()
-        {
-            Destroy();
-        }
-
-        public override void Destroy()
-        {
-            DestroyAura();
-            base.Destroy();
-        }
-
-        public void DestroyAura()
-        {
-            if (_aura == null) return;
-            Object.Destroy(_aura);
-            _aura = null;
         }
     }
 }

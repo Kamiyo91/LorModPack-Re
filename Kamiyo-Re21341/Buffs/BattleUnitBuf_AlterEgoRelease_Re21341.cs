@@ -2,7 +2,7 @@
 using Sound;
 using UnityEngine;
 
-namespace Kamiyo_Re21341.Buffs
+namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_AlterEgoRelease_Re21341 : BattleUnitBuf
     {

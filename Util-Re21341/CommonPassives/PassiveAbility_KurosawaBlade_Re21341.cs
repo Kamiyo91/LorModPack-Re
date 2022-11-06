@@ -1,6 +1,6 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 
-namespace Util_Re21341.CommonPassives
+namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
     public class PassiveAbility_KurosawaBlade_Re21341 : PassiveAbilityBase
     {

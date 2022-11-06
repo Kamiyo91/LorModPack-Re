@@ -1,6 +1,6 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Mio_Re21341.Buffs
+namespace KamiyoModPack.Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_KurosawaEmblem_Re21341 : BattleUnitBuf
     {

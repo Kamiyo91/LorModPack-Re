@@ -1,6 +1,6 @@
-﻿using Kamiyo_Re21341.Buffs;
+﻿using KamiyoModPack.Kamiyo_Re21341.Buffs;
 
-namespace Kamiyo_Re21341.Passives
+namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_PossesorOfMioLight_Re21341 : PassiveAbilityBase
     {

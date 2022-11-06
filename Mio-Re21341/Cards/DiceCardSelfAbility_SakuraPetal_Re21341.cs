@@ -1,7 +1,7 @@
-﻿using KamiyoStaticUtil.Utils;
-using Mio_Re21341.Buffs;
+﻿using BigDLL4221.Utils;
+using KamiyoModPack.Mio_Re21341.Buffs;
 
-namespace Mio_Re21341.Cards
+namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_SakuraPetal_Re21341 : DiceCardSelfAbilityBase
     {
@@ -15,7 +15,7 @@ namespace Mio_Re21341.Cards
         {
             if (!(unit.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
                     BattleUnitBuf_SakuraPetal_Re21341 buf)) return;
-            SkinUtil.SakuraEffect(unit);
+            ArtUtil.IndexReleaseBreakEffect(unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, unit);
             buf.Destroy();

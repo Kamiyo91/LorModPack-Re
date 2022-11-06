@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace Hayate_Re21341
+namespace KamiyoModPack.Hayate_Re21341
 {
     public class Hayate_Re21341MapManager : CustomMapManager
     {

@@ -1,6 +1,7 @@
-﻿using Hayate_Re21341.Buffs;
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Hayate_Re21341.Buffs;
 
-namespace Hayate_Re21341.Cards
+namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_Fingersnap_Re21341 : DiceCardSelfAbilityBase
     {
@@ -14,6 +15,7 @@ namespace Hayate_Re21341.Cards
 
         public override void OnStartBattle()
         {
+            owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>().OnAddBuf(-999);
             if (_motionChange)
             {
                 _motionChange = false;

@@ -1,6 +1,6 @@
-﻿using Util_Re21341.CommonBuffs;
+﻿using BigDLL4221.Buffs;
 
-namespace Util_Re21341.CommonCards
+namespace KamiyoModPack.Util_Re21341.CommonCards
 {
     public class DiceCardSelfAbility_CustomInstantIndexRelease_Re21341 : DiceCardSelfAbilityBase
     {
@@ -12,7 +12,7 @@ namespace Util_Re21341.CommonCards
 
         private static void Activate(BattleUnitModel unit)
         {
-            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_CustomInstantIndexRelease_Re21341());
+            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_CustomInstantIndexRelease_DLL4221());
         }
     }
 }

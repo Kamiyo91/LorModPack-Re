@@ -1,6 +1,6 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Util_Re21341.CommonPassives
+namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
     public class PassiveAbility_KurosawaStory_Re21341 : PassiveAbilityBase
     {

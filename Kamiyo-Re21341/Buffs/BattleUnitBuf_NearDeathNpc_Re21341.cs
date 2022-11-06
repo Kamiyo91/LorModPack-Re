@@ -1,4 +1,4 @@
-﻿namespace Kamiyo_Re21341.Buffs
+﻿namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_NearDeathNpc_Re21341 : BattleUnitBuf
     {

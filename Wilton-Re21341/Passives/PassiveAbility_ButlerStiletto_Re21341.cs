@@ -1,4 +1,4 @@
-﻿namespace Wilton_Re21341.Passives
+﻿namespace KamiyoModPack.Wilton_Re21341.Passives
 {
     public class PassiveAbility_ButlerStiletto_Re21341 : PassiveAbilityBase
     {

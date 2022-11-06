@@ -1,6 +1,6 @@
-﻿using Util_Re21341.CommonPassives;
+﻿using KamiyoModPack.Util_Re21341.CommonPassives;
 
-namespace Raziel_Re21341.Cards
+namespace KamiyoModPack.Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_RazielMassAttack_Re21341 : DiceCardSelfAbilityBase
     {

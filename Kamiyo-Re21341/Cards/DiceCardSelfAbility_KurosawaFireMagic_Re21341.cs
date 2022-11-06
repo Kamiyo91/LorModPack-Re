@@ -1,4 +1,4 @@
-﻿namespace Kamiyo_Re21341.Cards
+﻿namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_KurosawaFireMagic_Re21341 : DiceCardSelfAbilityBase
     {

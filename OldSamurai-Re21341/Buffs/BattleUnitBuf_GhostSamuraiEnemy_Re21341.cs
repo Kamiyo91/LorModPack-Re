@@ -1,4 +1,4 @@
-﻿namespace OldSamurai_Re21341.Buffs
+﻿namespace KamiyoModPack.OldSamurai_Re21341.Buffs
 {
     public class BattleUnitBuf_GhostSamuraiEnemy_Re21341 : BattleUnitBuf
     {

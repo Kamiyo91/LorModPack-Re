@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace Mio_Re21341
+namespace KamiyoModPack.Mio_Re21341
 {
     public class Mio_Re21341MapManager : CustomMapManager
     {

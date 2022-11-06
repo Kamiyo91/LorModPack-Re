@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace Kamiyo_Re21341.MapManager
+namespace KamiyoModPack.Kamiyo_Re21341.MapManager
 {
     public class Kamiyo2_Re21341MapManager : CustomMapManager
     {

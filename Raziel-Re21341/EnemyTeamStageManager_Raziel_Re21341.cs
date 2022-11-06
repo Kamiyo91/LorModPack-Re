@@ -1,20 +1,16 @@
-﻿using CustomMapUtility;
+﻿using System.Collections.Generic;
+using BigDLL4221.Models;
+using BigDLL4221.StageManagers;
+using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Raziel_Re21341
+namespace KamiyoModPack.Raziel_Re21341
 {
-    public class EnemyTeamStageManager_Raziel_Re21341 : EnemyTeamStageManager
+    public class EnemyTeamStageManager_Raziel_Re21341 : EnemyTeamStageManager_BaseWithCMU_DLL4221
     {
         public override void OnWaveStart()
         {
-            CustomMapHandler.InitCustomMap("Raziel_Re21341", typeof(Raziel_Re21341MapManager), false, true, 0.5f,
-                0.375f, 0.5f, 0.225f);
-            CustomMapHandler.EnforceMap();
-            Singleton<StageController>.Instance.CheckMapChange();
-        }
-
-        public override void OnRoundStart()
-        {
-            CustomMapHandler.EnforceMap();
+            SetParameters(new RazielUtil().RazielNpcUtil, new List<MapModel> { KamiyoModParameters.RazielMap });
+            base.OnWaveStart();
         }
     }
 }

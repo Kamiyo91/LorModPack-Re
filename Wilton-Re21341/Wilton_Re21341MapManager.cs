@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace Wilton_Re21341
+namespace KamiyoModPack.Wilton_Re21341
 {
     public class Wilton_Re21341MapManager : CustomMapManager
     {

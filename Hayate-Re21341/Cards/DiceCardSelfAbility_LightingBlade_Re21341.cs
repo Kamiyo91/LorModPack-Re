@@ -1,4 +1,4 @@
-﻿namespace Hayate_Re21341.Cards
+﻿namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_LightingBlade_Re21341 : DiceCardSelfAbilityBase
     {

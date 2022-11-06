@@ -1,6 +1,6 @@
-﻿using Mio_Re21341.Buffs;
+﻿using KamiyoModPack.Mio_Re21341.Buffs;
 
-namespace Mio_Re21341.Passives
+namespace KamiyoModPack.Mio_Re21341.Passives
 {
     public class PassiveAbility_KurosawaEmblem_Re21341 : PassiveAbilityBase
     {

@@ -1,7 +1,7 @@
-﻿using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
 using LOR_DiceSystem;
 
-namespace Kamiyo_Re21341.Passives
+namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_MaskOfPerceptionNpc_Re21341 : PassiveAbilityBase
     {

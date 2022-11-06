@@ -1,8 +1,8 @@
-﻿using BLL_Re21341.Models;
-using KamiyoStaticUtil.Utils;
-using Util_Re21341.CommonBuffs;
+﻿using BigDLL4221.Buffs;
+using BigDLL4221.Utils;
+using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Hayate_Re21341.Passives
+namespace KamiyoModPack.Hayate_Re21341.Passives
 {
     public class PassiveAbility_DontGetTooCocky_Re21341 : PassiveAbilityBase
     {
@@ -14,7 +14,7 @@ namespace Hayate_Re21341.Passives
             _used = true;
             owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
-            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_DLL4221(isImmortalBp: true));
         }
 
         public override void OnLoseParrying(BattleDiceBehavior behavior)
@@ -23,7 +23,7 @@ namespace Hayate_Re21341.Passives
             _used = true;
             owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
-            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_DLL4221(isImmortalBp: true));
         }
 
         public override void OnTakeDamageByAttack(BattleDiceBehavior atkDice, int dmg)
@@ -32,7 +32,7 @@ namespace Hayate_Re21341.Passives
             _used = true;
             owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 907));
             UnitUtil.UnitReviveAndRecovery(owner, 0, false);
-            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ImmortalSpecialUntilRoundEnd_Re21341());
+            owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Immortal_DLL4221(isImmortalBp: true));
         }
 
         public override void OnRoundEndTheLast_ignoreDead()

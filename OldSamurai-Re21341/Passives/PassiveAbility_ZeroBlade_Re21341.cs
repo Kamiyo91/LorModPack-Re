@@ -1,8 +1,8 @@
-﻿using BLL_Re21341.Models;
-using KamiyoStaticUtil.Utils;
-using OldSamurai_Re21341.Dice;
+﻿using BigDLL4221.Utils;
+using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.OldSamurai_Re21341.Dice;
 
-namespace OldSamurai_Re21341.Passives
+namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
     public class PassiveAbility_ZeroBlade_Re21341 : PassiveAbilityBase
     {

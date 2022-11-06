@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace Raziel_Re21341
+namespace KamiyoModPack.Raziel_Re21341
 {
     public class Raziel_Re21341MapManager : CustomMapManager
     {

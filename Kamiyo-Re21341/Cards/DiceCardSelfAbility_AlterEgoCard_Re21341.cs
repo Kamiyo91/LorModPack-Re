@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models;
-using Util_Re21341.CommonPassives;
+﻿using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.Util_Re21341.CommonPassives;
 
-namespace Kamiyo_Re21341.Cards
+namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_AlterEgoCard_Re21341 : DiceCardSelfAbilityBase
     {

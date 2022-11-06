@@ -1,7 +1,7 @@
-﻿using Hayate_Re21341.Buffs;
+﻿using KamiyoModPack.Hayate_Re21341.Buffs;
 using LOR_DiceSystem;
 
-namespace Hayate_Re21341.Cards
+namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_Ultima_Re21341 : DiceCardSelfAbilityBase
     {
@@ -24,7 +24,7 @@ namespace Hayate_Re21341.Cards
             var buff =
                 owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
                     BattleUnitBuf_EntertainMe_Re21341;
-            buff?.AddStack(3);
+            buff?.OnAddBuf(3);
         }
     }
 }

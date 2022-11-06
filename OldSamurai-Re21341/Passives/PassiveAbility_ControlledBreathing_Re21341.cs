@@ -1,9 +1,9 @@
-﻿using BLL_Re21341.Models;
+﻿using BigDLL4221.Buffs;
+using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.OldSamurai_Re21341.Cards;
 using LOR_DiceSystem;
-using OldSamurai_Re21341.Cards;
-using Util_Re21341.CommonBuffs;
 
-namespace OldSamurai_Re21341.Passives
+namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
     public class PassiveAbility_ControlledBreathing_Re21341 : PassiveAbilityBase
     {
@@ -44,7 +44,7 @@ namespace OldSamurai_Re21341.Passives
 
         public override void OnRoundEndTheLast()
         {
-            if (owner.faction != Faction.Enemy && !owner.bufListDetail.HasBuf<BattleUnitBuf_Uncontrollable_Re21341>())
+            if (owner.faction != Faction.Enemy && !owner.bufListDetail.HasBuf<BattleUnitBuf_Uncontrollable_DLL4221>())
                 return;
 
             _enemyCount++;

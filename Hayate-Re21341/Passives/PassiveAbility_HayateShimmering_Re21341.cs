@@ -1,14 +1,9 @@
-﻿using BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Hayate_Re21341.Passives
+namespace KamiyoModPack.Hayate_Re21341.Passives
 {
     public class PassiveAbility_HayateShimmering_Re21341 : PassiveAbilityBase
     {
-        public override int SpeedDiceNumAdder()
-        {
-            return 2;
-        }
-
         public override void OnRoundStartAfter()
         {
             SetCards();

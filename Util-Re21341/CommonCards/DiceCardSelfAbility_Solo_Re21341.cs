@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using KamiyoStaticUtil.Utils;
+using BigDLL4221.Utils;
 
-namespace Util_Re21341.CommonCards
+namespace KamiyoModPack.Util_Re21341.CommonCards
 {
     public class DiceCardSelfAbility_Solo_Re21341 : DiceCardSelfAbilityBase
     {
@@ -15,7 +15,7 @@ namespace Util_Re21341.CommonCards
         {
             foreach (var allyUnit in BattleObjectManager.instance.GetAliveList(unit.faction).Where(x => x != unit))
             {
-                UnitUtil.RemoveDiceTargets(allyUnit);
+                UnitUtil.RemoveDiceTargets(allyUnit, true);
                 allyUnit.Die();
             }
         }

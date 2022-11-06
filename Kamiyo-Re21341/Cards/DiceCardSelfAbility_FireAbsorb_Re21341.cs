@@ -1,6 +1,6 @@
-﻿using Kamiyo_Re21341.Buffs;
+﻿using KamiyoModPack.Kamiyo_Re21341.Buffs;
 
-namespace Kamiyo_Re21341.Cards
+namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_FireAbsorb_Re21341 : DiceCardSelfAbilityBase
     {

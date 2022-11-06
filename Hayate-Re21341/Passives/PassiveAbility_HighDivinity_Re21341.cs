@@ -1,4 +1,4 @@
-﻿namespace Hayate_Re21341.Passives
+﻿namespace KamiyoModPack.Hayate_Re21341.Passives
 {
     public class PassiveAbility_HighDivinity_Re21341 : PassiveAbilityBase
     {

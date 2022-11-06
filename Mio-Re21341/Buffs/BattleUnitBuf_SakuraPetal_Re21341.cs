@@ -1,4 +1,4 @@
-﻿namespace Mio_Re21341.Buffs
+﻿namespace KamiyoModPack.Mio_Re21341.Buffs
 {
     public class BattleUnitBuf_SakuraPetal_Re21341 : BattleUnitBuf
     {

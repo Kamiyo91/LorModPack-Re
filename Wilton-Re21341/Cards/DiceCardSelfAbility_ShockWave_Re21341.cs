@@ -1,4 +1,4 @@
-﻿namespace Wilton_Re21341.Cards
+﻿namespace KamiyoModPack.Wilton_Re21341.Cards
 {
     public class DiceCardSelfAbility_ShockWave_Re21341 : DiceCardSelfAbilityBase
     {

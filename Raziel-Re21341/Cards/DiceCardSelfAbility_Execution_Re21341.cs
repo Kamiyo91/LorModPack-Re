@@ -1,7 +1,7 @@
-﻿using BLL_Re21341.Models;
-using KamiyoStaticUtil.Utils;
+﻿using BigDLL4221.Utils;
+using KamiyoModPack.BLL_Re21341.Models;
 
-namespace Raziel_Re21341.Cards
+namespace KamiyoModPack.Raziel_Re21341.Cards
 {
     public class DiceCardSelfAbility_Execution_Re21341 : DiceCardSelfAbilityBase
     {

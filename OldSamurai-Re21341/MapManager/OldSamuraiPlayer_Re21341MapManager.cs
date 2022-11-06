@@ -1,7 +1,7 @@
-﻿using CustomMapUtility;
+﻿using BigDLL4221.Utils;
 using UnityEngine;
 
-namespace OldSamurai_Re21341.MapManager
+namespace KamiyoModPack.OldSamurai_Re21341.MapManager
 {
     public class OldSamuraiPlayer_Re21341MapManager : CustomMapManager
     {

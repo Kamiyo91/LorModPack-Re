@@ -1,17 +1,19 @@
 ﻿using System.Linq;
-using BLL_Re21341.Models;
-using CustomMapUtility;
-using Hayate_Re21341.Passives;
-using KamiyoStaticBLL.Models;
-using KamiyoStaticUtil.Utils;
-using Util_Re21341.CommonBuffs;
+using BigDLL4221.Utils;
+using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.Hayate_Re21341.Passives;
+using KamiyoModPack.Util_Re21341.CommonBuffs;
 
-namespace Wilton_Re21341
+namespace KamiyoModPack.Wilton_Re21341
 {
     public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
+        private readonly StageLibraryFloorModel
+            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
+
         private bool _checkEnd;
         private bool _finalMech;
+
         private BattleUnitModel _mainEnemyModel;
         private Wilton_Re21341MapManager _mapManager;
         private bool _phaseChanged;
@@ -19,13 +21,13 @@ namespace Wilton_Re21341
         public override void OnWaveStart()
         {
             _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
-            CustomMapHandler.InitCustomMap("Wilton_Re21341", typeof(Wilton_Re21341MapManager), false, true, 0.5f, 0.2f);
+            CustomMapHandler.InitCustomMap<Wilton_Re21341MapManager>("Wilton_Re21341", false, true, 0.5f, 0.2f);
             CustomMapHandler.EnforceMap();
             Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
-            if (_finalMech)
-                foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-                    unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
+            //if (_finalMech)
+            //    foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+            //        unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
             if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject is Wilton_Re21341MapManager)
                 _mapManager = SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject as Wilton_Re21341MapManager;
             _phaseChanged = false;
@@ -45,7 +47,7 @@ namespace Wilton_Re21341
 
         public override void OnRoundStart_After()
         {
-            if (_phaseChanged) MapStaticUtil.ActiveCreatureBattleCamFilterComponent();
+            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
         }
 
         private void CheckPhase()
@@ -62,14 +64,8 @@ namespace Wilton_Re21341
             _checkEnd = true;
             foreach (var playerUnit in BattleObjectManager.instance.GetAliveList(Faction.Player))
                 playerUnit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Vip_Re21341));
-            var unit = UnitUtil.AddNewUnitEnemySide(new UnitModel
-            {
-                Id = 6,
-                Pos = 0,
-                EmotionLevel = 5,
-                AddEmotionPassive = false,
-                OnWaveStart = true
-            }, KamiyoModParameters.PackageId);
+            var unit = UnitUtil.AddNewUnitWithDefaultData(_floor, KamiyoModParameters.HayateLastScene, 0,
+                emotionLevel: 5, playerSide: false);
             unit.allyCardDetail.ExhaustAllCards();
             unit.allyCardDetail.AddNewCard(new LorId(KamiyoModParameters.PackageId, 903));
             var passive =
