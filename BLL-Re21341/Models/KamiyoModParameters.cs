@@ -338,7 +338,8 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }, personalCards: new Dictionary<LorId, PersonalCardOptions>
             {
                 { new LorId(KamiyoModParameters.PackageId, 17), new PersonalCardOptions(true, activeEgoCard: true) },
-                { new LorId(KamiyoModParameters.PackageId, 16), new PersonalCardOptions(true) }
+                { new LorId(KamiyoModParameters.PackageId, 16), new PersonalCardOptions(true) },
+                { new LorId(KamiyoModParameters.PackageId, 60), new PersonalCardOptions(true, true) }
             }));
 
         public SummonedUnitStatModelLinked MioMemoryUtil = new SummonedUnitStatModelLinked(
@@ -383,7 +384,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }, egoOptions: new Dictionary<int, EgoOptions>
             {
                 {
-                    0, new EgoOptions(new BattleUnitBuf_OwlSpiritNpc_Re21341(),
+                    0, new EgoOptions(new BattleUnitBuf_OwlSpirit_Re21341(),
                         egoAbDialogList: new List<AbnormalityCardDialog>
                         {
                             new AbnormalityCardDialog
@@ -577,7 +578,8 @@ namespace KamiyoModPack.BLL_Re21341.Models
             personalCards: new Dictionary<LorId, PersonalCardOptions>
             {
                 { new LorId(KamiyoModParameters.PackageId, 47), new PersonalCardOptions(true, activeEgoCard: true) },
-                { new LorId(KamiyoModParameters.PackageId, 48), new PersonalCardOptions(true) }
+                { new LorId(KamiyoModParameters.PackageId, 48), new PersonalCardOptions(true) },
+                { new LorId(KamiyoModParameters.PackageId, 30), new PersonalCardOptions(true, true) }
             }, firstEgoFormCard: new LorId(KamiyoModParameters.PackageId, 47), egoMaps: new Dictionary<LorId, MapModel>
             {
                 { new LorId(KamiyoModParameters.PackageId, 48), KamiyoModParameters.WiltonMap }

@@ -1,4 +1,5 @@
-﻿using BigDLL4221.Extensions;
+﻿using System.Linq;
+using BigDLL4221.Extensions;
 using KamiyoModPack.Hayate_Re21341.Buffs;
 
 namespace KamiyoModPack.Hayate_Re21341.Cards
@@ -32,6 +33,16 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
                     unit.TakeDamage(250, DamageType.ETC);
                     unit.breakDetail.TakeBreakDamage(250, DamageType.ETC);
                 }
+
+            var buff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
+            if (buff != null) owner.bufListDetail.RemoveBuf(buff);
+            var selectedCardList = owner.emotionDetail.GetSelectedCardList();
+            var posCount = selectedCardList.FindAll(x => x.XmlInfo.State == MentalState.Positive).Count;
+            var negCount = selectedCardList.FindAll(x => x.XmlInfo.State == MentalState.Negative).Count;
+            if (!selectedCardList.Any() || posCount > negCount)
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_ThisIsAllYouCanDo_Re21341());
+            else
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_Serious_Re21341());
         }
 
         public override void OnApplyCard()

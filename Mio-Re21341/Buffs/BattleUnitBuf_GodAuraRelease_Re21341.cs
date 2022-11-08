@@ -1,19 +1,21 @@
-﻿using Sound;
+﻿using BigDLL4221.Buffs;
+using Sound;
 using UnityEngine;
 
 namespace KamiyoModPack.Mio_Re21341.Buffs
 {
-    public class BattleUnitBuf_GodAuraRelease_Re21341 : BattleUnitBuf
+    public class BattleUnitBuf_GodAuraRelease_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
     {
-        public BattleUnitBuf_GodAuraRelease_Re21341()
+        public BattleUnitBuf_GodAuraRelease_Re21341() : base(infinite: true, lastOneScene: false)
         {
-            stack = 0;
         }
 
         public override bool isAssimilation => true;
-        public override int paramInBufDesc => 0;
         protected override string keywordId => "GodAura_Re21341";
         protected override string keywordIconId => "Light_Re21341";
+        public override int MaxStack => 30;
+        public override int MinStack => 1;
+        public override int AdderStackEachScene => -1;
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -50,15 +52,20 @@ namespace KamiyoModPack.Mio_Re21341.Buffs
             }
         }
 
+
         public override void OnRoundEnd()
         {
             RecoverHpAndStagger();
+            base.OnRoundEnd();
         }
 
         private void RecoverHpAndStagger()
         {
             _owner.RecoverHP(3);
             _owner.breakDetail.RecoverBreak(3);
+            if (stack > 2) _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Quickness, stack / 3, _owner);
+            if (stack > 9) _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Endurance, stack / 10, _owner);
+            if (stack > 14) _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Strength, stack / 15, _owner);
         }
     }
 }

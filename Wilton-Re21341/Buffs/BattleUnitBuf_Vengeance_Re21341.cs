@@ -1,20 +1,22 @@
-﻿using KamiyoModPack.Wilton_Re21341.Passives;
+﻿using BigDLL4221.Buffs;
+using KamiyoModPack.Wilton_Re21341.Passives;
 using Sound;
 using UnityEngine;
 
 namespace KamiyoModPack.Wilton_Re21341.Buffs
 {
-    public class BattleUnitBuf_Vengeance_Re21341 : BattleUnitBuf
+    public class BattleUnitBuf_Vengeance_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
     {
-        public BattleUnitBuf_Vengeance_Re21341()
+        public BattleUnitBuf_Vengeance_Re21341() : base(infinite: true, lastOneScene: false)
         {
-            stack = 0;
         }
 
-        public override int paramInBufDesc => 0;
         public override bool isAssimilation => true;
         protected override string keywordId => "Vengeance_Re21341";
         protected override string keywordIconId => "RedHood_Rage";
+        public override int MaxStack => 50;
+        public override int MinStack => 1;
+        public override int AdderStackEachScene => -1;
 
         public override void Init(BattleUnitModel owner)
         {
@@ -29,6 +31,7 @@ namespace KamiyoModPack.Wilton_Re21341.Buffs
             var passive = owner.passiveDetail.PassiveList.Find(x => x is PassiveAbility_MysticEyes_Re21341) as
                 PassiveAbility_MysticEyes_Re21341;
             passive?.ChangeStacks(2);
+            passive?.SetBuff(this);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
@@ -38,8 +41,13 @@ namespace KamiyoModPack.Wilton_Re21341.Buffs
                 {
                     power = 1
                 });
+            if (stack > 24)
+                behavior.ApplyDiceStatBonus(
+                    new DiceStatBonus
+                    {
+                        power = 1
+                    });
         }
-
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
         {

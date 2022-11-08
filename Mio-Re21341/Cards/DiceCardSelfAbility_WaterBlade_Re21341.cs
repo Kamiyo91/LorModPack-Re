@@ -1,4 +1,7 @@
-﻿namespace KamiyoModPack.Mio_Re21341.Cards
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Mio_Re21341.Buffs;
+
+namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_WaterBlade_Re21341 : DiceCardSelfAbilityBase
     {
@@ -14,6 +17,7 @@
             var speedDice = target.speedDiceResult[targetSlotOrder];
             var targetDiceBroken = target.speedDiceResult[targetSlotOrder].breaked;
             if (speedDiceResultValue - speedDice.value <= Check && !targetDiceBroken) return;
+            owner.GetActiveBuff<BattleUnitBuf_GodAuraRelease_Re21341>()?.OnAddBuf(1);
             foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
                          .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
             {
