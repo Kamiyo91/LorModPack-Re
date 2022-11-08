@@ -12,18 +12,3 @@ namespace KamiyoModPack.Mio_Re21341.Passives
         }
     }
 }
-//public void ForcedEgo()
-//{
-//    _util.SetVipUnit();
-//    _util.ChangeEgoAbDialog(new List<AbnormalityCardDialog>
-//    {
-//        new AbnormalityCardDialog
-//        {
-//            id = "Mio",
-//            dialog = ModParameters.EffectTexts.FirstOrDefault(x => x.Key.Equals("MioEgoActive3_Re21341")).Value
-//                .Desc
-//        }
-//    });
-//    _util.ForcedEgo();
-//    owner.personalEgoDetail.RemoveCard(new LorId(KamiyoModParameters.PackageId, 9));
-//}

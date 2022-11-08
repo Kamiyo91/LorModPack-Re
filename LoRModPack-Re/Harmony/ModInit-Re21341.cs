@@ -121,12 +121,13 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new CardOptions(17, CardOption.Personal,
                     cardColorOptions: new CardColorOptions(Color.gray, iconColor: HSVColors.Black)),
                 new CardOptions(28, CardOption.Personal,
-                    cardColorOptions: new CardColorOptions(Color.blue, iconColor: HSVColors.Blue)),
+                    cardColorOptions: new CardColorOptions(Color.blue, customIconColor: Color.blue,
+                        useHSVFilter: false)),
                 new CardOptions(29, CardOption.Personal),
                 new CardOptions(42, CardOption.Personal),
                 new CardOptions(47, CardOption.Personal),
                 new CardOptions(57, CardOption.Personal,
-                    cardColorOptions: new CardColorOptions(Color.red, iconColor: new HSVColor(6, 82, 58))),
+                    cardColorOptions: new CardColorOptions(Color.red, customIconColor: Color.red, useHSVFilter: false)),
                 new CardOptions(59, CardOption.Personal),
                 new CardOptions(60, CardOption.Personal),
                 new CardOptions(61, CardOption.Personal),
@@ -151,22 +152,38 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             {
                 new KeypageOptions(3,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 3, customFaceData: false,
-                        originalSkin: "MioNormalEye_Re21341", egoSkin: new List<string> { "MioRedEye_Re21341" })),
+                        originalSkin: "MioNormalEye_Re21341", egoSkin: new List<string> { "MioRedEye_Re21341" }),
+                    keypageColorOptions: new KeypageColorOptions(Color.white, Color.white)),
                 new KeypageOptions(4,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 4, customFaceData: false,
-                        originalSkin: "KamiyoNormal_Re21341", egoSkin: new List<string> { "KamiyoMask_Re21341" })),
+                        originalSkin: "KamiyoNormal_Re21341", egoSkin: new List<string> { "KamiyoMask_Re21341" },
+                        xiaoTaotieAction: ActionDetail.Guard),
+                    keypageColorOptions: new KeypageColorOptions(Color.gray, Color.gray)),
                 new KeypageOptions(10000003, everyoneCanEquip: true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 3, originalSkin: "MioNormalEye_Re21341",
-                        egoSkin: new List<string> { "MioRedEye_Re21341" })),
+                        egoSkin: new List<string> { "MioRedEye_Re21341" }),
+                    keypageColorOptions: new KeypageColorOptions(Color.white, Color.white)),
                 new KeypageOptions(10000004, everyoneCanEquip: true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 4, originalSkin: "KamiyoNormal_Re21341",
-                        egoSkin: new List<string> { "KamiyoMask_Re21341" })),
+                        egoSkin: new List<string> { "KamiyoMask_Re21341" }, xiaoTaotieAction: ActionDetail.Guard),
+                    keypageColorOptions: new KeypageColorOptions(Color.gray, Color.gray)),
+                new KeypageOptions(10000900,
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 3, originalSkin: "MioNormalEye_Re21341",
+                        egoSkin: new List<string> { "MioRedEye_Re21341" }),
+                    keypageColorOptions: new KeypageColorOptions(Color.white, Color.white)),
+                new KeypageOptions(10000901,
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 4, originalSkin: "KamiyoNormal_Re21341",
+                        egoSkin: new List<string> { "KamiyoMask_Re21341" }, xiaoTaotieAction: ActionDetail.Guard),
+                    keypageColorOptions: new KeypageColorOptions(Color.gray, Color.gray)),
                 new KeypageOptions(10000005, everyoneCanEquip: true,
-                    bookCustomOptions: new BookCustomOptions(nameTextId: 6)),
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 6),
+                    keypageColorOptions: new KeypageColorOptions(Color.blue, Color.blue)),
                 new KeypageOptions(10000006, everyoneCanEquip: true,
-                    bookCustomOptions: new BookCustomOptions(nameTextId: 8)),
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 8),
+                    keypageColorOptions: new KeypageColorOptions(Color.cyan, Color.cyan)),
                 new KeypageOptions(10000007, everyoneCanEquip: true,
-                    bookCustomOptions: new BookCustomOptions(nameTextId: 10)),
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 10),
+                    keypageColorOptions: new KeypageColorOptions(Color.yellow, Color.yellow)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
@@ -208,12 +225,17 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             ModParameters.StageOptions.Add(KamiyoModParameters.PackageId, new List<StageOptions>
             {
                 new StageOptions(1, preBattleOptions: new PreBattleOptions(onlySephirah: true)),
-                new StageOptions(4, preBattleOptions: new PreBattleOptions(onlySephirah: true)),
+                new StageOptions(2, stageColorOptions: new StageColorOptions(Color.white, Color.white)),
+                new StageOptions(3, stageColorOptions: new StageColorOptions(Color.gray, Color.gray)),
+                new StageOptions(4, preBattleOptions: new PreBattleOptions(onlySephirah: true),
+                    stageColorOptions: new StageColorOptions(Color.blue, Color.blue)),
                 new StageOptions(6, true,
                     preBattleOptions: new PreBattleOptions(new List<SephirahType> { SephirahType.Keter },
                         new List<UnitModel>
-                            { KamiyoModParameters.KamiyoPreBattleModel, KamiyoModParameters.MioPreBattleModel })),
-                new StageOptions(11, true)
+                            { KamiyoModParameters.KamiyoPreBattleModel, KamiyoModParameters.MioPreBattleModel }),
+                    stageColorOptions: new StageColorOptions(Color.cyan, Color.cyan)),
+                new StageOptions(7, stageColorOptions: new StageColorOptions(Color.yellow, Color.yellow)),
+                new StageOptions(11, true, stageColorOptions: new StageColorOptions(Color.cyan, Color.cyan))
             });
         }
 
@@ -228,7 +250,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new PassiveOptions(13, false, passiveColorOptions: new PassiveColorOptions(Color.gray, Color.gray)),
                 new PassiveOptions(18, false, passiveColorOptions: new PassiveColorOptions(Color.blue, Color.blue)),
                 new PassiveOptions(20, false, passiveColorOptions: new PassiveColorOptions(Color.blue, Color.blue)),
-                new PassiveOptions(24, false),
+                new PassiveOptions(24, false, passiveColorOptions: new PassiveColorOptions(Color.cyan, Color.cyan)),
+                new PassiveOptions(25, false, passiveColorOptions: new PassiveColorOptions(Color.cyan, Color.cyan)),
                 new PassiveOptions(35, false),
                 new PassiveOptions(38, false, passiveColorOptions: new PassiveColorOptions(Color.yellow, Color.yellow)),
                 new PassiveOptions(40, false, passiveColorOptions: new PassiveColorOptions(Color.yellow, Color.yellow)),
@@ -252,29 +275,20 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new PassiveOptions(37, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red))
             });
         }
+
+        private static void OnInitDropBooks()
+        {
+            ModParameters.DropBookOptions.Add(KamiyoModParameters.PackageId, new List<DropBookOptions>
+            {
+                new DropBookOptions(3, new DropBookColorOptions(Color.white, Color.white)),
+                new DropBookOptions(4, new DropBookColorOptions(Color.gray, Color.gray)),
+                new DropBookOptions(5, new DropBookColorOptions(Color.blue, Color.blue)),
+                new DropBookOptions(7, new DropBookColorOptions(Color.cyan, Color.cyan)),
+                new DropBookOptions(9, new DropBookColorOptions(Color.yellow, Color.yellow))
+            });
+        }
     }
 }
-//ModParameters.SkinParameters.AddRange(new List<SkinNames>
-//{
-//    new SkinNames
-//    {
-//        PackageId = KamiyoModParameters.PackageId,
-//        Name = "Wilton_Re21341",
-//        SkinParameters = new List<SkinParameters>
-//        {
-//            new SkinParameters
-//            {
-//                PivotPosX = float.Parse("-28"), PivotPosY = float.Parse("-377"),
-//                Motion = ActionDetail.Special, FileName = "Special.png"
-//            },
-//            new SkinParameters
-//            {
-//                PivotPosX = float.Parse("101"), PivotPosY = float.Parse("-326"),
-//                Motion = ActionDetail.S1, FileName = "S1.png"
-//            }
-//        }
-//    }
-//});
 
 //new Tuple<LorId, List<LorId>>(new LorId(KamiyoModParameters.PackageId, 22),
 //    new List<LorId>
