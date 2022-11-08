@@ -18,7 +18,6 @@ namespace KamiyoModPack.Mio_Re21341.Cards
             var speedDice = target.speedDiceResult[targetSlotOrder];
             var targetDiceBroken = target.speedDiceResult[targetSlotOrder].breaked;
             if (speedDiceResultValue - speedDice.value <= Check && !targetDiceBroken) return;
-            owner.GetActiveBuff<BattleUnitBuf_GodAuraRelease_Re21341>()?.OnAddBuf(1);
             owner.TakeDamage(9, DamageType.Card_Ability, owner);
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {

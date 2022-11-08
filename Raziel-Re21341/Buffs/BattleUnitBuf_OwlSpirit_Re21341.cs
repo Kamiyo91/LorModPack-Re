@@ -36,7 +36,7 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            var pow = RandomUtil.Range(1, stack + 1);
+            var pow = RandomUtil.Range(1, stack);
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 min = pow,
