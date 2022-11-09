@@ -1,7 +1,4 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.Mio_Re21341.Buffs;
-
-namespace KamiyoModPack.Mio_Re21341.Cards
+﻿namespace KamiyoModPack.Mio_Re21341.Cards
 {
     public class DiceCardSelfAbility_WaterBlade_Re21341 : DiceCardSelfAbilityBase
     {

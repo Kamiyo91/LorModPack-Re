@@ -11,6 +11,11 @@ namespace KamiyoModPack.Wilton_Re21341.Actions
     {
         private readonly float _additionalDst = 0;
         private readonly float _atkDelay = 0.6f;
+        private readonly float _endDelay = 1.5f;
+        private readonly float _knockbackSpeed = 1;
+        private readonly float _moveSlowSpeed = 0.3f;
+        private readonly float _moveSpeed = 5;
+        private readonly float _startPortalOffsetX = 5;
 
         private List<GameObject> _createdPortals;
 
@@ -23,19 +28,14 @@ namespace KamiyoModPack.Wilton_Re21341.Actions
         private float _elapsedGiveDamage;
 
         private float _elapsedStart;
-        private readonly float _endDelay = 1.5f;
 
         private int _knockbackEnergy;
-        private readonly float _knockbackSpeed = 1;
 
         private KingOfGreedMapManager _map;
-        private readonly float _moveSlowSpeed = 0.3f;
-        private readonly float _moveSpeed = 5;
 
         private Vector3 _srcPosAtkOneTarget;
 
         private GameObject _startPortal;
-        private readonly float _startPortalOffsetX = 5;
 
         private List<BattleFarAreaPlayManager.VictimInfo> _victimList;
 

@@ -51,7 +51,9 @@ namespace KamiyoModPack.Wilton_Re21341.Buffs
 
         public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
         {
-            return target != _owner ? 1 : 0;
+            if (target == _owner) return 0;
+            if (cardBuf.bufType == KeywordBuf.Vulnerable || cardBuf.bufType == KeywordBuf.Bleeding) OnAddBuf(1);
+            return 1;
         }
     }
 }

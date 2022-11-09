@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using BigDLL4221.Extensions;
 using KamiyoModPack.Hayate_Re21341.Buffs;
+using KamiyoModPack.Hayate_Re21341.Passives;
 
 namespace KamiyoModPack.Hayate_Re21341.Cards
 {
@@ -34,6 +35,8 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
                     unit.breakDetail.TakeBreakDamage(250, DamageType.ETC);
                 }
 
+            owner.GetActivePassive<PassiveAbility_Hayate_Re21341>()?.Util
+                .DeactivePermanentBuff(typeof(BattleUnitBuf_EntertainMe_Re21341));
             var buff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
             if (buff != null) owner.bufListDetail.RemoveBuf(buff);
             var selectedCardList = owner.emotionDetail.GetSelectedCardList();

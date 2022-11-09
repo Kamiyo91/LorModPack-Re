@@ -437,7 +437,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
                             }
                         })
                 }
-            }, permanentBuffList: new List<BattleUnitBuf> { new BattleUnitBuf_EntertainMe_Re21341() },
+            }, permanentBuffList: new List<PermanentBuffOptions> { new PermanentBuffOptions(new BattleUnitBuf_EntertainMe_Re21341()) },
             mechOptions: new Dictionary<int, MechPhaseOptions>
             {
                 {
@@ -490,7 +490,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }));
 
         public MechUtil_Hayate HayatePlayerUtil = new MechUtil_Hayate(new MechUtilBaseModel(
-            permanentBuffList: new List<BattleUnitBuf> { new BattleUnitBuf_EntertainMe_Re21341() }, survive: true,
+            permanentBuffList: new List<PermanentBuffOptions> { new PermanentBuffOptions(new BattleUnitBuf_EntertainMe_Re21341()) }, survive: true,
             recoverToHp: 75, personalCards: new Dictionary<LorId, PersonalCardOptions>
             {
                 { new LorId(KamiyoModParameters.PackageId, 28), new PersonalCardOptions(true, activeEgoCard: true) },

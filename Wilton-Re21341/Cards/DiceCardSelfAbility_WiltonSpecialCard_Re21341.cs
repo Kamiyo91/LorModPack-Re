@@ -9,7 +9,7 @@ namespace KamiyoModPack.Wilton_Re21341.Cards
         public override bool OnChooseCard(BattleUnitModel owner)
         {
             return owner.bufListDetail.GetActivatedBufList().FirstOrDefault(x => x is BattleUnitBuf_Vengeance_Re21341)
-                ?.stack > 39;
+                ?.stack > 29;
         }
 
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
@@ -23,7 +23,7 @@ namespace KamiyoModPack.Wilton_Re21341.Cards
             if (!(unit.bufListDetail.GetActivatedBufList()
                         .FirstOrDefault(x => x is BattleUnitBuf_Vengeance_Re21341) is BattleUnitBuf_Vengeance_Re21341
                     buff)) return;
-            targetUnit.TakeDamage(buff.stack / 2);
+            targetUnit.TakeDamage(buff.stack);
             buff.OnAddBuf(-99);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.cardSlotDetail.RecoverPlayPoint(1);
