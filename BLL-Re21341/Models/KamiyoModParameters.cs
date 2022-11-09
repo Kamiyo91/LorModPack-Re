@@ -347,7 +347,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             maxCounter: 4, additionalSpeedDie: 2, useCustomData: false, massAttackCards: new List<LorId>
             {
                 new LorId(KamiyoModParameters.PackageId, 900)
-            }, originalSkinName: "MioNormalEye_Re21341", maxCardCost: 4,
+            }, originalSkinName: "MioNormalEye_Re21341", maxCardCost: 4,loweredCardCost:2,
             egoOptions: new EgoOptions(new BattleUnitBuf_GodAuraRelease_Re21341(), "MioRedEye_Re21341",
                 activeEgoOnStart: true));
     }
