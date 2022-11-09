@@ -1,6 +1,8 @@
 ﻿using BigDLL4221.Buffs;
 using Sound;
 using UnityEngine;
+using Random = System.Random;
+
 
 namespace KamiyoModPack.Raziel_Re21341.Buffs
 {
@@ -8,6 +10,7 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
     {
         private GameObject _aura;
         private int _damageCount;
+        private Random _random;
 
         public BattleUnitBuf_OwlSpirit_Re21341() : base(infinite: true, lastOneScene: false)
         {
@@ -22,6 +25,7 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
+            _random = new Random();
             _damageCount = 0;
             var effect =
                 SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
@@ -36,7 +40,7 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            var pow = RandomUtil.Range(1, stack);
+            var pow = _random.Next(0, stack);
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 min = pow,
