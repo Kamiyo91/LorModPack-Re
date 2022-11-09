@@ -182,11 +182,11 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     bookCustomOptions: new BookCustomOptions(nameTextId: 4, originalSkin: "KamiyoNormal_Re21341",
                         egoSkin: new List<string> { "KamiyoMask_Re21341" }, xiaoTaotieAction: ActionDetail.Guard),
                     keypageColorOptions: new KeypageColorOptions(Color.gray, Color.gray)),
-                new KeypageOptions(10000900,
+                new KeypageOptions(10000900,bannedEmotionCards:true,bannedEgoFloorCards:true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 3, originalSkin: "MioNormalEye_Re21341",
                         egoSkin: new List<string> { "MioRedEye_Re21341" }),
                     keypageColorOptions: new KeypageColorOptions(Color.white, Color.white)),
-                new KeypageOptions(10000901,
+                new KeypageOptions(10000901,bannedEmotionCards:true,bannedEgoFloorCards:true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 4, originalSkin: "KamiyoNormal_Re21341",
                         egoSkin: new List<string> { "KamiyoMask_Re21341" }, xiaoTaotieAction: ActionDetail.Guard),
                     keypageColorOptions: new KeypageColorOptions(Color.gray, Color.gray)),
@@ -273,6 +273,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             ModParameters.PassiveOptions.Add(KamiyoModParameters.PackageId, new List<PassiveOptions>
             {
                 new PassiveOptions(6, false),
+                new PassiveOptions(57, false, bannedEgoFloorCards:true,bannedEmotionCardSelection:true),
                 new PassiveOptions(7, false, passiveColorOptions: new PassiveColorOptions(Color.white, Color.white)),
                 new PassiveOptions(8, false, passiveColorOptions: new PassiveColorOptions(Color.white, Color.white)),
                 new PassiveOptions(12, false, passiveColorOptions: new PassiveColorOptions(Color.gray, Color.gray)),
