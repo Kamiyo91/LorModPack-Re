@@ -3,7 +3,6 @@ using Sound;
 using UnityEngine;
 using Random = System.Random;
 
-
 namespace KamiyoModPack.Raziel_Re21341.Buffs
 {
     public class BattleUnitBuf_OwlSpirit_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
