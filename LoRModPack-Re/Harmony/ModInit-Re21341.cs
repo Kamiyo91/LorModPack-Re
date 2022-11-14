@@ -316,7 +316,14 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     new LorId(KamiyoModParameters.SephirahBundlePackageId, 27)
                 }, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
                 new PassiveOptions(21, cannotBeUsedWithPassives: new List<LorId> { new LorId(250115) }),
-                new PassiveOptions(37, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red))
+                new PassiveOptions(37, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
+                new PassiveOptions(22,
+                    cannotBeUsedWithPassives: new List<LorId>
+                    {
+                        new LorId(KamiyoModParameters.MaryModPackageId, 3),
+                        new LorId(KamiyoModParameters.VortexModPackageId, 3),
+                        new LorId(KamiyoModParameters.VortexModPackageId, 8)
+                    })
             });
         }
 
@@ -334,10 +341,3 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         }
     }
 }
-
-//new Tuple<LorId, List<LorId>>(new LorId(KamiyoModParameters.PackageId, 22),
-//    new List<LorId>
-//    {
-//        new LorId("SaeModSa21341.Mod", 3), new LorId("SaeModSa21341.Mod", 8),
-//        new LorId("MaryIb21341.Mod", 3)
-//    }),
