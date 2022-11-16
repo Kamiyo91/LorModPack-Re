@@ -255,10 +255,9 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new StageOptions(4, preBattleOptions: new PreBattleOptions(onlySephirah: true),
                     stageColorOptions: new StageColorOptions(new Color(0.4f, 0.69f, 1f), new Color(0.4f, 0.69f, 1f))),
                 new StageOptions(6, true,
-                    preBattleOptions: new PreBattleOptions(new List<SephirahType> { SephirahType.Keter },
-                        new List<UnitModel>
-                            { KamiyoModParameters.KamiyoPreBattleModel, KamiyoModParameters.MioPreBattleModel }),
-                    stageColorOptions: new StageColorOptions(Color.cyan, Color.cyan)),
+                    preBattleOptions: new PreBattleOptions(battleType:PreBattleType.CustomUnits,customUnits:new Dictionary<SephirahType,List<UnitModel>> { {SephirahType.Keter,new List<UnitModel>
+                            { KamiyoModParameters.KamiyoPreBattleModel, KamiyoModParameters.MioPreBattleModel }} }),
+                        stageColorOptions: new StageColorOptions(Color.cyan, Color.cyan)),
                 new StageOptions(7, stageColorOptions: new StageColorOptions(Color.yellow, Color.yellow),
                     stageRewardOptions: new RewardOptions(null, new Dictionary<LorId, int>
                         {
