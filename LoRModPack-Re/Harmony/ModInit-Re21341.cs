@@ -18,8 +18,13 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             OnInitParameters();
             ArtUtil.GetArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/ArtWork"));
+            ArtUtil.GetCardArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CardArtWork"));
             CardUtil.ChangeCardItem(ItemXmlDataList.instance, KamiyoModParameters.PackageId);
             PassiveUtil.ChangePassiveItem(KamiyoModParameters.PackageId);
+            CardUtil.LoadEmotionAndEgoCards(KamiyoModParameters.PackageId, KamiyoModParameters.Path + "/EmotionCards",
+                new List<Assembly> { Assembly.GetExecutingAssembly() });
+            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Emotion,
+                KamiyoModParameters.EmotionCardIds);
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);
             ArtUtil.PreLoadBufIcons();
             LocalizeUtil.RemoveError();
@@ -145,6 +150,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     cardColorOptions: new CardColorOptions(Color.red, customIconColor: Color.red, useHSVFilter: false)),
                 new CardOptions(59, CardOption.Personal),
                 new CardOptions(60, CardOption.Personal),
+                new CardOptions(36, CardOption.Personal),
                 new CardOptions(61, CardOption.Personal),
                 new CardOptions(907, CardOption.Personal)
             });
@@ -208,7 +214,10 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     keypageColorOptions: new KeypageColorOptions(Color.cyan, Color.cyan)),
                 new KeypageOptions(10000007, everyoneCanEquip: true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 10),
-                    keypageColorOptions: new KeypageColorOptions(Color.yellow, Color.yellow)),
+                    keypageColorOptions: new KeypageColorOptions(Color.yellow, Color.yellow),
+                    customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
+                        KamiyoModParameters.PoolCode,
+                        KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341")),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }

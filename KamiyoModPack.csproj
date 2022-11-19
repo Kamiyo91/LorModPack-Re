@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL-Re21341\Models\KamiyoModParameters.cs" />
+    <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EmotionRage_21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMeFinalPhase_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_Serious_Re21341.cs" />
@@ -84,6 +85,10 @@
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_Rage_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_TrueGodAuraRelease_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_Ultima_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\DiceCardAbility_HayateCounter_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate3_21341.cs" />
+    <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate2_21341.cs" />
+    <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate1_21341.cs" />
     <Compile Include="Hayate-Re21341\EnemyTeamStageManager_Hayate_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Hayate_Re21341MapManager.cs" />
     <Compile Include="Hayate-Re21341\MechUtil\MechUtil_Hayate.cs" />
@@ -105,6 +110,9 @@
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KurosawaFireMagic_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_OutragingFire_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo3_21341.cs" />
+    <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo2_21341.cs" />
+    <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo1_21341.cs" />
     <Compile Include="Kamiyo-Re21341\EnemyTeamStageManager_Kamiyo_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo1_Re21341MapManager.cs" />
     <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo2_Re21341MapManager.cs" />
@@ -133,6 +141,9 @@
     <Compile Include="Mio-Re21341\Effects\DiceAttackEffect_MioHit_Re21341.cs" />
     <Compile Include="Mio-Re21341\Effects\DiceAttackEffect_MioSlash_Re21341.cs" />
     <Compile Include="Mio-Re21341\Effects\DiceAttackEffect_MioPierce_Re21341.cs" />
+    <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio3_21341.cs" />
+    <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio2_21341.cs" />
+    <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio1_21341.cs" />
     <Compile Include="Mio-Re21341\EnemyTeamStageManager_Mio_Re21341.cs" />
     <Compile Include="Mio-Re21341\Mio_Re21341MapManager.cs" />
     <Compile Include="Mio-Re21341\MechUtil_Mio.cs" />
@@ -143,19 +154,26 @@
     <Compile Include="Mio-Re21341\Passives\PassiveAbility_MioMemory_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_SamuraiDamageUp_21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_AncestralCallFragment_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Dice\DiceCardAbility_ZeroBlade_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai3_21341.cs" />
+    <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai2_21341.cs" />
+    <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai1_21341.cs" />
     <Compile Include="OldSamurai-Re21341\EnemyTeamStageManager_OldSamurai_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
     <Compile Include="OldSamurai-Re21341\MapManager\OldSamurai_Re21341MapManager.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_DeepBreathing_Re21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_GhostSamuraiEmotion_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_GhostSamurai_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_OldSamuraiEnemyDesc_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_OldSamurai_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_ZeroBlade_Re21341.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Raziel-Re21341\Buffs\BattleUnitBuf_Judgment_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Buffs\BattleUnitBuf_OwlSpirit_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Execution_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_GatheringSelfInquisitor_Re21341.cs" />
@@ -163,6 +181,9 @@
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Kaioken_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Meeting_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_RazielMassAttack_Re21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor3_21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor2_21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor1_21341.cs" />
     <Compile Include="Raziel-Re21341\EnemyTeamStageManager_Raziel_Re21341.cs" />
     <Compile Include="Raziel-Re21341\MechUtil\NpcMechUtil_Raziel.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GodTrial_Re21341.cs" />

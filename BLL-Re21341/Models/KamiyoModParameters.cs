@@ -33,9 +33,12 @@ namespace KamiyoModPack.BLL_Re21341.Models
         public static string Path;
         public static readonly int EgoEmotionLevel = 3;
 
-        // OldSamurai
+        // OldSamurai10000009
         public static UnitModel SamuraiGhostNpc = new UnitModel(2, PackageId, 2, lockedEmotion: true);
         public static UnitModel SamuraiGhostPlayer = new UnitModel(10000002, PackageId, 2, lockedEmotion: true);
+
+        public static UnitModel SamuraiGhostPlayerEmotion = new UnitModel(10000009, PackageId, 2, lockedEmotion: true,
+            summonedOnPlay: true, autoPlay: true);
 
         public static MapModel SamuraiMapNpc = new MapModel(typeof(OldSamurai_Re21341MapManager), "OldSamurai_Re21341",
             oneTurnEgo: false, bgy: 0.2f, originalMapStageIds: new List<LorId> { new LorId(PackageId, 1) });
@@ -90,6 +93,11 @@ namespace KamiyoModPack.BLL_Re21341.Models
 
         public static UnitModel MioPreBattleModel = new UnitModel(10000900, PackageId, 3,
             skinName: "MioNormalEye_Re21341", additionalPassiveIds: new List<LorId> { new LorId(PackageId, 37) });
+
+        public static List<int> EmotionCardIds = new List<int>
+            { 21341, 21342, 21343, 21344, 21345, 21346, 21347, 21348, 21349, 21350, 21351, 21352, 21353, 21354, 21355 };
+
+        public static string PoolCode = "Kurosawa_21341";
     }
 
     public class OldSamuraiUtil

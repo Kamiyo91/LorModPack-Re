@@ -8,9 +8,6 @@ namespace KamiyoModPack.Wilton_Re21341
 {
     public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
-        private readonly StageLibraryFloorModel
-            _floor = Singleton<StageController>.Instance.GetCurrentStageFloorModel();
-
         private bool _checkEnd;
         private bool _finalMech;
 
@@ -64,8 +61,8 @@ namespace KamiyoModPack.Wilton_Re21341
             _checkEnd = true;
             foreach (var playerUnit in BattleObjectManager.instance.GetAliveList(Faction.Player))
                 playerUnit.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_Vip_Re21341));
-            var unit = UnitUtil.AddNewUnitWithDefaultData(_floor, KamiyoModParameters.HayateLastScene, 0,
-                emotionLevel: 5, playerSide: false);
+            var unit = UnitUtil.AddNewUnitWithDefaultData(KamiyoModParameters.HayateLastScene, 0,
+                emotionLevel: 5, unitSide: Faction.Enemy);
             unit.allyCardDetail.ExhaustAllCards();
             unit.allyCardDetail.AddNewCard(new LorId(KamiyoModParameters.PackageId, 903));
             var passive =
