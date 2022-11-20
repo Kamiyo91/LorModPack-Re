@@ -1,6 +1,6 @@
 ﻿namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 {
-    public class EmotionCardAbility_Inquisitor3_21341 : EmotionCardAbilityBase
+    public class EmotionCardAbility_Inquisitors3_21341 : EmotionCardAbilityBase
     {
         public override void OnSelectEmotion()
         {

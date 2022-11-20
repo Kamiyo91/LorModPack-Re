@@ -2,7 +2,7 @@
 
 namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 {
-    public class EmotionCardAbility_Inquisitor1_21341 : EmotionCardAbilityBase
+    public class EmotionCardAbility_Inquisitors1_21341 : EmotionCardAbilityBase
     {
         private bool _revive;
 

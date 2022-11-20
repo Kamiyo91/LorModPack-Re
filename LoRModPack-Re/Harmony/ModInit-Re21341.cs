@@ -21,6 +21,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             ArtUtil.GetCardArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CardArtWork"));
             CardUtil.ChangeCardItem(ItemXmlDataList.instance, KamiyoModParameters.PackageId);
             PassiveUtil.ChangePassiveItem(KamiyoModParameters.PackageId);
+            KeypageUtil.ChangeKeypageItem(BookXmlList.Instance, KamiyoModParameters.PackageId);
             CardUtil.LoadEmotionAndEgoCards(KamiyoModParameters.PackageId, KamiyoModParameters.Path + "/EmotionCards",
                 new List<Assembly> { Assembly.GetExecutingAssembly() });
             CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Emotion,
@@ -209,6 +210,10 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     bookCustomOptions: new BookCustomOptions(nameTextId: 6),
                     keypageColorOptions: new KeypageColorOptions(new Color(0.4f, 0.69f, 1f),
                         new Color(0.4f, 0.69f, 1f))),
+                new KeypageOptions(10000002,
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 2, customFaceData: false), isDeckFixed: true),
+                new KeypageOptions(10000009,
+                    bookCustomOptions: new BookCustomOptions(nameTextId: 2, customFaceData: false), isDeckFixed: true),
                 new KeypageOptions(10000006, everyoneCanEquip: true,
                     bookCustomOptions: new BookCustomOptions(nameTextId: 8),
                     keypageColorOptions: new KeypageColorOptions(Color.cyan, Color.cyan)),
@@ -239,6 +244,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             {
                 new SpriteOptions(SpriteEnum.Base, 10000001, "Sprites/Books/Thumb/243003"),
                 new SpriteOptions(SpriteEnum.Base, 10000002, "Sprites/Books/Thumb/243003"),
+                new SpriteOptions(SpriteEnum.Base, 10000009, "Sprites/Books/Thumb/243003"),
                 new SpriteOptions(SpriteEnum.Custom, 10000003, "MioDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000004, "KamiyoDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000005, "HayateDefault_Re21341"),

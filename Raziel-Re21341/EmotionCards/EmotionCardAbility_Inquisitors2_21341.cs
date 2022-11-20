@@ -3,7 +3,7 @@ using KamiyoModPack.Raziel_Re21341.Buffs;
 
 namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 {
-    public class EmotionCardAbility_Inquisitor2_21341 : EmotionCardAbilityBase
+    public class EmotionCardAbility_Inquisitors2_21341 : EmotionCardAbilityBase
     {
         private bool _buffGiven;
 

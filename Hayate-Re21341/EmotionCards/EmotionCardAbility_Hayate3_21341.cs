@@ -41,7 +41,7 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
                 _counterReload = behavior.abilityList.Exists(x => x is DiceCardAbility_HayateCounter_Re21341);
         }
 
-        public override void OnEndBattlePhase()
+        public override void OnEndParrying(BattlePlayingCardDataInUnitModel curCard)
         {
             if (!_counterReload) return;
             _counterReload = false;

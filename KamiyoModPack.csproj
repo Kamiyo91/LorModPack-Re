@@ -181,9 +181,9 @@
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Kaioken_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_Meeting_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Cards\DiceCardSelfAbility_RazielMassAttack_Re21341.cs" />
-    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor3_21341.cs" />
-    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor2_21341.cs" />
-    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitor1_21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors3_21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors2_21341.cs" />
+    <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors1_21341.cs" />
     <Compile Include="Raziel-Re21341\EnemyTeamStageManager_Raziel_Re21341.cs" />
     <Compile Include="Raziel-Re21341\MechUtil\NpcMechUtil_Raziel.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GodTrial_Re21341.cs" />
