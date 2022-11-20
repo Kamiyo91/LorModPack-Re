@@ -319,6 +319,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new PassiveOptions(38, false, passiveColorOptions: new PassiveColorOptions(Color.yellow, Color.yellow)),
                 new PassiveOptions(40, false, passiveColorOptions: new PassiveColorOptions(Color.yellow, Color.yellow)),
                 new PassiveOptions(58, false),
+                new PassiveOptions(5, false),
+                new PassiveOptions(28, false),
                 new PassiveOptions(57, bannedEmotionCardSelection: true, bannedEgoFloorCards: true),
                 new PassiveOptions(37,
                     canBeUsedWithPassivesOne: new List<LorId> { new LorId(KamiyoModParameters.PackageId, 8) },
