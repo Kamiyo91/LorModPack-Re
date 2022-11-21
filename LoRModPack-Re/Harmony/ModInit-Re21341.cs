@@ -223,7 +223,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
                         KamiyoModParameters.PoolCode,
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
-                        customFloorMap: KamiyoModParameters.HayateMap)),
+                        customFloorMap: KamiyoModParameters.HayateSephirahMap)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
