@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL-Re21341\Models\KamiyoModParameters.cs" />
+    <Compile Include="Hayate-Re21341\AuraColor.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EmotionRage_21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMeFinalPhase_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMe_Re21341.cs" />

@@ -1,5 +1,4 @@
-﻿using BigDLL4221.Utils;
-using Sound;
+﻿using Sound;
 
 namespace KamiyoModPack.Hayate_Re21341.Buffs
 {
@@ -36,7 +35,11 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
-            ArtUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
+            var aura = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect("6/BigBadWolf_Emotion_Aura",
+                1f, _owner.view,
+                _owner.view);
+            aura.gameObject.AddComponent<AuraColor>();
+            SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
         }
     }
 }
