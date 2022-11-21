@@ -9,7 +9,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
-            if (behavior.Detail == BehaviourDetail.Evasion) _owner.RecoverHP(3);
+            if (behavior.Detail != BehaviourDetail.Evasion) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.RecoverHP(3);
         }
 
         public override DiceStatBonus GetDiceStatBonus(BehaviourDetail behaviour)

@@ -15,7 +15,9 @@ namespace KamiyoModPack.Mio_Re21341.EmotionCards
 
         public override void OnKill(BattleUnitModel target)
         {
-            if (_killCount < 3) _killCount++;
+            if (_killCount >= 3) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _killCount++;
         }
 
         public override void OnSelectEmotion()

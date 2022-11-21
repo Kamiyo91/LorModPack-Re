@@ -73,6 +73,11 @@ namespace KamiyoModPack.BLL_Re21341.Models
             fy: 0.475f,
             originalMapStageIds: new List<LorId> { new LorId(PackageId, 4), new LorId(PackageId, 10) });
 
+        public static MapModel HayateSephirahMap = new MapModel(typeof(HayateSephirah_Re21341MapManager),
+            "Hayate_Re21341", bgy: 0.3f,
+            fy: 0.475f,
+            originalMapStageIds: new List<LorId> { new LorId(PackageId, 4), new LorId(PackageId, 10) });
+
         public static UnitModel KamiyoSoloUnit = new UnitModel(10000901, PackageId, 4);
 
         //Wilton

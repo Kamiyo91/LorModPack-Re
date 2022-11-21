@@ -7,13 +7,14 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public override void OnRoundStart()
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList().Where(x => x != _owner))
-                unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 3, _owner);
+                unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 1, _owner);
         }
 
         public override void OnSucceedAttack(BattleDiceBehavior behavior)
         {
             var target = behavior.card?.target;
             if (target == null) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
             target.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 1, _owner);
             if (target.bufListDetail.GetActivatedBuf(KeywordBuf.Burn) != null) _owner.breakDetail.RecoverBreak(3);
         }

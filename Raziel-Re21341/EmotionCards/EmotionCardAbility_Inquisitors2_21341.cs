@@ -9,12 +9,13 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
         {
-            if (attackerCard?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() != null)
-                attackerCard.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-                {
-                    min = -1,
-                    max = -1
-                });
+            if (attackerCard?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() == null) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            attackerCard.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            {
+                min = -1,
+                max = -1
+            });
         }
 
         public override void OnParryingStart(BattlePlayingCardDataInUnitModel card)
@@ -31,12 +32,14 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
             }
 
             var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
-            if (battlePlayingCardDataInUnitModel2?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() != null)
-                battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-                {
-                    min = 1,
-                    max = -1
-                });
+            if (battlePlayingCardDataInUnitModel2?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() ==
+                null) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            {
+                min = 1,
+                max = -1
+            });
         }
 
         public override void OnRoundStart()

@@ -7,6 +7,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
     {
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
         {
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
             attackerCard?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 max = -1
@@ -27,6 +28,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
             }
 
             var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
             battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 max = -1

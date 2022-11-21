@@ -18,11 +18,12 @@ namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
             }
 
             var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
-            if (battlePlayingCardDataInUnitModel2 != null)
-                card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-                {
-                    min = 1, max = 1
-                });
+            if (battlePlayingCardDataInUnitModel2 == null) return;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            {
+                min = 1, max = 1
+            });
         }
 
         public override void OnSelectEmotion()

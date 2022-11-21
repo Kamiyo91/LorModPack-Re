@@ -45,6 +45,7 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
         {
             if (!_counterReload) return;
             _counterReload = false;
+            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
             UnitUtil.ReadyCounterCard(_owner, _random.Next(31, 35), KamiyoModParameters.PackageId);
         }
     }

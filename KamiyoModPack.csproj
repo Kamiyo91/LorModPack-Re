@@ -90,6 +90,7 @@
     <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate2_21341.cs" />
     <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate1_21341.cs" />
     <Compile Include="Hayate-Re21341\EnemyTeamStageManager_Hayate_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\HayateSephirah_Re21341MapManager.cs" />
     <Compile Include="Hayate-Re21341\Hayate_Re21341MapManager.cs" />
     <Compile Include="Hayate-Re21341\MechUtil\MechUtil_Hayate.cs" />
     <Compile Include="Hayate-Re21341\MechUtil\NpcMechUtil_Hayate.cs" />
