@@ -47,6 +47,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             OnInitCards();
             OnInitDropBooks();
             OnInitPassives();
+            OnInitCategories();
             OnInitRewards();
             OnInitStages();
             OnInitCredenza();
@@ -225,6 +226,24 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
                         customFloorMap: KamiyoModParameters.HayateSephirahMap)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
+            });
+        }
+
+        private static void OnInitCategories()
+        {
+            ModParameters.CategoryOptions.Add(KamiyoModParameters.PackageId, new List<CategoryOptions>
+            {
+                new CategoryOptions(KamiyoModParameters.PackageId, "_1",
+                    bookDataColor: new CategoryColorOptions(Color.white, Color.white)
+                    , categoryBooksId: new List<int> { 10000003, 10000004, 10000005, 10000006, 10000007 },
+                    categoryNameId: "KurosawaSlot1_21341", customIconSpriteId: KamiyoModParameters.PackageId),
+                new CategoryOptions(KamiyoModParameters.PackageId, "_2",
+                    bookDataColor: new CategoryColorOptions(Color.white, Color.white)
+                    , categoryBooksId: new List<int> { 10000008, 10000011, 10000012, 10000013, 10000014, 10000015, 10000016, 10000017 },
+                    categoryNameId: "KurosawaSlot3_21341", customIconSpriteId: KamiyoModParameters.PackageId),
+                new CategoryOptions(KamiyoModParameters.PackageId, "_3"
+                    , new List<int> { 10000001, 10000002, 10000009 }, categoryNameId: "KurosawaSlot2_21341",
+                    baseIconSpriteId: "Chapter5")
             });
         }
 
