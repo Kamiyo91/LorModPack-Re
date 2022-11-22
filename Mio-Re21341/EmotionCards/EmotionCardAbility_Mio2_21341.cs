@@ -1,4 +1,5 @@
 ﻿using System;
+using BigDLL4221.Extensions;
 
 namespace KamiyoModPack.Mio_Re21341.EmotionCards
 {
@@ -21,7 +22,7 @@ namespace KamiyoModPack.Mio_Re21341.EmotionCards
         {
             _attackCount++;
             if (_attackCount < 10) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             _attackCount = 0;
             _owner.RecoverHP(3);
             _owner.breakDetail.RecoverBreak(3);

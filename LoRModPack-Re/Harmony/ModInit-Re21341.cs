@@ -101,10 +101,12 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000005) }),
                 new CardOptions(25, CardOption.OnlyPage, new List<string> { "HayatePage_Re21341" },
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000005) },
-                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),iconColor: HSVColors.Black)),
+                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),
+                        iconColor: HSVColors.Black)),
                 new CardOptions(26, CardOption.OnlyPage, new List<string> { "HayatePage_Re21341" },
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000005) },
-                    cardColorOptions: new CardColorOptions(Color.gray,customIconColor: new Color(0.5f, 0.5f, 0.5f), iconColor: HSVColors.Black)),
+                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),
+                        iconColor: HSVColors.Black)),
                 new CardOptions(27, CardOption.OnlyPage, new List<string> { "HayatePage_Re21341" },
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000005) }),
                 new CardOptions(43, CardOption.OnlyPage, new List<string> { "WiltonPage_Re21341" },
@@ -134,9 +136,11 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new CardOptions(9, CardOption.Personal,
                     cardColorOptions: new CardColorOptions(Color.white, iconColor: HSVColors.White)),
                 new CardOptions(17, CardOption.Personal,
-                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),iconColor: HSVColors.Black)),
+                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),
+                        iconColor: HSVColors.Black)),
                 new CardOptions(28, CardOption.Personal,
-                    cardColorOptions: new CardColorOptions(Color.gray,customIconColor: new Color(0.5f, 0.5f, 0.5f), iconColor: HSVColors.Black)),
+                    cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),
+                        iconColor: HSVColors.Black)),
                 new CardOptions(29, CardOption.Personal),
                 new CardOptions(30, CardOption.Personal, cardColorOptions: new CardColorOptions(Color.red,
                     customIconColor: Color.red,
@@ -272,7 +276,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new SpriteOptions(SpriteEnum.Custom, 10000013, "FragmentBlueDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000014, "FragmentBlueDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000015, "FragmentBlueDefault_Re21341"),
-                new SpriteOptions(SpriteEnum.Custom, 10000016, "FragmentRedDefault_Re21341")
+                new SpriteOptions(SpriteEnum.Custom, 10000016, "FragmentRedDefault_Re21341"),
+                new SpriteOptions(SpriteEnum.Custom, 10000017, "FragmentRedDefault_Re21341")
             });
         }
 

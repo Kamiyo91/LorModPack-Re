@@ -1,4 +1,5 @@
 ﻿using System;
+using BigDLL4221.Extensions;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
@@ -10,7 +11,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
             if (behavior.Detail != BehaviourDetail.Evasion) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             _owner.RecoverHP(3);
         }
 

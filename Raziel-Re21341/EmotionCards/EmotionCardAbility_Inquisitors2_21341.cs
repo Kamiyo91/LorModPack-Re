@@ -10,7 +10,7 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
         {
             if (attackerCard?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() == null) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             attackerCard.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 min = -1,
@@ -34,7 +34,7 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
             var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
             if (battlePlayingCardDataInUnitModel2?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() ==
                 null) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 min = 1,

@@ -1,4 +1,5 @@
-﻿using KamiyoModPack.OldSamurai_Re21341.Buffs;
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.OldSamurai_Re21341.Buffs;
 
 namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
 {
@@ -19,7 +20,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
 
             var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
             if (battlePlayingCardDataInUnitModel2 == null) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 min = 1, max = 1

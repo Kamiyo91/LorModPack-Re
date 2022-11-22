@@ -1,4 +1,5 @@
-﻿using BigDLL4221.Utils;
+﻿using BigDLL4221.Extensions;
+using BigDLL4221.Utils;
 using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
 
@@ -14,7 +15,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
         public override DiceStatBonus GetDiceStatBonus(BehaviourDetail behaviour)
         {
             if (!_owner.bufListDetail.IsNullifyPower()) return base.GetDiceStatBonus(behaviour);
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             return new DiceStatBonus { min = 1, max = 1 };
         }
 

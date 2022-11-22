@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using BigDLL4221.Extensions;
 
 namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 {
@@ -14,7 +15,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         {
             var target = behavior.card?.target;
             if (target == null) return;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             target.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 1, _owner);
             if (target.bufListDetail.GetActivatedBuf(KeywordBuf.Burn) != null) _owner.breakDetail.RecoverBreak(3);
         }

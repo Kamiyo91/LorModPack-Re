@@ -7,7 +7,7 @@ namespace KamiyoModPack.Mio_Re21341.EmotionCards
     {
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             behavior.card?.target?.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Vulnerable, 1, _owner);
         }
 

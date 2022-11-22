@@ -1,4 +1,5 @@
 ﻿using System;
+using BigDLL4221.Extensions;
 using BigDLL4221.Utils;
 using KamiyoModPack.BLL_Re21341.Models;
 
@@ -45,7 +46,7 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
         {
             if (!_counterReload) return;
             _counterReload = false;
-            _owner.battleCardResultLog.SetEmotionAbility(true, _emotionCard, _emotionCard.XmlInfo.id);
+            _owner.SetEmotionCombatLog(_emotionCard);
             UnitUtil.ReadyCounterCard(_owner, _random.Next(31, 35), KamiyoModParameters.PackageId);
         }
     }
