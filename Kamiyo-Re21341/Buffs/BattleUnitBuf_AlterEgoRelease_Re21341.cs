@@ -8,9 +8,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_AlterEgoRelease_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
     {
-        private const string Path = "6/RedHood_Emotion_Aura";
-        private CreatureEffect _aura;
-
         public BattleUnitBuf_AlterEgoRelease_Re21341() : base(infinite: true, lastOneScene: false)
         {
         }
