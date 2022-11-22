@@ -101,6 +101,8 @@
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_Hayate_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighDivinity_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighGuard_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\AuraColorFragment.cs" />
+    <Compile Include="Kamiyo-Re21341\AuraColor.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeathNpc_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />

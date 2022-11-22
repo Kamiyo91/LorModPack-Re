@@ -1,5 +1,5 @@
 ﻿using KamiyoModPack.BLL_Re21341.Models;
-using Sound;
+using UnityEngine;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
@@ -30,9 +30,16 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         private void InitAuraAndPlaySound()
         {
-            SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
-                "5_T/FX_IllusionCard_5_T_Happiness", 1f, _owner.view, _owner.view);
-            SoundEffectPlayer.PlaySound("Creature/Greed_MakeDiamond");
+            _owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
+            var aura = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
+                "2_Y/FX_IllusionCard_2_Y_Charge", 1f, _owner.view, _owner.view);
+            foreach (var particle in aura.gameObject.GetComponentsInChildren<ParticleSystem>())
+            {
+                if (particle.gameObject.name.Contains("Burn"))
+                    particle.gameObject.AddComponent<AuraColorFragment>();
+                if (particle.gameObject.name.Equals("Burn")) continue;
+                particle.gameObject.SetActive(false);
+            }
         }
 
         public override void OnRoundStartAfter()

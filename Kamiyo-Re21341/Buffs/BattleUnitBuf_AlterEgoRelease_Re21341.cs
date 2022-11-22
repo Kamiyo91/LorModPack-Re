@@ -53,17 +53,15 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         private void PlayChangingEffect(BattleUnitModel owner)
         {
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
-            if (_aura == null)
-                _aura = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect(Path, 1f, owner.view,
-                    owner.view);
-            var original = Resources.Load("Prefabs/Battle/SpecialEffect/RedMistRelease_ActivateParticle");
-            if (original != null)
+            var aura = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect(
+                "2_Y/FX_IllusionCard_2_Y_Charge", 1f, _owner.view, _owner.view);
+            foreach (var particle in aura.gameObject.GetComponentsInChildren<ParticleSystem>())
             {
-                var gameObject = Object.Instantiate(original) as GameObject;
-                gameObject.transform.parent = owner.view.charAppearance.transform;
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
+                if (particle.gameObject.name.Contains("Burn"))
+                    particle.gameObject.AddComponent<AuraColor>();
+                if (!particle.gameObject.name.Equals("Main") && !particle.gameObject.name.Contains("Charge") &&
+                    !particle.gameObject.name.Contains("Scaner_holo_distortion")) continue;
+                particle.gameObject.SetActive(false);
             }
 
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
