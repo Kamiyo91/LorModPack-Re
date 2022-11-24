@@ -30,8 +30,8 @@ namespace KamiyoModPack.FloorEgoCards_Re21341
         {
             foreach (var unit in Units)
             {
-                unit.TakeDamage(30);
-                unit.breakDetail.TakeBreakDamage(30);
+                unit.TakeDamage(50);
+                unit.breakDetail.TakeBreakDamage(50);
             }
         }
     }
