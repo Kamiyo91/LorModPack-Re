@@ -102,6 +102,9 @@ namespace KamiyoModPack.BLL_Re21341.Models
         public static List<int> EmotionCardIds = new List<int>
             { 21341, 21342, 21343, 21344, 21345, 21346, 21347, 21348, 21349, 21350, 21351, 21352, 21353, 21354, 21355 };
 
+        public static List<int> FloorEgoCardIds = new List<int>
+            { 21356, 21357, 21358, 21359, 21360 };
+
         public static string PoolCode = "Kurosawa_21341";
     }
 

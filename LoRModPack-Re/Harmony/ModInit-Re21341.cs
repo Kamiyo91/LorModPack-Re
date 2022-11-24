@@ -26,6 +26,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new List<Assembly> { Assembly.GetExecutingAssembly() });
             CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Emotion,
                 KamiyoModParameters.EmotionCardIds);
+            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Ego,
+                KamiyoModParameters.FloorEgoCardIds);
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);
             ArtUtil.PreLoadBufIcons();
             LocalizeUtil.RemoveError();
@@ -154,7 +156,12 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new CardOptions(60, CardOption.Personal),
                 new CardOptions(36, CardOption.Personal),
                 new CardOptions(61, CardOption.Personal),
-                new CardOptions(907, CardOption.Personal)
+                new CardOptions(907, CardOption.Personal),
+                new CardOptions(21356, CardOption.EGO),
+                new CardOptions(21357, CardOption.EGO),
+                new CardOptions(21358, CardOption.EGO),
+                new CardOptions(21359, CardOption.EGO),
+                new CardOptions(21360, CardOption.EGO)
             });
         }
 
@@ -162,6 +169,9 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             ModParameters.SkinOptions.AddRange(new Dictionary<string, SkinOptions>
             {
+                { "Wilton_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },
+                { "Hayate_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },
+                { "Raziel_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },
                 { "KamiyoNormal_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },
                 { "KamiyoMask_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },
                 { "MioNormalEye_Re21341", new SkinOptions(KamiyoModParameters.PackageId) },

@@ -69,6 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL-Re21341\Models\KamiyoModParameters.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_MioFloorEgo_Re21341.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_HayateFloorEgo_Re21341.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_RazielFloorEgo_Re21341.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_KamiyoFloorEgo_Re21341.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_WiltonFloorEgo_Re21341.cs" />
     <Compile Include="Hayate-Re21341\AuraColor.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EmotionRage_21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_EntertainMeFinalPhase_Re21341.cs" />
@@ -134,6 +139,7 @@
     <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_CorruptedGodAuraRelease_Re21341.cs" />
     <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_GodAuraRelease_Re21341.cs" />
     <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_KurosawaEmblem_Re21341.cs" />
+    <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_SakuraPetalOneScene_Re21341.cs" />
     <Compile Include="Mio-Re21341\Buffs\BattleUnitBuf_SakuraPetal_Re21341.cs" />
     <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_EnergyRelease_Re21341.cs" />
     <Compile Include="Mio-Re21341\Cards\DiceCardSelfAbility_GodAuraCard_Re21341.cs" />
@@ -190,6 +196,7 @@
     <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors1_21341.cs" />
     <Compile Include="Raziel-Re21341\EnemyTeamStageManager_Raziel_Re21341.cs" />
     <Compile Include="Raziel-Re21341\MechUtil\NpcMechUtil_Raziel.cs" />
+    <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GatheringSelf_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GodTrial_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorBlade_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorEnemy_Re21341.cs" />
