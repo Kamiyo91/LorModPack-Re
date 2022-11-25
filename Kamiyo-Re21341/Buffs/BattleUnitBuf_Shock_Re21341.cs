@@ -1,4 +1,5 @@
 ﻿using BigDLL4221.Buffs;
+using KamiyoModPack.BLL_Re21341.Models;
 using UnityEngine;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Buffs
@@ -9,19 +10,23 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         {
         }
 
-        protected override string keywordId => "Shock_Re21341";
+        protected override string keywordId => _owner.Book.BookId.packageId == KamiyoModParameters.PackageId
+            ? "Shock_Re21341"
+            : "Shock_Sa21341";
+
         protected override string keywordIconId => "Shock_Re21341";
         public override int MaxStack => 10;
 
         public override void OnRoundStart()
         {
-            if (stack > 0 && !_owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>())
-                _owner.TakeBreakDamage(stack);
+            if (stack > 0 && !_owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>() &&
+                _owner.Book.BookId.packageId == KamiyoModParameters.PackageId) _owner.TakeBreakDamage(stack);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            if (_owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>()) return;
+            if (_owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>() ||
+                _owner.Book.BookId.packageId != KamiyoModParameters.PackageId) return;
             var debuffValue = Mathf.Clamp(stack / 3, 0, 3);
             if (debuffValue == 0) return;
             behavior.ApplyDiceStatBonus(new DiceStatBonus { min = -debuffValue });

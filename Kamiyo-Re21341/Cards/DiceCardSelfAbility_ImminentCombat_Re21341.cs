@@ -13,7 +13,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             owner.allyCardDetail.DrawCards(1);
             _defClashWin = 0;
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
-            if (buff == null || buff.stack < 3) return;
+            if (buff == null)
+            {
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_Shock_Re21341());
+                return;
+            }
+
+            if (buff.stack < 3) return;
             buff.OnAddBuf(-3);
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = 1 });
         }

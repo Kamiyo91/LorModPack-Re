@@ -16,6 +16,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
             if (buff == null || buff.stack < 5)
             {
+                if (buff == null) owner.bufListDetail.AddBuf(new BattleUnitBuf_Shock_Re21341());
                 _stacks = 2;
                 return;
             }

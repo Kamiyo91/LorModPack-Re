@@ -11,7 +11,14 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnUseCard()
         {
             owner.cardSlotDetail.RecoverPlayPointByCard(1);
-            owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>()?.OnAddBuf(3);
+            var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
+            if (buff == null)
+            {
+                buff = new BattleUnitBuf_Shock_Re21341();
+                owner.bufListDetail.AddBuf(buff);
+            }
+
+            buff.OnAddBuf(3);
             _atkClashWin = 0;
         }
 

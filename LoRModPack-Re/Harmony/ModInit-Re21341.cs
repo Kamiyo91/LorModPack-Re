@@ -88,11 +88,23 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new CardOptions(15, CardOption.OnlyPage, new List<string> { "MioPage_Re21341" },
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000003) }),
                 new CardOptions(19, CardOption.OnlyPage, new List<string> { "KamiyoPage_Re21341" },
-                    new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000004) }),
+                    new List<LorId>
+                    {
+                        new LorId(KamiyoModParameters.PackageId, 10000004),
+                        new LorId(KamiyoModParameters.VortexModPackageId, 10000005)
+                    }),
                 new CardOptions(20, CardOption.OnlyPage, new List<string> { "KamiyoPage_Re21341" },
-                    new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000004) }),
+                    new List<LorId>
+                    {
+                        new LorId(KamiyoModParameters.PackageId, 10000004),
+                        new LorId(KamiyoModParameters.VortexModPackageId, 10000005)
+                    }),
                 new CardOptions(21, CardOption.OnlyPage, new List<string> { "KamiyoPage_Re21341" },
-                    new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000004) }),
+                    new List<LorId>
+                    {
+                        new LorId(KamiyoModParameters.PackageId, 10000004),
+                        new LorId(KamiyoModParameters.VortexModPackageId, 10000005)
+                    }),
                 new CardOptions(22, CardOption.OnlyPage, new List<string> { "KamiyoPage_Re21341" },
                     new List<LorId> { new LorId(KamiyoModParameters.PackageId, 10000004) },
                     cardColorOptions: new CardColorOptions(Color.gray, customIconColor: new Color(0.5f, 0.5f, 0.5f),
