@@ -1,10 +1,19 @@
-﻿using BigDLL4221.Utils;
+﻿using BigDLL4221.Extensions;
+using BigDLL4221.Utils;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
     public class PassiveAbility_MaskOfPerceptionNpc_Re21341 : PassiveAbilityBase
     {
+        public override bool CanAddBuf(BattleUnitBuf buf)
+        {
+            if (buf.bufType != KeywordBuf.Paralysis) return base.CanAddBuf(buf);
+            owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>().OnAddBuf(1);
+            return false;
+        }
+
         public override bool IsTargetable_theLast()
         {
             return false;

@@ -37,7 +37,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 
         public override void OnRoundStart()
         {
-            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 1, _owner);
+            _owner.TakeDamage(2);
+            _owner.TakeBreakDamage(2);
         }
 
         public override void OnSelectEmotion()

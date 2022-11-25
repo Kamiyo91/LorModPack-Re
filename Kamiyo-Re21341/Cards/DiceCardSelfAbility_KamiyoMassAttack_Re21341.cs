@@ -1,4 +1,6 @@
-﻿using KamiyoModPack.Kamiyo_Re21341.Buffs;
+﻿using System.Linq;
+using BigDLL4221.Extensions;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
@@ -9,6 +11,19 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override bool OnChooseCard(BattleUnitModel owner)
         {
             return owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
+        }
+
+        public override void OnUseCard()
+        {
+            var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
+            if (buff == null || buff.stack <= 7) return;
+            var dice = card.card.CreateDiceCardBehaviorList().LastOrDefault();
+            card.AddDice(dice);
+            card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            {
+                power = 2
+            });
+            buff.OnAddBuf(-99);
         }
 
         public override void OnEndAreaAttack()

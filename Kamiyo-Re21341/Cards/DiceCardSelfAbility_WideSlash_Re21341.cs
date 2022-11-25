@@ -1,14 +1,27 @@
-﻿namespace KamiyoModPack.Kamiyo_Re21341.Cards
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
+
+namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
-    public class DiceCardSelfAbility_OutragingFire_Re21341 : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_WideSlash_Re21341 : DiceCardSelfAbilityBase
     {
         private const int Check = 2;
         private int _atkClashWin;
+        private int _stacks;
 
         public override void OnUseCard()
         {
             owner.allyCardDetail.DrawCards(1);
             _atkClashWin = 0;
+            var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
+            if (buff == null || buff.stack < 5)
+            {
+                _stacks = 2;
+                return;
+            }
+
+            buff.OnAddBuf(-5);
+            _stacks = 5;
         }
 
         public override void OnWinParryingAtk()
@@ -22,7 +35,7 @@
             foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction == Faction.Player
                          ? Faction.Enemy
                          : Faction.Player))
-                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 2);
+                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, _stacks);
         }
     }
 }

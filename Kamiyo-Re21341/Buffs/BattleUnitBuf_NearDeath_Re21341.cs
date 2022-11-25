@@ -16,12 +16,12 @@
             foreach (var unit in BattleObjectManager.instance.GetAliveList(_owner.faction == Faction.Player
                          ? Faction.Enemy
                          : Faction.Player))
-                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 1, unit);
+                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1, unit);
         }
 
         public override bool CanRecoverHp(int amount)
         {
-            if (_owner.hp + amount < 64) return true;
+            if (_owner.hp + amount < 40) return true;
             _owner.SetHp(64);
             return false;
         }

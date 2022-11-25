@@ -1,6 +1,9 @@
-﻿namespace KamiyoModPack.Kamiyo_Re21341.Cards
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
+
+namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
-    public class DiceCardSelfAbility_FireBlade_Re21341 : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_LowerSlash_Re21341 : DiceCardSelfAbilityBase
     {
         private const int Check = 1;
         private int _atkClashWin;
@@ -8,6 +11,7 @@
         public override void OnUseCard()
         {
             owner.cardSlotDetail.RecoverPlayPointByCard(1);
+            owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>()?.OnAddBuf(3);
             _atkClashWin = 0;
         }
 

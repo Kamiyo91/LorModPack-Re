@@ -254,6 +254,10 @@ namespace KamiyoModPack.BLL_Re21341.Models
     public class KamiyoUtil
     {
         public NpcMechUtil_Kamiyo KamiyoNpcUtil = new NpcMechUtil_Kamiyo(new NpcMechUtilBaseModel("PhaseKamiyoRe21341",
+            permanentBuffList: new List<PermanentBuffOptions>
+            {
+                new PermanentBuffOptions(new BattleUnitBuf_Shock_Re21341())
+            },
             egoMaps: new Dictionary<LorId, MapModel>
             {
                 { new LorId(KamiyoModParameters.PackageId, 902), KamiyoModParameters.KamiyoMap2 }
@@ -303,6 +307,10 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }));
 
         public MechUtilBase KamiyoPlayerUtil = new MechUtilBase(new MechUtilBaseModel(
+            permanentBuffList: new List<PermanentBuffOptions>
+            {
+                new PermanentBuffOptions(new BattleUnitBuf_Shock_Re21341())
+            },
             egoMaps: new Dictionary<LorId, MapModel>
             {
                 { new LorId(KamiyoModParameters.PackageId, 16), KamiyoModParameters.KamiyoMap2 }

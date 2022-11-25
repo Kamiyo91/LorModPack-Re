@@ -16,7 +16,7 @@
             foreach (var unit in BattleObjectManager.instance.GetAliveList(_owner.faction == Faction.Player
                          ? Faction.Enemy
                          : Faction.Player))
-                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 1, unit);
+                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1, unit);
         }
 
         public override bool CanRecoverHp(int amount)

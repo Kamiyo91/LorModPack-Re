@@ -16,16 +16,16 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         protected override string keywordIconId => "AlterEgoMask_Re21341";
         public override int MaxStack => 10;
         public override int MinStack => 1;
-        public override int AdderStackEachScene => -1;
+        public override int AdderStackEachScene => -2;
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
-                    power = stack > 4 ? 2 : 1
+                    power = stack > 7 ? 2 : 1
                 });
-            if (stack > 7 && behavior.Detail == BehaviourDetail.Evasion)
+            if (stack > 4 && behavior.Detail == BehaviourDetail.Evasion)
                 behavior.ApplyDiceStatBonus(
                     new DiceStatBonus
                     {
@@ -41,9 +41,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         public override void OnRoundStart()
         {
-            _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 3, _owner);
-            if (stack > 4) _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 1, _owner);
-            if (stack > 7) _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, 2, _owner);
+            _owner.TakeDamage(stack > 7 ? 8 : stack > 4 ? 5 : 3);
         }
 
         private void PlayChangingEffect(BattleUnitModel owner)

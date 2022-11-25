@@ -1,8 +1,9 @@
-﻿using BigDLL4221.Utils;
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
-    public class DiceCardSelfAbility_FireOverflow_Re21341 : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_Focus_Re21341 : DiceCardSelfAbilityBase
     {
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
@@ -12,9 +13,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
 
         private static void Activate(BattleUnitModel unit)
         {
-            ArtUtil.BaseGameLoadPrefabEffect(unit, "Battle/DiceAttackEffects/New/FX/DamageDebuff/FX_DamageDebuff_Fire",
-                "Buf/Effect_Burn");
-            unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Burn, 3, unit);
+            //ArtUtil.BaseGameLoadPrefabEffect(unit, "Battle/DiceAttackEffects/New/FX/DamageDebuff/FX_DamageDebuff_Fire",
+            //    "Buf/Effect_Burn");
+            unit.GetActiveBuff<BattleUnitBuf_Shock_Re21341>()?.OnAddBuf(1);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, unit);
         }
