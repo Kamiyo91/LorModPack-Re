@@ -246,7 +246,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
                         KamiyoModParameters.PoolCode,
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
-                        customFloorMap: KamiyoModParameters.HayateSephirahMap)),
+                        customFloorMap: KamiyoModParameters.HayateSephirahMap,lockOriginalEgoSlots:true,lockOriginalEmotionSlots:true)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
