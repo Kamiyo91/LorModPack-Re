@@ -246,7 +246,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
                         KamiyoModParameters.PoolCode,
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
-                        customFloorMap: KamiyoModParameters.HayateSephirahMap,lockOriginalEgoSlots:true,lockOriginalEmotionSlots:true)),
+                        customFloorMap: KamiyoModParameters.HayateSephirahMap, lockOriginalEgoSlots: true,
+                        lockOriginalEmotionSlots: true)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
@@ -258,13 +259,16 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new CategoryOptions(KamiyoModParameters.PackageId, "_1",
                     bookDataColor: new CategoryColorOptions(Color.white, Color.white)
                     , categoryBooksId: new List<int> { 10000003, 10000004, 10000005, 10000006, 10000007 },
+                    credenzaBooksId: new List<int> { 10000003, 10000004, 10000005, 10000006, 10000007 },
                     categoryNameId: "KurosawaSlot1_21341", customIconSpriteId: KamiyoModParameters.PackageId),
                 new CategoryOptions(KamiyoModParameters.PackageId, "_2",
                     bookDataColor: new CategoryColorOptions(Color.white, Color.white)
                     , categoryBooksId: new List<int> { 10000008, 10000011, 10000012, 10000013, 10000014, 10000015, 10000016, 10000017 },
-                    categoryNameId: "KurosawaSlot3_21341", customIconSpriteId: KamiyoModParameters.PackageId),
+                    categoryNameId: "KurosawaSlot3_21341", customIconSpriteId: KamiyoModParameters.PackageId,
+                    credenzaType: CredenzaEnum.NoCredenza),
                 new CategoryOptions(KamiyoModParameters.PackageId, "_3"
                     , new List<int> { 10000001, 10000002, 10000009 }, categoryNameId: "KurosawaSlot2_21341",
+                    credenzaBooksId: new List<int> { 10000001 },
                     baseIconSpriteId: "Chapter5")
             });
         }
