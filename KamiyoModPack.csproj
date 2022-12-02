@@ -35,8 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\PurpleMod\Assemblies\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="1BigDLL4221">
-      <HintPath>..\..\NewDLL\bin\Debug\1BigDLL4221.dll</HintPath>
+    <Reference Include="1BigDLL4221, Version=1.0.0.0, Culture=neutral, PublicKeyToken=47d1ca6ac4ef9de7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\NewDLL\bin\Release\1BigDLL4221.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -211,6 +212,7 @@
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaStory_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_NoEmotionFloor_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_NotEquip_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_PlayerShimmering_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_Solo_Re21341.cs" />
