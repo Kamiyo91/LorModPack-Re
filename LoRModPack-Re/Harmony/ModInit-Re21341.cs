@@ -18,15 +18,17 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             OnInitParameters();
             ArtUtil.GetArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/ArtWork"));
-            ArtUtil.GetCardArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CardArtWork"));
+            //ArtUtil.GetCardArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CardArtWork"));
             CardUtil.ChangeCardItem(ItemXmlDataList.instance, KamiyoModParameters.PackageId);
             PassiveUtil.ChangePassiveItem(KamiyoModParameters.PackageId);
             KeypageUtil.ChangeKeypageItem(BookXmlList.Instance, KamiyoModParameters.PackageId);
             CardUtil.LoadEmotionAndEgoCards(KamiyoModParameters.PackageId, KamiyoModParameters.Path + "/EmotionCards",
                 new List<Assembly> { Assembly.GetExecutingAssembly() });
-            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Emotion,
+            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PackageId, KamiyoModParameters.PoolCode,
+                TypeCardEnum.Emotion,
                 KamiyoModParameters.EmotionCardIds);
-            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PoolCode, TypeCardEnum.Ego,
+            CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PackageId, KamiyoModParameters.PoolCode,
+                TypeCardEnum.Ego,
                 KamiyoModParameters.FloorEgoCardIds);
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);
             ArtUtil.PreLoadBufIcons();
