@@ -63,10 +63,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             ModParameters.CustomBookSkinsOptions.Add(KamiyoModParameters.PackageId, new List<CustomBookSkinsOption>
             {
-                new CustomBookSkinsOption("MioRedEye_Re21341", 10000003, characterNameId: 3),
                 new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3),
                 new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4),
-                new CustomBookSkinsOption("KamiyoMask_Re21341", 10000004, characterNameId: 4),
                 new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10),
                 new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6),
                 new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8)
