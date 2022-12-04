@@ -31,6 +31,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 TypeCardEnum.Ego,
                 KamiyoModParameters.FloorEgoCardIds);
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);
+            ArtUtil.MakeCustomBook(KamiyoModParameters.PackageId);
             ArtUtil.PreLoadBufIcons();
             LocalizeUtil.RemoveError();
             CardUtil.InitKeywordsList(new List<Assembly> { Assembly.GetExecutingAssembly() });
@@ -45,6 +46,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             ModParameters.Path.Add(KamiyoModParameters.PackageId, KamiyoModParameters.Path);
             ModParameters.DefaultKeyword.Add(KamiyoModParameters.PackageId, "LoRModPage_Re21341");
+            ModParameters.Assemblies.Add(Assembly.GetExecutingAssembly());
             OnInitSprites();
             OnInitSkins();
             OnInitKeypages();
@@ -55,6 +57,21 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             OnInitRewards();
             OnInitStages();
             OnInitCredenza();
+            OnInitCustomSkins();
+        }
+
+        private static void OnInitCustomSkins()
+        {
+            ModParameters.CustomBookSkinsOptions.Add(KamiyoModParameters.PackageId, new List<CustomBookSkinsOption>
+            {
+                new CustomBookSkinsOption("MioRedEye_Re21341", 10000003, characterNameId: 3),
+                new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3),
+                new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4),
+                new CustomBookSkinsOption("KamiyoMask_Re21341", 10000004, characterNameId: 4),
+                new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10),
+                new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6),
+                new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8)
+            });
         }
 
         private static void OnInitRewards()
@@ -395,7 +412,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         new LorId(KamiyoModParameters.VortexModPackageId, 3),
                         new LorId(KamiyoModParameters.VortexModPackageId, 8)
                     }),
-                new PassiveOptions(30,passiveColorOptions:new PassiveColorOptions(Color.red,Color.red))
+                new PassiveOptions(30, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red))
             });
         }
 
