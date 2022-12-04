@@ -18,7 +18,6 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             OnInitParameters();
             ArtUtil.GetArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/ArtWork"));
-            //ArtUtil.GetCardArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CardArtWork"));
             CardUtil.ChangeCardItem(ItemXmlDataList.instance, KamiyoModParameters.PackageId);
             PassiveUtil.ChangePassiveItem(KamiyoModParameters.PackageId);
             KeypageUtil.ChangeKeypageItem(BookXmlList.Instance, KamiyoModParameters.PackageId);
