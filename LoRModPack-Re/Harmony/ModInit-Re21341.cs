@@ -44,8 +44,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             KamiyoModParameters.Path = Path.GetDirectoryName(
                 Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
             ModParameters.Path.Add(KamiyoModParameters.PackageId, KamiyoModParameters.Path);
-            ModParameters.DefaultKeyword.Add(KamiyoModParameters.PackageId, "LoRModPage_Re21341");
             ModParameters.Assemblies.Add(Assembly.GetExecutingAssembly());
+            ModParameters.DefaultKeyword.Add(KamiyoModParameters.PackageId, "LoRModPage_Re21341");
             OnInitSprites();
             OnInitSkins();
             OnInitKeypages();
@@ -327,7 +327,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             ModParameters.StageOptions.Add(KamiyoModParameters.PackageId, new List<StageOptions>
             {
-                new StageOptions(1, preBattleOptions: new PreBattleOptions(onlySephirah: true)),
+                new StageOptions(1, preBattleOptions: new PreBattleOptions(onlySephirah: true),
+                    stageRequirements:new StageRequirements(requiredStageIds:new List<LorId>{new LorId(KamiyoModParameters.PackageId,3)})),
                 new StageOptions(2, stageColorOptions: new StageColorOptions(Color.white, Color.white)),
                 new StageOptions(3, stageColorOptions: new StageColorOptions(Color.gray, Color.gray)),
                 new StageOptions(4, preBattleOptions: new PreBattleOptions(onlySephirah: true),
