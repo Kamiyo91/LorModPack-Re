@@ -410,7 +410,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         new LorId(KamiyoModParameters.VortexModPackageId, 3),
                         new LorId(KamiyoModParameters.VortexModPackageId, 8)
                     }),
-                new PassiveOptions(30, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red))
+                new PassiveOptions(30, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
+                new PassiveOptions(14,forceAggroOptions:new ForceAggroOptions(forceAggroLastDie:true))
             });
         }
 
