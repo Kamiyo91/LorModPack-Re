@@ -29,6 +29,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PackageId, KamiyoModParameters.PoolCode,
                 TypeCardEnum.Ego,
                 KamiyoModParameters.FloorEgoCardIds);
+            CardUtil.SetEmotionCardColors(KamiyoModParameters.PackageId, new List<int> { 21344, 21347 },
+                new EmotionCardColorOptions(Color.white, Color.white, HSVColors.White));
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);
             ArtUtil.MakeCustomBook(KamiyoModParameters.PackageId);
             ArtUtil.PreLoadBufIcons();
@@ -63,11 +65,13 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             ModParameters.CustomBookSkinsOptions.Add(KamiyoModParameters.PackageId, new List<CustomBookSkinsOption>
             {
-                new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3),
-                new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4),
-                new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10),
-                new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6),
-                new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8)
+                new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3,
+                    iconId: "Light_Re21341"),
+                new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4,
+                    iconId: "Kamiyo_Re21341"),
+                new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10, iconId: "Raziel_Re21341"),
+                new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6, iconId: "Hayate_Re21341"),
+                new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8, iconId: "Wilton_Re21341")
             });
         }
 
@@ -180,8 +184,11 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     cardColorOptions: new CardColorOptions(Color.red, customIconColor: Color.red, useHSVFilter: false)),
                 new CardOptions(57, CardOption.Personal,
                     cardColorOptions: new CardColorOptions(Color.red, customIconColor: Color.red, useHSVFilter: false)),
-                new CardOptions(59, CardOption.Personal),
-                new CardOptions(60, CardOption.Personal),
+                new CardOptions(59, CardOption.Personal,
+                    cardColorOptions: new CardColorOptions(Color.white, iconColor: HSVColors.White)),
+                new CardOptions(60, CardOption.Personal, cardColorOptions: new CardColorOptions(Color.gray,
+                    customIconColor: new Color(0.5f, 0.5f, 0.5f),
+                    iconColor: HSVColors.Black)),
                 new CardOptions(36, CardOption.Personal),
                 new CardOptions(61, CardOption.Personal),
                 new CardOptions(907, CardOption.Personal),
@@ -328,7 +335,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             ModParameters.StageOptions.Add(KamiyoModParameters.PackageId, new List<StageOptions>
             {
                 new StageOptions(1, preBattleOptions: new PreBattleOptions(onlySephirah: true),
-                    stageRequirements:new StageRequirements(requiredStageIds:new List<LorId>{new LorId(KamiyoModParameters.PackageId,3)})),
+                    stageRequirements: new StageRequirements(requiredStageIds: new List<LorId>
+                        { new LorId(KamiyoModParameters.PackageId, 3) })),
                 new StageOptions(2, stageColorOptions: new StageColorOptions(Color.white, Color.white)),
                 new StageOptions(3, stageColorOptions: new StageColorOptions(Color.gray, Color.gray)),
                 new StageOptions(4, preBattleOptions: new PreBattleOptions(onlySephirah: true),
@@ -411,7 +419,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         new LorId(KamiyoModParameters.VortexModPackageId, 8)
                     }),
                 new PassiveOptions(30, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
-                new PassiveOptions(14,forceAggroOptions:new ForceAggroOptions(forceAggroLastDie:true))
+                new PassiveOptions(14, forceAggroOptions: new ForceAggroOptions(forceAggroLastDie: true))
             });
         }
 
