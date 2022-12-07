@@ -65,13 +65,11 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             ModParameters.CustomBookSkinsOptions.Add(KamiyoModParameters.PackageId, new List<CustomBookSkinsOption>
             {
-                new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3,
-                    iconId: "Light_Re21341"),
-                new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4,
-                    iconId: "Kamiyo_Re21341"),
-                new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10, iconId: "Raziel_Re21341"),
-                new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6, iconId: "Hayate_Re21341"),
-                new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8, iconId: "Wilton_Re21341")
+                new CustomBookSkinsOption("MioNormalEye_Re21341", 10000003, characterNameId: 3),
+                new CustomBookSkinsOption("KamiyoNormal_Re21341", 10000004, characterNameId: 4),
+                new CustomBookSkinsOption("Raziel_Re21341", 10000007, characterNameId: 10),
+                new CustomBookSkinsOption("Hayate_Re21341", 10000005, characterNameId: 6),
+                new CustomBookSkinsOption("Wilton_Re21341", 10000006, characterNameId: 8)
             });
         }
 
@@ -269,8 +267,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
                         KamiyoModParameters.PoolCode,
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
-                        customFloorMap: KamiyoModParameters.HayateSephirahMap, lockOriginalEgoSlots: true,
-                        lockOriginalEmotionSlots: true)),
+                        customFloorMap: KamiyoModParameters.HayateSephirahMap)),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
