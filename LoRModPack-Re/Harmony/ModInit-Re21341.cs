@@ -24,11 +24,9 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
             CardUtil.LoadEmotionAndEgoCards(KamiyoModParameters.PackageId, KamiyoModParameters.Path + "/EmotionCards",
                 new List<Assembly> { Assembly.GetExecutingAssembly() });
             CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PackageId, KamiyoModParameters.PoolCode,
-                TypeCardEnum.Emotion,
-                KamiyoModParameters.EmotionCardIds);
+                TypeCardEnum.Emotion, KamiyoModParameters.EmotionCardIds);
             CardUtil.SetFloorPullCodeCards(KamiyoModParameters.PackageId, KamiyoModParameters.PoolCode,
-                TypeCardEnum.Ego,
-                KamiyoModParameters.FloorEgoCardIds);
+                TypeCardEnum.Ego, KamiyoModParameters.FloorEgoCardIds);
             CardUtil.SetEmotionCardColors(KamiyoModParameters.PackageId, new List<int> { 21344, 21347 },
                 new EmotionCardColorOptions(Color.white, Color.white, HSVColors.White));
             LocalizeUtil.AddGlobalLocalize(KamiyoModParameters.PackageId);

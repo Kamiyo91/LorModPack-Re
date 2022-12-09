@@ -23,8 +23,8 @@ namespace KamiyoModPack.Mio_Re21341.Cards
                 power = 1
             });
             if (owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
-                BattleUnitBuf_SakuraPetal_Re21341 buf) return;
-            buf = new BattleUnitBuf_SakuraPetal_Re21341();
+                BattleUnitBuf_SakuraPetal_Re21341) return;
+            var buf = new BattleUnitBuf_SakuraPetal_Re21341();
             owner.bufListDetail.AddBufWithoutDuplication(buf);
             owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 59));
         }
