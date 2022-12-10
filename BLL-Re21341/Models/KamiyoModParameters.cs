@@ -12,7 +12,6 @@ using KamiyoModPack.Kamiyo_Re21341.MechUtil;
 using KamiyoModPack.Kamiyo_Re21341.Passives;
 using KamiyoModPack.Mio_Re21341;
 using KamiyoModPack.Mio_Re21341.Buffs;
-using KamiyoModPack.Mio_Re21341.Passives;
 using KamiyoModPack.OldSamurai_Re21341.MapManager;
 using KamiyoModPack.Raziel_Re21341;
 using KamiyoModPack.Raziel_Re21341.Buffs;
@@ -306,7 +305,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
                 }
             }));
 
-        public MechUtilBase KamiyoPlayerUtil = new MechUtilBase(new MechUtilBaseModel(
+        public MechUtil_Kamiyo KamiyoPlayerUtil = new MechUtil_Kamiyo(new MechUtilBaseModel(
             permanentBuffList: new List<PermanentBuffOptions>
             {
                 new PermanentBuffOptions(new BattleUnitBuf_Shock_Re21341())

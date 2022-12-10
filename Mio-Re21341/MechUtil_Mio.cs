@@ -7,7 +7,7 @@ using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Util_Re21341.CommonBuffs;
 using LOR_XML;
 
-namespace KamiyoModPack.Mio_Re21341.Passives
+namespace KamiyoModPack.Mio_Re21341
 {
     public class MechUtil_Mio : MechUtilBase
     {
