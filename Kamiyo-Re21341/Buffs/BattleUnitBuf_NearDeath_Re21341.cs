@@ -21,7 +21,7 @@
 
         public override bool CanRecoverHp(int amount)
         {
-            if (_owner.hp + amount < 40) return true;
+            if (_owner.hp + amount < 64) return true;
             _owner.SetHp(64);
             return false;
         }
