@@ -1,5 +1,4 @@
 ﻿using BigDLL4221.Buffs;
-using LOR_DiceSystem;
 using Sound;
 using UnityEngine;
 
@@ -14,23 +13,17 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         public override bool isAssimilation => true;
         protected override string keywordId => "AlterEgoMask_Re21341";
         protected override string keywordIconId => "AlterEgoMask_Re21341";
-        public override int MaxStack => 10;
+        public override int MaxStack => 30;
         public override int MinStack => 1;
-        public override int AdderStackEachScene => -2;
+        public override int AdderStackEachScene => -3;
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
-                    power = stack > 7 ? 2 : 1
+                    power = stack > 24 ? 2 : 1
                 });
-            if (stack > 4 && behavior.Detail == BehaviourDetail.Evasion)
-                behavior.ApplyDiceStatBonus(
-                    new DiceStatBonus
-                    {
-                        power = 1
-                    });
         }
 
         public override void Init(BattleUnitModel owner)
@@ -39,9 +32,16 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
             PlayChangingEffect(owner);
         }
 
+        public override void OnSuccessAttack(BattleDiceBehavior behavior)
+        {
+            if (stack > 14)
+                behavior.card?.target?.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Vulnerable, 1, _owner);
+        }
+
         public override void OnRoundStart()
         {
-            _owner.TakeDamage(stack > 7 ? 8 : stack > 4 ? 5 : 3);
+            if (stack > 4) _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 1, _owner);
+            _owner.TakeDamage(stack > 24 ? 9 : stack > 14 ? 7 : stack > 4 ? 5 : 3);
         }
 
         private void PlayChangingEffect(BattleUnitModel owner)
@@ -64,6 +64,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
             OnAddBuf(1);
+        }
+
+        public override void OnLoseParrying(BattleDiceBehavior behavior)
+        {
+            if (_owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeath_Re21341>() ||
+                _owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeathNpc_Re21341>()) return;
+            OnAddBuf(-1);
         }
     }
 }
