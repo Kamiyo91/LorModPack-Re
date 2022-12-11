@@ -14,7 +14,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.MechUtil
         public override bool EgoActive()
         {
             if (!base.EgoActive()) return false;
-            if (UsingSkinProjection()) ChangeDiceEffects(Model.Owner);
+            if (!UsingSkinProjection())
+                ChangeDiceEffects(Model.Owner);
             return true;
         }
 
