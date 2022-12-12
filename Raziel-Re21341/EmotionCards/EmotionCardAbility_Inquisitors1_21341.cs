@@ -1,26 +1,17 @@
-﻿using BigDLL4221.Utils;
+﻿using KamiyoModPack.Util_Re21341.CommonPassives;
 
 namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 {
     public class EmotionCardAbility_Inquisitors1_21341 : EmotionCardAbilityBase
     {
-        private bool _revive;
-
         public override void OnSelectEmotion()
         {
-            _revive = false;
+            _owner.passiveDetail.AddPassive(new PassiveAbility_ReviveOnce_Re21341());
         }
 
         public override void OnWaveStart()
         {
-            _revive = false;
-        }
-
-        public override void OnRoundStart_ignoreDead()
-        {
-            if (_revive || !_owner.IsDead()) return;
-            _revive = true;
-            UnitUtil.UnitReviveAndRecovery(_owner, _owner.MaxHp, true);
+            _owner.passiveDetail.AddPassive(new PassiveAbility_ReviveOnce_Re21341());
         }
     }
 }

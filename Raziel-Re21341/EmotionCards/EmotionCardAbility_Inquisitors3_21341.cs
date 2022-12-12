@@ -6,8 +6,8 @@
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList(_owner.faction))
             {
-                unit.RecoverHP(50);
-                unit.breakDetail.RecoverBreak(50);
+                unit.RecoverHP(25);
+                unit.breakDetail.RecoverBreak(25);
             }
         }
 

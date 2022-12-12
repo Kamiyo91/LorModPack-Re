@@ -10,8 +10,8 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
         {
             _owner.cardSlotDetail.RecoverPlayPoint(_owner.cardSlotDetail.GetMaxPlayPoint());
             _owner.allyCardDetail.DrawCards(2);
-            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 3, _owner);
-            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 3, _owner);
+            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, _owner);
+            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, _owner);
             foreach (var unit in BattleObjectManager.instance.GetAliveList().Where(x => x != _owner))
                 unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Vulnerable, 3, _owner);
         }

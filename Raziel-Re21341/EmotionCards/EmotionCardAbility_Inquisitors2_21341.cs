@@ -35,9 +35,9 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
             if (battlePlayingCardDataInUnitModel2?.owner.GetActiveBuff<BattleUnitBuf_Judgment_Re21341>() ==
                 null) return;
             _owner.SetEmotionCombatLog(_emotionCard);
-            battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            battlePlayingCardDataInUnitModel2.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
-                min = 1,
+                min = -1,
                 max = -1
             });
         }

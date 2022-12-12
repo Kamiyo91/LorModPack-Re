@@ -1,4 +1,7 @@
-﻿using BigDLL4221.Extensions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BigDLL4221.Extensions;
+using BigDLL4221.Models;
 using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Kamiyo_Re21341.Passives;
 
@@ -6,50 +9,25 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 {
     public class EmotionCardAbility_Kamiyo1_21341 : EmotionCardAbilityBase
     {
-        public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
-        {
-            _owner.SetEmotionCombatLog(_emotionCard);
-            attackerCard?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-            {
-                max = -1
-            });
-        }
-
-        public override void OnParryingStart(BattlePlayingCardDataInUnitModel card)
-        {
-            BattlePlayingCardDataInUnitModel battlePlayingCardDataInUnitModel;
-            if (card == null)
-            {
-                battlePlayingCardDataInUnitModel = null;
-            }
-            else
-            {
-                var target = card.target;
-                battlePlayingCardDataInUnitModel = target?.currentDiceAction;
-            }
-
-            var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
-            _owner.SetEmotionCombatLog(_emotionCard);
-            battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-            {
-                max = -1
-            });
-        }
-
         public override void OnRoundStart()
         {
             _owner.TakeDamage(2);
             _owner.TakeBreakDamage(2);
+            SetRedirectSpeedDie();
         }
 
         public override void OnSelectEmotion()
         {
             ActiveEgo();
+            _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
+            SetRedirectSpeedDie();
         }
 
         public override void OnWaveStart()
         {
             ActiveEgo();
+            _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
+            SetRedirectSpeedDie();
         }
 
         public void ActiveEgo()
@@ -62,6 +40,20 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
             _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
             passive.Util.TurnEgoAbDialogOff();
             passive.Util.EgoActive();
+        }
+
+        private void SetRedirectSpeedDie()
+        {
+            if (!ModParameters.PassiveOptions.TryGetValue(KamiyoModParameters.PackageId, out var passiveOptions))
+                return;
+            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 14);
+            if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
+                                        passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
+                                            _owner.speedDiceResult.Count - 2))) return;
+            var index = passiveOptions.IndexOf(passiveItem);
+            passiveItem.ForceAggroOptions =
+                new ForceAggroOptions(forceAggroSpeedDie: new List<int> { _owner.speedDiceResult.Count - 2 });
+            if (index != -1) passiveOptions[index] = passiveItem;
         }
     }
 }
