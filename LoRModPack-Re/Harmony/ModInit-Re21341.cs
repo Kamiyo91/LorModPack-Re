@@ -18,6 +18,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
         {
             OnInitParameters();
             ArtUtil.GetArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/ArtWork"));
+            ArtUtil.GetSpeedDieArtWorks(new DirectoryInfo(KamiyoModParameters.Path + "/CustomDiceArtWork"));
             CardUtil.ChangeCardItem(ItemXmlDataList.instance, KamiyoModParameters.PackageId);
             PassiveUtil.ChangePassiveItem(KamiyoModParameters.PackageId);
             KeypageUtil.ChangeKeypageItem(BookXmlList.Instance, KamiyoModParameters.PackageId);
@@ -265,7 +266,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     customFloorOptions: new CustomFloorOptions(KamiyoModParameters.PackageId,
                         KamiyoModParameters.PoolCode,
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
-                        customFloorMap: KamiyoModParameters.HayateSephirahMap)),
+                        customFloorMap: KamiyoModParameters.HayateSephirahMap,customDiceColorOptions:new CustomDiceColorOptions("KurosawaFloor_Re21341",Color.white))),
                 new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
