@@ -49,10 +49,10 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
             var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 14);
             if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
                                         passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
-                                            _owner.speedDiceResult.Count - 2))) return;
+                                            _owner.speedDiceResult.Count - 2 < 0 ? 0 : _owner.speedDiceResult.Count - 2))) return;
             var index = passiveOptions.IndexOf(passiveItem);
             passiveItem.ForceAggroOptions =
-                new ForceAggroOptions(forceAggroSpeedDie: new List<int> { _owner.speedDiceResult.Count - 2 });
+                new ForceAggroOptions(forceAggroSpeedDie: new List<int> { _owner.speedDiceResult.Count - 2 < 0 ? 0 : _owner.speedDiceResult.Count - 2});
             if (index != -1) passiveOptions[index] = passiveItem;
         }
     }
