@@ -38,8 +38,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
                 battleDiceCardModel.GetBufList();
                 battleDiceCardModel.AddCost(-1);
             }
-
-            owner.allyCardDetail.DrawCards(1);
         }
     }
 }
