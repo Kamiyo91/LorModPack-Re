@@ -212,6 +212,7 @@
     <Compile Include="Util-Re21341\CommonBuffs\BattleUnitBuf_Vip_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonCards\DiceCardSelfAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonCards\DiceCardSelfAbility_Solo_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_CannotBeSelectedEmotion_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_CustomInstantIndexRelease_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_EmotionRedirect_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />

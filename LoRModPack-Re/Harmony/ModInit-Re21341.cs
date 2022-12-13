@@ -268,7 +268,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         KamiyoModParameters.PackageId, floorNameId: "KurosawaFloor_21341",
                         customFloorMap: KamiyoModParameters.HayateSephirahMap,
                         customDiceColorOptions: new CustomDiceColorOptions("KurosawaFloor_Re21341", Color.white))),
-                new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
+                new KeypageOptions(10000017, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red)),
+                new KeypageOptions(10000018, keypageColorOptions: new KeypageColorOptions(Color.red, Color.red))
             });
         }
 
@@ -283,7 +284,7 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                     categoryNameId: "KurosawaSlot1_21341", customIconSpriteId: KamiyoModParameters.PackageId),
                 new CategoryOptions(KamiyoModParameters.PackageId, "_2",
                     bookDataColor: new CategoryColorOptions(Color.white, Color.white)
-                    , categoryBooksId: new List<int> { 10000008, 10000011, 10000012, 10000013, 10000014, 10000015, 10000016, 10000017 },
+                    , categoryBooksId: new List<int> { 10000008, 10000011, 10000012, 10000013, 10000014, 10000015, 10000016, 10000017, 10000018 },
                     categoryNameId: "KurosawaSlot3_21341", customIconSpriteId: KamiyoModParameters.PackageId,
                     credenzaType: CredenzaEnum.NoCredenza),
                 new CategoryOptions(KamiyoModParameters.PackageId, "_3"
@@ -323,7 +324,8 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                 new SpriteOptions(SpriteEnum.Custom, 10000014, "FragmentBlueDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000015, "FragmentBlueDefault_Re21341"),
                 new SpriteOptions(SpriteEnum.Custom, 10000016, "FragmentRedDefault_Re21341"),
-                new SpriteOptions(SpriteEnum.Custom, 10000017, "FragmentRedDefault_Re21341")
+                new SpriteOptions(SpriteEnum.Custom, 10000017, "FragmentRedDefault_Re21341"),
+                new SpriteOptions(SpriteEnum.Custom, 10000018, "FragmentRedDefault_Re21341")
             });
         }
 
@@ -416,7 +418,18 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
                         new LorId(KamiyoModParameters.VortexModPackageId, 8)
                     }),
                 new PassiveOptions(30, passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
-                new PassiveOptions(14, forceAggroOptions: new ForceAggroOptions(forceAggroLastDie: true))
+                new PassiveOptions(14, forceAggroOptions: new ForceAggroOptions(forceAggroLastDie: true)),
+                new PassiveOptions(31),
+                new PassiveOptions(32, bannedEmotionCardSelection: true,
+                    cannotBeUsedWithPassives: new List<LorId> { new LorId(KamiyoModParameters.PackageId, 51) },
+                    passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
+                new PassiveOptions(33, bannedEgoFloorCards: true,
+                    cannotBeUsedWithPassives: new List<LorId> { new LorId(KamiyoModParameters.PackageId, 51) },
+                    passiveColorOptions: new PassiveColorOptions(Color.red, Color.red)),
+                new PassiveOptions(51, bannedEmotionCardSelection: true, bannedEgoFloorCards: true,
+                    cannotBeUsedWithPassives: new List<LorId>
+                        { new LorId(KamiyoModParameters.PackageId, 32), new LorId(KamiyoModParameters.PackageId, 33) },
+                    passiveColorOptions: new PassiveColorOptions(Color.red, Color.red))
             });
         }
 
