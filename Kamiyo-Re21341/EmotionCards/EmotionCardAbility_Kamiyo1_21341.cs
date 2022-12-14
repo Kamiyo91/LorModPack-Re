@@ -9,7 +9,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 {
     public class EmotionCardAbility_Kamiyo1_21341 : EmotionCardAbilityBase
     {
-        public override void OnRoundStart()
+        public override void OnRoundStart_after()
         {
             _owner.TakeDamage(3);
             _owner.TakeBreakDamage(3);
@@ -46,7 +46,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         {
             if (!ModParameters.PassiveOptions.TryGetValue(KamiyoModParameters.PackageId, out var passiveOptions))
                 return;
-            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 14);
+            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 31);
             if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
                                         passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
                                             _owner.speedDiceResult.Count - 2 < 0

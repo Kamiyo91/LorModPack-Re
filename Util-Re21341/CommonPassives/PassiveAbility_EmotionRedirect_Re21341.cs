@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using BigDLL4221.Models;
-using BigDLL4221.Utils;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
@@ -12,6 +11,11 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
             x.abiliity.behaviourInCard.Detail == BehaviourDetail.Evasion;
 
         public PassiveOptions PassiveOption;
+
+        public override void OnCreated()
+        {
+            Hide();
+        }
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
@@ -33,7 +37,6 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
         {
             if (PassiveOption?.ForceAggroOptions == null) return;
             if (!PassiveOption.ForceAggroOptions.ForceAggroSpeedDie.Contains(attackerCard.targetSlotOrder)) return;
-            UnitUtil.SetPassiveCombatLog(this, owner);
             attackerCard.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 min = -1,
@@ -47,7 +50,6 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
             if (!PassiveOption.ForceAggroOptions.ForceAggroSpeedDie.Contains(card.slotOrder)) return;
             var target = card.target;
             var battlePlayingCardDataInUnitModel = target?.currentDiceAction;
-            UnitUtil.SetPassiveCombatLog(this, owner);
             battlePlayingCardDataInUnitModel?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 min = -1,
