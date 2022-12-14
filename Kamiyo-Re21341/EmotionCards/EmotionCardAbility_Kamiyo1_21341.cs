@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BigDLL4221.Extensions;
-using BigDLL4221.Models;
+﻿using BigDLL4221.Extensions;
 using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Kamiyo_Re21341.Passives;
 
@@ -13,21 +10,18 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         {
             _owner.TakeDamage(3);
             _owner.TakeBreakDamage(3);
-            SetRedirectSpeedDie();
         }
 
         public override void OnSelectEmotion()
         {
             ActiveEgo();
             _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
-            SetRedirectSpeedDie();
         }
 
         public override void OnWaveStart()
         {
             ActiveEgo();
             _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
-            SetRedirectSpeedDie();
         }
 
         public void ActiveEgo()
@@ -40,23 +34,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
             _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
             passive.Util.TurnEgoAbDialogOff();
             passive.Util.EgoActive();
-        }
-
-        private void SetRedirectSpeedDie()
-        {
-            if (!ModParameters.PassiveOptions.TryGetValue(KamiyoModParameters.PackageId, out var passiveOptions))
-                return;
-            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 31);
-            if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
-                                        passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
-                                            _owner.speedDiceResult.Count - 2 < 0
-                                                ? 0
-                                                : _owner.speedDiceResult.Count - 2))) return;
-            var index = passiveOptions.IndexOf(passiveItem);
-            passiveItem.ForceAggroOptions =
-                new ForceAggroOptions(forceAggroSpeedDie: new List<int>
-                    { _owner.speedDiceResult.Count - 2 < 0 ? 0 : _owner.speedDiceResult.Count - 2 });
-            if (index != -1) passiveOptions[index] = passiveItem;
         }
     }
 }

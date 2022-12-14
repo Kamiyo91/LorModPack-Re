@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BigDLL4221.Models;
+using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
@@ -17,6 +19,11 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
             Hide();
         }
 
+        public override void OnAfterRollSpeedDice()
+        {
+            SetRedirectSpeedDie();
+        }
+
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
         {
             if (PassiveOption?.ForceAggroOptions == null) return;
@@ -25,12 +32,6 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
                 {
                     power = 1
                 });
-        }
-
-        public override void OnRoundStartAfter()
-        {
-            if (!ModParameters.PassiveOptions.TryGetValue(id.packageId, out var passiveOptions)) return;
-            PassiveOption = passiveOptions.FirstOrDefault(x => x.PassiveId == id.id);
         }
 
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
@@ -55,6 +56,24 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
                 min = -1,
                 max = -1
             });
+        }
+
+        private void SetRedirectSpeedDie()
+        {
+            if (!ModParameters.PassiveOptions.TryGetValue(KamiyoModParameters.PackageId, out var passiveOptions))
+                return;
+            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 31);
+            if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
+                                        passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
+                                            owner.speedDiceResult.Count - 2 < 0
+                                                ? 0
+                                                : owner.speedDiceResult.Count - 2))) return;
+            var index = passiveOptions.IndexOf(passiveItem);
+            passiveItem.ForceAggroOptions =
+                new ForceAggroOptions(forceAggroSpeedDie: new List<int>
+                    { owner.speedDiceResult.Count - 2 < 0 ? 0 : owner.speedDiceResult.Count - 2 });
+            if (index != -1) passiveOptions[index] = passiveItem;
+            PassiveOption = passiveItem;
         }
     }
 }
