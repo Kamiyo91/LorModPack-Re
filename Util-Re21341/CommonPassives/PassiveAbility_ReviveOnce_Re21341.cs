@@ -14,7 +14,7 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
 
         public override void OnRoundEndTheLast_ignoreDead()
         {
-            if (Revived) return;
+            if (!owner.IsDead() || Revived) return;
             Revived = true;
             UnitUtil.UnitReviveAndRecovery(owner, owner.MaxHp, true);
         }
