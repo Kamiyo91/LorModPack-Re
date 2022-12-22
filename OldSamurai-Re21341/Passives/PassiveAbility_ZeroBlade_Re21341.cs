@@ -11,6 +11,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.Passives
         public override void OnStartBattle()
         {
             UnitUtil.ReadyCounterCard(owner, 2, KamiyoModParameters.PackageId);
+            CardUtil.PrepareCounterDieOrderGameObject(owner, typeof(DiceCardAbility_ZeroBlade_Re21341),false);
         }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
