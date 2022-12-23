@@ -7,10 +7,10 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
     {
         public bool Active;
 
-        public override bool OnChooseCard(BattleUnitModel owner)
-        {
-            return owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
-        }
+        //public override bool OnChooseCard(BattleUnitModel owner)
+        //{
+        //    return owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
+        //}
 
         public override void OnStartBattle()
         {

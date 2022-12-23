@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using BigDLL4221.Extensions;
+using KamiyoModPack.Kamiyo_Re21341.Buffs;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Actions
 {
@@ -23,20 +25,32 @@ namespace KamiyoModPack.Kamiyo_Re21341.Actions
             if (opponent.infoList.Count > 0)
                 opponent.infoList.Clear();
             opponent.infoList = SetDamageEnemy();
-            return SetAttacksPlayer();
+            return SetAttacksPlayer(_self);
         }
 
-        private static List<RencounterManager.MovingAction> SetAttacksPlayer()
+        private static List<RencounterManager.MovingAction> SetAttacksPlayer(BattleUnitModel self)
         {
+            var hasEgoBuff = self.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() != null;
+            var isForgotten = !hasEgoBuff && self.Book.BookId == new LorId("VortexTowerModSa21341.Mod", 10000005);
             return new List<RencounterManager.MovingAction>
             {
-                CreateAttackAction(ActionDetail.Hit, 0.2f, "KamiyoHitEgo_Re21341", EffectTiming.PRE, EffectTiming.NONE,
+                CreateAttackAction(ActionDetail.Hit, 0.2f,
+                    hasEgoBuff ? "KamiyoHitEgo_Re21341" :
+                    isForgotten ? "KamiyoHitForgotten_Sa21341" : "KamiyoHit_Re21341", EffectTiming.PRE,
+                    EffectTiming.NONE,
                     EffectTiming.WITHOUT_DMGTEXT),
-                CreateAttackAction(ActionDetail.Slash, 0.3f, "KamiyoSlashEgo_Re21341", EffectTiming.PRE,
+                CreateAttackAction(ActionDetail.Slash, 0.3f,
+                    hasEgoBuff ? "KamiyoSlashEgo_Re21341" :
+                    isForgotten ? "KamiyoSlashForgotten_Sa21341" : "KamiyoSlash_Re21341", EffectTiming.PRE,
                     EffectTiming.NONE, EffectTiming.WITHOUT_DMGTEXT),
-                CreateAttackAction(ActionDetail.Penetrate, 0.4f, "PierceKamiyoMask_Re21341", EffectTiming.PRE,
+                CreateAttackAction(ActionDetail.Penetrate, 0.65f,
+                    hasEgoBuff ? "PierceKamiyoMask_Re21341" :
+                    isForgotten ? "PierceKamiyoForgotten_Sa21341" : "PierceKamiyo_Re21341", EffectTiming.PRE,
                     EffectTiming.NONE, EffectTiming.WITHOUT_DMGTEXT),
-                CreateAttackAction(ActionDetail.Hit, 0.5f, "KamiyoHitEgo_Re21341", EffectTiming.PRE, EffectTiming.PRE,
+                CreateAttackAction(ActionDetail.Hit, 0.5f,
+                    hasEgoBuff ? "KamiyoHitEgo_Re21341" :
+                    isForgotten ? "KamiyoHitForgotten_Sa21341" : "KamiyoHit_Re21341", EffectTiming.PRE,
+                    EffectTiming.PRE,
                     EffectTiming.PRE)
             };
             ;
@@ -48,8 +62,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.Actions
             {
                 new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Stop, 1f, true, 0.2f),
                 new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Stop, 1f, true, 0.3f),
-                new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Stop, 1f, true, 0.4f),
-                new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Stop, 1f, true, 0.5f)
+                new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Stop, 1f, true, 0.65f),
+                new RencounterManager.MovingAction(ActionDetail.Damaged, CharMoveState.Knockback, 1f, true, 0.5f)
+                    { knockbackPower = 10f }
             };
         }
 
