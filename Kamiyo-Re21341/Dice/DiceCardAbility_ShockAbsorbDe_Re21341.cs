@@ -3,7 +3,7 @@ using LOR_DiceSystem;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Dice
 {
-    public class DiceCardAbility_ShockAbsorb_Re21341 : DiceCardAbilityBase
+    public class DiceCardAbility_ShockAbsorbDie_Re21341 : DiceCardAbilityBase
     {
         public override void OnWinParrying()
         {
@@ -11,6 +11,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
                 behavior.Type == BehaviourType.Standby) return;
             if (card?.target?.currentDiceAction?.cardBehaviorQueue.Count > 0)
                 card?.target?.currentDiceAction?.DestroyDice(DiceMatch.AllDice);
+        }
+
+        public override void OnSucceedAttack()
+        {
+            card.target?.bufListDetail.AddKeywordBufByCard(KeywordBuf.Paralysis, 1, owner);
         }
     }
 }
