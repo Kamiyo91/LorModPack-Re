@@ -6,6 +6,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_Shock_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
     {
+        private int _clashWin;
+
         public BattleUnitBuf_Shock_Re21341() : base(infinite: true, lastOneScene: false)
         {
         }
@@ -34,14 +36,17 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
+            _clashWin++;
+            if (_clashWin < 3) return;
+            _clashWin = 0;
             OnAddBuf(1);
         }
 
-        public override void OnLoseParrying(BattleDiceBehavior behavior)
-        {
-            if (_owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeath_Re21341>() ||
-                _owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeathNpc_Re21341>()) return;
-            OnAddBuf(-1);
-        }
+        //public override void OnLoseParrying(BattleDiceBehavior behavior)
+        //{
+        //    if (_owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeath_Re21341>() ||
+        //        _owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeathNpc_Re21341>()) return;
+        //    OnAddBuf(-1);
+        //}
     }
 }

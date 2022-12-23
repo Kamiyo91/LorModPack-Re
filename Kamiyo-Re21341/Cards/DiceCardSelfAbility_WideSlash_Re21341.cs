@@ -14,14 +14,14 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             owner.allyCardDetail.DrawCards(1);
             _atkClashWin = 0;
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
-            if (buff == null || buff.stack < 5)
+            if (buff == null || buff.stack < 10)
             {
                 if (buff == null) owner.bufListDetail.AddBuf(new BattleUnitBuf_Shock_Re21341());
                 _stacks = 2;
                 return;
             }
 
-            buff.OnAddBuf(-5);
+            buff.OnAddBuf(-10);
             _stacks = 5;
         }
 
