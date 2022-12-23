@@ -15,7 +15,12 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnStartBattle()
         {
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
-            if (buff == null) return;
+            if (buff == null)
+            {
+                buff = new BattleUnitBuf_Shock_Re21341();
+                owner.bufListDetail.AddBuf(buff);
+            }
+
             buff.OnAddBuf(3);
             var positiveNum = buff.stack;
             if (positiveNum > 0)
