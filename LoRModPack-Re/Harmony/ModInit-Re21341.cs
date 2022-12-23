@@ -9,7 +9,9 @@ namespace KamiyoModPack.LoRModPack_Re.Harmony
     {
         public override void OnInitializeMod()
         {
-            KamiyoModParameters.Path = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
+            KamiyoModParameters.Path =
+                Path.GetDirectoryName(
+                    Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
         }
         //Old Version
         //public override void OnInitializeMod()

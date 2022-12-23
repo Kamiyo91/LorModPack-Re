@@ -5,6 +5,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
     public class DiceCardSelfAbility_ShockAbsorb_Re21341 : DiceCardSelfAbilityBase
     {
+        public bool Active;
+
         public override bool OnChooseCard(BattleUnitModel owner)
         {
             return owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>();
@@ -19,7 +21,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             if (positiveNum > 0)
                 positiveNum /= 3;
             if (positiveNum == 0) return;
+            Active = buff.stack > 9;
             buff.OnAddBuf(-99);
+            owner.TakeDamage(positiveNum * 5);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, positiveNum, owner);
             owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, positiveNum, owner);
         }

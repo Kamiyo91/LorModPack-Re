@@ -107,6 +107,7 @@
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_Hayate_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighDivinity_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HighGuard_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Actions\BehaviourAction_ShockAbsorb_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\AuraColorFragment.cs" />
     <Compile Include="Kamiyo-Re21341\AuraColor.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_ImminentCombat_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_WideSlash_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Dice\DiceCardAbility_ShockAbsorb_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Effects\DiceAttackEffect_KamiyoHit_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Effects\DiceAttackEffect_PierceKamiyo_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Effects\DiceAttackEffect_KamiyoSlash_Re21341.cs" />
