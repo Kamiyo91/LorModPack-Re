@@ -15,8 +15,7 @@
         {
             var units = BattleObjectManager.instance.GetAliveList(_owner.faction);
             if (units.Count <= 2) return;
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(_owner.faction))
-                unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 3, _owner);
+            _owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Protection, 3, _owner);
         }
     }
 }
