@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BigDLL4221.Models;
 using BigDLL4221.StageManagers;
+using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
 
 namespace KamiyoModPack.OldSamurai_Re21341
@@ -9,7 +10,8 @@ namespace KamiyoModPack.OldSamurai_Re21341
     {
         public override void OnWaveStart()
         {
-            SetParameters(new OldSamuraiUtil().OldSamuraiNpcUtil,
+            SetParameters(CustomMapHandler.GetCMU(KamiyoModParameters.PackageId),
+                new OldSamuraiUtil().OldSamuraiNpcUtil,
                 new List<MapModel> { KamiyoModParameters.SamuraiMapNpc });
             base.OnWaveStart();
         }

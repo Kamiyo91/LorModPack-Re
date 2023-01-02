@@ -8,7 +8,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.MechUtil
 {
     public class NpcMechUtil_Kamiyo : NpcMechUtilBase
     {
-        public NpcMechUtil_Kamiyo(NpcMechUtilBaseModel model) : base(model)
+        public NpcMechUtil_Kamiyo(NpcMechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
         }
 

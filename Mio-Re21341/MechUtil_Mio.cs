@@ -11,7 +11,7 @@ namespace KamiyoModPack.Mio_Re21341
 {
     public class MechUtil_Mio : MechUtilBase
     {
-        public MechUtil_Mio(MechUtilBaseModel model) : base(model)
+        public MechUtil_Mio(MechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
         }
 

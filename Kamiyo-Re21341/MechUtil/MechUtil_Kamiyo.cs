@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using BigDLL4221.BaseClass;
 using BigDLL4221.Models;
+using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Kamiyo_Re21341.MechUtil
 {
     public class MechUtil_Kamiyo : MechUtilBase
     {
-        public MechUtil_Kamiyo(MechUtilBaseModel model) : base(model)
+        public MechUtil_Kamiyo(MechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
         }
 

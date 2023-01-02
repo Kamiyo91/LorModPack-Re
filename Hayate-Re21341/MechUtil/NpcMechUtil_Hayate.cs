@@ -15,7 +15,7 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
         private BattleUnitModel _fingersnapSpecialTarget;
         public bool WiltonCase;
 
-        public NpcMechUtil_Hayate(NpcMechUtilBaseModel model) : base(model)
+        public NpcMechUtil_Hayate(NpcMechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
             WiltonCase = false;
         }

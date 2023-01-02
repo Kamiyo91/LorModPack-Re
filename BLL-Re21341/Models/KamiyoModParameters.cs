@@ -125,7 +125,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
                             KamiyoModParameters.SamuraiGhostNpc
                         })
                 }
-            }));
+            }), KamiyoModParameters.PackageId);
 
         public MechUtilBase OldSamuraiPlayerUtil = new MechUtilBase(new MechUtilBaseModel(
             egoMaps: new Dictionary<LorId, MapModel>
@@ -147,7 +147,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
                         unitsThatDieTogetherByPassive: new List<LorId>
                             { new LorId(KamiyoModParameters.PackageId, 5) }, removeEgoWhenSolo: true)
                 }
-            }));
+            }), KamiyoModParameters.PackageId);
     }
 
     public class MioUtil
@@ -199,7 +199,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
                         .FirstOrDefault(x => x.Key.Equals("MioEnemySurvive1_Re21341"))
                         .Value.Desc
                 }
-            }));
+            }), KamiyoModParameters.PackageId);
 
         public MechUtil_Mio MioPlayerUtil = new MechUtil_Mio(new MechUtilBaseModel(
             egoMaps: new Dictionary<LorId, MapModel>
@@ -443,7 +443,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }, egoMaps: new Dictionary<LorId, MapModel>
             {
                 { new LorId(KamiyoModParameters.PackageId, 58), KamiyoModParameters.RazielMap }
-            }));
+            }), KamiyoModParameters.PackageId);
     }
 
     public class HayateUtil
@@ -601,7 +601,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }, egoMaps: new Dictionary<LorId, MapModel>
             {
                 { new LorId(KamiyoModParameters.PackageId, 905), KamiyoModParameters.WiltonMap }
-            }));
+            }), KamiyoModParameters.PackageId);
 
         public MechUtilBase WiltonPlayerUtil = new MechUtilBase(new MechUtilBaseModel(
             personalCards: new Dictionary<LorId, PersonalCardOptions>
@@ -627,6 +627,6 @@ namespace KamiyoModPack.BLL_Re21341.Models
                             }
                         })
                 }
-            }));
+            }), KamiyoModParameters.PackageId);
     }
 }

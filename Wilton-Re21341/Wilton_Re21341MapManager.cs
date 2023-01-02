@@ -1,23 +1,16 @@
-﻿using BigDLL4221.Utils;
+﻿using System;
+using CustomMapUtility;
+using KamiyoModPack.BLL_Re21341.Models;
 using UnityEngine;
 
 namespace KamiyoModPack.Wilton_Re21341
 {
     public class Wilton_Re21341MapManager : CustomMapManager
     {
-        private readonly AudioClip[] _introClip =
-        {
-            null,
-            CustomMapHandler.GetAudioClip("Obscurity_Intro2.ogg")
-        };
-
-        private readonly AudioClip[] _multiClip =
-        {
-            CustomMapHandler.GetAudioClip("Obscurity_Phase1_Loop2.ogg"),
-            CustomMapHandler.GetAudioClip("Obscurity_Phase2_Loop.ogg")
-        };
-
+        private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
+        private AudioClip[] _introClip;
         private bool _loop;
+        private AudioClip[] _multiClip;
         private bool _snap;
         public int Phase;
 
@@ -107,10 +100,29 @@ namespace KamiyoModPack.Wilton_Re21341
 
         public override void InitializeMap()
         {
-            CustomMapHandler.LoadEnemyTheme("Obscurity_Intro2.ogg");
-            CustomMapHandler.LoadEnemyTheme("Obscurity_Phase1_Loop2.ogg");
-            CustomMapHandler.LoadEnemyTheme("Obscurity_Phase2_Loop.ogg");
-            _introClip[0] = mapBgm[0];
+            try
+            {
+                _cmh.LoadEnemyTheme("Obscurity_Intro.ogg");
+                _cmh.LoadEnemyTheme("Obscurity_Intro2.ogg");
+                _cmh.LoadEnemyTheme("Obscurity_Phase1_Loop2.ogg");
+                _cmh.LoadEnemyTheme("Obscurity_Phase2_Loop.ogg");
+                _multiClip = new[]
+                {
+                    _cmh.GetAudioClip("Obscurity_Phase1_Loop2.ogg"),
+                    _cmh.GetAudioClip("Obscurity_Phase2_Loop.ogg")
+                };
+                _introClip = new[]
+                {
+                    _cmh.GetAudioClip("Obscurity_Intro.ogg"),
+                    _cmh.GetAudioClip("Obscurity_Intro2.ogg")
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.Message + "\n" + ex.InnerException);
+            }
+
+            Debug.LogError("After Init BGM");
             base.InitializeMap();
         }
 

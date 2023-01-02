@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BigDLL4221.Utils;
+using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Hayate_Re21341.Passives;
 using KamiyoModPack.Util_Re21341.CommonBuffs;
@@ -8,6 +9,7 @@ namespace KamiyoModPack.Wilton_Re21341
 {
     public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
     {
+        private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
         private bool _checkEnd;
         private bool _finalMech;
 
@@ -18,9 +20,9 @@ namespace KamiyoModPack.Wilton_Re21341
         public override void OnWaveStart()
         {
             _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
-            CustomMapHandler.InitCustomMap<Wilton_Re21341MapManager>("Wilton_Re21341", false, true, 0.5f, 0.2f);
-            CustomMapHandler.EnforceMap();
-            Singleton<StageController>.Instance.CheckMapChange();
+            _cmh.InitCustomMap<Wilton_Re21341MapManager>("Wilton_Re21341", false, true, 0.5f, 0.2f);
+            _cmh.EnforceMap();
+            //Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
             //if (_finalMech)
             //    foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
@@ -39,7 +41,7 @@ namespace KamiyoModPack.Wilton_Re21341
 
         public override void OnRoundStart()
         {
-            CustomMapHandler.EnforceMap();
+            _cmh.EnforceMap();
         }
 
         public override void OnRoundStart_After()

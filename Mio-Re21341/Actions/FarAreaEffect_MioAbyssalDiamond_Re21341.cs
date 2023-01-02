@@ -3,6 +3,8 @@ using System.Linq;
 using Battle.DiceAttackEffect;
 using BigDLL4221.Models;
 using BigDLL4221.Utils;
+using CustomMapUtility;
+using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
 using LOR_XML;
 using Sound;
@@ -76,7 +78,9 @@ namespace KamiyoModPack.Mio_Re21341.Actions
                                     {
                                         case 0:
                                         {
-                                            audioClip = UnitUtil.GetSound("Purple_Stab_Stab2", true);
+                                            audioClip = UnitUtil.GetSound(
+                                                CustomMapHandler.GetCMU(KamiyoModParameters.PackageId),
+                                                "Purple_Stab_Stab2", true);
                                             detail = ActionDetail.Penetrate;
                                             var componentType = ModParameters.CustomEffects["MioPierce_Re21341"];
                                             var diceAttackEffect =
@@ -89,7 +93,9 @@ namespace KamiyoModPack.Mio_Re21341.Actions
                                         }
                                         case 1:
                                         {
-                                            audioClip = UnitUtil.GetSound("Purple_Slash_Hori", true);
+                                            audioClip = UnitUtil.GetSound(
+                                                CustomMapHandler.GetCMU(KamiyoModParameters.PackageId),
+                                                "Purple_Slash_Hori", true);
                                             detail = ActionDetail.Slash;
                                             var componentType = ModParameters.CustomEffects["MioSlash_Re21341"];
                                             var diceAttackEffect =
@@ -103,7 +109,9 @@ namespace KamiyoModPack.Mio_Re21341.Actions
                                         }
                                         case 2:
                                         {
-                                            audioClip = UnitUtil.GetSound("Purple_Slash_VertDown", true);
+                                            audioClip = UnitUtil.GetSound(
+                                                CustomMapHandler.GetCMU(KamiyoModParameters.PackageId),
+                                                "Purple_Slash_VertDown", true);
                                             detail = ActionDetail.Hit;
                                             var componentType = ModParameters.CustomEffects["MioHit_Re21341"];
                                             var diceAttackEffect =

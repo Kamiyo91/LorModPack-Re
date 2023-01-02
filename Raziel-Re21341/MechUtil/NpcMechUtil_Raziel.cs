@@ -11,7 +11,7 @@ namespace KamiyoModPack.Raziel_Re21341.MechUtil
 {
     public class NpcMechUtil_Raziel : NpcMechUtilBase
     {
-        public NpcMechUtil_Raziel(NpcMechUtilBaseModel model) : base(model)
+        public NpcMechUtil_Raziel(NpcMechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
         }
 

@@ -9,7 +9,7 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
     {
         private BattleUnitModel _fingersnapSpecialTarget;
 
-        public MechUtil_Hayate(MechUtilBaseModel model) : base(model)
+        public MechUtil_Hayate(MechUtilBaseModel model) : base(model, KamiyoModParameters.PackageId)
         {
         }
 
