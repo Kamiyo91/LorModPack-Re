@@ -122,7 +122,6 @@ namespace KamiyoModPack.Wilton_Re21341
                 Debug.LogError(ex.Message + "\n" + ex.InnerException);
             }
 
-            Debug.LogError("After Init BGM");
             base.InitializeMap();
         }
 

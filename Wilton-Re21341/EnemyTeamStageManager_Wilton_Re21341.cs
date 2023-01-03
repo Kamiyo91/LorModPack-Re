@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BigDLL4221.Models;
+using BigDLL4221.StageManagers;
 using BigDLL4221.Utils;
 using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
@@ -7,22 +10,20 @@ using KamiyoModPack.Util_Re21341.CommonBuffs;
 
 namespace KamiyoModPack.Wilton_Re21341
 {
-    public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager
+    public class EnemyTeamStageManager_Wilton_Re21341 : EnemyTeamStageManager_BaseWithCMUOnly_DLL4221
     {
-        private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
         private bool _checkEnd;
         private bool _finalMech;
-
         private BattleUnitModel _mainEnemyModel;
         private Wilton_Re21341MapManager _mapManager;
         private bool _phaseChanged;
 
         public override void OnWaveStart()
         {
+            SetParameters(CustomMapHandler.GetCMU(KamiyoModParameters.PackageId),
+                new List<MapModel> { KamiyoModParameters.WiltonMap });
+            base.OnWaveStart();
             _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
-            _cmh.InitCustomMap<Wilton_Re21341MapManager>("Wilton_Re21341", false, true, 0.5f, 0.2f);
-            _cmh.EnforceMap();
-            //Singleton<StageController>.Instance.CheckMapChange();
             _mainEnemyModel = BattleObjectManager.instance.GetList(Faction.Enemy).FirstOrDefault();
             //if (_finalMech)
             //    foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
@@ -39,19 +40,10 @@ namespace KamiyoModPack.Wilton_Re21341
             HayateEntry();
         }
 
-        public override void OnRoundStart()
-        {
-            _cmh.EnforceMap();
-        }
-
-        public override void OnRoundStart_After()
-        {
-            if (_phaseChanged) MapUtil.ActiveCreatureBattleCamFilterComponent();
-        }
-
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 271 || _phaseChanged) return;
+            ChangeFilterStatus(true);
             _phaseChanged = true;
             _mapManager.Phase = 1;
             _mapManager.Update();

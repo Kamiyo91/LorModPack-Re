@@ -90,6 +90,15 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
         public override void ExtraMethodCase()
         {
             WiltonCase = true;
+            foreach (var mechOption in Model.MechOptions)
+                mechOption.Value.SummonOriginalUnitByIndex.Clear();
+        }
+
+        public override BattleUnitModel IgnoreSephiraSelectionTarget(LorId cardId)
+        {
+            if (!WiltonCase) return base.IgnoreSephiraSelectionTarget(cardId);
+            return BattleObjectManager.instance.GetAliveList(Faction.Player).LastOrDefault() ??
+                   base.IgnoreSephiraSelectionTarget(cardId);
         }
 
         public override void ExtraMethodOnKill(BattleUnitModel unit)
