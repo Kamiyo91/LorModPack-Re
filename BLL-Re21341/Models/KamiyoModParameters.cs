@@ -33,7 +33,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
         public static string Path;
         public static readonly int EgoEmotionLevel = 3;
 
-        // OldSamurai10000009
+        // OldSamurai
         public static UnitModel SamuraiGhostNpc = new UnitModel(2, PackageId, 2, lockedEmotion: true);
         public static UnitModel SamuraiGhostPlayer = new UnitModel(10000002, PackageId, 2, lockedEmotion: true);
 

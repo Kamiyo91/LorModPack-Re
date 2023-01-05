@@ -55,6 +55,10 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
             _emotionCards = UnitUtil.AddValueToEmotionCardList(UnitUtil.GetEmotionCardByUnit(unit), _emotionCards);
         }
 
+        //public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
+        //{
+        //    if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId != "RushBattle21341.Mod") base.OnSelectCardPutMassAttack(ref origin);
+        //}
         public override void ExtraMechRoundPreEnd(MechPhaseOptions mechOptions)
         {
             foreach (var unit in BattleObjectManager.instance.GetList(
