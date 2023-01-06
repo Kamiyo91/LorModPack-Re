@@ -21,18 +21,10 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            if (_atkLand < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-
             var buf =
                 owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
                     BattleUnitBuf_EntertainMe_Re21341;
-            buf?.OnAddBuf(1);
+            buf?.OnAddBuf(_atkLand < Check ? -1 : 1);
         }
     }
 }

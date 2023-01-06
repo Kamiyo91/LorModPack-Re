@@ -21,11 +21,18 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            if (_atkLand < Check) return;
-            var buf =
+            var buff =
                 owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
                     BattleUnitBuf_EntertainMe_Re21341;
-            buf?.OnAddBuf(3);
+            if (_atkLand < Check)
+            {
+                buff?.OnAddBuf(-3);
+                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Weak, 1, owner);
+                return;
+            }
+
+            buff?.OnAddBuf(3);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, owner);
         }
     }
 }

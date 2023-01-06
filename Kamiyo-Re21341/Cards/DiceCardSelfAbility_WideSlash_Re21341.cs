@@ -17,12 +17,12 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             if (buff == null || buff.stack < 10)
             {
                 if (buff == null) owner.bufListDetail.AddBuf(new BattleUnitBuf_Shock_Re21341());
-                _stacks = 2;
+                _stacks = 1;
                 return;
             }
 
             buff.OnAddBuf(-10);
-            _stacks = 5;
+            _stacks = 2;
         }
 
         public override void OnWinParryingAtk()
@@ -33,10 +33,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkClashWin < Check) return;
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(owner.faction == Faction.Player
-                         ? Faction.Enemy
-                         : Faction.Player))
-                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, _stacks);
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, _stacks, owner);
+            var buff = card.target?.GetActiveBuff<BattleUnitBuf_AlterEnergy_Re21341>();
+            if (buff == null || buff.stack < 10) return;
+            buff.OnAddBuf(-10);
+            owner.RecoverHP(5);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BigDLL4221.Buffs;
+using BigDLL4221.Extensions;
 using Sound;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
-                    power = stack > 24 ? 2 : 1
+                    power = 1
                 });
         }
 
@@ -35,7 +36,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
             if (stack > 14)
-                behavior.card?.target?.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Vulnerable, 1, _owner);
+                behavior.card?.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
         }
 
         public override void OnRoundStart()
@@ -64,6 +65,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
             OnAddBuf(1);
+            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
         }
 
         public override void OnLoseParrying(BattleDiceBehavior behavior)
@@ -71,6 +73,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
             if (_owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeath_Re21341>() ||
                 _owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeathNpc_Re21341>()) return;
             OnAddBuf(-1);
+        }
+
+        public override int GetCardCostAdder(BattleDiceCardModel card)
+        {
+            return card.GetOriginCost() < 3 ? -1 : base.GetCardCostAdder(card);
         }
     }
 }

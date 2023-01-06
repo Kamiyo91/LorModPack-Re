@@ -1,8 +1,10 @@
-﻿namespace KamiyoModPack.Hayate_Re21341.Cards
+﻿using LOR_DiceSystem;
+
+namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_LightingBlade_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 8;
+        private const int Check = 1;
         private int _atkLand;
 
         public override void OnUseCard()
@@ -11,21 +13,14 @@
             _atkLand = 0;
         }
 
-        public override void AfterGiveDamage(int damage, BattleUnitModel target)
+        public override void OnSucceedAttack(BattleDiceBehavior behavior)
         {
-            _atkLand += damage;
+            if (behavior.Type == BehaviourType.Atk) _atkLand++;
         }
 
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-
             owner.cardSlotDetail.RecoverPlayPoint(1);
         }
     }

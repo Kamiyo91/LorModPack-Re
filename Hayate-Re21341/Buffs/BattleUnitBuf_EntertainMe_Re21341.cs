@@ -10,6 +10,7 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
         {
         }
 
+        public override int MinStack => -50;
         public override int MaxStack => 50;
         public override BufPositiveType positiveType => BufPositiveType.Positive;
 
@@ -26,17 +27,16 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            if (stack >= 40)
-                behavior.ApplyDiceStatBonus(
-                    new DiceStatBonus
-                    {
-                        power = 1
-                    });
+            behavior.ApplyDiceStatBonus(
+                new DiceStatBonus
+                {
+                    min = stack < 0 ? -1 : 1
+                });
         }
 
         public override void OnRoundEndTheLast()
         {
-            OnAddBuf(_owner.faction == Faction.Enemy ? 5 : 3);
+            OnAddBuf(_owner.faction == Faction.Enemy ? 3 : 1);
         }
 
 
@@ -54,6 +54,11 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
         {
             if (attacker == null) return;
             OnAddBuf(-_addValue);
+        }
+
+        public override int GetCardCostAdder(BattleDiceCardModel card)
+        {
+            return stack < 0 ? -1 : base.GetCardCostAdder(card);
         }
     }
 }

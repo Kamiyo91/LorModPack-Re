@@ -55,10 +55,29 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
             _emotionCards = UnitUtil.AddValueToEmotionCardList(UnitUtil.GetEmotionCardByUnit(unit), _emotionCards);
         }
 
-        //public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
-        //{
-        //    if (Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.packageId != "RushBattle21341.Mod") base.OnSelectCardPutMassAttack(ref origin);
-        //}
+        public override void OnSelectCardPutMassAttack(ref BattleDiceCardModel origin)
+        {
+            if (!Model.MechOptions.TryGetValue(Model.Phase, out var mechPhaseOptions)) return;
+            if (!MassAttackExtraCondition()) return;
+            if (Model.OneTurnCard) return;
+            if (mechPhaseOptions.SingletonBufMech != null &&
+                (mechPhaseOptions.SingletonBufMech.Buff.stack >= mechPhaseOptions.SingletonBufMech.MassAttackStacks ||
+                 mechPhaseOptions.SingletonBufMech.Buff.stack <= -mechPhaseOptions.SingletonBufMech.MassAttackStacks))
+            {
+                var card = RandomUtil.SelectOne(mechPhaseOptions.SingletonBufMech.MassAttackCards);
+                origin = BattleDiceCardModel.CreatePlayingCard(
+                    ItemXmlDataList.instance.GetCardItem(card.CardId));
+                SetOneTurnCard(true);
+            }
+
+            if (!Model.MassAttackStartCount || mechPhaseOptions.Counter < mechPhaseOptions.MaxCounter) return;
+            if (!mechPhaseOptions.EgoMassAttackCardsOptions.Any()) return;
+            origin = BattleDiceCardModel.CreatePlayingCard(
+                ItemXmlDataList.instance.GetCardItem(RandomUtil.SelectOne(mechPhaseOptions.EgoMassAttackCardsOptions)
+                    .CardId));
+            SetOneTurnCard(true);
+        }
+
         public override void ExtraMechRoundPreEnd(MechPhaseOptions mechOptions)
         {
             foreach (var unit in BattleObjectManager.instance.GetList(

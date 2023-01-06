@@ -12,9 +12,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         {
         }
 
-        protected override string keywordId => _owner.Book.BookId.packageId == KamiyoModParameters.PackageId
+        protected override string keywordId => _owner.Book.BookId.packageId == KamiyoModParameters.PackageId &&
+                                               (_owner.Book.BookId.id == 4 || _owner.Book.BookId.id == 10000004 ||
+                                                _owner.Book.BookId.id == 10000901)
             ? "Shock_Re21341"
-            : "Shock_Sa21341";
+            : "ShockGeneral_Re21341";
 
         protected override string keywordIconId => "Shock_Re21341";
         public override int MaxStack => 10;

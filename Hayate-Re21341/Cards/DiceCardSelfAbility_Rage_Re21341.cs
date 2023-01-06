@@ -4,7 +4,7 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 {
     public class DiceCardSelfAbility_Rage_Re21341 : DiceCardSelfAbilityBase
     {
-        private const int Check = 1;
+        private const int Check = 2;
         private int _atkLand;
 
         public override void OnUseCard()
@@ -22,12 +22,6 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
 
             owner.cardSlotDetail.RecoverPlayPointByCard(1);
         }

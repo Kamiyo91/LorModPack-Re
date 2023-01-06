@@ -12,7 +12,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         {
             if (behavior.Detail != BehaviourDetail.Evasion) return;
             _owner.SetEmotionCombatLog(_emotionCard);
-            _owner.RecoverHP(3);
+            _owner.RecoverHP(2);
         }
 
         public override DiceStatBonus GetDiceStatBonus(BehaviourDetail behaviour)

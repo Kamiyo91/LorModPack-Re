@@ -32,12 +32,10 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_defClashWin < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
+            var buff = card.target?.GetActiveBuff<BattleUnitBuf_AlterEnergy_Re21341>();
+            if (buff == null || buff.stack < 5) return;
+            buff.OnAddBuf(-5);
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Protection, 2, owner);
         }
     }
 }

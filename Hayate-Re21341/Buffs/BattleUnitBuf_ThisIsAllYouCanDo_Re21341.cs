@@ -12,15 +12,6 @@
         protected override string keywordId => "ThisIsAllYouCanDo_Re21341";
         protected override string keywordIconId => "ThisIsAllYouCanDo_Re21341";
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
-        {
-            behavior.ApplyDiceStatBonus(
-                new DiceStatBonus
-                {
-                    power = 1
-                });
-        }
-
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
             _owner.RecoverHP(3);

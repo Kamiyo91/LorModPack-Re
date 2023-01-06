@@ -12,18 +12,23 @@
         protected override string keywordId => "Serious_Re21341";
         protected override string keywordIconId => "Serious_Re21341";
 
+        public override void OnSuccessAttack(BattleDiceBehavior behavior)
+        {
+            behavior.card.target?.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1);
+        }
+
+        public override int GetCardCostAdder(BattleDiceCardModel card)
+        {
+            return -1;
+        }
+
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
-                    power = 2
+                    power = 1
                 });
-        }
-
-        public override void OnSuccessAttack(BattleDiceBehavior behavior)
-        {
-            behavior.card.target?.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1);
         }
     }
 }

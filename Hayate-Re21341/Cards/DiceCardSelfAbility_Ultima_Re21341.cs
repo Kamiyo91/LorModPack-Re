@@ -1,4 +1,5 @@
-﻿using KamiyoModPack.Hayate_Re21341.Buffs;
+﻿using BigDLL4221.Extensions;
+using KamiyoModPack.Hayate_Re21341.Buffs;
 using LOR_DiceSystem;
 
 namespace KamiyoModPack.Hayate_Re21341.Cards
@@ -20,11 +21,24 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            if (_atkLand < Check) return;
             var buff =
                 owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
                     BattleUnitBuf_EntertainMe_Re21341;
+            if (_atkLand < Check)
+            {
+                buff?.OnAddBuf(-3);
+                return;
+            }
+
             buff?.OnAddBuf(3);
+            if (card.target == null) return;
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(card.target.faction))
+            {
+                var ultimaBuff = unit.GetActiveBuff<BattleUnitBuf_Ultima_Re21341>();
+                if (ultimaBuff != null) unit.bufListDetail.RemoveBuf(ultimaBuff);
+            }
+
+            card.target.bufListDetail.AddBuf(new BattleUnitBuf_Ultima_Re21341());
         }
     }
 }

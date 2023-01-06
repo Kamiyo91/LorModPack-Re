@@ -1,4 +1,6 @@
-﻿namespace KamiyoModPack.Kamiyo_Re21341.Buffs
+﻿using BigDLL4221.Extensions;
+
+namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_NearDeathNpc_Re21341 : BattleUnitBuf
     {
@@ -13,10 +15,7 @@
 
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(_owner.faction == Faction.Player
-                         ? Faction.Enemy
-                         : Faction.Player))
-                unit.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1, unit);
+            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
         }
 
         public override bool CanRecoverHp(int amount)

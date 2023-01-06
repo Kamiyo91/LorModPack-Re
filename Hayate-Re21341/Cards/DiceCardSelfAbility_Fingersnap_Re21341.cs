@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BigDLL4221.Extensions;
+﻿using BigDLL4221.Extensions;
 using KamiyoModPack.Hayate_Re21341.Buffs;
 using KamiyoModPack.Hayate_Re21341.Passives;
 
@@ -11,13 +10,15 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 
         public override bool OnChooseCard(BattleUnitModel owner)
         {
-            return owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341).stack >=
-                   40;
+            var buff = owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341);
+            return buff != null && (buff.stack < -40 || buff.stack > 40);
         }
 
         public override void OnStartBattle()
         {
-            owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>().OnAddBuf(-999);
+            var oldBuff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
+            var newBuffType = oldBuff.stack < -40;
+            oldBuff.OnAddBuf(-999);
             if (_motionChange)
             {
                 _motionChange = false;
@@ -39,10 +40,7 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
                 .DeactivePermanentBuff(typeof(BattleUnitBuf_EntertainMe_Re21341));
             var buff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
             if (buff != null) owner.bufListDetail.RemoveBuf(buff);
-            var selectedCardList = owner.emotionDetail.GetSelectedCardList();
-            var posCount = selectedCardList.FindAll(x => x.XmlInfo.State == MentalState.Positive).Count;
-            var negCount = selectedCardList.FindAll(x => x.XmlInfo.State == MentalState.Negative).Count;
-            if (!selectedCardList.Any() || posCount > negCount)
+            if (!newBuffType)
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_ThisIsAllYouCanDo_Re21341());
             else
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_Serious_Re21341());

@@ -29,8 +29,10 @@ namespace KamiyoModPack.Wilton_Re21341.Cards
             unit.cardSlotDetail.RecoverPlayPoint(1);
             targetUnit.bufListDetail.RemoveBufAll(BufPositiveType.Positive);
             targetUnit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Weak, 1, unit);
+            targetUnit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Disarm, 1, unit);
             ArtUtil.BaseGameLoadPrefabEffect(targetUnit,
                 "Battle/DiceAttackEffects/New/FX/DamageDebuff/FX_DamageDebuff_Blooding", "Buf/Effect_Bleeding");
+            unit.bufListDetail.AddBuf(new BattleUnitBuff_LowerCostTo0UntilRoundEnd_Re21341());
         }
     }
 }

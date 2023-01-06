@@ -19,13 +19,7 @@
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-
+            owner.RecoverHP(3);
             owner.cardSlotDetail.RecoverPlayPoint(1);
         }
     }

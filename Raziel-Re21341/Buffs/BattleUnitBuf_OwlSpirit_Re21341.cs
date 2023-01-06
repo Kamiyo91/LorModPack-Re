@@ -42,7 +42,6 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
             var pow = _random.Next(0, stack);
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
-                min = pow,
                 max = pow
             });
         }

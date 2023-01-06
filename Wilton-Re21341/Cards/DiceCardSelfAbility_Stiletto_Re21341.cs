@@ -21,13 +21,6 @@
             if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList()
                     .Exists(x => x.bufType == KeywordBuf.Bleeding && x.stack >= Check)) return;
             {
-                foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                             .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-                {
-                    battleDiceCardModel.GetBufList();
-                    battleDiceCardModel.AddCost(-1);
-                }
-
                 owner.cardSlotDetail.RecoverPlayPointByCard(1);
             }
         }

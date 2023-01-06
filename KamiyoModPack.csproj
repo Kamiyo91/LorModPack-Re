@@ -84,6 +84,7 @@
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_Serious_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_ThisIsAllYouCanDo_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_TrueGodAuraRelease_Re21341.cs" />
+    <Compile Include="Hayate-Re21341\Buffs\BattleUnitBuf_Ultima_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FerventCut_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FingersnapBeforeLastPhase_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Cards\DiceCardSelfAbility_FingersnapNpc_Re21341.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Kamiyo-Re21341\AuraColorFragment.cs" />
     <Compile Include="Kamiyo-Re21341\AuraColor.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_AlterEgoRelease_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_AlterEnergy_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeathNpc_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_NearDeath_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Buffs\BattleUnitBuf_PossessorOfMioLight_Re21341.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_WillOTheWisp_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Actions\BehaviourAction_WiltonMassAttack_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Actions\FarAreaEffect_WiltonMassAttack_Re21341.cs" />
+    <Compile Include="Wilton-Re21341\Buffs\BattleUnitBuff_LowerCostTo0UntilRoundEnd_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Buffs\BattleUnitBuf_Vengeance_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_HorizonSlash_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_MysticEyeVision_Re21341.cs" />

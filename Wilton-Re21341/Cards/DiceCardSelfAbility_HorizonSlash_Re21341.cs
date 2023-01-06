@@ -22,13 +22,6 @@ namespace KamiyoModPack.Wilton_Re21341.Cards
         {
             if (!_atkSuccess || card.target.bufListDetail.GetActivatedBufList()
                     .Where(x => x.positiveType == BufPositiveType.Negative).Select(x => x.stack).Sum() < Check) return;
-            foreach (var battleDiceCardModel in owner.allyCardDetail.GetAllDeck()
-                         .FindAll(x => x != card.card && x.GetID() == card.card.GetID()))
-            {
-                battleDiceCardModel.GetBufList();
-                battleDiceCardModel.AddCost(-1);
-            }
-
             card.target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Bleeding, 1, owner);
             card.target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Vulnerable, 1, owner);
         }
