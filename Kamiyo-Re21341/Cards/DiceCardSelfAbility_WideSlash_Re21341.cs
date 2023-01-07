@@ -36,6 +36,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, _stacks, owner);
             var buff = card.target?.GetActiveBuff<BattleUnitBuf_AlterEnergy_Re21341>();
             if (buff == null || buff.stack < 10) return;
+            buff.OnEndBattle(null);
             buff.OnAddBuf(-10);
             owner.RecoverHP(5);
         }

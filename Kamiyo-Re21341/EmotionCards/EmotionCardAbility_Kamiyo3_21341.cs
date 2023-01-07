@@ -12,7 +12,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
                 unit.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
         }
 
-        public override void OnSucceedAttack(BattleDiceBehavior behavior)
+        public override void OnWinParrying(BattleDiceBehavior behavior)
         {
             var target = behavior.card?.target;
             if (target == null) return;
