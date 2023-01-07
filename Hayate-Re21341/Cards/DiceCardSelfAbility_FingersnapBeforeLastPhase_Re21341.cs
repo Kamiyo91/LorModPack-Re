@@ -7,7 +7,8 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
     {
         public override void OnStartBattle()
         {
-            owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>().OnAddBuf(-999);
+            var buff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
+            if (buff != null) buff.stack = 0;
             owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.Die();
         }

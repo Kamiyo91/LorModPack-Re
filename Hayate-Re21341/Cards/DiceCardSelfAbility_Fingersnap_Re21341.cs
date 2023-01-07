@@ -18,7 +18,7 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
         {
             var oldBuff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
             var newBuffType = oldBuff.stack < -40;
-            oldBuff.OnAddBuf(-999);
+            oldBuff.stack = 0;
             if (_motionChange)
             {
                 _motionChange = false;
