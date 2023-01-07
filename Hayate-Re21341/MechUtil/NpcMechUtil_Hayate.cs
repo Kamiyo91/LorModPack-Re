@@ -102,7 +102,7 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
             }
 
             UnitUtil.RefreshCombatUI();
-            UnitUtil.ChangeCardCostByValue(kamiyoUnit, -5, 6, false);
+            UnitUtil.ChangeCardCostByValue(kamiyoUnit, -5, 99, false);
             kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 43));
             var specialPassive = kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 17));
             specialPassive.OnWaveStart();

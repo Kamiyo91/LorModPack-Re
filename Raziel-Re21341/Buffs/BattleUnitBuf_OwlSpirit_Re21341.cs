@@ -21,6 +21,11 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
         public override int MaxStack => 5;
         public override int MinStack => 1;
 
+        public override bool IsInvincibleBp(BattleUnitModel attacker)
+        {
+            return true;
+        }
+
         public override void Init(BattleUnitModel owner)
         {
             base.Init(owner);
