@@ -5,6 +5,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
 {
     public class DiceCardAbility_ShockAbsorbDie_Re21341 : DiceCardAbilityBase
     {
+        public override string[] Keywords => new[] { "Paralysis" };
+
         public override void OnWinParrying()
         {
             if (!(card.cardAbility is DiceCardSelfAbility_ShockAbsorb_Re21341 ability) || !ability.Active ||
