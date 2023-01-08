@@ -126,6 +126,7 @@
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_KamiyoMassAttack_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_ImminentCombat_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Cards\DiceCardSelfAbility_WideSlash_Re21341.cs" />
+    <Compile Include="Kamiyo-Re21341\Dice\DiceCardAbility_AlterEnergy_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Dice\DiceCardAbility_ShockAbsorbDe_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Effects\DiceAttackEffect_KamiyoHit_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Effects\DiceAttackEffect_PierceKamiyo_Re21341.cs" />

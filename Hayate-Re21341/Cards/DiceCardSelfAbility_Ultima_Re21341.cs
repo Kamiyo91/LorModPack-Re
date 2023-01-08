@@ -8,6 +8,7 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
     {
         private const int Check = 3;
         private int _atkLand;
+        public override string[] Keywords => new[] { "UltimaKeyword_Re21341" };
 
         public override void OnUseCard()
         {

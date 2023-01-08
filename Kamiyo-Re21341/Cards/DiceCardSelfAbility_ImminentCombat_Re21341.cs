@@ -7,6 +7,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
     {
         private const int Check = 1;
         private int _defClashWin;
+        public override string[] Keywords => new[] { "ShockKeyword_Re21341" };
 
         public override void OnUseCard()
         {
