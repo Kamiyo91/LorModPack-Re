@@ -130,7 +130,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
         public MechUtilBase OldSamuraiPlayerUtil = new MechUtilBase(new MechUtilBaseModel(
             egoMaps: new Dictionary<LorId, MapModel>
                 { { new LorId(KamiyoModParameters.PackageId, 999999), KamiyoModParameters.SamuraiMapPlayer } },
-            reviveOnDeath: true, recoverHpOnRevive: 999, personalCards: new Dictionary<LorId, PersonalCardOptions>
+            personalCards: new Dictionary<LorId, PersonalCardOptions>
             {
                 { new LorId(KamiyoModParameters.PackageId, 8), new PersonalCardOptions(activeEgoCard: true) }
             }, egoOptions:

@@ -31,26 +31,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\DLLUtil\Assemblies\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="1BigDLL4221, Version=1.0.0.0, Culture=neutral, PublicKeyToken=47d1ca6ac4ef9de7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NewDLL\bin\Release\1BigDLL4221.dll</HintPath>
+    <Reference Include="1BigDLL4221">
+      <HintPath>..\DLL\bin\Release\1BigDLL4221.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="CustomMapUtility">
-      <HintPath>..\..\CommonDLL\CustomMapUtility.dll</HintPath>
+      <HintPath>..\CommonDLL\CustomMapUtility.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\Mono.Cecil.dll</HintPath>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\CommonDLL\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="MonoMod.Utils, Version=21.12.13.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\MonoMod.Utils.dll</HintPath>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>..\CommonDLL\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

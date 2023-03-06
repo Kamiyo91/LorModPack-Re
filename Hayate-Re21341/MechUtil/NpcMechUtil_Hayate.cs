@@ -83,6 +83,8 @@ namespace KamiyoModPack.Hayate_Re21341.MechUtil
             foreach (var unit in BattleObjectManager.instance.GetList(
                          UnitUtil.ReturnOtherSideFaction(Model.Owner.faction)))
                 BattleObjectManager.instance.UnregisterUnit(unit);
+            var buff = Model.PermanentBuffList.FirstOrDefault();
+            if (buff != null) buff.IsActive = false;
             var kamiyoUnit = UnitUtil.AddNewUnitWithDefaultData(KamiyoModParameters.KamiyoSoloUnit, 0,
                 emotionLevel: Model.Owner.emotionDetail.EmotionLevel);
             if (kamiyoUnit.HasPassivePlayerMech(out var passive))
