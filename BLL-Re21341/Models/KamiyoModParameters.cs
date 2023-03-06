@@ -369,7 +369,7 @@ namespace KamiyoModPack.BLL_Re21341.Models
             }));
 
         public SummonedUnitStatModelLinked MioMemoryUtil = new SummonedUnitStatModelLinked(
-            new PassiveAbility_AlterEgoNpc_Re21341(), 161, false, reviveAfterScenesNpc: 0, hpRecoveredWithRevive: 999,
+            new PassiveAbility_AlterEgoNpc_Re21341(), 161, reviveAfterScenesNpc: 0, hpRecoveredWithRevive: 999,
             maxCounter: 4, additionalSpeedDie: 2, useCustomData: false, massAttackCards: new List<LorId>
             {
                 new LorId(KamiyoModParameters.PackageId, 900)
