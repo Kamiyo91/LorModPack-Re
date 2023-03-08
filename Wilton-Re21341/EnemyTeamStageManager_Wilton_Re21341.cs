@@ -7,6 +7,7 @@ using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Hayate_Re21341.Passives;
 using KamiyoModPack.Util_Re21341.CommonBuffs;
+using UnityEngine;
 
 namespace KamiyoModPack.Wilton_Re21341
 {
@@ -28,18 +29,22 @@ namespace KamiyoModPack.Wilton_Re21341
             //if (_finalMech)
             //    foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
             //        unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_Vip_Re21341());
-            if (SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject is Wilton_Re21341MapManager)
-                _mapManager = SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject as Wilton_Re21341MapManager;
             _phaseChanged = false;
             _checkEnd = false;
         }
-
+        
         public override void OnRoundEndTheLast()
         {
+            CheckMapManager();
             CheckPhase();
             HayateEntry();
         }
 
+        private void CheckMapManager()
+        {
+            if (_mapManager == null && SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject is Wilton_Re21341MapManager)
+                _mapManager = SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject as Wilton_Re21341MapManager;
+        }
         private void CheckPhase()
         {
             if (_mainEnemyModel.hp > 271 || _phaseChanged) return;
