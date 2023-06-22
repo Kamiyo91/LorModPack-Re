@@ -32,6 +32,12 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
             buf?.SetValue(2);
         }
 
+        public override void OnRoundEndTheLast()
+        {
+            _owner.allyCardDetail.DrawCards(1);
+            _owner.cardSlotDetail.RecoverPlayPoint(1);
+        }
+
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");

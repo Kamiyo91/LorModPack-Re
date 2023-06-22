@@ -10,7 +10,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
         {
             if (owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
                 !owner.ActivatedEmotionCard(KamiyoModParameters.PackageId, 21345)) return;
-            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
+            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1,maxStack:10);
         }
     }
 }

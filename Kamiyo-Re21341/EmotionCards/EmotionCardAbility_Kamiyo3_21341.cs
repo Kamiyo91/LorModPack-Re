@@ -9,7 +9,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public override void OnRoundStart()
         {
             foreach (var unit in BattleObjectManager.instance.GetAliveList().Where(x => x != _owner))
-                unit.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
+                unit.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
         }
 
         public override void OnWinParrying(BattleDiceBehavior behavior)

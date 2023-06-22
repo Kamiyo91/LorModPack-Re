@@ -26,7 +26,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_defClashWin < Check) return;
-            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Protection, 2, owner);
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Protection, 1, owner);
         }
     }
 }
