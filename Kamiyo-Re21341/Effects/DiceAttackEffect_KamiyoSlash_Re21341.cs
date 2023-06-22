@@ -7,21 +7,19 @@ namespace KamiyoModPack.Kamiyo_Re21341.Effects
 {
     public class DiceAttackEffect_KamiyoSlash_Re21341 : DiceAttackEffect
     {
-        private const float Scale = 2f;
+        private const float Scale = 2.5f;
         private float _duration;
 
         public override void Initialize(BattleUnitView self, BattleUnitView target, float destroyTime)
         {
             base.Initialize(self, target, destroyTime);
-            DiceEffectUtil.InitializeEffect<DiceAttackEffect_KamiyoSlash_Re21341>(destroyTime, 0.55f, 0.15f, false,
-                self,
-                target, destroyTime, KamiyoModParameters.Path, gameObject, ref _self, ref _selfTransform,
-                ref _targetTransform, ref _duration, ref spr, transform);
+            _duration = _destroyTime;
+            DiceEffectUtil.InitializeEffect(KamiyoModParameters.Path, 0.55f, 0.15f, true, this, self, target);
         }
 
         public override void SetScale(float scaleFactor)
         {
-            base.SetScale(Scale);
+            base.SetScale(DiceEffectUtil.CalculateScale(false, scaleFactor, Scale));
         }
 
         protected override void Update()
@@ -34,21 +32,19 @@ namespace KamiyoModPack.Kamiyo_Re21341.Effects
 
     public class DiceAttackEffect_KamiyoSlashEgo_Re21341 : DiceAttackEffect
     {
-        private const float Scale = 2f;
+        private const float Scale = 2.5f;
         private float _duration;
 
         public override void Initialize(BattleUnitView self, BattleUnitView target, float destroyTime)
         {
             base.Initialize(self, target, destroyTime);
-            DiceEffectUtil.InitializeEffect<DiceAttackEffect_KamiyoSlashEgo_Re21341>(destroyTime, 0.55f, 0.15f, false,
-                self,
-                target, destroyTime, KamiyoModParameters.Path, gameObject, ref _self, ref _selfTransform,
-                ref _targetTransform, ref _duration, ref spr, transform);
+            _duration = _destroyTime;
+            DiceEffectUtil.InitializeEffect(KamiyoModParameters.Path, 0.55f, 0.15f, true, this, self, target);
         }
 
         public override void SetScale(float scaleFactor)
         {
-            base.SetScale(Scale);
+            base.SetScale(DiceEffectUtil.CalculateScale(false, scaleFactor, Scale));
         }
 
         protected override void Update()

@@ -56,7 +56,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
-            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1,maxStack:10);
+            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
         }
     }
 }

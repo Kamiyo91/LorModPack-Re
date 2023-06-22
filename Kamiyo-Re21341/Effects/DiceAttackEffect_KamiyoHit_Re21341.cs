@@ -13,14 +13,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Effects
         public override void Initialize(BattleUnitView self, BattleUnitView target, float destroyTime)
         {
             base.Initialize(self, target, destroyTime);
-            DiceEffectUtil.InitializeEffect<DiceAttackEffect_KamiyoHit_Re21341>(destroyTime, 0.54f, 0.32f, false, self,
-                target, destroyTime, KamiyoModParameters.Path, gameObject, ref _self, ref _selfTransform,
-                ref _targetTransform, ref _duration, ref spr, transform);
+            _duration = _destroyTime;
+            DiceEffectUtil.InitializeEffect(KamiyoModParameters.Path, 0.54f, 0.32f, true, this, self, target);
         }
 
         public override void SetScale(float scaleFactor)
         {
-            base.SetScale(Scale);
+            base.SetScale(DiceEffectUtil.CalculateScale(false, scaleFactor, Scale));
         }
 
         protected override void Update()
@@ -39,15 +38,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Effects
         public override void Initialize(BattleUnitView self, BattleUnitView target, float destroyTime)
         {
             base.Initialize(self, target, destroyTime);
-            DiceEffectUtil.InitializeEffect<DiceAttackEffect_KamiyoHitEgo_Re21341>(destroyTime, 0.54f, 0.32f, false,
-                self,
-                target, destroyTime, KamiyoModParameters.Path, gameObject, ref _self, ref _selfTransform,
-                ref _targetTransform, ref _duration, ref spr, transform);
+            _duration = _destroyTime;
+            DiceEffectUtil.InitializeEffect(KamiyoModParameters.Path, 0.54f, 0.32f, true, this, self, target);
         }
 
         public override void SetScale(float scaleFactor)
         {
-            base.SetScale(Scale);
+            base.SetScale(DiceEffectUtil.CalculateScale(false, scaleFactor, Scale));
         }
 
         protected override void Update()
