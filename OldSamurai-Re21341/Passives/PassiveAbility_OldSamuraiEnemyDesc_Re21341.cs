@@ -11,7 +11,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.Passives
     public class PassiveAbility_OldSamuraiEnemyDesc_Re21341 : PassiveAbilityBase
     {
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 1;
         public bool CreatureFilter;
 
         public MapModelRoot MapModel = new MapModelRoot
