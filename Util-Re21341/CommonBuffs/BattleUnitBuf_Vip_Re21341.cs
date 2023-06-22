@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Util_Re21341.CommonBuffs
 {
@@ -15,7 +15,7 @@ namespace KamiyoModPack.Util_Re21341.CommonBuffs
 
         public override void OnDie()
         {
-            UnitUtil.VipDeath(_owner);
+            _owner.VipDeath();
         }
     }
 }

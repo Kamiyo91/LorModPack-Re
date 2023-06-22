@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Utils;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Raziel_Re21341.Cards
 {
@@ -22,7 +22,7 @@ namespace KamiyoModPack.Raziel_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-            UnitUtil.ReadyCounterCard(owner, 56, KamiyoModParameters.PackageId);
+            owner.ReadyCounterCard(56, KamiyoModParameters.PackageId);
         }
     }
 }

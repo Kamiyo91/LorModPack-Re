@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.Raziel_Re21341.Buffs;
+﻿using KamiyoModPack.Raziel_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Raziel_Re21341.EmotionCards
 {
@@ -13,8 +13,7 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
             _owner.SetEmotionCombatLog(_emotionCard);
             attackerCard.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
-                min = -1,
-                max = -1
+                min = -1
             });
         }
 
@@ -37,8 +36,7 @@ namespace KamiyoModPack.Raziel_Re21341.EmotionCards
             _owner.SetEmotionCombatLog(_emotionCard);
             battlePlayingCardDataInUnitModel2.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
-                min = -1,
-                max = -1
+                min = -1
             });
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
-using BigDLL4221.Extensions;
-using BigDLL4221.Utils;
 using KamiyoModPack.BLL_Re21341.Models;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Hayate_Re21341.EmotionCards
 {
@@ -16,7 +15,7 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
             if (UnitUtil.SupportCharCheck(_owner) == 1)
             {
                 _soloCheck = true;
-                UnitUtil.ReadyCounterCard(_owner, _random.Next(31, 35), KamiyoModParameters.PackageId);
+                _owner.ReadyCounterCard(_random.Next(31, 35), KamiyoModParameters.PackageId);
             }
             else
             {
@@ -47,7 +46,7 @@ namespace KamiyoModPack.Hayate_Re21341.EmotionCards
             if (!_counterReload) return;
             _counterReload = false;
             _owner.SetEmotionCombatLog(_emotionCard);
-            UnitUtil.ReadyCounterCard(_owner, _random.Next(31, 35), KamiyoModParameters.PackageId);
+            _owner.ReadyCounterCard(_random.Next(31, 35), KamiyoModParameters.PackageId);
         }
     }
 }

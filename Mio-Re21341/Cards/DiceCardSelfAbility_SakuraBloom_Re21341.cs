@@ -1,5 +1,6 @@
 ﻿using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Mio_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Cards
 {
@@ -10,13 +11,7 @@ namespace KamiyoModPack.Mio_Re21341.Cards
         public override void OnUseCard()
         {
             owner.allyCardDetail.DrawCards(1);
-            var speedDiceResultValue = card.speedDiceResultValue;
-            var target = card.target;
-            var targetSlotOrder = card.targetSlotOrder;
-            if (targetSlotOrder < 0 || targetSlotOrder >= target.speedDiceResult.Count) return;
-            var speedDice = target.speedDiceResult[targetSlotOrder];
-            var targetDiceBroken = target.speedDiceResult[targetSlotOrder].breaked;
-            if (speedDiceResultValue - speedDice.value <= Check && !targetDiceBroken) return;
+            if (!card.CheckTargetSpeedByCard(Check)) return;
             owner.TakeDamage(9, DamageType.Card_Ability, owner);
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {

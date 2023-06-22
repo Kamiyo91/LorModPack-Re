@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using BigDLL4221.Extensions;
 using KamiyoModPack.Hayate_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Hayate_Re21341.EmotionCards
 {

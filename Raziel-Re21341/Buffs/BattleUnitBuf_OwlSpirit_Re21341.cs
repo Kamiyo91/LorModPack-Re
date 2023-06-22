@@ -1,25 +1,20 @@
-﻿using BigDLL4221.Buffs;
-using Sound;
+﻿using Sound;
 using UnityEngine;
+using UtilLoader21341.Util;
 using Random = System.Random;
 
 namespace KamiyoModPack.Raziel_Re21341.Buffs
 {
-    public class BattleUnitBuf_OwlSpirit_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
+    public class BattleUnitBuf_OwlSpirit_Re21341 : BattleUnitBuf
     {
         private GameObject _aura;
         private int _damageCount;
         private Random _random;
-
-        public BattleUnitBuf_OwlSpirit_Re21341() : base(infinite: true, lastOneScene: false)
-        {
-        }
-
         public override bool isAssimilation => true;
         protected override string keywordId => "Kaioken_Re21341";
         protected override string keywordIconId => "Kaioken_Re21341";
-        public override int MaxStack => 5;
-        public override int MinStack => 1;
+        public int MaxStack => 3;
+        public int MinStack => 1;
 
         public override bool IsInvincibleBp(BattleUnitModel attacker)
         {
@@ -59,10 +54,8 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
         public override void OnRoundStartAfter()
         {
             _owner.TakeDamage(15);
-            if (_damageCount > 25 && stack < 2) OnAddBuf(1);
-            if (_damageCount > 50 && stack < 3) OnAddBuf(1);
-            if (_damageCount > 75 && stack < 4) OnAddBuf(1);
-            if (_damageCount > 100 && stack < 5) OnAddBuf(1);
+            if (_damageCount > 75 && stack < 2) this.OnAddBufCustom(1, false, MinStack, MaxStack);
+            if (_damageCount > 150 && stack < 3) this.OnAddBufCustom(1, false, MinStack, MaxStack);
         }
     }
 }

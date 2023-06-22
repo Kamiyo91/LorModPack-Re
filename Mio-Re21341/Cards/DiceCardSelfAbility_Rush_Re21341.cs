@@ -1,5 +1,4 @@
-﻿using BigDLL4221.Extensions;
-using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Cards
 {
@@ -11,7 +10,7 @@ namespace KamiyoModPack.Mio_Re21341.Cards
         {
             owner.allyCardDetail.DrawCards(1);
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Quickness, 1, owner);
-            if (!UnitUtil.CheckTargetSpeedByCard(card, Check)) return;
+            if (!card.CheckTargetSpeedByCard(Check)) return;
             owner.ChangeSameCardsCost(card, -1);
         }
     }

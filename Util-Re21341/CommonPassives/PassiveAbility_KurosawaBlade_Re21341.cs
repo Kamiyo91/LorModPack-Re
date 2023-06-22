@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
@@ -6,7 +6,7 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
     {
         public override void OnSucceedAttack(BattleDiceBehavior behavior)
         {
-            UnitUtil.SetPassiveCombatLog(this, owner);
+            owner.SetPassiveCombatLog(this);
             owner.RecoverHP(2);
             owner.breakDetail.RecoverBreak(2);
         }

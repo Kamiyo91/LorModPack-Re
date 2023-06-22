@@ -1,5 +1,6 @@
-﻿using BigDLL4221.Utils;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
+using UtilLoader21341.Models;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.OldSamurai_Re21341.Cards
 {
@@ -24,7 +25,16 @@ namespace KamiyoModPack.OldSamurai_Re21341.Cards
 
         public static BattleUnitModel SummonSpecialUnit()
         {
-            return UnitUtil.AddNewUnitPlayerSideCustomData(KamiyoModParameters.SamuraiGhostPlayerEmotion,
+            var unit = new UnitModelRoot
+            {
+                PackageId = KamiyoModParameters.PackageId,
+                Id = 10000009,
+                UnitNameId = 9,
+                SummonedOnPlay = true,
+                AutoPlay = true,
+                LockedEmotion = true
+            };
+            return UnitUtil.AddNewUnitPlayerSideCustomData(unit,
                 BattleObjectManager.instance.GetList(Faction.Player).Count);
         }
     }

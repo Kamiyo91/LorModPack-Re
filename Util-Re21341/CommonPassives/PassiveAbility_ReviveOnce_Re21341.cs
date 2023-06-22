@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
@@ -16,7 +16,7 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
         {
             if (!owner.IsDead() || Revived) return;
             Revived = true;
-            UnitUtil.UnitReviveAndRecovery(owner, owner.MaxHp, true);
+            owner.UnitReviveAndRecovery(owner.MaxHp, true);
         }
     }
 }

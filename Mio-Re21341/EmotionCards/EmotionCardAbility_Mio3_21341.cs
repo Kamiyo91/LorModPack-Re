@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Extensions;
-using LOR_DiceSystem;
+﻿using LOR_DiceSystem;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.EmotionCards
 {
@@ -16,7 +16,7 @@ namespace KamiyoModPack.Mio_Re21341.EmotionCards
 
         public override void OnKill(BattleUnitModel target)
         {
-            if (_killCount >= 3) return;
+            if (_killCount >= 1) return;
             _owner.SetEmotionCombatLog(_emotionCard);
             _killCount++;
         }

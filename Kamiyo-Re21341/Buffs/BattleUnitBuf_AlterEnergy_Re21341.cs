@@ -1,30 +1,14 @@
-﻿using BigDLL4221.Buffs;
-using BigDLL4221.Extensions;
-using KamiyoModPack.BLL_Re21341.Models;
-using UnityEngine;
+﻿using UnityEngine;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
-    public class BattleUnitBuf_AlterEnergy_Re21341 : BattleUnitBuf_BaseBufChanged_DLL4221
+    public class BattleUnitBuf_AlterEnergy_Re21341 : BattleUnitBuf
     {
-        private bool _takeDamage;
-
-        public BattleUnitBuf_AlterEnergy_Re21341() : base(infinite: false, lastOneScene: false)
-        {
-        }
-
+        private GameObject Aura;
         protected override string keywordId => "AlterEnergy_Re21341";
         protected override string keywordIconId => "AlterEnergy_Re21341";
-        public override int AdderStackEachScene => -2;
-        public override int MaxStack => 10;
-        public override bool DestroyedAt0Stack => true;
-
-        public override void OnTakeDamageByAttack(BattleDiceBehavior atkDice, int dmg)
-        {
-            if (atkDice.owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
-                !atkDice.owner.GetActivatedCustomEmotionCard(KamiyoModParameters.PackageId, 21345, out _)) return;
-            _takeDamage = true;
-        }
+        public int MaxStack => 10;
 
         public override void Init(BattleUnitModel owner)
         {
@@ -32,11 +16,16 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
             InitAura();
         }
 
-        public override void OnEndBattle(BattlePlayingCardDataInUnitModel curCard)
+        public override void OnRoundEndTheLast()
         {
-            if (!_takeDamage) return;
-            _takeDamage = false;
             _owner.TakeDamage(stack, DamageType.Buf);
+            this.OnAddBufCustom(-2);
+            if (stack < 1) RemoveBuff();
+        }
+
+        public override void OnAddBuf(int addedStack)
+        {
+            this.OnAddBufCustom(addedStack, maxStack: MaxStack);
         }
 
         private void InitAura()
@@ -58,6 +47,12 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
             }
 
             Aura = effect.gameObject;
+        }
+
+        private void RemoveBuff()
+        {
+            if (Aura != null) Object.Destroy(Aura);
+            _owner.bufListDetail.RemoveBuf(this);
         }
     }
 }

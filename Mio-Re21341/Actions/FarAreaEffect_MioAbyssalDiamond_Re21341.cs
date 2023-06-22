@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Battle.DiceAttackEffect;
-using BigDLL4221.Models;
-using BigDLL4221.Utils;
 using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
 using LOR_XML;
 using Sound;
 using UnityEngine;
+using UtilLoader21341;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Actions
 {

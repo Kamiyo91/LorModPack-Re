@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Utils;
-using KamiyoModPack.Mio_Re21341.Buffs;
+﻿using KamiyoModPack.Mio_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Cards
 {
@@ -15,7 +15,7 @@ namespace KamiyoModPack.Mio_Re21341.Cards
         {
             if (!(unit.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
                     BattleUnitBuf_SakuraPetal_Re21341 buf)) return;
-            ArtUtil.IndexReleaseBreakEffect(unit);
+            ParticleEffectsUtil.IndexReleaseBreakEffect(unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, unit);
             buf.Destroy();

@@ -19,7 +19,7 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
-                    power = 2
+                    power = 1
                 });
         }
 

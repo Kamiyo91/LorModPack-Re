@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Buffs;
+﻿using UtilLoader21341.Extensions;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
@@ -6,8 +6,8 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
     {
         public override void OnRoundStartAfter()
         {
-            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_ChangeCardCost_DLL4221>())
-                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ChangeCardCost_DLL4221());
+            if (!owner.bufListDetail.HasBuf<BattleUnitBuf_ChangeCardCost_DLL21341>())
+                owner.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_ChangeCardCost_DLL21341());
         }
     }
 }

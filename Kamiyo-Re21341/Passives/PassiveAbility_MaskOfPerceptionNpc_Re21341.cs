@@ -1,7 +1,5 @@
-﻿using BigDLL4221.Extensions;
-using BigDLL4221.Utils;
-using KamiyoModPack.Kamiyo_Re21341.Buffs;
-using LOR_DiceSystem;
+﻿using LOR_DiceSystem;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
@@ -9,9 +7,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
     {
         public override bool CanAddBuf(BattleUnitBuf buf)
         {
-            if (buf.bufType != KeywordBuf.Paralysis) return base.CanAddBuf(buf);
-            owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>().OnAddBuf(1);
-            return false;
+            return buf.bufType != KeywordBuf.Paralysis && base.CanAddBuf(buf);
         }
 
         public override bool IsTargetable_theLast()
@@ -27,30 +23,23 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
 
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
         {
-            UnitUtil.SetPassiveCombatLog(this, owner);
+            owner.SetPassiveCombatLog(this);
             attackerCard?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
+                min = -1,
                 max = -1
             });
         }
 
         public override void OnStartParrying(BattlePlayingCardDataInUnitModel card)
         {
-            BattlePlayingCardDataInUnitModel battlePlayingCardDataInUnitModel;
-            if (card == null)
+            if (card == null) return;
+            var target = card.target;
+            var attackerCard = target?.currentDiceAction;
+            owner.SetPassiveCombatLog(this);
+            attackerCard?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
-                battlePlayingCardDataInUnitModel = null;
-            }
-            else
-            {
-                var target = card.target;
-                battlePlayingCardDataInUnitModel = target?.currentDiceAction;
-            }
-
-            var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
-            UnitUtil.SetPassiveCombatLog(this, owner);
-            battlePlayingCardDataInUnitModel2?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
-            {
+                min = -1,
                 max = -1
             });
         }

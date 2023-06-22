@@ -1,7 +1,6 @@
-﻿using BigDLL4221.Extensions;
-using BigDLL4221.Utils;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
 {
@@ -9,7 +8,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
     {
         public override void OnStartBattle()
         {
-            UnitUtil.ReadyCounterCard(_owner, 37, KamiyoModParameters.PackageId);
+            _owner.ReadyCounterCard(37, KamiyoModParameters.PackageId);
         }
 
         public override DiceStatBonus GetDiceStatBonus(BehaviourDetail behaviour)

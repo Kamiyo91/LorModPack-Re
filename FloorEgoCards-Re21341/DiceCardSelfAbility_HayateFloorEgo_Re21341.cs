@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using BigDLL4221.CardAbility;
 using Sound;
 using UnityEngine;
 
 namespace KamiyoModPack.FloorEgoCards_Re21341
 {
-    public class DiceCardSelfAbility_HayateFloorEgo_Re21341 : DiceCardSelfAbility_EgoOneScene_DLL4221
+    public class DiceCardSelfAbility_HayateFloorEgo_Re21341 : DiceCardSelfAbility_EgoOneScene_Re21341
     {
         public override string SkinName => "Hayate_Re21341";
     }

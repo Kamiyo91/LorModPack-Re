@@ -17,5 +17,10 @@
             _owner.RecoverHP(3);
             _owner.breakDetail.RecoverBreak(3);
         }
+
+        public override void OnRoundStart()
+        {
+            _owner.allyCardDetail.DrawCards(1);
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.Kamiyo_Re21341.Buffs;
+﻿using KamiyoModPack.Kamiyo_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
@@ -14,14 +14,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             owner.allyCardDetail.DrawCards(1);
             _defClashWin = 0;
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
-            if (buff == null)
-            {
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_Shock_Re21341());
-                return;
-            }
-
-            if (buff.stack < 3) return;
-            buff.OnAddBuf(-3);
+            if (buff == null || buff.stack < 25) return;
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = 1 });
         }
 
@@ -33,10 +26,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_defClashWin < Check) return;
-            var buff = card.target?.GetActiveBuff<BattleUnitBuf_AlterEnergy_Re21341>();
-            if (buff == null || buff.stack < 5) return;
-            buff.OnEndBattle(null);
-            buff.OnAddBuf(-5);
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Protection, 2, owner);
         }
     }

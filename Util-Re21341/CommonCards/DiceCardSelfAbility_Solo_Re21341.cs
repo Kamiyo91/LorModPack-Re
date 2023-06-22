@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using BigDLL4221.Utils;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Util_Re21341.CommonCards
 {
@@ -15,7 +15,7 @@ namespace KamiyoModPack.Util_Re21341.CommonCards
         {
             foreach (var allyUnit in BattleObjectManager.instance.GetAliveList(unit.faction).Where(x => x != unit))
             {
-                UnitUtil.RemoveDiceTargets(allyUnit, true);
+                allyUnit.RemoveDiceTargets(true);
                 allyUnit.Die();
             }
         }

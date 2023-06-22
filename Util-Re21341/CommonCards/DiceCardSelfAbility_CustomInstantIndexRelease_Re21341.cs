@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Buffs;
+﻿using UtilLoader21341.Extensions;
 
 namespace KamiyoModPack.Util_Re21341.CommonCards
 {
@@ -12,7 +12,7 @@ namespace KamiyoModPack.Util_Re21341.CommonCards
 
         private static void Activate(BattleUnitModel unit)
         {
-            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_CustomInstantIndexRelease_DLL4221());
+            unit.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_CustomInstantIndexRelease_DLL21341());
         }
     }
 }

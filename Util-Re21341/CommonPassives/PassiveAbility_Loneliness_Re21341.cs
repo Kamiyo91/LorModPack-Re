@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
 {

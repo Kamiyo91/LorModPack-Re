@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {
@@ -11,7 +11,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
 
         public override void OnRoundStartAfter()
         {
-            UnitUtil.DrawUntilX(owner, 9);
+            owner.DrawUntilX(9);
             owner.cardSlotDetail.RecoverPlayPoint(owner.cardSlotDetail.GetMaxPlayPoint());
         }
     }

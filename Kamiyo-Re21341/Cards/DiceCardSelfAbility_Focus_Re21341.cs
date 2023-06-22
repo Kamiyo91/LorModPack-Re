@@ -1,6 +1,4 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.Kamiyo_Re21341.Buffs;
-using Sound;
+﻿using Sound;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Cards
 {
@@ -18,7 +16,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             //    "Buf/Effect_Burn");
             SoundEffectPlayer.PlaySound("Creature/Helper_FullCharge");
             unit.TakeDamage(5);
-            unit.GetActiveBuff<BattleUnitBuf_Shock_Re21341>()?.OnAddBuf(1);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, unit);
         }

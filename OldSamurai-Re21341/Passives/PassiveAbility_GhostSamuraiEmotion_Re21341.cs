@@ -1,16 +1,15 @@
-﻿using BigDLL4221.Buffs;
-using BigDLL4221.Passives;
-using KamiyoModPack.OldSamurai_Re21341.Buffs;
+﻿using KamiyoModPack.OldSamurai_Re21341.Buffs;
+using UtilLoader21341.Extensions;
 
 namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
-    public class PassiveAbility_GhostSamuraiEmotion_Re21341 : PassiveAbility_SupportChar_DLL4221
+    public class PassiveAbility_GhostSamuraiEmotion_Re21341 : PassiveAbilityBase
     {
         private void AddGhostUnitBuffs()
         {
             owner.bufListDetail.AddBuf(new BattleUnitBuf_KeterFinal_LibrarianAura());
             if (owner.faction == Faction.Player)
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_DLL4221());
+                owner.bufListDetail.AddBuf(new BattleUnitBuf_Uncontrollable_DLL21341());
             else
                 owner.bufListDetail.AddBuf(new BattleUnitBuf_GhostSamuraiEnemy_Re21341());
         }
@@ -24,7 +23,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.Passives
 
             owner.bufListDetail.RemoveBufAll(typeof(BattleUnitBuf_KeterFinal_LibrarianAura));
             owner.bufListDetail.RemoveBufAll(owner.faction == Faction.Player
-                ? typeof(BattleUnitBuf_Uncontrollable_DLL4221)
+                ? typeof(BattleUnitBuf_Uncontrollable_DLL21341)
                 : typeof(BattleUnitBuf_GhostSamuraiEnemy_Re21341));
         }
 

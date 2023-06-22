@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Extensions;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
@@ -15,7 +15,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
-            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
+            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
         }
 
         public override bool CanRecoverHp(int amount)

@@ -1,7 +1,7 @@
-﻿using BigDLL4221.Buffs;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.OldSamurai_Re21341.Cards;
 using LOR_DiceSystem;
+using UtilLoader21341.Extensions;
 
 namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
@@ -44,7 +44,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.Passives
 
         public override void OnRoundEndTheLast()
         {
-            if (owner.faction != Faction.Enemy && !owner.bufListDetail.HasBuf<BattleUnitBuf_Uncontrollable_DLL4221>())
+            if (owner.faction != Faction.Enemy && !owner.bufListDetail.HasBuf<BattleUnitBuf_Uncontrollable_DLL21341>())
                 return;
 
             _enemyCount++;

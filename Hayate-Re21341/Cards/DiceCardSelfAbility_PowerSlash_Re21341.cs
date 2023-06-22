@@ -1,5 +1,4 @@
-﻿using KamiyoModPack.Hayate_Re21341.Buffs;
-using LOR_DiceSystem;
+﻿using LOR_DiceSystem;
 
 namespace KamiyoModPack.Hayate_Re21341.Cards
 {
@@ -21,18 +20,8 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
 
         public override void OnEndBattle()
         {
-            var buff =
-                owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341) as
-                    BattleUnitBuf_EntertainMe_Re21341;
-            if (_atkLand < Check)
-            {
-                buff?.OnAddBuf(-3);
-                owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Weak, 1, owner);
-                return;
-            }
-
-            buff?.OnAddBuf(3);
-            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, owner);
+            if (_atkLand < Check) return;
+            card.target.bufListDetail.AddKeywordBufNextNextByCard(KeywordBuf.Disarm, 1);
         }
     }
 }

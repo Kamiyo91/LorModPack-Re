@@ -1,5 +1,5 @@
-﻿using BigDLL4221.Utils;
-using Sound;
+﻿using Sound;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Buffs
 {
@@ -33,7 +33,8 @@ namespace KamiyoModPack.Mio_Re21341.Buffs
         private void InitAuraAndPlaySound()
         {
             SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Kali_Change");
-            ArtUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
+            ParticleEffectsUtil.MakeEffect(_owner, "6/BigBadWolf_Emotion_Aura", 1f, _owner);
+            SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
         }
 
         public override void OnRoundEnd()

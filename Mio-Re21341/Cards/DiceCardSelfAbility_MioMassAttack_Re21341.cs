@@ -1,5 +1,4 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Mio_Re21341.Buffs;
 
 namespace KamiyoModPack.Mio_Re21341.Cards
@@ -19,7 +18,6 @@ namespace KamiyoModPack.Mio_Re21341.Cards
             if (!(owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_SakuraPetal_Re21341) is
                     BattleUnitBuf_SakuraPetal_Re21341 buf))
             {
-                owner.GetActiveBuff<BattleUnitBuf_GodAuraRelease_Re21341>()?.OnAddBuf(3);
                 buf = new BattleUnitBuf_SakuraPetal_Re21341();
                 owner.bufListDetail.AddBufWithoutDuplication(buf);
                 owner.personalEgoDetail.AddCard(new LorId(KamiyoModParameters.PackageId, 59));

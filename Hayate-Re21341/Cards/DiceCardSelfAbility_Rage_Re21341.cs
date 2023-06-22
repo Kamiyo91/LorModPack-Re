@@ -22,7 +22,6 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
         public override void OnEndBattle()
         {
             if (_atkLand < Check) return;
-
             owner.cardSlotDetail.RecoverPlayPointByCard(1);
         }
     }

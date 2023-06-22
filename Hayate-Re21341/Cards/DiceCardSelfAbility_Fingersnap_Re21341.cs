@@ -1,6 +1,6 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.Hayate_Re21341.Buffs;
+﻿using KamiyoModPack.Hayate_Re21341.Buffs;
 using KamiyoModPack.Hayate_Re21341.Passives;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Hayate_Re21341.Cards
 {
@@ -11,14 +11,11 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
         public override bool OnChooseCard(BattleUnitModel owner)
         {
             var buff = owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_EntertainMe_Re21341);
-            return buff != null && (buff.stack < -40 || buff.stack > 40);
+            return buff != null && buff.stack >= 40;
         }
 
         public override void OnStartBattle()
         {
-            var oldBuff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
-            var newBuffType = oldBuff.stack < -40;
-            oldBuff.stack = 0;
             if (_motionChange)
             {
                 _motionChange = false;
@@ -36,14 +33,10 @@ namespace KamiyoModPack.Hayate_Re21341.Cards
                     unit.breakDetail.TakeBreakDamage(250, DamageType.ETC);
                 }
 
-            owner.GetActivePassive<PassiveAbility_Hayate_Re21341>()?.Util
-                .DeactivePermanentBuff(typeof(BattleUnitBuf_EntertainMe_Re21341));
+            owner.GetActivePassive<PassiveAbility_Hayate_Re21341>()?.SetActiveBuffValue(false);
             var buff = owner.GetActiveBuff<BattleUnitBuf_EntertainMe_Re21341>();
             if (buff != null) owner.bufListDetail.RemoveBuf(buff);
-            if (!newBuffType)
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_ThisIsAllYouCanDo_Re21341());
-            else
-                owner.bufListDetail.AddBuf(new BattleUnitBuf_Serious_Re21341());
+            owner.bufListDetail.AddBuf(new BattleUnitBuf_ThisIsAllYouCanDo_Re21341());
         }
 
         public override void OnApplyCard()

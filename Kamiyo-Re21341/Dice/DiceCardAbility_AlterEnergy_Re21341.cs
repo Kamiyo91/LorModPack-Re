@@ -1,6 +1,6 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.BLL_Re21341.Models;
+﻿using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Kamiyo_Re21341.Buffs;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Dice
 {
@@ -9,7 +9,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
         public override void OnWinParrying()
         {
             if (owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
-                !owner.GetActivatedCustomEmotionCard(KamiyoModParameters.PackageId, 21345, out _)) return;
+                !owner.ActivatedEmotionCard(KamiyoModParameters.PackageId, 21345)) return;
             behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1);
         }
     }

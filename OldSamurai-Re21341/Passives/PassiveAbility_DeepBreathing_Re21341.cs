@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Utils;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.OldSamurai_Re21341.Passives
 {
@@ -12,7 +12,7 @@ namespace KamiyoModPack.OldSamurai_Re21341.Passives
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
-            UnitUtil.SetPassiveCombatLog(this, owner);
+            owner.SetPassiveCombatLog(this);
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {

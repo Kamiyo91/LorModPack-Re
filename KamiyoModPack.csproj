@@ -31,20 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="1BigDLL4221">
-      <HintPath>..\DLL\bin\Release\1BigDLL4221.dll</HintPath>
+    <Reference Include="1UtilLoader21341, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UtilLoader\UtilLoader21341\bin\Release\1UtilLoader21341.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\bin\Release\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CustomMapUtility">
+    <Reference Include="CustomMapUtility, Version=3.1.1.0, Culture=neutral, PublicKeyToken=52e277cf1b9a4a04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CommonDLL\CustomMapUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\CommonDLL\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\CommonDLL\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,18 +51,21 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Tower\bin\Release\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\bin\Release\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\Tower\bin\Release\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL-Re21341\Models\KamiyoModParameters.cs" />
+    <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_EgoOneScene_Re21341.cs" />
     <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_MioFloorEgo_Re21341.cs" />
     <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_HayateFloorEgo_Re21341.cs" />
     <Compile Include="FloorEgoCards-Re21341\DiceCardSelfAbility_RazielFloorEgo_Re21341.cs" />
@@ -93,11 +93,8 @@
     <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate3_21341.cs" />
     <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate2_21341.cs" />
     <Compile Include="Hayate-Re21341\EmotionCards\EmotionCardAbility_Hayate1_21341.cs" />
-    <Compile Include="Hayate-Re21341\EnemyTeamStageManager_Hayate_Re21341.cs" />
     <Compile Include="Hayate-Re21341\HayateSephirah_Re21341MapManager.cs" />
     <Compile Include="Hayate-Re21341\Hayate_Re21341MapManager.cs" />
-    <Compile Include="Hayate-Re21341\MechUtil\MechUtil_Hayate.cs" />
-    <Compile Include="Hayate-Re21341\MechUtil\NpcMechUtil_Hayate.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_DontGetTooCocky_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HayateNpc_Re21341.cs" />
     <Compile Include="Hayate-Re21341\Passives\PassiveAbility_HayateShimmering_Re21341.cs" />
@@ -128,11 +125,8 @@
     <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo3_21341.cs" />
     <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo2_21341.cs" />
     <Compile Include="Kamiyo-Re21341\EmotionCards\EmotionCardAbility_Kamiyo1_21341.cs" />
-    <Compile Include="Kamiyo-Re21341\EnemyTeamStageManager_Kamiyo_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo1_Re21341MapManager.cs" />
     <Compile Include="Kamiyo-Re21341\MapManager\Kamiyo2_Re21341MapManager.cs" />
-    <Compile Include="Kamiyo-Re21341\MechUtil\MechUtil_Kamiyo.cs" />
-    <Compile Include="Kamiyo-Re21341\MechUtil\NpcMechUtil_Kamiyo.cs" />
     <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_AlterEgoNpc_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_AlterEgoPlayer_Re21341.cs" />
     <Compile Include="Kamiyo-Re21341\Passives\PassiveAbility_KamiyoFakeShimmering_Re21341.cs" />
@@ -161,9 +155,7 @@
     <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio3_21341.cs" />
     <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio2_21341.cs" />
     <Compile Include="Mio-Re21341\EmotionCards\EmotionCardAbility_Mio1_21341.cs" />
-    <Compile Include="Mio-Re21341\EnemyTeamStageManager_Mio_Re21341.cs" />
     <Compile Include="Mio-Re21341\Mio_Re21341MapManager.cs" />
-    <Compile Include="Mio-Re21341\MechUtil_Mio.cs" />
     <Compile Include="Mio-Re21341\Passives\PassiveAbility_GodFragmentEnemy_Re21341.cs" />
     <Compile Include="Mio-Re21341\Passives\PassiveAbility_GodFragment_Re21341.cs" />
     <Compile Include="Mio-Re21341\Passives\PassiveAbility_HiddenBlade_Re21341.cs" />
@@ -172,6 +164,7 @@
     <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_DeepBreathing_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_GhostSamuraiEnemy_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_SamuraiDamageUp_21341.cs" />
+    <Compile Include="OldSamurai-Re21341\Buffs\BattleUnitBuf_SamuraiEgo_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_AncestralCallFragment_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_AncestralCall_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\Cards\DiceCardSelfAbility_DeepBreathing_Re21341.cs" />
@@ -179,7 +172,6 @@
     <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai3_21341.cs" />
     <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai2_21341.cs" />
     <Compile Include="OldSamurai-Re21341\EmotionCards\EmotionCardAbility_OldSamurai1_21341.cs" />
-    <Compile Include="OldSamurai-Re21341\EnemyTeamStageManager_OldSamurai_Re21341.cs" />
     <Compile Include="OldSamurai-Re21341\MapManager\OldSamuraiPlayer_Re21341MapManager.cs" />
     <Compile Include="OldSamurai-Re21341\MapManager\OldSamurai_Re21341MapManager.cs" />
     <Compile Include="OldSamurai-Re21341\Passives\PassiveAbility_ControlledBreathing_Re21341.cs" />
@@ -201,8 +193,6 @@
     <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors3_21341.cs" />
     <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors2_21341.cs" />
     <Compile Include="Raziel-Re21341\EmotionCards\EmotionCardAbility_Inquisitors1_21341.cs" />
-    <Compile Include="Raziel-Re21341\EnemyTeamStageManager_Raziel_Re21341.cs" />
-    <Compile Include="Raziel-Re21341\MechUtil\NpcMechUtil_Raziel.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GatheringSelf_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_GodTrial_Re21341.cs" />
     <Compile Include="Raziel-Re21341\Passives\PassiveAbility_InquisitorBlade_Re21341.cs" />
@@ -235,7 +225,6 @@
     <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_Vengeance_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_WiltonMassAttack_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Cards\DiceCardSelfAbility_WiltonSpecialCard_Re21341.cs" />
-    <Compile Include="Wilton-Re21341\EnemyTeamStageManager_Wilton_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Passives\PassiveAbility_ButlerStiletto_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Passives\PassiveAbility_KurosawaButlerEnemy_Re21341.cs" />
     <Compile Include="Wilton-Re21341\Passives\PassiveAbility_KurosawaButler_Re21341.cs" />

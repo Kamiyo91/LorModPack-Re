@@ -1,6 +1,7 @@
-﻿using BigDLL4221.Extensions;
-using KamiyoModPack.BLL_Re21341.Models;
-using KamiyoModPack.Kamiyo_Re21341.Passives;
+﻿using KamiyoModPack.Kamiyo_Re21341.Passives;
+using LOR_DiceSystem;
+using UtilLoader21341.Extensions;
+using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 {
@@ -15,25 +16,22 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public override void OnSelectEmotion()
         {
             ActiveEgo();
-            _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
+            var passive = new PassiveAbility_RedirectDiePassive_DLL21341();
+            passive.SetDetailType(BehaviourDetail.Evasion);
+            _owner.passiveDetail.AddPassive(passive);
         }
 
         public override void OnWaveStart()
         {
             ActiveEgo();
-            _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 31));
+            var passive = new PassiveAbility_RedirectDiePassive_DLL21341();
+            passive.SetDetailType(BehaviourDetail.Evasion);
+            _owner.passiveDetail.AddPassive(passive);
         }
 
         public void ActiveEgo()
         {
-            var passive = _owner.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>();
-            if (passive == null) return;
-            if (!passive.Util.Model.EgoOptions.TryGetValue(passive.Util.Model.EgoPhase, out var egoOptions)) return;
-            if (egoOptions.EgoActive) return;
-            _owner.personalEgoDetail.RemoveCard(passive.Util.Model.FirstEgoFormCard);
-            _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
-            passive.Util.TurnEgoAbDialogOff();
-            passive.Util.EgoActive();
+            _owner.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>()?.EgoActived();
         }
     }
 }

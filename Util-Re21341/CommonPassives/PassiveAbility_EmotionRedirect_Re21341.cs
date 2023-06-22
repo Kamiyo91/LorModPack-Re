@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BigDLL4221.Models;
 using KamiyoModPack.BLL_Re21341.Models;
 using LOR_DiceSystem;
+using UtilLoader21341;
+using UtilLoader21341.Models;
 
 namespace KamiyoModPack.Util_Re21341.CommonPassives
 {
@@ -12,7 +13,7 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
         public static Predicate<DiceMatch> AllEvadeDice = x =>
             x.abiliity.behaviourInCard.Detail == BehaviourDetail.Evasion;
 
-        public PassiveOptions PassiveOption;
+        public PassiveOptionRoot PassiveOption;
 
         public override void OnCreated()
         {
@@ -60,19 +61,21 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
 
         private void SetRedirectSpeedDie()
         {
-            if (!ModParameters.PassiveOptions.TryGetValue(KamiyoModParameters.PackageId, out var passiveOptions))
-                return;
-            var passiveItem = passiveOptions.FirstOrDefault(x => x.PassiveId == 31);
+            var passiveItem = ModParameters.PassiveOptions.FirstOrDefault(x =>
+                x.PackageId == KamiyoModParameters.PackageId && x.PassiveId == 31);
             if (passiveItem == null || (passiveItem.ForceAggroOptions != null &&
                                         passiveItem.ForceAggroOptions.ForceAggroSpeedDie.Contains(
                                             owner.speedDiceResult.Count - 2 < 0
                                                 ? 0
                                                 : owner.speedDiceResult.Count - 2))) return;
-            var index = passiveOptions.IndexOf(passiveItem);
+            var index = ModParameters.PassiveOptions.IndexOf(passiveItem);
             passiveItem.ForceAggroOptions =
-                new ForceAggroOptions(forceAggroSpeedDie: new List<int>
-                    { owner.speedDiceResult.Count - 2 < 0 ? 0 : owner.speedDiceResult.Count - 2 });
-            if (index != -1) passiveOptions[index] = passiveItem;
+                new ForceAggroOptionsRoot
+                {
+                    ForceAggroSpeedDie = new List<int>
+                        { owner.speedDiceResult.Count - 2 < 0 ? 0 : owner.speedDiceResult.Count - 2 }
+                };
+            if (index != -1) ModParameters.PassiveOptions[index] = passiveItem;
             PassiveOption = passiveItem;
         }
     }

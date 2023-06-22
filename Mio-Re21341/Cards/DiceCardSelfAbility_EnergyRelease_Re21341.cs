@@ -1,4 +1,4 @@
-﻿using BigDLL4221.Buffs;
+﻿using UtilLoader21341.Extensions;
 
 namespace KamiyoModPack.Mio_Re21341.Cards
 {
@@ -12,7 +12,8 @@ namespace KamiyoModPack.Mio_Re21341.Cards
         public override void OnStartBattle()
         {
             owner.bufListDetail.RemoveBufAll(KeywordBuf.Binding);
-            owner.bufListDetail.AddBuf(new BattleUnitBuf_ImmunityToOneStatus_DLL4221(immunityType: KeywordBuf.Binding));
+            owner.bufListDetail.AddBuf(
+                new BattleUnitBuf_ImmunityToOneStatus_DLL21341(immunityType: KeywordBuf.Binding));
         }
     }
 }
