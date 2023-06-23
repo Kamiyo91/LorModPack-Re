@@ -65,7 +65,7 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return Phase == 0 ? 2 : 3;
+            return 2;
         }
 
         public override void OnWaveStart()
@@ -91,6 +91,7 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
 
         public override void OnRoundEndTheLast()
         {
+            if (owner.IsDead() && Counter < MaxCounter) owner.UnitReviveAndRecovery(owner.MaxHp, true);
             if (Counter >= MaxCounter) owner.DieFake();
             if (Phase < 1 && Counter > 1) MechChanging = true;
             if (!MechChanging) return;

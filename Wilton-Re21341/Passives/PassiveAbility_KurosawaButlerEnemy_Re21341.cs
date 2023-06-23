@@ -115,7 +115,7 @@ namespace KamiyoModPack.Wilton_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return 2;
+            return Phase != 0 ? 2 : 0;
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

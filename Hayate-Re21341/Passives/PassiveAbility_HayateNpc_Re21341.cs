@@ -4,7 +4,6 @@ using CustomMapUtility;
 using KamiyoModPack.BLL_Re21341.Models;
 using KamiyoModPack.Hayate_Re21341.Buffs;
 using KamiyoModPack.Kamiyo_Re21341.Passives;
-using KamiyoModPack.Mio_Re21341.Buffs;
 using LOR_XML;
 using UnityEngine;
 using UtilLoader21341;
@@ -58,16 +57,39 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
         public string MusicFileNamePhase3 = "HayatePhase3_Re21341.ogg";
         public bool OneTurnCard;
         public int Phase;
+
+        public List<AbnormalityCardDialog> Phase2Dialog = new List<AbnormalityCardDialog>
+        {
+            new AbnormalityCardDialog
+            {
+                id = "HayateEnemy",
+                dialog = ModParameters.LocalizedItems[KamiyoModParameters.PackageId]?.EffectTexts
+                    .FirstOrDefault(x => x.Key.Equals("HayateEnemyPhase2_Re21341")).Value?.Desc ?? ""
+            }
+        };
+
+        public List<AbnormalityCardDialog> Phase3Dialog = new List<AbnormalityCardDialog>
+        {
+            new AbnormalityCardDialog
+            {
+                id = "HayateEnemy",
+                dialog = ModParameters.LocalizedItems[KamiyoModParameters.PackageId]?.EffectTexts
+                    .FirstOrDefault(x => x.Key.Equals("HayateEnemyFinalPhase1_Re21341")).Value?.Desc ?? ""
+            }
+        };
+
         public int PhaseHp = 527;
-        public int PhaseHp2 = 271;
+        public int PhaseHp2 = 100;
         public string SaveDataId = "HayateSave21341";
         public LorId SpecialAttackCard = new LorId(KamiyoModParameters.PackageId, 904);
         public int SpecialCardStacks = 40;
+        public bool SpecialDialog;
         public bool WiltonCase;
         public override bool isImmortal => Phase < 3;
 
         public override void OnWaveStart()
         {
+            SpecialDialog = false;
             if (_mapActive || _additionalUnit)
             {
                 MapUtil.InitEnemyMap<Hayate_Re21341MapManager>(_cmh, MapModel);
@@ -85,6 +107,12 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
 
         public override void OnRoundStart()
         {
+            if (Phase == 3 && _additionalUnit && !SpecialDialog)
+            {
+                SpecialDialog = true;
+                UnitUtil.BattleAbDialog(owner.view.dialogUI, Phase3Dialog, Color.red);
+            }
+
             _buff = owner.CheckPermanentBuff<BattleUnitBuf_EntertainMe_Re21341>();
             if (_mapActive || _additionalUnit) _cmh.EnforceMap();
             owner.RemoveImmortalBuff();
@@ -114,8 +142,12 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
         {
             if (OneTurnCard || Phase > 2) return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
             if (Phase == 2 && _additionalUnit)
+            {
                 origin = BattleDiceCardModel.CreatePlayingCard(
                     ItemXmlDataList.instance.GetCardItem(SpecialAttackCard));
+                OneTurnCard = true;
+            }
+
             if (_buff.stack < SpecialCardStacks) return base.OnSelectCardAuto(origin, currentDiceSlotIdx);
             origin = BattleDiceCardModel.CreatePlayingCard(
                 ItemXmlDataList.instance.GetCardItem(AttackCard));
@@ -125,7 +157,7 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return Phase == 0 ? 2 : Phase < 2 ? 4 : 3;
+            return Phase == 0 ? 2 : 4;
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -190,7 +222,7 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
                         UnitUtil.AddOriginalPlayerUnit(i, 3);
                     UnitUtil.RefreshCombatUI();
                     if (!EgoActive)
-                        owner.EgoActive<BattleUnitBuf_CorruptedGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
+                        owner.EgoActive<BattleUnitBuf_TrueGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
                             color: Color.green);
                     _buff.stack = 40;
                     if (!_mapActive && !_additionalUnit) break;
@@ -199,9 +231,10 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
                     break;
                 case 2:
                     owner.ChangeCardCostByValue(restart ? -2 : -1, 99, true);
+                    UnitUtil.BattleAbDialog(owner.view.dialogUI, Phase2Dialog, Color.red);
                     _buff.stack = 0;
                     if (!EgoActive)
-                        owner.EgoActive<BattleUnitBuf_CorruptedGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
+                        owner.EgoActive<BattleUnitBuf_TrueGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
                             color: Color.green);
                     if (_mapActive || _additionalUnit)
                     {
@@ -214,7 +247,7 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
                     if (!_additionalUnit) break;
                     owner.ChangeCardCostByValue(-99, 99, true);
                     if (!EgoActive)
-                        owner.EgoActive<BattleUnitBuf_CorruptedGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
+                        owner.EgoActive<BattleUnitBuf_TrueGodAuraRelease_Re21341>(ref EgoActive, dialog: EgoDialog,
                             color: Color.green);
                     foreach (var unit in BattleObjectManager.instance.GetList(owner.faction.ReturnOtherSideFaction()))
                         BattleObjectManager.instance.UnregisterUnit(unit);
@@ -222,6 +255,14 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
                         new UnitModelRoot { PackageId = KamiyoModParameters.PackageId, Id = 10000901, UnitNameId = 4 },
                         0,
                         emotionLevel: owner.emotionDetail.EmotionLevel);
+                    UnitUtil.RefreshCombatUI();
+                    kamiyoUnit.ChangeCardCostByValue(-5, 99, false);
+                    kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 43));
+                    var specialPassive =
+                        kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 17));
+                    specialPassive.OnWaveStart();
+                    owner.UnitReviveAndRecovery(50, true);
+                    kamiyoUnit.ApplyEmotionCards(_emotionCards);
                     var kamiyoPassive = kamiyoUnit.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>();
                     if (kamiyoPassive != null)
                     {
@@ -238,14 +279,6 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
                         kamiyoPassive.EgoActived();
                     }
 
-                    UnitUtil.RefreshCombatUI();
-                    kamiyoUnit.ChangeCardCostByValue(-5, 99, false);
-                    kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 43));
-                    var specialPassive =
-                        kamiyoUnit.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 17));
-                    specialPassive.OnWaveStart();
-                    owner.UnitReviveAndRecovery(50, true);
-                    kamiyoUnit.ApplyEmotionCards(_emotionCards);
                     if (!_mapActive) break;
                     CreatureFilter = false;
                     MapUtil.ActiveCreatureBattleCamFilterComponent(false);
@@ -259,9 +292,14 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
             MapUtil.ActiveCreatureBattleCamFilterComponent(false);
         }
 
-        public override void OnKill(BattleUnitModel target)
+        public void AddEmotionCards(BattleUnitModel target)
         {
             _emotionCards = UnitUtil.AddValueToEmotionCardList(UnitUtil.GetEmotionCardByUnit(target), _emotionCards);
+        }
+
+        public override void OnKill(BattleUnitModel target)
+        {
+            AddEmotionCards(target);
             if (!WiltonCase) return;
             var playerUnit = BattleObjectManager.instance.GetAliveList(Faction.Player).FirstOrDefault();
             if (playerUnit != null)

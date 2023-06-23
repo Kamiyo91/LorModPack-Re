@@ -78,7 +78,7 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
 
         public override void OnBattleEnd()
         {
-            owner.UnitReviveAndRecovery(owner.MaxHp, false);
+            owner.Revive(owner.MaxHp);
         }
 
         public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
