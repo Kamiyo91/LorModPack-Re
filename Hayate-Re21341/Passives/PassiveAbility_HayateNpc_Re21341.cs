@@ -125,7 +125,7 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return Phase == 0 ? 2 : Phase < 2 ? 5 : 3;
+            return Phase == 0 ? 2 : Phase < 2 ? 4 : 3;
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)

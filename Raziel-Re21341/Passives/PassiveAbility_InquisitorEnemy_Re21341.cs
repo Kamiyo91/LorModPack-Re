@@ -15,6 +15,17 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
     public class PassiveAbility_InquisitorEnemy_Re21341 : PassiveAbilityBase
     {
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
+
+        private readonly List<AbnormalityCardDialog> _egoDialog = new List<AbnormalityCardDialog>
+        {
+            new AbnormalityCardDialog
+            {
+                id = "RazielEnemy",
+                dialog = ModParameters.LocalizedItems[KamiyoModParameters.PackageId]?.EffectTexts
+                    .FirstOrDefault(x => x.Key.Equals("RazielEnemyEgoActive1_Re21341")).Value?.Desc ?? ""
+            }
+        };
+
         private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 7;
 
         private readonly List<AbnormalityCardDialog> _reviveDialog = new List<AbnormalityCardDialog>
@@ -44,7 +55,7 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
         };
 
         public string MapName = "Raziel_Re21341";
-        public int MaxCounter = 6;
+        public int MaxCounter = 5;
         public bool MechChanging;
         public string MusicFileName = "RazielPhase2_Re21341.ogg";
         public bool OneTurnCard;
@@ -54,7 +65,7 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return Phase == 0 ? 2 : 4;
+            return Phase == 0 ? 2 : 3;
         }
 
         public override void OnWaveStart()
@@ -128,7 +139,9 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
                 case 1:
                     if (!owner.passiveDetail.HasPassive<PassiveAbility_InquisitorShimmering_Re21341>())
                         owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 41));
-                    if (!EgoActive) owner.EgoActive<BattleUnitBuf_OwlSpirit_Re21341>(ref EgoActive);
+                    if (!EgoActive)
+                        owner.EgoActive<BattleUnitBuf_OwlSpirit_Re21341>(ref EgoActive, dialog: _egoDialog,
+                            color: Color.red);
                     if (!_mapActive) break;
                     _cmh.SetMapBgm(MusicFileName, true, MapName);
                     break;
