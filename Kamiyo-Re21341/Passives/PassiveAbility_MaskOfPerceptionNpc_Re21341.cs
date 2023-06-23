@@ -1,5 +1,4 @@
-﻿using LOR_DiceSystem;
-using UtilLoader21341.Util;
+﻿using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Passives
 {

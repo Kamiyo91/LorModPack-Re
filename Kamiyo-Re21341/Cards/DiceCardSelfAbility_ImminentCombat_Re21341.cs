@@ -14,7 +14,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             owner.allyCardDetail.DrawCards(1);
             _defClashWin = 0;
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
-            if (buff == null || buff.stack < 25) return;
+            if (buff == null || buff.stack < 19) return;
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = 1 });
         }
 

@@ -30,12 +30,12 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         {
             if (!_clashWin) return;
             _clashWin = false;
-            this.OnAddBufCustom(1);
+            this.OnAddBufCustom(1, maxStack: 20);
         }
 
         public override int GetCardCostAdder(BattleDiceCardModel card)
         {
-            return stack > 24 ? -1 : base.GetCardCostAdder(card);
+            return stack > 19 ? -1 : base.GetCardCostAdder(card);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             //ArtUtil.BaseGameLoadPrefabEffect(unit, "Battle/DiceAttackEffects/New/FX/DamageDebuff/FX_DamageDebuff_Fire",
             //    "Buf/Effect_Burn");
             SoundEffectPlayer.PlaySound("Creature/Helper_FullCharge");
-            unit.TakeDamage(5);
+            unit.TakeDamage(10);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 1, unit);
             unit.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 1, unit);
         }

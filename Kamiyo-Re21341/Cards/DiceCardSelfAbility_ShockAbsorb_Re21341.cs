@@ -18,14 +18,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Cards
             if (!owner.bufListDetail.HasBuf<BattleUnitBuf_AlterEgoRelease_Re21341>()) return;
             var buff = owner.GetActiveBuff<BattleUnitBuf_Shock_Re21341>();
             if (buff == null) return;
-            var positiveNum = buff.stack;
-            if (positiveNum > 0)
-                positiveNum /= 10;
-            if (positiveNum == 0) return;
-            Active = buff.stack > 24;
-            owner.TakeDamage(positiveNum * 5);
-            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, positiveNum, owner);
-            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, positiveNum, owner);
+            Active = buff.stack > 19;
+            if (!Active) return;
+            owner.TakeDamage(25);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, 2, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Endurance, 2, owner);
         }
     }
 }

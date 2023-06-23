@@ -84,7 +84,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
             var tryGet = Singleton<StageController>.Instance.GetStageModel()
                 .GetStageStorageData<bool>(SurvivedSavedId, out var survived);
             if (tryGet) Survived = survived;
-            owner.AddBuff<BattleUnitBuf_Shock_Re21341>(1);
             if (UnitUtil.CheckSkinProjection(owner))
                 CustomSkin = true;
             owner.personalEgoDetail.AddCard(_egoCard);
@@ -92,6 +91,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
 
         public override void OnRoundStart()
         {
+            owner.CheckPermanentBuff<BattleUnitBuf_Shock_Re21341>();
             if (EgoActive)
             {
                 owner.personalEgoDetail.RemoveCard(_egoAdditionalCard);

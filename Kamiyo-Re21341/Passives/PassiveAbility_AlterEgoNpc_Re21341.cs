@@ -75,14 +75,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
                 MapUtil.InitEnemyMap<Kamiyo2_Re21341MapManager>(_cmh, MapModelPhase2);
                 _cmh.EnforceMap();
             }
-
-            owner.AddBuff<BattleUnitBuf_Shock_Re21341>(1);
             Phase = NpcMechUtil.RestartPhase(SaveDataId);
             if (Phase != 0) ChangePhase(Phase);
         }
 
         public override void OnRoundStart()
         {
+            owner.CheckPermanentBuff<BattleUnitBuf_Shock_Re21341>();
             if (_mapActive) _cmh.EnforceMap(Phase == 0 ? 0 : 1);
             owner.RemoveImmortalBuff();
             OneTurnCard = false;
