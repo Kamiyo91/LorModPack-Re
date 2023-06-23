@@ -75,6 +75,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
                 MapUtil.InitEnemyMap<Kamiyo2_Re21341MapManager>(_cmh, MapModelPhase2);
                 _cmh.EnforceMap();
             }
+
             Phase = NpcMechUtil.RestartPhase(SaveDataId);
             if (Phase != 0) ChangePhase(Phase);
         }
