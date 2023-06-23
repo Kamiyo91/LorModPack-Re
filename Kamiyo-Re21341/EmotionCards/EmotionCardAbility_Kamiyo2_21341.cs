@@ -18,7 +18,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public override DiceStatBonus GetDiceStatBonus(BehaviourDetail behaviour)
         {
             return behaviour == BehaviourDetail.Evasion
-                ? new DiceStatBonus { power = _random.Next(1, 2) }
+                ? new DiceStatBonus { power = _random.Next(0, 1) }
                 : base.GetDiceStatBonus(behaviour);
         }
     }

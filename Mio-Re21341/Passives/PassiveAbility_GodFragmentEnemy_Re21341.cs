@@ -186,7 +186,13 @@ namespace KamiyoModPack.Mio_Re21341.Passives
                     if (!EgoActive)
                         owner.EgoActive<BattleUnitBuf_CorruptedGodAuraRelease_Re21341>(ref EgoActive, EgoSkinName, true,
                             false, null, EgoDialog, Color.red);
-                    unit.GetActivePassive<PassiveAbility_GodFragment_Re21341>()?.ForcedEgo();
+                    var passive = unit.GetActivePassive<PassiveAbility_GodFragment_Re21341>();
+                    if (passive != null)
+                    {
+                        passive.ForcedEgo();
+                        passive.SpeedCount = 15;
+                    }
+
                     if (!_mapActive && !_additionalUnit) break;
                     CreatureFilter = true;
                     _cmh.SetMapBgm(MusicFileName, true, MapName);

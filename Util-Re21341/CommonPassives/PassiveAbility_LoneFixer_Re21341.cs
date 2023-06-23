@@ -11,11 +11,6 @@ namespace KamiyoModPack.Util_Re21341.CommonPassives
             desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(230008);
         }
 
-        public override void OnWaveStart()
-        {
-            UnitUtil.ChangeLoneFixerPassive(owner.faction,this);
-        }
-
         public override void OnRoundEnd()
         {
             if (UnitUtil.SupportCharCheck(owner) < 2)

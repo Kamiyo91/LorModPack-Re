@@ -5,7 +5,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_Shock_Re21341 : BattleUnitBuf
     {
-        //private int _clashWin;
+        private bool _clashWin;
 
         protected override string keywordId => _owner.Book.BookId.packageId == KamiyoModParameters.PackageId &&
                                                (_owner.Book.BookId.id == 4 || _owner.Book.BookId.id == 10000004 ||
@@ -23,9 +23,13 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 
         public override void OnWinParrying(BattleDiceBehavior behavior)
         {
-            //_clashWin++;
-            //if (_clashWin < 3) return;
-            //_clashWin = 0;
+            _clashWin = true;
+        }
+
+        public override void OnEndBattle(BattlePlayingCardDataInUnitModel curCard)
+        {
+            if (!_clashWin) return;
+            _clashWin = false;
             this.OnAddBufCustom(1);
         }
 

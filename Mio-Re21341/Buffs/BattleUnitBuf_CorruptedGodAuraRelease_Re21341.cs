@@ -1,4 +1,5 @@
-﻿using Sound;
+﻿using KamiyoModPack.Mio_Re21341.Passives;
+using Sound;
 using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Mio_Re21341.Buffs
@@ -17,6 +18,8 @@ namespace KamiyoModPack.Mio_Re21341.Buffs
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
+            var target = behavior.card?.target;
+            if (target != null && target.passiveDetail.HasPassive<PassiveAbility_GodFragment_Re21341>()) return;
             behavior.ApplyDiceStatBonus(
                 new DiceStatBonus
                 {
@@ -44,8 +47,8 @@ namespace KamiyoModPack.Mio_Re21341.Buffs
 
         private void TakeDamageByEffect()
         {
-            _owner.TakeDamage(20, DamageType.Emotion);
-            _owner.breakDetail.TakeBreakDamage(20, DamageType.Emotion);
+            _owner.TakeDamage(45, DamageType.Emotion);
+            _owner.breakDetail.TakeBreakDamage(45, DamageType.Emotion);
         }
     }
 }
