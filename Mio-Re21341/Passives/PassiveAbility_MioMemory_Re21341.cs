@@ -21,12 +21,12 @@ namespace KamiyoModPack.Mio_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return 2;
+            return 1;
         }
 
         public override void OnWaveStart()
         {
-            Counter = 3;
+            Counter = 2;
             owner.EgoActive<BattleUnitBuf_GodAuraRelease_Re21341>(ref EgoActive, EgoSkinName, true);
         }
 

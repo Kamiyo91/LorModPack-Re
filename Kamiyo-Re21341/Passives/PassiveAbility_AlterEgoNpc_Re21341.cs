@@ -64,7 +64,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
         public bool MechChanging;
         public bool OneTurnCard;
         public int Phase;
-        public int PhaseHp = 161;
+        public int PhaseHp = 81;
         public string SaveDataId = "KamiyoSave21341";
 
         public override void OnWaveStart()
@@ -110,7 +110,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
 
         public override int SpeedDiceNumAdder()
         {
-            return Phase == 0 ? 2 : 3;
+            return 2;
         }
 
         public override bool BeforeTakeDamage(BattleUnitModel attacker, int dmg)
@@ -169,7 +169,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
         {
             var unit = new UnitModelRoot { PackageId = KamiyoModParameters.PackageId, Id = 5, UnitNameId = 5 };
             UnitUtil.AddNewUnitWithDefaultData(unit,
-                BattleObjectManager.instance.GetList(owner.faction.ReturnOtherSideFaction()).Count, true, 4,
+                BattleObjectManager.instance.GetList(owner.faction).Count, true, 4,
                 Faction.Enemy);
         }
 

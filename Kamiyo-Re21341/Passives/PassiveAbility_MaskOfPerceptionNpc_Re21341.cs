@@ -15,12 +15,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
             return false;
         }
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
-        {
-            if (behavior.Detail != BehaviourDetail.Evasion) return;
-            behavior.ApplyDiceStatBonus(new DiceStatBonus { power = 1 });
-        }
-
         public override void OnStartTargetedOneSide(BattlePlayingCardDataInUnitModel attackerCard)
         {
             owner.SetPassiveCombatLog(this);
