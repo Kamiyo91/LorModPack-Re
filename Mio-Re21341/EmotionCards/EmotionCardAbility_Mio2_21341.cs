@@ -24,8 +24,8 @@ namespace KamiyoModPack.Mio_Re21341.EmotionCards
             if (_attackCount < 10) return;
             _owner.SetEmotionCombatLog(_emotionCard);
             _attackCount = 0;
-            _owner.RecoverHP(3);
-            _owner.breakDetail.RecoverBreak(3);
+            _owner.RecoverHP(5);
+            _owner.breakDetail.RecoverBreak(5);
             _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Weak, 1, _owner);
             _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Disarm, 1, _owner);
         }

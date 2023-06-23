@@ -7,23 +7,11 @@ namespace KamiyoModPack.OldSamurai_Re21341.EmotionCards
     {
         public override void OnParryingStart(BattlePlayingCardDataInUnitModel card)
         {
-            BattlePlayingCardDataInUnitModel battlePlayingCardDataInUnitModel;
-            if (card == null)
-            {
-                battlePlayingCardDataInUnitModel = null;
-            }
-            else
-            {
-                var target = card.target;
-                battlePlayingCardDataInUnitModel = target?.currentDiceAction;
-            }
-
-            var battlePlayingCardDataInUnitModel2 = battlePlayingCardDataInUnitModel;
-            if (battlePlayingCardDataInUnitModel2 == null) return;
             _owner.SetEmotionCombatLog(_emotionCard);
-            card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            card?.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
-                min = 1
+                min = +1,
+                max = +1
             });
         }
 

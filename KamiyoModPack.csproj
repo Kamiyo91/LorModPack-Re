@@ -208,6 +208,7 @@
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_EmotionRedirect_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaBlade_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_KurosawaStory_Re21341.cs" />
+    <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_LoneFixer_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_Loneliness_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_NotEquip_Re21341.cs" />
     <Compile Include="Util-Re21341\CommonPassives\PassiveAbility_PlayerShimmering_Re21341.cs" />
