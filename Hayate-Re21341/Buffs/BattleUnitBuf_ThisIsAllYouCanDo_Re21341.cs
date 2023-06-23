@@ -21,6 +21,16 @@
         public override void OnRoundStart()
         {
             _owner.allyCardDetail.DrawCards(1);
+            _owner.cardSlotDetail.RecoverPlayPoint(1);
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            behavior.ApplyDiceStatBonus(
+                new DiceStatBonus
+                {
+                    power = 1
+                });
         }
     }
 }
