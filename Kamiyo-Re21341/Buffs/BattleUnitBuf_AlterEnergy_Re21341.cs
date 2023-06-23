@@ -5,7 +5,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
     public class BattleUnitBuf_AlterEnergy_Re21341 : BattleUnitBuf
     {
-        private GameObject Aura;
+        private GameObject _aura;
         protected override string keywordId => "AlterEnergy_Re21341";
         protected override string keywordIconId => "AlterEnergy_Re21341";
         public int MaxStack => 10;
@@ -19,8 +19,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         public override void OnRoundEndTheLast()
         {
             _owner.TakeDamage(stack, DamageType.Buf);
-            this.OnAddBufCustom(-2);
-            if (stack < 1) RemoveBuff();
+            RemoveBuff();
         }
 
         public override void OnAddBuf(int addedStack)
@@ -46,12 +45,12 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
                 main.startSizeMultiplier = 0.1f;
             }
 
-            Aura = effect.gameObject;
+            _aura = effect.gameObject;
         }
 
         private void RemoveBuff()
         {
-            if (Aura != null) Object.Destroy(Aura);
+            if (_aura != null) Object.Destroy(_aura);
             _owner.bufListDetail.RemoveBuf(this);
         }
     }
