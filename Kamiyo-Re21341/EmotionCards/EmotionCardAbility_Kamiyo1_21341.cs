@@ -1,4 +1,5 @@
-﻿using KamiyoModPack.Kamiyo_Re21341.Passives;
+﻿using KamiyoModPack.BLL_Re21341.Models;
+using KamiyoModPack.Kamiyo_Re21341.Passives;
 using LOR_DiceSystem;
 using UtilLoader21341.Extensions;
 using UtilLoader21341.Util;
@@ -32,6 +33,8 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
         public void ActiveEgo()
         {
             _owner.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>()?.EgoActived();
+            if (!_owner.passiveDetail.HasPassive<PassiveAbility_MaskOfPerception_Re21341>())
+                _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
         }
     }
 }

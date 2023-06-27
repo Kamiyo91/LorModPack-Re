@@ -132,6 +132,11 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
             owner.EgoActive<BattleUnitBuf_AlterEgoRelease_Re21341>(ref EgoActive, CustomSkin ? "" : EgoSkinName, true,
                 false, new List<LorId> { _egoAttackCard, _egoAdditionalCard }, EgoDialog, Color.red);
             if (!CustomSkin) ChangeDiceEffects(owner);
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            if (!EgoActiveQueue) return;
             if (!owner.passiveDetail.HasPassive<PassiveAbility_MaskOfPerception_Re21341>())
                 owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
         }
