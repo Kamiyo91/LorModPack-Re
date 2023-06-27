@@ -32,7 +32,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.EmotionCards
 
         public void ActiveEgo()
         {
-            _owner.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>()?.EgoActived();
+            var passive = _owner.GetActivePassive<PassiveAbility_AlterEgoPlayer_Re21341>();
+            if (passive == null) return;
+            passive.EgoActived();
             if (!_owner.passiveDetail.HasPassive<PassiveAbility_MaskOfPerception_Re21341>())
                 _owner.passiveDetail.AddPassive(new LorId(KamiyoModParameters.PackageId, 14));
         }
