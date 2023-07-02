@@ -22,7 +22,7 @@ namespace KamiyoModPack.Wilton_Re21341.Cards
         {
             if (!_atkSuccess || !card.target.bufListDetail.GetActivatedBufList()
                     .Exists(x => x.bufType == KeywordBuf.Vulnerable && x.stack >= Check)) return;
-            owner.ChangeSameCardsCost(card, 1);
+            owner.ChangeSameCardsCost(card, -1);
             owner.allyCardDetail.DrawCards(1);
         }
     }
