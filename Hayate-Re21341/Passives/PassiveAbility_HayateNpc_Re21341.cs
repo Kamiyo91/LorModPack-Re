@@ -18,7 +18,9 @@ namespace KamiyoModPack.Hayate_Re21341.Passives
             Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 4;
 
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 10;
+
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 10 ||
+                                           Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 12;
 
         private BattleUnitBuf_EntertainMe_Re21341 _buff;
         private List<BattleEmotionCardModel> _emotionCards = new List<BattleEmotionCardModel>();

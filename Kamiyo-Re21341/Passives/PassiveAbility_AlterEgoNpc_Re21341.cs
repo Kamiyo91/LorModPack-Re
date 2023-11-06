@@ -20,7 +20,9 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
         private const string EgoSkinName = "KamiyoMask_Re21341";
 
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 3;
+
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 3 ||
+                                           Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 12;
 
         public LorId AttackCard = new LorId(KamiyoModParameters.PackageId, 902);
         public int Counter;

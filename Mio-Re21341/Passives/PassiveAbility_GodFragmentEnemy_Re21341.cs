@@ -20,7 +20,9 @@ namespace KamiyoModPack.Mio_Re21341.Passives
             Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 2;
 
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 9;
+
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 9 ||
+                                           Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 12;
 
         public LorId AttackCard = new LorId(KamiyoModParameters.PackageId, 900);
         public int Counter;

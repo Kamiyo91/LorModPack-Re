@@ -18,7 +18,9 @@ namespace KamiyoModPack.Wilton_Re21341.Passives
     {
         private readonly CustomMapHandler _cmh = CustomMapHandler.GetCMU(KamiyoModParameters.PackageId);
         private readonly bool _finalMech = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 6;
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 11;
+
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 11 ||
+                                           Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 12;
 
         private Wilton_Re21341MapManager _mapManager;
         public LorId AttackCard = new LorId(KamiyoModParameters.PackageId, 905);

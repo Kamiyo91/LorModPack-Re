@@ -26,7 +26,8 @@ namespace KamiyoModPack.Raziel_Re21341.Passives
             }
         };
 
-        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 7;
+        private readonly bool _mapActive = Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 7 ||
+                                           Singleton<StageController>.Instance.GetStageModel().ClassInfo.id.id == 12;
 
         private readonly List<AbnormalityCardDialog> _reviveDialog = new List<AbnormalityCardDialog>
         {
