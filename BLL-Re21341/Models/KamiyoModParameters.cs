@@ -9,5 +9,6 @@
         //public const string VortexModPackageId = "VortexTowerModSa21341.Mod";
         public static string Path;
         public static readonly int EgoEmotionLevel = 3;
+        public static bool EmotionCardUtilLoaded = false;
     }
 }

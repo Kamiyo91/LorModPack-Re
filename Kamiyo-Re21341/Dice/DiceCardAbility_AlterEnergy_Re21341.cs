@@ -9,8 +9,15 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
         public override void OnWinParrying()
         {
             if (owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
-                !owner.ActivatedEmotionCard(KamiyoModParameters.PackageId, 21345)) return;
+                !KamiyoModParameters.EmotionCardUtilLoaded) return;
+            if (owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
+                KamiyoModParameters.EmotionCardUtilLoaded && !CheckEmotionUtilEffect()) return;
             behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
+        }
+
+        public bool CheckEmotionUtilEffect()
+        {
+            return owner.ActivatedEmotionCard(KamiyoModParameters.PackageId, 21345);
         }
     }
 }
