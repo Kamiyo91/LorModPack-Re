@@ -9,7 +9,6 @@ namespace KamiyoModPack.FloorEgoCards_Re21341
     public class DiceCardSelfAbility_EgoOneScene_Re21341 : DiceCardSelfAbilityBase
     {
         public bool MapActivated;
-        public virtual MapModelRoot MapModel => null;
         public virtual string SkinName => "";
         public string PackageId => KamiyoModParameters.PackageId;
 
@@ -21,7 +20,7 @@ namespace KamiyoModPack.FloorEgoCards_Re21341
                 owner.view.SetAltSkin(SkinName);
             }
 
-            ChangeToEgoMap();
+            ChangeToEgoMap(null);
         }
 
         public override void OnEndAreaAttack()
@@ -31,23 +30,24 @@ namespace KamiyoModPack.FloorEgoCards_Re21341
             owner.view.CreateSkin();
         }
 
-        public void ChangeToEgoMap()
+        public void ChangeToEgoMap(MapModelRoot mapModel)
         {
-            if (MapModel == null || SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
-            if (MapUtil.ChangeMap(CustomMapHandler.GetCMU(PackageId), MapModel)) MapActivated = true;
+            if (mapModel == null || SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.isEgo) return;
+            if (MapUtil.ChangeMap(CustomMapHandler.GetCMU(PackageId), mapModel)) MapActivated = true;
         }
 
-        public virtual void ReturnFromEgoMap()
+        public void ReturnFromEgoMap(MapModelRoot mapModel)
         {
             MapActivated = false;
-            if (MapModel == null) return;
-            MapUtil.ReturnFromEgoMap(CustomMapHandler.GetCMU(PackageId), MapModel.Stage,
-                MapModel.OriginalMapStageIds.Select(x => x.ToLorId()).ToList());
+            if (mapModel == null) return;
+            MapUtil.ReturnFromEgoMap(CustomMapHandler.GetCMU(PackageId), mapModel.Stage,
+                mapModel.OriginalMapStageIds.Select(x => x.ToLorId()).ToList());
         }
 
         public override void OnRoundEnd(BattleUnitModel unit, BattleDiceCardModel self)
         {
-            if (MapActivated) ReturnFromEgoMap();
+            if (!MapActivated) return;
+            ReturnFromEgoMap(null);
         }
     }
 }
