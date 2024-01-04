@@ -21,7 +21,7 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
 
         public override void OnRoundEndTheLast()
         {
-            this.AddBufCustom(_owner.faction == Faction.Enemy ? 3 : 1);
+            this.AddBufCustom(_owner.faction == Faction.Enemy ? 3 : 1,maxStack:MaxStack);
         }
 
         public void SetValue(int value)
@@ -31,7 +31,7 @@ namespace KamiyoModPack.Hayate_Re21341.Buffs
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
-            this.AddBufCustom(_addValue);
+            this.AddBufCustom(_addValue, maxStack: MaxStack);
         }
     }
 }
