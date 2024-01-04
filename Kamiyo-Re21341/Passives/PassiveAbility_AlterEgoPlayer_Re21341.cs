@@ -122,7 +122,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Passives
         {
             owner.SurviveCheck<BattleUnitBuf>(dmg, 0, ref Survived, 64, dialog: _surviveDialog, color: Color.red);
             if (Survived && !owner.bufListDetail.HasBuf<BattleUnitBuf_NearDeath_Re21341>())
-                owner.AddBuff<BattleUnitBuf_NearDeath_Re21341>(0);
+                owner.AddBuffCustom<BattleUnitBuf_NearDeath_Re21341>(0);
             return base.BeforeTakeDamage(attacker, dmg);
         }
 

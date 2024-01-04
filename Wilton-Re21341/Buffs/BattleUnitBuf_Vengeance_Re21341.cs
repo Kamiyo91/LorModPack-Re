@@ -40,7 +40,7 @@ namespace KamiyoModPack.Wilton_Re21341.Buffs
         {
             if (target == _owner) return 0;
             if (cardBuf.bufType == KeywordBuf.Vulnerable || cardBuf.bufType == KeywordBuf.Bleeding)
-                this.OnAddBufCustom(1);
+                this.AddBufCustom(1);
             return 1;
         }
 

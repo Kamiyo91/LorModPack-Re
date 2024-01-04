@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UtilLoader21341.Util;
 
 namespace KamiyoModPack.Kamiyo_Re21341.Buffs
 {
@@ -20,11 +19,6 @@ namespace KamiyoModPack.Kamiyo_Re21341.Buffs
         {
             _owner.TakeDamage(stack, DamageType.Buf);
             RemoveBuff();
-        }
-
-        public override void OnAddBuf(int addedStack)
-        {
-            this.OnAddBufCustom(addedStack, maxStack: MaxStack);
         }
 
         private void InitAura()

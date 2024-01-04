@@ -12,7 +12,7 @@ namespace KamiyoModPack.Kamiyo_Re21341.Dice
                 !KamiyoModParameters.EmotionCardUtilLoaded) return;
             if (owner.GetActiveBuff<BattleUnitBuf_AlterEgoRelease_Re21341>() == null &&
                 KamiyoModParameters.EmotionCardUtilLoaded && !CheckEmotionUtilEffect()) return;
-            behavior.card.target?.AddBuff<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
+            behavior.card.target?.AddBuffCustom<BattleUnitBuf_AlterEnergy_Re21341>(1, maxStack: 10);
         }
 
         public bool CheckEmotionUtilEffect()

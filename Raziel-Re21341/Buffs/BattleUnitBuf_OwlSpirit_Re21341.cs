@@ -54,8 +54,8 @@ namespace KamiyoModPack.Raziel_Re21341.Buffs
         public override void OnRoundStartAfter()
         {
             _owner.TakeDamage(15);
-            if (_damageCount > 75 && stack < 2) this.OnAddBufCustom(1, false, MinStack, MaxStack);
-            if (_damageCount > 150 && stack < 3) this.OnAddBufCustom(1, false, MinStack, MaxStack);
+            if (_damageCount > 75 && stack < 2) this.AddBufCustom(1, false, MinStack, MaxStack);
+            if (_damageCount > 150 && stack < 3) this.AddBufCustom(1, false, MinStack, MaxStack);
         }
     }
 }
